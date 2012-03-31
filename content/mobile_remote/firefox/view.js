@@ -7,6 +7,7 @@ MobileRemote.Firefox.View = function() {
     var klass = null;
     var button = document.getElementById('mobile-remote-button');
     
+    // TODO DRY class
     if (isOn) {
       klass = "toolbarbutton-1 chromeclass-toolbar-additional mobile-remote-button on";
     } else {
