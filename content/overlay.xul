@@ -19,7 +19,7 @@
   <menupopup id="menu_ToolsPopup">
       <menu label="&mobile-remote;" id="mobile-remote-menu" insertafter="devToolsSeparator">
         <menupopup>
-          <menuitem id="mobile-remote-start-stop" label="&start-stop;" oncommand="MobileRemote.singleton.server.toggle();"/>
+          <menuitem id="mobile-remote-start-stop" label="&start-stop;" oncommand="MobileRemote.instance.server.toggle();"/>
         </menupopup>
       </menu>
   </menupopup>

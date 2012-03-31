@@ -1,9 +1,9 @@
 if (MobileRemote.Firefox == null) MobileRemote.Firefox = {}
 
 MobileRemote.Firefox.Env = function() {
-  var self = this
+  var self = this;
   
-  this.extensionPath = null
+  this.extensionPath = null;
   
   this.init = function() {
     profilePath = Components.classes["@mozilla.org/file/directory_service;1"].getService( Components.interfaces.nsIProperties).get("ProfD", Components.interfaces.nsIFile).path;
@@ -19,9 +19,9 @@ MobileRemote.Firefox.Env = function() {
   };
 
   var fileHandle = function(path) {
-    var f = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile)
-    f.initWithPath(path)
-    return f
+    var f = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+    f.initWithPath(path);
+    return f;
   }
 
   // https://developer.mozilla.org/en/Code_snippets/File_I%2F%2FO
@@ -33,7 +33,7 @@ MobileRemote.Firefox.Env = function() {
     fstream.init(file, -1, 0, 0);
     cstream.init(fstream, "UTF-8", 0, 0); // you can use another encoding here if you wish
     
-    var str = {}
+    var str = {};
     var read = 0;
     do {
       read = cstream.readString(0xffffffff, str); // read as much as we can and put it in str.value
@@ -42,7 +42,7 @@ MobileRemote.Firefox.Env = function() {
     
     cstream.close(); // this closes fstream
     
-    return data
+    return data;
   }
 
   this.init();

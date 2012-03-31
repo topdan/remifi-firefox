@@ -37,7 +37,7 @@ window.addEventListener("load", function(e) {
 }, false);
 
 window.addEventListener("unload", function(e) { 
-  if (MobileRemote.singleton) {
+  if (MobileRemote.instance) {
     MobileRemote.instance.unload();
     MobileRemote.instance = null;
   }

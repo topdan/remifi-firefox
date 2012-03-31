@@ -3,7 +3,7 @@
 // MIT License
 
 MobileRemote.URI = function(str) {
-  var uri = this
+  var uri = this;
   var o = MobileRemote.parseUriOptions,
     m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
     i   = 14;
@@ -16,11 +16,11 @@ MobileRemote.URI = function(str) {
   });
   
   this.toString = function() {
-    return str
+    return str;
   }
   
   this.clone = function() {
-    return MobileRemote.cloneHash(this)
+    return MobileRemote.cloneHash(this);
   }
 }
 
@@ -40,18 +40,18 @@ MobileRemote.parseUriOptions = {
 
 MobileRemote.addUriQuery = function(url, params) {
   if (params != null) {
-    var count = 0
+    var count = 0;
     if (url.indexOf("?") != -1) count = 1;
     
     for (var key in params) {
-      var val = params[key]
+      var val = params[key];
       
       if (val != null) {
         if (count++ == 0)
-          url += "?"
+          url += "?";
         else
-          url += "&"
-        url += key + "=" + encodeURIComponent(val)
+          url += "&";
+        url += key + "=" + encodeURIComponent(val);
       }
     }
   }
