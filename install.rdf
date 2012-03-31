@@ -7,7 +7,7 @@
     <em:id>mobile-remote@topdan.com</em:id>
     <em:name>Mobile Remote</em:name>
     <em:version>0.1</em:version>
-    <em:description>Use your mobile phone to control internet video and audio.</em:description>
+    <em:description>Use your mobile phone to control Firefox on your computer.</em:description>
     <em:creator>Dan Cunning</em:creator>
     <!-- optional items -->
     <em:homepageURL>http://www.topdan.com/mobile-remote/</em:homepageURL>
