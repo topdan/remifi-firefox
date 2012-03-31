@@ -1,0 +1,7 @@
+content	mobile-remote	content/
+overlay	chrome://browser/content/browser.xul	chrome://mobile-remote/content/overlay.xul
+
+locale	mobile-remote	en-US	locale/en-US/
+
+skin	mobile-remote	classic/1.0	skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://mobile-remote/skin/overlay.css

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://mobile-remote/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://mobile-remote/locale/overlay.dtd">
+<overlay id="mobile-remote-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script src="overlay.js"/>
+
+  <script src="mobile_remote/base.js"/>
+  <script src="mobile_remote/request.js"/>
+  <script src="mobile_remote/response.js"/>
+  
+  <script src="mobile_remote/firefox/env.js"/>
+  <script src="mobile_remote/firefox/server.js"/>
+  
+  <script src="mobile_remote/utils/string.js"/>
+  <script src="mobile_remote/utils/uri.js"/>
+
+  <menupopup id="menu_ToolsPopup">
+      <menu label="&mobile-remote;" id="mobile-remote-menu" insertafter="devToolsSeparator">
+        <menupopup>
+          <menuitem id="mobile-remote-start-stop" label="&start-stop;" oncommand="MobileRemote.singleton.server.toggle();"/>
+        </menupopup>
+      </menu>
+  </menupopup>
+  
+</overlay>
