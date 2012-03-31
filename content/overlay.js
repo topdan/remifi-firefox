@@ -3,6 +3,8 @@ window.addEventListener("load", function(e) {
   var env = new MobileRemote.Firefox.Env();
   var remote = new MobileRemote.Base(env);
   
+  remote.view = new MobileRemote.Firefox.View();
+  
   remote.server = new MobileRemote.Firefox.Server();
   remote.server.filePath = function(request) {
     if (MobileRemote.startsWith(request.fullpath, '/static/')) {

@@ -1,2 +1,17 @@
 /* This is just an example. You shouldn't do this. */
 
+#mobile-remote-button, #wrapper-mobile-remote-button {list-style-image: url("chrome://mobile-remote/content/button-on.png");}
+#mobile-remote-button.off, #wrapper-mobile-remote-button.off {list-style-image: url("chrome://mobile-remote/content/button-off.png");}
+
+/* common style for all mobile-remote buttons */
+.mobile-remote-button
+  {-moz-image-region: rect( 0px 24px 24px  0px);}
+
+.mobile-remote-button:hover
+  {-moz-image-region: rect(24px 24px 48px  0px);}
+
+[iconsize="small"] .mobile-remote-button
+  {-moz-image-region: rect( 0px 40px 16px 24px);}
+
+[iconsize="small"] .mobile-remote-button:hover
+  {-moz-image-region: rect(24px 40px 40px 24px);}
