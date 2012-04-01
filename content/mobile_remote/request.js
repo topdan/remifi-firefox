@@ -3,6 +3,9 @@ MobileRemote.Request = function() {
   
   this.remote_ip = null;
   this.headers = {};
+  this.fullpath = null;
+  this.path = null;
+  this.params = null;
   
   this.setPath = function(path) {
     this.fullpath = path;

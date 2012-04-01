@@ -1,0 +1,10 @@
+table.app-icons { width: 100%; table-layout:fixed; }
+table.app-icons tbody { width: 100%; }
+table.app-icons tr { width: 100%; }
+table.app-icons tr td { padding-top: 0; margin-top: 0; width: 25%; text-align: center;}
+table.app-icons tr td a img { border: none; }
+table.app-icons tr.icons td { padding-top: 1em;}
+table.app-icons tr.titles { font-family: "Lucida Grande", Verdana, Courier, sans-serif; }
+table.app-icons tr.titles td { padding-top: 0; overflow: hidden;}
+/*table.app-icons tr.titles td div { min-height: 50px; }*/
+table.app-icons tr.titles td a { text-decoration: none; color: white; font-size: 75%; }

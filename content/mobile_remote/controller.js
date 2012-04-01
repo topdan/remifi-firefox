@@ -2,14 +2,24 @@ MobileRemote.Controller = function(remote, request, response) {
   
   this.layoutTop = null;
   this.layoutBottom = null;
+  this.notFoundBodyHTML = null;
   
   this.process = function() {
-    var body = "<h2>HI!</h2>"
+    var route = this.findRoute();
+    var body = route.getBody(request, response);
     
     if (request.isXhr) {
       return body;
     } else {
       return withLayout(body);
+    }
+  }
+  
+  this.findRoute = function() {
+    if (request.path == "/") {
+      return new MobileRemote.Pages.Dashboard(remote);
+    } else {
+      return new MobileRemote.Pages.NotFound(remote);
     }
   }
   
@@ -21,6 +31,14 @@ MobileRemote.Controller = function(remote, request, response) {
       this.layoutBottom = remote.env.fileContent('/views/layout/bottom.html');
     
     return this.layoutTop + body + this.layoutBottom;
+  }
+  
+  var notFoundBody = function() {
+    if (this.notFoundBodyHTML == null) {
+      this.notFoundBodyHTML = remote.env.fileContent('/views/404.html');
+    }
+    
+    return notFoundBodyHTML;
   }
   
 }

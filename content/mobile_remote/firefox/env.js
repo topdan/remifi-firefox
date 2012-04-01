@@ -27,6 +27,12 @@ MobileRemote.Firefox.Env = function() {
       return null;
   }
   
+  this.template = function(viewpath, data) {
+    content = this.fileContent(viewpath);
+    func = MobileRemote.microtemplate(content);
+    return data ? func(data) : func();
+  }
+  
   var fullpath = function(path) {
     return self.extensionPath + path
   }

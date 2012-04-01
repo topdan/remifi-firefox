@@ -1,0 +1,22 @@
+<table <% if (tableId) { %>id="<%= tableId %>" <% } %>class="app-icons">
+  <% for(var i=0 ; i < rows.length ; i++) { var row = rows[i]; %>
+    <tr class="icons">
+      <% for(var j=0 ; j < row.length ; j++) { var item = row[j]; %>
+        <td>
+          <% if (!item.isBlank) { %>
+          <a href="<%= item.url %>"><% if (item.icon) { %><img width="<%= item.icon.width %>" height="<%= item.icon.height %>" src="<%= item.icon.url %>"/><% } %></a>
+          <% } %>
+        </td>
+      <% } %>
+    </tr>
+    <tr class="titles">
+      <% for(var j=0 ; j < row.length ; j++) { var item = row[j]; %>
+        <td>
+          <% if (!item.isBlank) { %>
+          <a href="<%= item.url %>"><%= item.title %></a>
+          <% } %>
+        </td>
+      <% } %>
+    </tr>
+  <% } %>
+</table>
