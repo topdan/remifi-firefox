@@ -17,6 +17,19 @@ MobileRemote.Firefox.Env = function() {
       this.extensionPath = MobileRemote.trim(fileContent(file));
     }
   };
+  
+  this.fileContent = function(path) {
+    path = fullpath(path);
+    var file = fileHandle(path);
+    if (file.exists())
+      return fileContent(file);
+    else
+      return null;
+  }
+  
+  var fullpath = function(path) {
+    return self.extensionPath + path
+  }
 
   var fileHandle = function(path) {
     var f = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);

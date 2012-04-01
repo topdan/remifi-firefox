@@ -88,7 +88,7 @@ MobileRemote.Firefox.Server = function() {
       
       setupRequest(rawHeaders);
       
-      var staticPath = self.filePath(request);
+      var staticPath = self.getStaticFilePath(request);
       if (staticPath) {
         respondWithFile(staticPath);
       } else {
@@ -136,7 +136,7 @@ MobileRemote.Firefox.Server = function() {
       response.headers["Content-Length"] = f.fileSize;
       response.headers["Content-Type"] = contentType;
       
-      self.fileRequest(request, response);
+      self.staticRequest(request, response);
       
       var headers = response.headersString();
       outstream.write(headers, headers.length);
@@ -156,7 +156,7 @@ MobileRemote.Firefox.Server = function() {
     }
     
     var respondWithPage = function() {
-      var content = self.pageRequest(request, response);
+      var content = self.dynamicRequest(request, response);
       response.headers["Content-Length"] = content.length;
       
       var webpage = response.headersString() + content;
