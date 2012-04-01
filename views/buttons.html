@@ -1,4 +1,4 @@
-<table <% if (tableId) { %>id="<%= tableId %>" <% } %>class="app-icons">
+<table <% if (tableId) { %>id="<%= tableId %>" <% } %>class="app-icons<% if (tableClass) { %> <%= tableClass %><% } %>">
   <% for(var i=0 ; i < rows.length ; i++) { var row = rows[i]; %>
     <tr class="icons">
       <% for(var j=0 ; j < row.length ; j++) { var item = row[j]; %>

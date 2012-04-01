@@ -4,7 +4,11 @@ window.addEventListener("load", function(e) {
   var remote = new MobileRemote.Base(env);
   
   remote.view = new MobileRemote.Firefox.View();
-  remote.views = new MobileRemote.Views(env);
+  remote.views = function(callback) {
+    var views = new MobileRemote.Views(env);
+    callback(views);
+    return views.html();
+  }
   
   remote.server = new MobileRemote.Firefox.Server();
   remote.server.getStaticFilePath = function(request) {

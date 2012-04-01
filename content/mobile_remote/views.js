@@ -1,16 +1,28 @@
 MobileRemote.Views = function(env) {
   
+  this.content = [];
+  
+  this.html = function() {
+    return this.content.join("");
+  }
+  
   this.template = function(path, data) {
     content = env.fileContent(path);
     func = MobileRemote.microtemplate(content);
     return data ? func(data) : func();
   }
   
-  this.page = function(id, content) {
-    return '<div id="' + id + '">' + content + '</div>';
+  this.page = function(id, callback) {
+    this.content.push('<div id="' + id + '">');
+    callback();
+    this.content.push('</div>');
   }
   
-  this.buttons = function(apps, options) {
+  this.toolbar = function(name) {
+    this.content.push('<div class="toolbar"><h1>' + name + '</h1></div>');
+  }
+  
+  this.apps = function(apps, options) {
     if (options == null) options = {}
     if (apps.length == 0) return
 
@@ -52,7 +64,15 @@ MobileRemote.Views = function(env) {
       row.push({isBlank: true})
     }
 
-    return this.template("/views/buttons.html", {rows: rows, tableId: options.tableId})
+    var html = this.template("/views/buttons.html", {rows: rows, tableId: options.tableId, tableClass: options.tableClass});
+    this.content.push(html);
+  }
+  
+  this.systemApps = function(apps, options) {
+    if (options == null) options = {}
+    options = MobileRemote.mergeHash(options, {tableClass: 'system-app-icons'})
+    
+    this.apps(apps, options)
   }
   
 };
