@@ -16,8 +16,12 @@
   <script src="mobile_remote/firefox/server.js"/>
   <script src="mobile_remote/firefox/view.js"/>
   
+  <script src="mobile_remote/pages/current.js"/>
   <script src="mobile_remote/pages/dashboard.js"/>
   <script src="mobile_remote/pages/not_found.js"/>
+  <script src="mobile_remote/pages/search.js"/>
+  <script src="mobile_remote/pages/tabs.js"/>
+  <script src="mobile_remote/pages/windows.js"/>
   
   <script src="mobile_remote/utils/microtemplate.js"/>
   <script src="mobile_remote/utils/string.js"/>

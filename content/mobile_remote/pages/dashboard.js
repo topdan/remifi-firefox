@@ -21,20 +21,20 @@ MobileRemote.Pages.Dashboard = function(remote) {
         
         v.systemApps([
           {
-            title: "google",
-            url: "google.html"
+            title: "search",
+            url: "/search/index.html"
           },
           {
             title: "current",
-            url: "current.html"
+            url: "/current/index.html"
           },
           {
             title: "windows",
-            url: "windows.html"
+            url: "/windows/index.html"
           },
           {
             title: "tabs",
-            url: "tabs.html"
+            url: "/tabs/index.html"
           }
         ]);
         

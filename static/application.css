@@ -9,3 +9,14 @@ table.app-icons tr.titles td { padding-top: 0; overflow: hidden;}
 table.app-icons tr.titles td a { text-decoration: none; color: white; font-size: 75%; }
 
 table.system-app-icons { position: absolute; top: 352px; background-color: black;}
+
+a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px 0 #5CC801 inset; color: white; text-shadow: 0 -1px 0 #3C8101; }
+
+#jqt ul.list ul.actions { list-style: none; width: 100%; padding: 0; margin: 0; border: 0; }
+#jqt ul.list ul.actions li { float: left; padding: 0; margin: 0; border: 0; text-align: center; background: none; top:50%;}
+#jqt ul.list ul.actions-1 li { width: 100%;}
+#jqt ul.list ul.actions-2 li { width: 50%;}
+#jqt ul.list ul.actions-3 li { width: 33%;}
+#jqt ul.list ul.actions-4 li { width: 25%;}
+#jqt ul.list ul.actions-5 li { width: 20%;}
+#jqt ul.list ul.actions li a.danger { background-color: #EE5F5B;}

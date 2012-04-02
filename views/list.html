@@ -1,0 +1,17 @@
+<ul class="list <% if (rounded) { %>rounded<% } %>">
+  <% for(var i=0 ; i < items.length ; i++) { var item = items[i]; %>
+  <li>
+    <a href="<%= item.url %>" class="<% if (item.active) { %>current<% } %>"><%= item.title %></a> 
+    
+    <% if (item.actions && item.actions.length > 0) { %>
+      <ul class="actions actions-<%= item.actions.length %>" style="display:none">
+        <% for (var j=0 ; j < item.actions.length ; j++) { var action = item.actions[j]; %>
+        <li class="inline-links">
+          <a href="<%= action.url %>"><%= action.title %></a>
+        </li>
+        <% } %>
+      </ul>
+    <% } %>
+  </li>
+  <% } %>
+</ul>

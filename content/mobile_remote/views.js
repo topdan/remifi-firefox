@@ -9,7 +9,8 @@ MobileRemote.Views = function(env) {
   this.template = function(path, data) {
     content = env.fileContent(path);
     func = MobileRemote.microtemplate(content);
-    return data ? func(data) : func();
+    var html = data ? func(data) : func();
+    this.content.push(html);
   }
   
   this.page = function(id, callback) {
@@ -18,8 +19,19 @@ MobileRemote.Views = function(env) {
     this.content.push('</div>');
   }
   
-  this.toolbar = function(name) {
-    this.content.push('<div class="toolbar"><h1>' + name + '</h1></div>');
+  this.toolbar = function(name, options) {
+    if (options == null) options = {};
+    var left = options.left;
+    var right = options.right;
+    
+    this.template('/views/toolbar.html', {name: name, left: left, right: right});
+  }
+  
+  this.list = function(items, options) {
+    if (options == null) options = {};
+    if (items == null || items.length == 0) return;
+    
+    this.template("/views/list.html", {items: items, rounded: options.rounded});
   }
   
   this.apps = function(apps, options) {
@@ -64,8 +76,7 @@ MobileRemote.Views = function(env) {
       row.push({isBlank: true})
     }
 
-    var html = this.template("/views/buttons.html", {rows: rows, tableId: options.tableId, tableClass: options.tableClass});
-    this.content.push(html);
+    this.template("/views/buttons.html", {rows: rows, tableId: options.tableId, tableClass: options.tableClass});
   }
   
   this.systemApps = function(apps, options) {

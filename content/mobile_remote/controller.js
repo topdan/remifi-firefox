@@ -8,8 +8,11 @@ MobileRemote.Controller = function(remote, request, response) {
     var route = this.findRoute();
     var body = route.getBody(request, response);
     
+    if (body == undefined)
+      body = "";
+    
     if (request.isXhr) {
-      return body;
+      return body + '<script type="text/javascript" charset="utf-8">\nsetupPages()\n</script>';
     } else {
       return withLayout(body);
     }
@@ -18,6 +21,14 @@ MobileRemote.Controller = function(remote, request, response) {
   this.findRoute = function() {
     if (request.path == "/") {
       return new MobileRemote.Pages.Dashboard(remote);
+    } else if (MobileRemote.startsWith(request.path, '/tabs/')) {
+      return new MobileRemote.Pages.Tabs(remote);
+    } else if (MobileRemote.startsWith(request.path, '/windows/')) {
+      return new MobileRemote.Pages.Windows(remote);
+    } else if (MobileRemote.startsWith(request.path, '/current/')) {
+      return new MobileRemote.Pages.Current(remote);
+    } else if (MobileRemote.startsWith(request.path, '/search/')) {
+      return new MobileRemote.Pages.Search(remote);
     } else {
       return new MobileRemote.Pages.NotFound(remote);
     }
