@@ -10,6 +10,14 @@ function setupPages() {
   $('#jqt').each(function() {
     var e = $(this);
     
+    e.find('ul.list ul.actions a').swipe(function(evt, data) {
+      var link = $(this);
+      var li = link.parent().parent().parent();
+      
+      li.find('ul.actions').hide();
+      li.find('a.title').show();
+    });
+    
     e.find('ul.list a').swipe(function(evt, data) {
       var link = $(this);
       var actions = link.next('ul.actions');

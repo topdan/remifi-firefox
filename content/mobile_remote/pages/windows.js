@@ -66,7 +66,6 @@ MobileRemote.Pages.Windows = function(remote) {
         var windows = [];
         var wenum = Components.classes["@mozilla.org/embedcomp/window-watcher;1"].getService(Components.interfaces.nsIWindowWatcher).getWindowEnumerator();
         var count = 0;
-        var windowName = "yourWindowName";
         while (wenum.hasMoreElements()) {
           var win = wenum.getNext();
           

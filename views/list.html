@@ -1,7 +1,7 @@
 <ul class="list <% if (rounded) { %>rounded<% } %>">
   <% for(var i=0 ; i < items.length ; i++) { var item = items[i]; %>
   <li>
-    <a href="<%= item.url %>" class="<% if (item.active) { %>current<% } %>"><%= item.title %></a> 
+    <a href="<%= item.url %>" class="title <% if (item.active) { %>current<% } %>"><%= item.title %></a> 
     
     <% if (item.actions && item.actions.length > 0) { %>
       <ul class="actions actions-<%= item.actions.length %>" style="display:none">
