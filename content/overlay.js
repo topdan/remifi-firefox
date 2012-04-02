@@ -1,4 +1,18 @@
 window.addEventListener("load", function(e) {
+  // check for the server already running inside another window and copy its reference
+  var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+  var wenum = wm.getEnumerator(null);
+  while (wenum.hasMoreElements()) {
+    var win = wenum.getNext();
+    if (win.MobileRemote.instance) {
+      MobileRemote.instance = win.MobileRemote.instance;
+      MobileRemote.isReference = true;
+      return;
+    }
+  }
+  
+  // the server is not initialized anywhere, so let's do it!
+  
   var serverSignature = 'Mobile-Remote/0.1';
   var env = new MobileRemote.Firefox.Env();
   var remote = new MobileRemote.Base(env);
@@ -25,16 +39,6 @@ window.addEventListener("load", function(e) {
     response.headers['Content-Type'] = 'text/html'
     response.headers['Server'] = serverSignature
     
-    // var isDev = remote.env.doesFileExist(devFile)
-    // var isRestart = remote.env.doesFileExist(restartFile)
-    // 
-    // if (isDev || isRestart) {
-    //  remote.plugins.reloadAll()
-    //  
-    //  if (isRestart)
-    //    remote.env.deleteFile(restartFile)
-    // }
-    
     var controller = new MobileRemote.Controller(remote, request, response);
     return controller.process();
   }
@@ -44,7 +48,7 @@ window.addEventListener("load", function(e) {
 }, false);
 
 window.addEventListener("unload", function(e) { 
-  if (MobileRemote.instance) {
+  if (MobileRemote.instance && MobileRemote.isReference != true) {
     MobileRemote.instance.unload();
     MobileRemote.instance = null;
   }

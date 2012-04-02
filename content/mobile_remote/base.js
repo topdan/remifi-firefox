@@ -6,12 +6,20 @@ MobileRemote.Base = function(env) {
   this.env = env;
   this.view = null;
   
+  this.isRunning = function() {
+    return this.server.isRunning;
+  }
+  
   this.toggle = function() {
     if (this.server.isRunning) {
       this.unload();
     } else {
       this.load();
     }
+  }
+  
+  this.refresh = function() {
+    this.view.toggle(this.isRunning());
   }
   
   this.load = function() {

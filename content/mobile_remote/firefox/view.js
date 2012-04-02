@@ -5,7 +5,6 @@ MobileRemote.Firefox.View = function() {
   
   this.toggle = function(isOn) {
     var klass = null;
-    var button = document.getElementById('mobile-remote-button');
     
     // TODO DRY class
     if (isOn) {
@@ -14,7 +13,13 @@ MobileRemote.Firefox.View = function() {
       klass = "toolbarbutton-1 chromeclass-toolbar-additional mobile-remote-button off";
     }
     
-    button.setAttribute('class', klass);
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+    var wenum = wm.getEnumerator(null);
+    while (wenum.hasMoreElements()) {
+      var win = wenum.getNext();
+      var button = win.document.getElementById('mobile-remote-button');
+      button.setAttribute('class', klass);
+    }
   }
   
 }
