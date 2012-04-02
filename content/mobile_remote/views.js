@@ -27,6 +27,10 @@ MobileRemote.Views = function(env) {
     this.template('/views/toolbar.html', {name: name, left: left, right: right});
   }
   
+  this.error = function(message) {
+    this.content.push('<p class="error-message">', message, '</p>');
+  }
+  
   this.list = function(items, options) {
     if (options == null) options = {};
     if (items == null || items.length == 0) return;

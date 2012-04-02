@@ -10,11 +10,11 @@ MobileRemote.Pages.Dashboard = function(remote) {
         
         v.apps([
           {
-            title: "Bookmarks",
+            title: "bookmarks",
             url: "bookmarks.html"
           },
           {
-            title: "History",
+            title: "history",
             url: "history.html"
           }
         ]);
@@ -25,8 +25,8 @@ MobileRemote.Pages.Dashboard = function(remote) {
             url: "/search/index.html"
           },
           {
-            title: "current",
-            url: "/current/index.html"
+            title: "controls",
+            url: "/controls/index.html"
           },
           {
             title: "windows",

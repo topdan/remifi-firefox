@@ -2,13 +2,16 @@ if (MobileRemote.Pages == null) MobileRemote.Pages = {}
 
 MobileRemote.Pages.NotFound = function(remote) {
   
-  this.html = null;
-  
   this.getBody = function(request, response) {
-    if (this.html == null)
-      this.html = remote.env.fileContent('/views/404.html');
-    
-    return this.html;
+    return remote.views(function(v) {
+      // TODO actually go back
+      
+      v.page('not_found', function() {
+        v.toolbar('Not Found', {left: {title: 'back', url: '/'}});
+
+        v.error("Sorry, that page was not found.");
+      })
+    });
   }
   
 };
