@@ -60,6 +60,10 @@ MobileRemote.Pages.Windows = function(remote) {
   this.index = function(request, response) {
     return remote.views(function(v) {
       
+      var currentWindowIndex = null;
+      var orderedWindows = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+      var currentWindow = orderedWindows.getZOrderDOMWindowEnumerator(null, true).getNext();
+      
       v.page('page1', function() {
         v.toolbar('Windows', {left: {title: 'back', url: '/'}});
         
@@ -82,11 +86,14 @@ MobileRemote.Pages.Windows = function(remote) {
             }]
           }
           
+          if (currentWindow == win && win.MobileRemote.isReference == true)
+            currentWindowIndex = count
+          
           windows.push({
             title: win.name || win.document.title || "(Untitled)",
             url: '/windows/open.html?index=' + count,
-            // active: (tab == gBrowser.mCurrentTab),
-            actions: actions
+            actions: actions,
+            active: (currentWindow == win)
           })
           
           count++;
@@ -94,17 +101,14 @@ MobileRemote.Pages.Windows = function(remote) {
         
         v.list(windows);
         
-        v.systemApps([
-          null,
-          null,
-          null,
-          {
-            title: "add window",
-            url: "/windows/add.html"
-          }
-        ]);
+        apps = [null, null]
+        if (currentWindowIndex)
+          apps.push({title: 'close current', url: "/windows/close.html?index=" + currentWindowIndex})
+        else
+          apps.push(null);
         
-        
+        apps.push({title: 'add window', url: '/windows/add.html'});
+        v.systemApps(apps);
       });
       
     });
