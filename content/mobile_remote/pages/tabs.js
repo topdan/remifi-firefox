@@ -21,20 +21,20 @@ MobileRemote.Pages.Tabs = function(remote) {
   
   this.open = function(request, response) {
     var index = request.params["index"];
-    if (index) gBrowser.selectTabAtIndex(index)
+    if (index) remote.currentBrowser().selectTabAtIndex(index)
     return this.index(request, response);
   }
   
   this.add = function(request, response) {
-    gBrowser.addTab("")
+    remote.currentBrowser().addTab("")
     return this.index(request, response);
   }
   
   this.close = function(request, response) {
     var index = request.params['index'];
     if (index) {
-      var tab = gBrowser.mTabs[index];
-      if (tab) gBrowser.removeTab(tab);
+      var tab = remote.currentBrowser().mTabs[index];
+      if (tab) remote.currentBrowser().removeTab(tab);
     }
     return this.index(request, response);
   }
@@ -42,18 +42,20 @@ MobileRemote.Pages.Tabs = function(remote) {
   this.index = function(request, response) {
     return remote.views(function(v) {
       
+      var currentBrowser = remote.currentBrowser();
+      
       v.page('page1', function() {
         v.toolbar('Tabs', {left: {title: 'back', url: '/'}});
         
         var tabs = [];
-        for (var i=0 ; i < gBrowser.mTabs.length ; i++) {
-          var tab = gBrowser.mTabs[i];
-          var browser = gBrowser.getBrowserForTab(tab);
+        for (var i=0 ; i < currentBrowser.mTabs.length ; i++) {
+          var tab = currentBrowser.mTabs[i];
+          var browser = currentBrowser.getBrowserForTab(tab);
           
           tabs.push({
             title: browser.contentDocument.title || "(Untitled)",
             url: '/tabs/open.html?index=' + i,
-            active: (tab == gBrowser.mCurrentTab),
+            active: (tab == currentBrowser.mCurrentTab),
             actions: [
               {
                 title: 'close',

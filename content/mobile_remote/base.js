@@ -6,6 +6,15 @@ MobileRemote.Base = function(env) {
   this.env = env;
   this.view = null;
   
+  this.currentWindow = function() {
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+    return wm.getMostRecentWindow("navigator:browser");
+  }
+  
+  this.currentBrowser = function() {
+    return this.currentWindow().getBrowser();
+  }
+  
   this.isRunning = function() {
     return this.server.isRunning;
   }

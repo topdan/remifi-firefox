@@ -7,6 +7,7 @@ window.addEventListener("load", function(e) {
     if (win.MobileRemote.instance) {
       MobileRemote.instance = win.MobileRemote.instance;
       MobileRemote.isReference = true;
+      MobileRemote.instance.refresh();
       return;
     }
   }
