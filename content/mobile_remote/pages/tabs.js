@@ -31,53 +31,59 @@ MobileRemote.Pages.Tabs = function(remote) {
   }
   
   this.close = function(request, response) {
+    var currentWindow = remote.currentWindow();
+    var currentBrowser = remote.currentBrowser();
     var index = request.params['index'];
-    if (index) {
+    if (index && (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true)) {
       var tab = remote.currentBrowser().mTabs[index];
       if (tab) remote.currentBrowser().removeTab(tab);
     }
+    
     return this.index(request, response);
   }
   
   this.index = function(request, response) {
     return remote.views(function(v) {
       
+      var currentWindow = remote.currentWindow();
       var currentBrowser = remote.currentBrowser();
+      var currentTabIndex = null;
       
       v.page('page1', function() {
-        v.toolbar('Tabs', {left: {title: 'back', url: '/'}});
+        v.toolbar('Tabs', {right: {title: 'home', url: '/'}});
         
         var tabs = [];
         for (var i=0 ; i < currentBrowser.mTabs.length ; i++) {
           var tab = currentBrowser.mTabs[i];
           var browser = currentBrowser.getBrowserForTab(tab);
           
+          if (tab == currentBrowser.mCurrentTab)
+            currentTabIndex = i;
+          
+          var actions = null;
+          if (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true)
+            actions = [{title: 'close', url: '/tabs/close.html?index=' + i}]
+          else
+            actions = [{title: "can't close last tab", url: '/tabs/index.html'}]
+          
           tabs.push({
             title: browser.contentDocument.title || "(Untitled)",
             url: '/tabs/open.html?index=' + i,
             active: (tab == currentBrowser.mCurrentTab),
-            actions: [
-              {
-                title: 'close',
-                url: '/tabs/close.html?index=' + i
-              }
-            ]
+            actions: actions
           })
         }
         
         v.list(tabs);
         
-        v.systemApps([
-          null,
-          null,
-          null,
-          {
-            title: "add tab",
-            url: "/tabs/add.html"
-          }
-        ]);
+        apps = [{title: 'windows', url: '/windows/index.html'}, null]
+        if (currentTabIndex != null && (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true))
+          apps.push({title: 'close', url: "/tabs/close.html?index=" + currentTabIndex})
+        else
+          apps.push(null);
         
-        
+        apps.push({title: 'add tab', url: '/tabs/add.html'});
+        v.systemApps(apps);
       });
       
     });

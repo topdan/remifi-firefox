@@ -2,6 +2,8 @@ if (MobileRemote.Pages == null) MobileRemote.Pages = {}
 
 MobileRemote.Pages.Windows = function(remote) {
   
+  this.tabs = new MobileRemote.Pages.Tabs(remote);
+  
   this.getBody = function(request, response) {
     if (request.path == '/windows/index.html' || request.path == '/windows/') {
       return this.index(request, response);
@@ -32,7 +34,8 @@ MobileRemote.Pages.Windows = function(remote) {
         count++
       }
     }
-    return this.index(request, response);
+    
+    return this.tabs.index(request, response);
   }
   
   this.add = function(request, response) {
@@ -65,7 +68,7 @@ MobileRemote.Pages.Windows = function(remote) {
       var currentWindow = orderedWindows.getZOrderDOMWindowEnumerator(null, true).getNext();
       
       v.page('page1', function() {
-        v.toolbar('Windows', {left: {title: 'back', url: '/'}});
+        v.toolbar('Windows', {right: {title: 'home', url: '/'}});
         
         var windows = [];
         var wenum = Components.classes["@mozilla.org/embedcomp/window-watcher;1"].getService(Components.interfaces.nsIWindowWatcher).getWindowEnumerator();
@@ -101,9 +104,9 @@ MobileRemote.Pages.Windows = function(remote) {
         
         v.list(windows);
         
-        apps = [null, null]
-        if (currentWindowIndex)
-          apps.push({title: 'close current', url: "/windows/close.html?index=" + currentWindowIndex})
+        apps = [{title: 'tabs', url: '/tabs/index.html'}, null]
+        if (currentWindowIndex != null)
+          apps.push({title: 'close', url: "/windows/close.html?index=" + currentWindowIndex})
         else
           apps.push(null);
         
