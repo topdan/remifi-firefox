@@ -6,6 +6,15 @@ MobileRemote.Base = function(env) {
   this.env = env;
   this.view = null;
   
+  this.pages = {};
+  this.pages.dashboard = new MobileRemote.Pages.Dashboard(this);
+  this.pages.tabs      = new MobileRemote.Pages.Tabs(this);
+  this.pages.windows   = new MobileRemote.Pages.Windows(this);
+  this.pages.controls  = new MobileRemote.Pages.Controls(this);
+  this.pages.go        = new MobileRemote.Pages.Go(this);
+  this.pages.notFound  = new MobileRemote.Pages.NotFound(this);
+  this.pages.noBody    = new MobileRemote.Pages.NoBody(this);
+  
   this.currentWindow = function() {
     var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
     return wm.getMostRecentWindow("navigator:browser");

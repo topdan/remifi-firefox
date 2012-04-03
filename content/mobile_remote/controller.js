@@ -1,16 +1,13 @@
 MobileRemote.Controller = function(remote, request, response) {
   
-  this.layoutTop = null;
-  this.layoutBottom = null;
-  this.notFoundBodyHTML = null;
-  this.noBodyHTML = null;
+  this.layout = null;
   
   this.process = function() {
-    var route = this.findRoute();
-    var body = route.getBody(request, response);
+    var page = this.findPage();
+    var body = page.getBody(request, response);
     
     if (body == undefined)
-      body = this.noBody();
+      body = remote.pages.noBody.getBody(request, response);
     
     if (request.isXhr) {
       return body + '<script type="text/javascript" charset="utf-8">\nsetupPages()\n</script>';
@@ -19,39 +16,29 @@ MobileRemote.Controller = function(remote, request, response) {
     }
   }
   
-  this.findRoute = function() {
+  this.findPage = function() {
     if (request.path == "/") {
-      return new MobileRemote.Pages.Dashboard(remote);
+      return remote.pages.dashboard;
     } else if (MobileRemote.startsWith(request.path, '/tabs/')) {
-      return new MobileRemote.Pages.Tabs(remote);
+      return remote.pages.tabs;
     } else if (MobileRemote.startsWith(request.path, '/windows/')) {
-      return new MobileRemote.Pages.Windows(remote);
+      return remote.pages.windows;
     } else if (MobileRemote.startsWith(request.path, '/current/')) {
-      return new MobileRemote.Pages.Current(remote);
+      return remote.pages.controls;
     } else if (MobileRemote.startsWith(request.path, '/go/')) {
-      return new MobileRemote.Pages.Go(remote);
+      return remote.pages.go;
     } else {
-      return new MobileRemote.Pages.NotFound(remote);
+      return remote.pages.notFound;
     }
-  }
-  
-  this.noBody = function() {
-    if (this.noBodyHTML == null) {
-      var page = new MobileRemote.Pages.NoBody(remote);
-      this.noBodyHTML = page.getBody();
-    }
-    
-    return this.noBodyHTML;
   }
   
   var withLayout = function(body) {
-    if (this.layoutTop == null)
-      this.layoutTop = remote.env.fileContent('/views/layout/top.html');
+    if (this.layout == null) {
+      var content = remote.env.fileContent('/views/layout.html');
+      this.layout = MobileRemote.microtemplate(content);
+    }
     
-    if (this.layoutBottom == null)
-      this.layoutBottom = remote.env.fileContent('/views/layout/bottom.html');
-    
-    return this.layoutTop + body + this.layoutBottom;
+    return this.layout({body: body});
   }
   
 }

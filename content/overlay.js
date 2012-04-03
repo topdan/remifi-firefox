@@ -41,7 +41,7 @@ window.addEventListener("load", function(e) {
     response.headers['Server'] = serverSignature
     
     var controller = new MobileRemote.Controller(remote, request, response);
-    return controller.process();
+    return controller.process(request, response);
   }
   
   MobileRemote.instance = remote;
