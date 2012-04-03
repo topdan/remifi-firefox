@@ -10,7 +10,6 @@
   <script src="mobile_remote/controller.js"/>
   <script src="mobile_remote/request.js"/>
   <script src="mobile_remote/response.js"/>
-  <script src="mobile_remote/views.js"/>
   
   <script src="mobile_remote/firefox/env.js"/>
   <script src="mobile_remote/firefox/server.js"/>
@@ -18,10 +17,14 @@
   
   <script src="mobile_remote/pages/current.js"/>
   <script src="mobile_remote/pages/dashboard.js"/>
+  <script src="mobile_remote/pages/no_body.js"/>
   <script src="mobile_remote/pages/not_found.js"/>
-  <script src="mobile_remote/pages/search.js"/>
+  <script src="mobile_remote/pages/go.js"/>
   <script src="mobile_remote/pages/tabs.js"/>
   <script src="mobile_remote/pages/windows.js"/>
+  
+  <script src="mobile_remote/views/base.js"/>
+  <script src="mobile_remote/views/form.js"/>
   
   <script src="mobile_remote/utils/microtemplate.js"/>
   <script src="mobile_remote/utils/string.js"/>

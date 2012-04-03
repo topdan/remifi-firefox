@@ -1,4 +1,6 @@
-MobileRemote.Views = function(env) {
+if (MobileRemote.Views == null) MobileRemote.Views = {}
+
+MobileRemote.Views.Base = function(env) {
   
   this.content = [];
   
@@ -25,6 +27,13 @@ MobileRemote.Views = function(env) {
     var right = options.right;
     
     this.template('/views/toolbar.html', {name: name, left: left, right: right});
+  }
+  
+  this.form = function(url, callback) {
+    var form = new MobileRemote.Views.Form(env, url);
+    callback(form);
+    
+    this.content.push(form.html());
   }
   
   this.error = function(message) {

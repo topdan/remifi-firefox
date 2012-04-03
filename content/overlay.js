@@ -20,7 +20,7 @@ window.addEventListener("load", function(e) {
   
   remote.view = new MobileRemote.Firefox.View();
   remote.views = function(callback) {
-    var views = new MobileRemote.Views(env);
+    var views = new MobileRemote.Views.Base(env);
     callback(views);
     return views.html();
   }

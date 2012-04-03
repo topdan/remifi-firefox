@@ -3,13 +3,14 @@ MobileRemote.Controller = function(remote, request, response) {
   this.layoutTop = null;
   this.layoutBottom = null;
   this.notFoundBodyHTML = null;
+  this.noBodyHTML = null;
   
   this.process = function() {
     var route = this.findRoute();
     var body = route.getBody(request, response);
     
     if (body == undefined)
-      body = "";
+      body = this.noBody();
     
     if (request.isXhr) {
       return body + '<script type="text/javascript" charset="utf-8">\nsetupPages()\n</script>';
@@ -27,11 +28,20 @@ MobileRemote.Controller = function(remote, request, response) {
       return new MobileRemote.Pages.Windows(remote);
     } else if (MobileRemote.startsWith(request.path, '/current/')) {
       return new MobileRemote.Pages.Current(remote);
-    } else if (MobileRemote.startsWith(request.path, '/search/')) {
-      return new MobileRemote.Pages.Search(remote);
+    } else if (MobileRemote.startsWith(request.path, '/go/')) {
+      return new MobileRemote.Pages.Go(remote);
     } else {
       return new MobileRemote.Pages.NotFound(remote);
     }
+  }
+  
+  this.noBody = function() {
+    if (this.noBodyHTML == null) {
+      var page = new MobileRemote.Pages.NoBody(remote);
+      this.noBodyHTML = page.getBody();
+    }
+    
+    return this.noBodyHTML;
   }
   
   var withLayout = function(body) {
@@ -42,14 +52,6 @@ MobileRemote.Controller = function(remote, request, response) {
       this.layoutBottom = remote.env.fileContent('/views/layout/bottom.html');
     
     return this.layoutTop + body + this.layoutBottom;
-  }
-  
-  var notFoundBody = function() {
-    if (this.notFoundBodyHTML == null) {
-      this.notFoundBodyHTML = remote.env.fileContent('/views/404.html');
-    }
-    
-    return notFoundBodyHTML;
   }
   
 }

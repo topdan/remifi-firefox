@@ -21,8 +21,8 @@ MobileRemote.Pages.Dashboard = function(remote) {
         
         v.systemApps([
           {
-            title: "search",
-            url: "/search/index.html"
+            title: "go",
+            url: "/go/index.html"
           },
           {
             title: "controls",
