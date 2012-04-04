@@ -21,8 +21,12 @@ a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px
 #jqt ul.list ul.actions-5 li { width: 20%;}
 #jqt ul.list ul.actions li a.danger { background-color: #EE5F5B;}
 
-p.error-message { margin: 0.5em; padding: 0.5em; color: #800000; background-color: #EEB4B4;}
+#error-message { margin: 0.5em; padding: 0.5em; color: #800000; background-color: #EEB4B4;}
 
 #waiting { padding-top: 4em; }
 #waiting .title { font-size: 125%; font-weight: bold; }
 p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black; background-color: #CCC;}
+
+#mouse { padding-top: 1em; }
+#mouse .touchpad { display: block; margin: 0px auto; background-color: #CCC; width: 320px; height: 240px; }
+#mouse .navigate { text-align: center; }

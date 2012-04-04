@@ -18,6 +18,7 @@
   <script src="mobile_remote/pages/controls.js"/>
   <script src="mobile_remote/pages/dashboard.js"/>
   <script src="mobile_remote/pages/error.js"/>
+  <script src="mobile_remote/pages/mouse.js"/>
   <script src="mobile_remote/pages/no_body.js"/>
   <script src="mobile_remote/pages/not_found.js"/>
   <script src="mobile_remote/pages/go.js"/>

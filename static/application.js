@@ -1,4 +1,25 @@
 function setupPages() {
+  
+  $('#mouse .touchpad').click(function(e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    
+    var offset = $(this).offset();
+    
+    var dx = (x - offset.left)/offset.width;
+    var dy = (y - offset.top)/offset.height;
+    
+    $.ajax({
+      url: '/mouse/move.js?x=' + encodeURIComponent(dx) + '&y=' + encodeURIComponent(dy),
+      success: function(script) {
+        eval(script);
+      }
+    })
+    
+    e.preventDefault();
+    return false;
+  })
+  
   $('#jqt').each(function() {
     var e = $(this);
     
@@ -19,9 +40,15 @@ function setupPages() {
       }
     });
   })
+  
 }
 
 MobileRemote = function(jQT) {
+  
+  this.error = function(message) {
+    $('#error-message').html(message);
+    jQT.goTo('#ajax_error');
+  }
   
   this.show = function(url) {
     $.ajax({
@@ -53,7 +80,7 @@ $(function() {
   });
   
   $(document).on('ajaxError', function(error, request) {
-    jQT.goTo('#ajax_error');
+    mobileRemote.error('We could not connect to your computer. Try restarting the server.')
   });
   
   mobileRemote = new MobileRemote(jQT);

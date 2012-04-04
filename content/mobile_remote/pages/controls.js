@@ -83,6 +83,8 @@ MobileRemote.Pages.Controls = function(remote) {
       v.page('controls', function() {
         v.toolbar('Controls', {right: {title: 'home', url: '/'}});
         
+        v.template('/views/mouse.html', {});
+        
         self.buttons(v);
       });
     });

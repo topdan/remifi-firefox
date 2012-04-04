@@ -14,7 +14,7 @@ MobileRemote.Controller = function(remote, request, response) {
     if (body == undefined)
       body = remote.pages.noBody.getBody(request, response);
     
-    if (request.isXhr && MobileRemote.endsWith(request.path, '.js')) {
+    if (request.isXhr && request.isScript) {
       return body;
     } else if (request.isXhr) {
       return body + '<script type="text/javascript" charset="utf-8">\nsetupPages()\n</script>';
@@ -32,6 +32,8 @@ MobileRemote.Controller = function(remote, request, response) {
       return remote.pages.windows;
     } else if (MobileRemote.startsWith(request.path, '/controls/')) {
       return remote.pages.controls;
+    } else if (MobileRemote.startsWith(request.path, '/mouse/')) {
+      return remote.pages.mouse;
     } else if (MobileRemote.startsWith(request.path, '/go/')) {
       return remote.pages.go;
     } else {
