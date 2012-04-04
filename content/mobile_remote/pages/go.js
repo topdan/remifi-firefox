@@ -18,7 +18,7 @@ MobileRemote.Pages.Go = function(remote) {
   this.index = function(request, response) {
     return remote.views(function(v) {
       v.page('go', function() {
-        v.toolbar('Go', {right: {title: 'home', url: '/'}});
+        v.toolbar('Go', {right: {title: 'home', url: '/home.html'}});
         
         v.form('/go/url.html', function(f) {
           f.url('url', {placeholder: 'Web Address'})

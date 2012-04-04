@@ -37,9 +37,12 @@ MobileRemote.Pages.Mouse = function(remote) {
   this.index = function(request, response) {
     return remote.views(function(v) {
       v.page('mouse-page', function() {
-        v.toolbar('Mouse', {right: {title: 'home', url: '/'}});
+        v.toolbar('Mouse', {right: {title: 'home', url: '/home.html'}});
         
-        v.template('/views/mouse.html', {});
+        width = 310;
+        height = 232;
+        
+        v.template('/views/mouse.html', {width: width, height: height});
         
         v.systemApps([
           {title: 'left', url: '/mouse/left.js'},
@@ -102,6 +105,16 @@ MobileRemote.Pages.Mouse = function(remote) {
   
   var actualMouseAction = function(type, x, y, x2, y2, up) {
     var args = null;
+    
+    if (x >= screen.width)
+      x = screen.width - 1;
+    else if (x < 0)
+      x = 0;
+    
+    if (y >= screen.height)
+      y = screen.height - 1;
+    else if (y < 0)
+      y = 0;
     
     switch(type) {
       case 'click':

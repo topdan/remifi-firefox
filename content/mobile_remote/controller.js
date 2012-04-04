@@ -8,6 +8,7 @@ MobileRemote.Controller = function(remote, request, response) {
     try {
       body = page.getBody(request, response);
     } catch (err) {
+      Components.utils.reportError(err);
       body = remote.pages.error.getBody(err, request, response);
     }
     
@@ -25,7 +26,9 @@ MobileRemote.Controller = function(remote, request, response) {
   
   this.findPage = function() {
     if (request.path == "/") {
-      return remote.pages.dashboard;
+      return remote.pages.home;
+    } else if (request.path == "/home.html") {
+      return remote.pages.home;
     } else if (MobileRemote.startsWith(request.path, '/tabs/')) {
       return remote.pages.tabs;
     } else if (MobileRemote.startsWith(request.path, '/windows/')) {

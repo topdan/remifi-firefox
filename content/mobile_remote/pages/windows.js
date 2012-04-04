@@ -68,7 +68,7 @@ MobileRemote.Pages.Windows = function(remote) {
       var currentWindow = orderedWindows.getZOrderDOMWindowEnumerator(null, true).getNext();
       
       v.page('windows', function() {
-        v.toolbar('Windows', {left: {title: 'tabs', url: '/tabs/index.html'}, right: {title: 'home', url: '/'}});
+        v.toolbar('Windows', {left: {title: 'tabs', url: '/tabs/index.html'}, right: {title: 'home', url: '/home.html'}});
         
         var windows = [];
         var wenum = Components.classes["@mozilla.org/embedcomp/window-watcher;1"].getService(Components.interfaces.nsIWindowWatcher).getWindowEnumerator();

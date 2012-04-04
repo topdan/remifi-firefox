@@ -1,11 +1,11 @@
 if (MobileRemote.Pages == null) MobileRemote.Pages = {}
 
-MobileRemote.Pages.Dashboard = function(remote) {
+MobileRemote.Pages.Home = function(remote) {
   
   this.getBody = function(request, response) {
     return remote.views(function(v) {
       
-      v.page('dashboard', function() {
+      v.page('home', function() {
         v.toolbar('Home');
         
         v.apps([
@@ -21,20 +21,17 @@ MobileRemote.Pages.Dashboard = function(remote) {
         
         v.systemApps([
           {
-            title: "go",
-            url: "/go/index.html"
-          },
-          {
             title: "mouse",
             url: "/mouse/index.html"
           },
-          {
-            title: "windows",
-            url: "/windows/index.html"
-          },
+          null,
           {
             title: "tabs",
             url: "/tabs/index.html"
+          },
+          {
+            title: "go",
+            url: "/go/index.html"
           }
         ]);
         
