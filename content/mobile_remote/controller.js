@@ -4,7 +4,12 @@ MobileRemote.Controller = function(remote, request, response) {
   
   this.process = function() {
     var page = this.findPage();
-    var body = page.getBody(request, response);
+    var body = null;
+    try {
+      body = page.getBody(request, response);
+    } catch (err) {
+      body = remote.pages.error.getBody(err, request, response);
+    }
     
     if (body == undefined)
       body = remote.pages.noBody.getBody(request, response);

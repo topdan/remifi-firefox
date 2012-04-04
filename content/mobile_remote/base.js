@@ -12,6 +12,7 @@ MobileRemote.Base = function(env) {
   this.pages.windows   = new MobileRemote.Pages.Windows(this);
   this.pages.controls  = new MobileRemote.Pages.Controls(this);
   this.pages.go        = new MobileRemote.Pages.Go(this);
+  this.pages.error     = new MobileRemote.Pages.Error(this);
   this.pages.notFound  = new MobileRemote.Pages.NotFound(this);
   this.pages.noBody    = new MobileRemote.Pages.NoBody(this);
   

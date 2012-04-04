@@ -1,11 +1,3 @@
-var jQT = new $.jQTouch({
-    icon: '/static/jqtouch/images/jqtouch.png',
-    addGlossToIcon: false,
-    startupScreen: '/static/jqtouch/images/jqt_startup.png',
-    statusBar: 'black',
-    useAnimations: false
-});
-
 function setupPages() {
   $('#jqt').each(function() {
     var e = $(this);
@@ -30,5 +22,17 @@ function setupPages() {
 }
 
 $(function() {
+  var jQT = new $.jQTouch({
+      icon: '/static/jqtouch/images/jqtouch.png',
+      addGlossToIcon: false,
+      startupScreen: '/static/jqtouch/images/jqt_startup.png',
+      statusBar: 'black',
+      useAnimations: false
+  });
+  
+  $(document).on('ajaxError', function(error, request) {
+    jQT.goTo('#ajax_error');
+  });
+  
   setupPages();
 })
