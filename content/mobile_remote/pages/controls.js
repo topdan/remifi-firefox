@@ -4,10 +4,7 @@ MobileRemote.Pages.Controls = function(remote) {
   var self = this;
   
   this.getBody = function(request, response) {
-    if (request.path == '/controls/index.html' || request.path == '/controls/') {
-      return this.index(request, response);
-      
-    } else if (request.path == '/controls/home.html') {
+    if (request.path == '/controls/home.html') {
       return this.home(request, response);
       
     } else if (request.path == '/controls/stop.html') {
@@ -32,28 +29,28 @@ MobileRemote.Pages.Controls = function(remote) {
   
   this.home = function(request, response) {
     remote.currentBrowser().goHome();
-    return this.wait(request.params['url'] || '/controls/index.html', request, response);
+    return this.wait(request.params['url'], request, response);
   }
   
   this.stop = function(request, response) {
     remote.currentBrowser().stop();
-    return this.wait(request.params['url'] || '/controls/index.html', request, response);
+    return this.wait(request.params['url'], request, response);
   }
   
   this.refresh = function(request, response) {
     var doc = remote.currentBrowser().contentDocument;
     doc.location.href = doc.location.href;
-    return this.wait(request.params['url'] || '/controls/index.html', request, response);
+    return this.wait(request.params['url'], request, response);
   }
   
   this.back = function(request, response) {
     remote.currentBrowser().goBack();
-    return this.wait(request.params['url'] || '/controls/index.html', request, response);
+    return this.wait(request.params['url'], request, response);
   }
   
   this.forward = function(request, response) {
     remote.currentBrowser().goForward();
-    return this.wait(request.params['url'] || '/controls/index.html', request, response);
+    return this.wait(request.params['url'], request, response);
   }
   
   this.wait = function(url, request, response) {
@@ -78,20 +75,8 @@ MobileRemote.Pages.Controls = function(remote) {
     }
   }
   
-  this.index = function(request, response) {
-    return remote.views(function(v) {
-      v.page('controls', function() {
-        v.toolbar('Controls', {right: {title: 'home', url: '/'}});
-        
-        v.template('/views/mouse.html', {});
-        
-        self.buttons(v);
-      });
-    });
-  };
-  
   this.buttons = function(v, url) {
-    if (url == null) url = '/controls/index.html';
+    if (url == null) throw "URL required";
     var browser = remote.currentBrowser();
     
     url = encodeURIComponent(url);

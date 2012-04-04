@@ -41,7 +41,7 @@ MobileRemote.Views.Base = function(env) {
   }
   
   this.error = function(message) {
-    this.content.push('<p class="error-message">', message, '</p>');
+    this.content.push('<p id="error-message">', message, '</p>');
   }
   
   this.list = function(items, options) {

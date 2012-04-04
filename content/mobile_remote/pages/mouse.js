@@ -10,7 +10,10 @@ MobileRemote.Pages.Mouse = function(remote) {
   this.y = null;
   
   this.getBody = function(request, response) {
-    if (request.path == '/mouse/over.js') {
+    if (request.path == '/mouse/index.html' || request.path == '/mouse/') {
+      return this.index(request, response);
+      
+    } else if (request.path == '/mouse/over.js') {
       return this.over(request, response);
       
     } else if (request.path == '/mouse/up.js') {
@@ -30,6 +33,18 @@ MobileRemote.Pages.Mouse = function(remote) {
       
     }
   }
+  
+  this.index = function(request, response) {
+    return remote.views(function(v) {
+      v.page('mouse', function() {
+        v.toolbar('Mouse', {right: {title: 'home', url: '/'}});
+        
+        v.template('/views/mouse.html', {});
+        
+        remote.pages.controls.buttons(v);
+      });
+    });
+  };
   
   this.over = function(request, response) {
     var x = parseFloat(request.params["x"]);

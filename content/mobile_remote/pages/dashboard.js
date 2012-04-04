@@ -25,8 +25,8 @@ MobileRemote.Pages.Dashboard = function(remote) {
             url: "/go/index.html"
           },
           {
-            title: "controls",
-            url: "/controls/index.html"
+            title: "mouse",
+            url: "/mouse/index.html"
           },
           {
             title: "windows",
