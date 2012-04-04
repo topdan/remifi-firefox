@@ -10,7 +10,7 @@ function setupPages() {
     var dy = (y - offset.top)/offset.height;
     
     $.ajax({
-      url: '/mouse/move.js?x=' + encodeURIComponent(dx) + '&y=' + encodeURIComponent(dy),
+      url: '/mouse/over.js?x=' + encodeURIComponent(dx) + '&y=' + encodeURIComponent(dy),
       success: function(script) {
         eval(script);
       }
@@ -18,7 +18,7 @@ function setupPages() {
     
     e.preventDefault();
     return false;
-  })
+  });
   
   $('#jqt').each(function() {
     var e = $(this);

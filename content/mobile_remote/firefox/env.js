@@ -33,6 +33,15 @@ MobileRemote.Firefox.Env = function() {
     return data ? func(data) : func();
   }
   
+  this.exec = function(path, args) {
+    var path = fullpath(path)
+    var file = fileHandle(path)
+    
+    var runner = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess)
+    runner.init(file)
+    runner.run(true, args, args.length)
+  }
+  
   var fullpath = function(path) {
     return self.extensionPath + path
   }

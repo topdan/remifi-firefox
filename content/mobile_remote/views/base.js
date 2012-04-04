@@ -15,6 +15,10 @@ MobileRemote.Views.Base = function(env) {
     this.content.push(html);
   }
   
+  this.escape = function(javascript) {
+    return javascript.toString().replace(/\"/g, '\\\"')
+  }
+  
   this.page = function(id, callback) {
     this.content.push('<div id="' + id + '">');
     callback();
