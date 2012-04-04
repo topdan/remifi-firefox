@@ -67,7 +67,7 @@ MobileRemote.Pages.Windows = function(remote) {
       var orderedWindows = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
       var currentWindow = orderedWindows.getZOrderDOMWindowEnumerator(null, true).getNext();
       
-      v.page('page1', function() {
+      v.page('windows', function() {
         v.toolbar('Windows', {left: {title: 'tabs', url: '/tabs/index.html'}, right: {title: 'home', url: '/'}});
         
         var windows = [];

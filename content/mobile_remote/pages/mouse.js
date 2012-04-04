@@ -36,12 +36,18 @@ MobileRemote.Pages.Mouse = function(remote) {
   
   this.index = function(request, response) {
     return remote.views(function(v) {
-      v.page('mouse', function() {
+      v.page('mouse-page', function() {
         v.toolbar('Mouse', {right: {title: 'home', url: '/'}});
         
         v.template('/views/mouse.html', {});
         
-        remote.pages.controls.buttons(v);
+        v.systemApps([
+          {title: 'left', url: '/mouse/left.js'},
+          {title: 'up', url: '/mouse/up.js'},
+          {title: 'down', url: '/mouse/down.js'},
+          {title: 'right', url: '/mouse/right.js'}
+        ]);
+        
       });
     });
   };

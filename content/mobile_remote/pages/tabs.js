@@ -49,7 +49,7 @@ MobileRemote.Pages.Tabs = function(remote) {
       var currentBrowser = remote.currentBrowser();
       var currentTabIndex = null;
       
-      v.page('page1', function() {
+      v.page('tabs', function() {
         v.toolbar('Tabs', {left: {title: 'windows', url: '/windows/index.html'}, right: {title: 'home', url: '/'}});
         
         var tabs = [];

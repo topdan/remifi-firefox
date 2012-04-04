@@ -7,7 +7,7 @@ MobileRemote.Pages.NotFound = function(remote) {
       // TODO actually go back
       
       v.page('not_found', function() {
-        v.toolbar('Not Found', {left: {title: 'back', url: '/'}});
+        v.toolbar('Not Found', {right: {title: 'home', url: '/'}});
 
         v.error("Sorry, that page was not found.");
       })
