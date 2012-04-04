@@ -3,6 +3,7 @@ if (MobileRemote.Firefox == null) MobileRemote.Firefox = {}
 MobileRemote.Firefox.Server = function() {
   var self = this;
   
+  this.signature = 'Mobile-Remote/0.1';
   this.port = 6670;
   this.loopbackOnly = false;
   
@@ -135,8 +136,10 @@ MobileRemote.Firefox.Server = function() {
       
       response.headers["Content-Length"] = f.fileSize;
       response.headers["Content-Type"] = contentType;
+      response.headers['Server'] = self.signature;
       
-      self.staticRequest(request, response);
+      if (self.staticRequest)
+        self.staticRequest(request, response);
       
       var headers = response.headersString();
       outstream.write(headers, headers.length);
@@ -156,6 +159,8 @@ MobileRemote.Firefox.Server = function() {
     }
     
     var respondWithPage = function() {
+      response.headers["Server"] = self.signature;
+      
       var content = self.dynamicRequest(request, response);
       response.headers["Content-Length"] = content.length;
       

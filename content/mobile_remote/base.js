@@ -28,6 +28,11 @@ MobileRemote.Base = function(env) {
     return this.server.isRunning;
   }
   
+  this.handleRequest = function(request, response) {
+    var controller = new MobileRemote.Controller(self, request, response);
+    return controller.process(request, response);
+  }
+  
   this.toggle = function() {
     if (this.server.isRunning) {
       this.unload();
