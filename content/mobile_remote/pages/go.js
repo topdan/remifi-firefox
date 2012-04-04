@@ -55,7 +55,7 @@ MobileRemote.Pages.Go = function(remote) {
       url = "http://" + url
     }
     remote.currentBrowser().contentDocument.location.href = url;
-    return this.index(request, response);
+    return remote.pages.controls.wait('/controls/index.html', request, response);
   }
   
 };

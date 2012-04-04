@@ -9,9 +9,10 @@ MobileRemote.Request = function() {
   
   this.setPath = function(path) {
     this.fullpath = path;
-
+    
     var smoothPath = this.cleanPath(path);
     
+    Components.utils.reportError(smoothPath);
     var uri = new MobileRemote.URI("http://mobile-remote.topdan.com" + smoothPath)
     this.params = uri.queryKey;
     this.path = uri.path;

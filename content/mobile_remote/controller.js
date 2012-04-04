@@ -14,7 +14,9 @@ MobileRemote.Controller = function(remote, request, response) {
     if (body == undefined)
       body = remote.pages.noBody.getBody(request, response);
     
-    if (request.isXhr) {
+    if (request.isXhr && MobileRemote.endsWith(request.path, '.js')) {
+      return body;
+    } else if (request.isXhr) {
       return body + '<script type="text/javascript" charset="utf-8">\nsetupPages()\n</script>';
     } else {
       return withLayout(body);

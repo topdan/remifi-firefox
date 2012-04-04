@@ -21,6 +21,28 @@ function setupPages() {
   })
 }
 
+MobileRemote = function(jQT) {
+  
+  this.show = function(url) {
+    $.ajax({
+      url: url,
+      success: function(data) {
+        jQT.insertPages(data, 'fade');
+      }
+    })
+  }
+  
+  this.wait = function(url) {
+    $.ajax({
+      url: '/controls/wait.js?url=' + encodeURIComponent(url),
+      success: function(script, status, request) {
+        eval(script);
+      }
+    })
+  }
+  
+}
+
 $(function() {
   var jQT = new $.jQTouch({
       icon: '/static/jqtouch/images/jqtouch.png',
@@ -33,6 +55,8 @@ $(function() {
   $(document).on('ajaxError', function(error, request) {
     jQT.goTo('#ajax_error');
   });
+  
+  mobileRemote = new MobileRemote(jQT);
   
   setupPages();
 })
