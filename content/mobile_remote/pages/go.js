@@ -26,7 +26,9 @@ MobileRemote.Pages.Go = function(remote) {
         
         v.form('/go/google.html', function(f) {
           f.search('q', {placeholder: 'Google Search'})
-        })
+        });
+        
+        remote.pages.controls.buttons(v, '/go/index.html');
       });
     });
   };

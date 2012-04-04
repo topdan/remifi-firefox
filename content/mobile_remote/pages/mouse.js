@@ -13,6 +13,21 @@ MobileRemote.Pages.Mouse = function(remote) {
     if (request.path == '/mouse/over.js') {
       return this.over(request, response);
       
+    } else if (request.path == '/mouse/up.js') {
+      return this.up(request, response);
+      
+    } else if (request.path == '/mouse/down.js') {
+      return this.down(request, response);
+      
+    } else if (request.path == '/mouse/left.js') {
+      return this.left(request, response);
+      
+    } else if (request.path == '/mouse/right.js') {
+      return this.right(request, response);
+      
+    } else if (request.path == '/mouse/click.js') {
+      return this.click(request, response);
+      
     }
   }
   
@@ -27,6 +42,40 @@ MobileRemote.Pages.Mouse = function(remote) {
       this.x = Math.floor(sx * x);
       this.y = Math.floor(sy * y);
       actualMouseAction('over', this.x, this.y);
+    }
+  }
+  
+  this.up = function(request, response) {
+    if (this.x && this.y) {
+      this.y -= 5;
+      actualMouseAction('over', this.x, this.y);
+    }
+  }
+  
+  this.down = function(request, response) {
+    if (this.x && this.y) {
+      this.y += 5;
+      actualMouseAction('over', this.x, this.y);
+    }
+  }
+  
+  this.left = function(request, response) {
+    if (this.x && this.y) {
+      this.x -= 5;
+      actualMouseAction('over', this.x, this.y);
+    }
+  }
+  
+  this.right = function(request, response) {
+    if (this.x && this.y) {
+      this.x += 5;
+      actualMouseAction('over', this.x, this.y);
+    }
+  }
+  
+  this.click = function(request, response) {
+    if (this.x && this.y) {
+      actualMouseAction('click', this.x, this.y);
     }
   }
   

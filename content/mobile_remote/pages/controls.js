@@ -32,28 +32,28 @@ MobileRemote.Pages.Controls = function(remote) {
   
   this.home = function(request, response) {
     remote.currentBrowser().goHome();
-    return this.wait('/controls/index.html', request, response);
+    return this.wait(request.params['url'] || '/controls/index.html', request, response);
   }
   
   this.stop = function(request, response) {
     remote.currentBrowser().stop();
-    return this.index(request, response);
+    return this.wait(request.params['url'] || '/controls/index.html', request, response);
   }
   
   this.refresh = function(request, response) {
     var doc = remote.currentBrowser().contentDocument;
     doc.location.href = doc.location.href;
-    return this.wait('/controls/index.html', request, response);
+    return this.wait(request.params['url'] || '/controls/index.html', request, response);
   }
   
   this.back = function(request, response) {
     remote.currentBrowser().goBack();
-    return this.wait('/controls/index.html', request, response);
+    return this.wait(request.params['url'] || '/controls/index.html', request, response);
   }
   
   this.forward = function(request, response) {
     remote.currentBrowser().goForward();
-    return this.wait('/controls/index.html', request, response);
+    return this.wait(request.params['url'] || '/controls/index.html', request, response);
   }
   
   this.wait = function(url, request, response) {
@@ -64,7 +64,7 @@ MobileRemote.Pages.Controls = function(remote) {
         v.content.push('<div id="waiting"><p class="wait-message"><span class="title">Loading...</span><br/><img src="/static/images/loading.gif" width="220" height="19"/><br/><span class="description">&nbsp;</span></p></div>')
         v.content.push('<script type="text/javascript">$(function() { mobileRemote.wait("' + url + '"); })</script>');
         
-        self.buttons(v);
+        self.buttons(v, url);
       });
     });
   }
@@ -90,19 +90,22 @@ MobileRemote.Pages.Controls = function(remote) {
     });
   };
   
-  this.buttons = function(v) {
+  this.buttons = function(v, url) {
+    if (url == null) url = '/controls/index.html';
     var browser = remote.currentBrowser();
     
-    var back = browser.canGoBack ? {title: 'back', url: '/controls/back.html'} : null;
-    var home = {title: 'home', url: '/controls/home.html'};
+    url = encodeURIComponent(url);
+    
+    var back = browser.canGoBack ? {title: 'back', url: '/controls/back.html?url=' + url} : null;
+    var home = {title: 'home', url: '/controls/home.html?url=' + url};
     
     var stop = null;
     if (browser.webProgress.isLoadingDocument)
-      stop = {title: 'stop', url: '/controls/stop.html'};
+      stop = {title: 'stop', url: '/controls/stop.html?url=' + url};
     else
-      stop = {title: 'refresh', url: '/controls/refresh.html'}
+      stop = {title: 'refresh', url: '/controls/refresh.html?url=' + url}
     
-    var forward = browser.canGoForward ? {title: 'forward', url: '/controls/forward.html'} : null;
+    var forward = browser.canGoForward ? {title: 'forward', url: '/controls/forward.html?url=' + url} : null;
     
     v.systemApps([back, home, stop, forward]);
   }
