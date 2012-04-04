@@ -28,7 +28,7 @@ MobileRemote.Controller = function(remote, request, response) {
       return remote.pages.tabs;
     } else if (MobileRemote.startsWith(request.path, '/windows/')) {
       return remote.pages.windows;
-    } else if (MobileRemote.startsWith(request.path, '/current/')) {
+    } else if (MobileRemote.startsWith(request.path, '/controls/')) {
       return remote.pages.controls;
     } else if (MobileRemote.startsWith(request.path, '/go/')) {
       return remote.pages.go;
