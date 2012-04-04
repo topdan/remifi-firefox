@@ -50,7 +50,7 @@ MobileRemote.Pages.Tabs = function(remote) {
       var currentTabIndex = null;
       
       v.page('page1', function() {
-        v.toolbar('Tabs', {right: {title: 'home', url: '/'}});
+        v.toolbar('Tabs', {left: {title: 'windows', url: '/windows/index.html'}, right: {title: 'home', url: '/'}});
         
         var tabs = [];
         for (var i=0 ; i < currentBrowser.mTabs.length ; i++) {
@@ -76,7 +76,7 @@ MobileRemote.Pages.Tabs = function(remote) {
         
         v.list(tabs);
         
-        apps = [{title: 'windows', url: '/windows/index.html'}, null]
+        apps = [null, null]
         if (currentTabIndex != null && (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true))
           apps.push({title: 'close', url: "/tabs/close.html?index=" + currentTabIndex})
         else
