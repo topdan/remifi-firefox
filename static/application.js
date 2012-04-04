@@ -1,24 +1,69 @@
 function setupPages() {
   
-  $('#mouse .touchpad').click(function(e) {
-    var x = e.clientX;
-    var y = e.clientY;
+  var isMoving = false;
+  var waitingX = null;
+  var waitingY = null;
+  
+  var mousePadTouched = function(element, event) {
+    var x = event.clientX;
+    var y = event.clientY;
     
-    var offset = $(this).offset();
+    var offset = $(element).offset();
     
     var dx = (x - offset.left)/offset.width;
     var dy = (y - offset.top)/offset.height;
     
-    $.ajax({
-      url: '/mouse/over.js?x=' + encodeURIComponent(dx) + '&y=' + encodeURIComponent(dy),
-      success: function(script) {
-        eval(script);
-      }
-    })
+    moveMouse(dx, dy);
+  }
+  
+  var moveMouse = function(x, y) {
+    if (isMoving) {
+      waitingX = x;
+      waitingY = y;
+    } else {
+      isMoving = true;
+      $.ajax({
+        url: '/mouse/over.js?x=' + encodeURIComponent(x) + '&y=' + encodeURIComponent(y),
+        success: function(script) {
+          eval(script);
+          isMoving = false;
+          
+          if (waitingX && waitingY) {
+            moveMouse(waitingX, waitingY);
+            waitingX = null;
+            waitingY = null;
+          }
+        }
+      })
+    }
+  }
+  
+  if ($.support.touch) {
+    $('#mouse .touchpad').bind('touchstart', function(e) {
+      var self = this;
+      var target = $(e.target);
+      
+      target.on('touchmove', function(){
+        mousePadTouched(self, e.touches[0])
+      });
+      
+      target.on('touchend', function() {
+        target.unbind('touchmove');
+      })
+      
+      mousePadTouched(this, e.touches[0]);
+      e.preventDefault();
+      return false;
+    });
     
-    e.preventDefault();
-    return false;
-  });
+  } else {
+    $('#mouse .touchpad').click(function(e) {
+      mousePadTouched(this, e);
+      e.preventDefault();
+      return false;
+    });
+    
+  }
   
   $('#jqt').each(function() {
     var e = $(this);
