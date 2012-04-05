@@ -2,11 +2,15 @@ if (MobileRemote.Pages == null) MobileRemote.Pages = {}
 
 MobileRemote.Pages.Home = function(remote) {
   
-  this.getBody = function(request, response) {
+  this.render = function(request, response) {
+    return this.index(request, response);
+  }
+  
+  this.index = function(request, response) {
     return remote.views(function(v) {
       
       v.page('home', function() {
-        v.toolbar('Home');
+        v.toolbar('Home', {right: {title: 'back', url: '/'}});
         
         v.apps([
           {

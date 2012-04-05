@@ -2,7 +2,7 @@ if (MobileRemote.Pages == null) MobileRemote.Pages = {}
 
 MobileRemote.Pages.Go = function(remote) {
   
-  this.getBody = function(request, response) {
+  this.render = function(request, response) {
     if (request.path == '/go/index.html' || request.path == '/go/') {
       return this.index(request, response);
       
@@ -18,7 +18,7 @@ MobileRemote.Pages.Go = function(remote) {
   this.index = function(request, response) {
     return remote.views(function(v) {
       v.page('go', function() {
-        v.toolbar('Go', {right: {title: 'home', url: '/home.html'}});
+        v.toolbar('Go');
         
         v.form('/go/url.html', function(f) {
           f.url('url', {placeholder: 'Web Address'})

@@ -3,17 +3,20 @@ MobileRemote.Controller = function(remote, request, response) {
   this.layout = null;
   
   this.process = function() {
+    var doc = remote.currentBrowser().contentDocument;
+    var uri = new MobileRemote.URI(doc.location.href);
+    
     var page = this.findPage();
     var body = null;
     try {
-      body = page.getBody(request, response);
+      body = page.render(request, response);
     } catch (err) {
       Components.utils.reportError(err);
-      body = remote.pages.error.getBody(err, request, response);
+      body = remote.pages.error.render(err, request, response);
     }
     
     if (body == undefined)
-      body = remote.pages.noBody.getBody(request, response);
+      body = remote.pages.noBody.render(request, response);
     
     if (request.isXhr && request.isScript) {
       return body;
@@ -26,7 +29,7 @@ MobileRemote.Controller = function(remote, request, response) {
   
   this.findPage = function() {
     if (request.path == "/") {
-      return remote.pages.home;
+      return remote.pages.apps;
     } else if (request.path == "/home.html") {
       return remote.pages.home;
     } else if (MobileRemote.startsWith(request.path, '/tabs/')) {

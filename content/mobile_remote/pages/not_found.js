@@ -2,12 +2,12 @@ if (MobileRemote.Pages == null) MobileRemote.Pages = {}
 
 MobileRemote.Pages.NotFound = function(remote) {
   
-  this.getBody = function(request, response) {
+  this.render = function(request, response) {
     return remote.views(function(v) {
       // TODO actually go back
       
       v.page('not_found', function() {
-        v.toolbar('Not Found', {right: {title: 'home', url: '/home.html'}});
+        v.toolbar('Not Found');
 
         v.error("Sorry, that page was not found.");
       })

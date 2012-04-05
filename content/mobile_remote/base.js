@@ -7,6 +7,7 @@ MobileRemote.Base = function(env) {
   this.view = null;
   
   this.pages = {};
+  this.pages.apps      = new MobileRemote.Pages.Apps(this);
   this.pages.home      = new MobileRemote.Pages.Home(this);
   this.pages.tabs      = new MobileRemote.Pages.Tabs(this);
   this.pages.windows   = new MobileRemote.Pages.Windows(this);

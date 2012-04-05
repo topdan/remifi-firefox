@@ -9,7 +9,7 @@ MobileRemote.Pages.Mouse = function(remote) {
   this.x = null;
   this.y = null;
   
-  this.getBody = function(request, response) {
+  this.render = function(request, response) {
     if (request.path == '/mouse/index.html' || request.path == '/mouse/') {
       return this.index(request, response);
       
@@ -37,7 +37,7 @@ MobileRemote.Pages.Mouse = function(remote) {
   this.index = function(request, response) {
     return remote.views(function(v) {
       v.page('mouse-page', function() {
-        v.toolbar('Mouse', {right: {title: 'home', url: '/home.html'}});
+        v.toolbar('Mouse');
         
         width = 310;
         height = 232;

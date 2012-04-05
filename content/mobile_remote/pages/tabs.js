@@ -3,7 +3,7 @@ if (MobileRemote.Pages == null) MobileRemote.Pages = {}
 MobileRemote.Pages.Tabs = function(remote) {
   // TODO extract firefox specific stuff
   
-  this.getBody = function(request, response) {
+  this.render = function(request, response) {
     if (request.path == '/tabs/index.html' || request.path == '/tabs/') {
       return this.index(request, response);
       
@@ -22,12 +22,12 @@ MobileRemote.Pages.Tabs = function(remote) {
   this.open = function(request, response) {
     var index = request.params["index"];
     if (index) remote.currentBrowser().selectTabAtIndex(index)
-    return this.index(request, response);
+    return remote.pages.apps.render(request, response);
   }
   
   this.add = function(request, response) {
-    remote.currentBrowser().addTab("")
-    return this.index(request, response);
+    gBrowser.selectedTab = remote.currentBrowser().addTab("")
+    return remote.pages.apps.render(request, response);
   }
   
   this.close = function(request, response) {
@@ -50,7 +50,7 @@ MobileRemote.Pages.Tabs = function(remote) {
       var currentTabIndex = null;
       
       v.page('tabs', function() {
-        v.toolbar('Tabs', {left: {title: 'windows', url: '/windows/index.html'}, right: {title: 'home', url: '/home.html'}});
+        v.toolbar('Tabs', {left: {title: 'windows', url: '/windows/index.html'}});
         
         var tabs = [];
         for (var i=0 ; i < currentBrowser.mTabs.length ; i++) {

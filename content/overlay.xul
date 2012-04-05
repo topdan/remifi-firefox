@@ -3,18 +3,28 @@
 <!DOCTYPE overlay SYSTEM "chrome://mobile-remote/locale/overlay.dtd">
 <overlay id="mobile-remote-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-
+  
   <script src="overlay.js"/>
-
+  
   <script src="mobile_remote/base.js"/>
+  <script src="mobile_remote/app.js"/>
   <script src="mobile_remote/controller.js"/>
   <script src="mobile_remote/request.js"/>
   <script src="mobile_remote/response.js"/>
+  
+  <script src="mobile_remote/app/google.js"/>
+  <script src="mobile_remote/app/youtube.js"/>
+  <script src="mobile_remote/app/netflix.js"/>
+  <script src="mobile_remote/app/hulu.js"/>
+  <script src="mobile_remote/app/hbo.js"/>
+  <script src="mobile_remote/app/cinemax.js"/>
+  <script src="mobile_remote/app/firefox.js"/>
   
   <script src="mobile_remote/firefox/env.js"/>
   <script src="mobile_remote/firefox/server.js"/>
   <script src="mobile_remote/firefox/view.js"/>
   
+  <script src="mobile_remote/pages/apps.js"/>
   <script src="mobile_remote/pages/controls.js"/>
   <script src="mobile_remote/pages/error.js"/>
   <script src="mobile_remote/pages/home.js"/>
