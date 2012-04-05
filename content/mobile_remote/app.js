@@ -28,7 +28,18 @@ MobileRemote.App.Sandbox = function(remote, name) {
     var action = request.path.match(/\/([^\/]+)$/)
     if (action) action = action[1];
     
-    var limitedRequest = {path: uri.path, action: action, params: request.params};
+    var limitedRequest = {
+      protocol: uri.protocol,
+      host: uri.host,
+      port: uri.port,
+      path: uri.path,
+      directory: uri.directory,
+      file: uri.file,
+      anchor: uri.anchor,
+      action: action, 
+      params: request.params
+    };
+    
     var json = Components.utils.evalInSandbox('render(' + JSON.stringify(limitedRequest) + ');', sandbox);
     
     if (typeof json == "string") {

@@ -36,7 +36,7 @@ function search() {
   var results = [];
   $('#rso h3 a').each(function() {
     results.push({
-      url: $(this).attr('href'),
+      url: externalURL($(this).attr('href')),
       title: $(this).text()
     })
   });

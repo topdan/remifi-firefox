@@ -44,10 +44,12 @@ function render(request) {
   else
     handler = this[route.funcName]
   
+  this.request = request;
   if (typeof handler == 'function')
     handler(request);
   else
     throw "Function not found: " + action.funcName || route.funcName;
+  this.request = null;
   
   if (this.isWaiting)
     this.pages = {type: 'wait'}
@@ -78,6 +80,29 @@ function page(id, callback) {
     toolbar(this.header)
   
   callback();
+}
+
+function externalURL(url) {
+  if (this.request == null) return;
+  
+  // absolute url using same protocol
+  if (url.match(/^\/\//)) {
+    return this.request.protocol + ":" + url;
+    
+  // absolute path with same protocol and host
+  } else if (url.match(/^\//)) {
+    return this.request.protocol + "://" + this.request.host + url;
+    
+  // absolute url
+  } else if (url.match(/^http:\/\//) || (url.match(/^http:\/\//))) {
+    return url;
+    
+  // relative url
+  } else {
+    var i = this.request.path.lastIndexOf('/');
+    var dir = this.request.path.substring(0, i);
+    return this.request.protocol + "://" + this.request.host + dir + '/' + url
+  }
 }
 
 function currentPage() {
