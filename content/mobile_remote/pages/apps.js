@@ -1,44 +1,43 @@
 if (MobileRemote.Pages == null) MobileRemote.Pages = {}
 
 MobileRemote.Pages.Apps = function(remote) {
+  var self = this;
   
+  this.about = new MobileRemote.App.About(remote)
   this.list = [
-    new MobileRemote.App.About(remote),
-    new MobileRemote.App.Google(remote),
-    new MobileRemote.App.Youtube(remote),
-    new MobileRemote.App.Hulu(remote),
-    new MobileRemote.App.Netflix(remote),
-    new MobileRemote.App.Hbo(remote),
-    new MobileRemote.App.Cinemax(remote),
+    new MobileRemote.App.Sandbox(remote, 'com.topdan.google'),
   ];
+  
+  // throw this.list[0].domain;
   
   this.render = function(request, response) {
     var doc = remote.currentBrowser().contentDocument;
-    var uri = new MobileRemote.URI(doc.location.href);
-    var appHandler = null;
+    var url = doc.location.href
+    var uri = new MobileRemote.URI(url);
+    var app = null;
+    var body = null;
     
-    if (uri) {
-      appHandler = this.recognize(uri, request, response);
-    }
-    
-    if (appHandler) {
-      var body = appHandler(request, response);
-      if (body == null)
-        return remote.pages.mouse.index(request, response);
-      else
-        return body;
+    if (MobileRemote.startsWith(url, 'about:')) {
+      body = this.about.render(uri, request, response);
     } else {
-      return remote.pages.mouse.index(request, response);
+      app = findApp(uri, request, response);
+      
+      if (app)
+        body = app.render(uri, request, response);
     }
+    
+    if (body == null)
+      return remote.pages.mouse.index(request, response);
+    else
+      return body;
   }
   
-  this.recognize = function(uri, request, response) {
-    for(var i=0 ; i < this.list.length ; i++) {
-      var app = this.list[i];
+  var findApp = function(uri, request, response) {
+    for(var i=0 ; i < self.list.length ; i++) {
+      var app = self.list[i];
       
-      var func = (app.domain == null || app.domain == uri.host) && app.recognize(uri, request, response)
-      if (func) {
-        return func;
+      if (app.domain && app.domain == uri.host) {
+        return app;
       }
     }
     

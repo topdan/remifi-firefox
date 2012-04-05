@@ -2,17 +2,21 @@ if (MobileRemote.Views == null) MobileRemote.Views = {}
 
 MobileRemote.Views.Base = function(env) {
   
-  this.content = [];
+  this.out = [];
   
   this.html = function() {
-    return this.content.join("");
+    return this.out.join("");
+  }
+  
+  this.safeOut = function(s) {
+    this.out.push(s);
   }
   
   this.template = function(path, data) {
-    var content = env.fileContent(path);
-    var func = MobileRemote.microtemplate(content);
+    var code = env.fileContent(path);
+    var func = MobileRemote.microtemplate(code);
     var html = data ? func(data) : func();
-    this.content.push(html);
+    this.out.push(html);
   }
   
   this.escape = function(javascript) {
@@ -20,9 +24,9 @@ MobileRemote.Views.Base = function(env) {
   }
   
   this.page = function(id, callback) {
-    this.content.push('<div id="' + id + '">');
+    this.out.push('<div id="' + id + '">');
     callback();
-    this.content.push('</div>');
+    this.out.push('</div>');
   }
   
   this.toolbar = function(name, options) {
@@ -49,22 +53,22 @@ MobileRemote.Views.Base = function(env) {
     } else {
       klass = "grayButton";
     }
-    this.content.push('<a class="' + klass + '" href="' + url + '" style="">' + name + '</a>')
+    this.out.push('<a class="' + klass + '" href="' + url + '" style="">' + name + '</a>')
   }
   
   this.br = function() {
-    this.content.push("<br/>");
+    this.out.push("<br/>");
   }
   
   this.form = function(url, callback) {
     var form = new MobileRemote.Views.Form(this, env, url);
     callback(form);
     
-    this.content.push(form.html());
+    this.out.push(form.html());
   }
   
   this.error = function(message) {
-    this.content.push('<p id="error-message">', message, '</p>');
+    this.out.push('<p id="error-message">', message, '</p>');
   }
   
   this.list = function(items, options) {

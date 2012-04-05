@@ -4,23 +4,23 @@ MobileRemote.Views.Form = function(view, env, url, options) {
   if (options == null) options = {};
   
   var inFieldSet = null;
-  this.content = ['<form action="' + url + '" method="GET">'];
+  this.out = ['<form action="' + url + '" method="GET">'];
   
   this.html = function() {
-    this.content.push('</ul></form>')
-    return this.content.join("");
+    this.out.push('</ul></form>')
+    return this.out.join("");
   }
   
   this.fieldset = function(callback) {
-    this.content.push('<ul class="edit">')
+    this.out.push('<ul class="edit">')
     inFieldSet = true;
     callback();
     inFieldSet = false;
-    this.content.push('</ul>')
+    this.out.push('</ul>')
   }
   
   this.br = function() {
-    this.content.push("<br/>")
+    this.out.push("<br/>")
   }
   
   this.url = function(name, options) {
@@ -47,7 +47,7 @@ MobileRemote.Views.Form = function(view, env, url, options) {
     } else {
       klass = "grayButton";
     }
-    this.content.push('<a class="submit ' + klass + '" href="' + url + '" style="">' + name + '</a>')
+    this.out.push('<a class="submit ' + klass + '" href="' + url + '" style="">' + name + '</a>')
   }
   
   this.input = function(type, name, options) {
@@ -59,10 +59,10 @@ MobileRemote.Views.Form = function(view, env, url, options) {
     if (options.value)
       rest = rest + ' value="' + options.value + '"';
     
-    var content = '<input type="' + type + '" name="' + name + '"' + rest + '/>';
+    var code = '<input type="' + type + '" name="' + name + '"' + rest + '/>';
     if (inFieldSet)
-      content = '<li>' + content + '</li>'
-    this.content.push(content);
+      content = '<li>' + code + '</li>'
+    this.out.push(code);
   }
   
 }

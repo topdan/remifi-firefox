@@ -161,10 +161,10 @@ MobileRemote.Firefox.Server = function() {
     var respondWithPage = function() {
       response.headers["Server"] = self.signature;
       
-      var content = self.dynamicRequest(request, response);
-      response.headers["Content-Length"] = content.length;
+      var code = self.dynamicRequest(request, response);
+      response.headers["Content-Length"] = code.length;
       
-      var webpage = response.headersString() + content;
+      var webpage = response.headersString() + code;
       
       outstream.write(webpage, webpage.length);
       instream.close();

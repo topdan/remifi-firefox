@@ -12,12 +12,6 @@
   <script src="mobile_remote/request.js"/>
   <script src="mobile_remote/response.js"/>
   
-  <script src="mobile_remote/app/google.js"/>
-  <script src="mobile_remote/app/youtube.js"/>
-  <script src="mobile_remote/app/netflix.js"/>
-  <script src="mobile_remote/app/hulu.js"/>
-  <script src="mobile_remote/app/hbo.js"/>
-  <script src="mobile_remote/app/cinemax.js"/>
   <script src="mobile_remote/app/about.js"/>
   
   <script src="mobile_remote/firefox/env.js"/>

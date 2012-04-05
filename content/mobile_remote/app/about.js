@@ -1,20 +1,20 @@
 MobileRemote.App.About = function(remote) {
   
-  this.recognize = function(uri, request, response) {
+  this.render = function(uri, request, response) {
     if (uri.toString() == "about:sessionrestore") {
       
       if (request.path == "/apps/about/sessionrestore/start-new-session.html") {
-        return sessionRestoreStartNewSession;
+        return sessionRestoreStartNewSession(request, response);
         
       } else if (request.path == "/apps/about/sessionrestore/restore.html") {
-        return sessionRestoreRestore;
+        return sessionRestoreRestore(request, response);
         
       } else {
-        return this.sessionRestore;
+        return this.sessionRestore(request, response);
       }
       
     } else if (uri.toString() == "about:blank") {
-      return remote.pages.home.index;
+      return remote.pages.home.index(request, response);
       
     }
   }

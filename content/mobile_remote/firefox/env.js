@@ -28,8 +28,8 @@ MobileRemote.Firefox.Env = function() {
   }
   
   this.template = function(viewpath, data) {
-    var content = this.fileContent(viewpath);
-    var func = MobileRemote.microtemplate(content);
+    var code = this.fileContent(viewpath);
+    var func = MobileRemote.microtemplate(code);
     return data ? func(data) : func();
   }
   

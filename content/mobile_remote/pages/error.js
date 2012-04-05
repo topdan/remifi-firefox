@@ -5,7 +5,7 @@ MobileRemote.Pages.Error = function(remote) {
   this.render = function(err, request, response) {
     return remote.views(function(v) {
       if (request.isScript) {
-        v.content.push('mobileRemote.error("' + v.escape(err) + '")');
+        v.safeOut('mobileRemote.error("' + v.escape(err) + '")');
       } else {
         v.page('no_body', function() {
           v.toolbar('Error');

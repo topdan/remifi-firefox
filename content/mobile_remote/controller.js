@@ -49,8 +49,8 @@ MobileRemote.Controller = function(remote, request, response) {
   
   var withLayout = function(body) {
     if (this.layout == null) {
-      var content = remote.env.fileContent('/views/layout.html');
-      this.layout = MobileRemote.microtemplate(content);
+      var code = remote.env.fileContent('/views/layout.html');
+      this.layout = MobileRemote.microtemplate(code);
     }
     
     return this.layout({body: body});
