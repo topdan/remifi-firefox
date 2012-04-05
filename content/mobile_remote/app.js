@@ -12,7 +12,7 @@ MobileRemote.App.Sandbox = function(remote, name) {
   this.filename = '/apps/' + name.replace(/\./g, '/') + '.js';
   this.url = null;
   this.uri = null;
-  this.domain = null;
+  this.domains = null;
   this.imports = ['lib/zepto', 'lib/json2'];
   this.metadata = {};
   this.sandbox = null;
@@ -65,7 +65,10 @@ MobileRemote.App.Sandbox = function(remote, name) {
     }
     
     evalInSandbox('$', '$ = Zepto', sandbox);
-    evalInSandbox(self.filename, self.code, sandbox);
+    
+    // OPTIMIZE save this once there's a development reload mode going
+    var code = remote.env.fileContent(self.filename);
+    evalInSandbox(self.filename, code, sandbox);
     return sandbox;
   }
   
@@ -97,13 +100,18 @@ MobileRemote.App.Sandbox = function(remote, name) {
       case 'url':
         self.url = value
         self.uri = new MobileRemote.URI(self.url);
-        self.domain = self.uri.host;
+        self.domains = [self.uri.host];
         break;
       
       case 'import':
         self.imports.push(value)
         break;
       
+      case 'domain':
+        if (self.domains == null)
+          self.domains = [];
+        self.domains.push(value);
+        
       default:
         self.metadata[key] = value
         break;

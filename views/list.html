@@ -2,9 +2,15 @@
   <% for(var i=0 ; i < items.length ; i++) { var item = items[i]; %>
   <li>
     <% if (MobileRemote.startsWith(item.url, "/")) { %>
-    <a href="<%= item.url %>" class="title <% if (item.active) { %>current<% } %>"><%= item.title %></a> 
+    <a href="<%= item.url %>" class="title <% if (item.active) { %>current<% } %>">
+      <%= item.title %>
+      <% if (item.image) { %><br/><img src="<%= item.image %>" class="thumb"/><% } %>
+    </a> 
     <% } else { %>
-      <a href="#" data-remote-url="<%= item.url %>" class="title <% if (item.active) { %>current<% } %>"><%= item.title %></a> 
+      <a href="#" data-remote-url="<%= item.url %>" class="title <% if (item.active) { %>current<% } %>">
+      <%= item.title %>
+      <% if (item.image) { %><br/><img src="<%= item.image %>" class="thumb"/><% } %>
+      </a> 
     <% } %>
     
     <% if (item.actions && item.actions.length > 0) { %>

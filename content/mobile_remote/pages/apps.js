@@ -6,6 +6,8 @@ MobileRemote.Pages.Apps = function(remote) {
   this.about = new MobileRemote.App.About(remote)
   this.list = [
     new MobileRemote.App.Sandbox(remote, 'com.topdan.google'),
+    new MobileRemote.App.Sandbox(remote, 'com.topdan.youtube'),
+    new MobileRemote.App.Sandbox(remote, 'com.topdan.nextflix')
   ];
   
   // throw this.list[0].domain;
@@ -36,7 +38,7 @@ MobileRemote.Pages.Apps = function(remote) {
     for(var i=0 ; i < self.list.length ; i++) {
       var app = self.list[i];
       
-      if (app.domain && app.domain == uri.host) {
+      if (app.domains && app.domains.indexOf(uri.host) != -1) {
         return app;
       }
     }
