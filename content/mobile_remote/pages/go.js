@@ -21,11 +21,15 @@ MobileRemote.Pages.Go = function(remote) {
         v.toolbar('Go');
         
         v.form('/go/url.html', function(f) {
-          f.url('url', {placeholder: 'Web Address'})
+          f.fieldset(function() {
+            f.url('url', {placeholder: 'Web Address'})
+          });
         })
         
         v.form('/go/google.html', function(f) {
-          f.search('q', {placeholder: 'Google Search'})
+          f.fieldset(function() {
+            f.search('q', {placeholder: 'Google Search'})
+          });
         });
         
         remote.pages.controls.buttons(v, '/go/index.html');

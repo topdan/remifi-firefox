@@ -39,6 +39,8 @@ MobileRemote.App.About = function(remote) {
     var s = Components.utils.Sandbox(content);
     s.win = content;
     Components.utils.evalInSandbox("win.startNewSession();", s);
+    
+    return remote.pages.controls.wait('/', request, response);
   }
   
   var sessionRestoreRestore = function(request, response) {
@@ -48,6 +50,8 @@ MobileRemote.App.About = function(remote) {
     var s = Components.utils.Sandbox(content);
     s.win = content;
     Components.utils.evalInSandbox("win.restoreSession();", s);
+    
+    return remote.pages.controls.wait('/', request, response);
   }
   
 }

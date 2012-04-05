@@ -28,3 +28,6 @@ a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px
 p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black; background-color: #CCC;}
 
 #mouse .touchpad { display: block; margin: 0px auto; background-color: #CCC; }
+
+#jqt .buttons-2 { width: 100%; }
+#jqt .buttons-2 button { width: 46%; float: left; }

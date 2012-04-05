@@ -22,7 +22,11 @@ MobileRemote.Pages.Apps = function(remote) {
     }
     
     if (appHandler) {
-      return appHandler(request, response);
+      var body = appHandler(request, response);
+      if (body == null)
+        return remote.pages.mouse.index(request, response);
+      else
+        return body;
     } else {
       return remote.pages.mouse.index(request, response);
     }
@@ -31,7 +35,8 @@ MobileRemote.Pages.Apps = function(remote) {
   this.recognize = function(uri, request, response) {
     for(var i=0 ; i < this.list.length ; i++) {
       var app = this.list[i];
-      var func = app.recognize(uri, request, response)
+      
+      var func = (app.domain == null || app.domain == uri.host) && app.recognize(uri, request, response)
       if (func) {
         return func;
       }

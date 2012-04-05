@@ -57,7 +57,7 @@ MobileRemote.Views.Base = function(env) {
   }
   
   this.form = function(url, callback) {
-    var form = new MobileRemote.Views.Form(env, url);
+    var form = new MobileRemote.Views.Form(this, env, url);
     callback(form);
     
     this.content.push(form.html());
