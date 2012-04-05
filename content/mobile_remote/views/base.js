@@ -31,7 +31,7 @@ MobileRemote.Views.Base = function(env) {
   
   this.toolbar = function(name, options) {
     if (options == null) options = {};
-    var left = options.left;
+    var left = options.left || {title: 'nav', url: '#nav'};
     var right = options.right || {title: 'home', url: '/home.html'};
     
     this.template('/views/toolbar.html', {name: name, left: left, right: right});

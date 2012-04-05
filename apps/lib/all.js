@@ -65,11 +65,18 @@ function wait() {
 function ensurePage() {
   if (this.pages.content.length == 0) {
     this.pages.content.push({type: 'page', content: []});
+    
+    if (this.header)
+      toolbar(this.header)
   }
 }
 
 function page(id, callback) {
   this.pages.content.push({type: 'page', id: id, content: []})
+  
+  if (this.header)
+    toolbar(this.header)
+  
   callback();
 }
 

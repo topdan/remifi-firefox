@@ -2,6 +2,7 @@
 // @import lib/all
 // @url    http://www.google.com
 //
+this.header = "Google"
 
 route("/", "index", function() {
   action("doSearch");
@@ -12,7 +13,6 @@ route("/search", "search", function() {
 });
 
 function index() {
-  toolbar("Google");
   br();
   br();
   
@@ -33,8 +33,6 @@ function doSearch(request) {
 }
 
 function search() {
-  toolbar("Google");
-  
   var results = [];
   $('#rso h3 a').each(function() {
     results.push({
