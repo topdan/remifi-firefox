@@ -6,9 +6,9 @@ MobileRemote.Firefox.Env = function() {
   this.extensionPath = null;
   
   this.init = function() {
-    profilePath = Components.classes["@mozilla.org/file/directory_service;1"].getService( Components.interfaces.nsIProperties).get("ProfD", Components.interfaces.nsIFile).path;
+    var profilePath = Components.classes["@mozilla.org/file/directory_service;1"].getService( Components.interfaces.nsIProperties).get("ProfD", Components.interfaces.nsIFile).path;
 
-    extensionsPath = profilePath + '/extensions';
+    var extensionsPath = profilePath + '/extensions';
     this.extensionPath = extensionsPath + '/mobile-remote@topdan.com';
     
     var f = fileHandle(this.extensionPath)
@@ -19,7 +19,7 @@ MobileRemote.Firefox.Env = function() {
   };
   
   this.fileContent = function(path) {
-    path = fullpath(path);
+    var path = fullpath(path);
     var file = fileHandle(path);
     if (file.exists())
       return fileContent(file);
@@ -28,8 +28,8 @@ MobileRemote.Firefox.Env = function() {
   }
   
   this.template = function(viewpath, data) {
-    content = this.fileContent(viewpath);
-    func = MobileRemote.microtemplate(content);
+    var content = this.fileContent(viewpath);
+    var func = MobileRemote.microtemplate(content);
     return data ? func(data) : func();
   }
   

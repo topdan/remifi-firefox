@@ -9,8 +9,8 @@ MobileRemote.Views.Base = function(env) {
   }
   
   this.template = function(path, data) {
-    content = env.fileContent(path);
-    func = MobileRemote.microtemplate(content);
+    var content = env.fileContent(path);
+    var func = MobileRemote.microtemplate(content);
     var html = data ? func(data) : func();
     this.content.push(html);
   }
@@ -31,6 +31,29 @@ MobileRemote.Views.Base = function(env) {
     var right = options.right || {title: 'home', url: '/home.html'};
     
     this.template('/views/toolbar.html', {name: name, left: left, right: right});
+  }
+  
+  this.button = function(name, url, options) {
+    if (options == null) options = {};
+    
+    var klass = null;
+    if (options.type == "info") {
+      klass = "white";
+      
+    } else if (options.type == "danger") {
+      klass = "redButton";
+      
+    } else if (options.type == "primary") {
+      klass = "greenButton";
+      
+    } else {
+      klass = "grayButton";
+    }
+    this.content.push('<a class="' + klass + '" href="' + url + '" style="">' + name + '</a>')
+  }
+  
+  this.br = function() {
+    this.content.push("<br/>");
   }
   
   this.form = function(url, callback) {

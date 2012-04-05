@@ -28,10 +28,10 @@ MobileRemote.Controller = function(remote, request, response) {
   }
   
   this.findPage = function() {
-    if (request.path == "/") {
-      return remote.pages.apps;
-    } else if (request.path == "/home.html") {
+    if (request.path == "/home.html") {
       return remote.pages.home;
+    } else if (request.path == "/" || MobileRemote.startsWith(request.path, '/apps/')) {
+      return remote.pages.apps;
     } else if (MobileRemote.startsWith(request.path, '/tabs/')) {
       return remote.pages.tabs;
     } else if (MobileRemote.startsWith(request.path, '/windows/')) {

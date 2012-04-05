@@ -18,7 +18,7 @@
   <script src="mobile_remote/app/hulu.js"/>
   <script src="mobile_remote/app/hbo.js"/>
   <script src="mobile_remote/app/cinemax.js"/>
-  <script src="mobile_remote/app/firefox.js"/>
+  <script src="mobile_remote/app/about.js"/>
   
   <script src="mobile_remote/firefox/env.js"/>
   <script src="mobile_remote/firefox/server.js"/>
@@ -38,6 +38,7 @@
   <script src="mobile_remote/views/base.js"/>
   <script src="mobile_remote/views/form.js"/>
   
+  <script src="mobile_remote/utils/jquery-1.7.js"/>
   <script src="mobile_remote/utils/microtemplate.js"/>
   <script src="mobile_remote/utils/string.js"/>
   <script src="mobile_remote/utils/uri.js"/>

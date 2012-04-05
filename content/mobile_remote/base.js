@@ -27,6 +27,15 @@ MobileRemote.Base = function(env) {
     return this.currentWindow().getBrowser();
   }
   
+  // this.currentDocument = function() {
+  //   return this.currentBrowser().contentDocument;
+  // }
+  // 
+  // // TODO insecure
+  // this.$ = function(selector) {
+  //   return jQuery(this.currentDocument()).find(selector);
+  // }
+  
   this.isRunning = function() {
     return this.server.isRunning;
   }
