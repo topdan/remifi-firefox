@@ -29,11 +29,10 @@ MobileRemote.App.Google = function(remote) {
           f.fieldset(function() {
             f.search('q', {placeholder: 'Google Search'});
           })
-          
-          f.buttons('buttons-2', function() {
-            f.submit('Google Search', {type: 'primary'});
-            f.submit("I'm Feeling Lucky")
-          });
+          f.br();
+          f.submit('Google Search', {type: 'info'});
+          f.br();
+          f.submit("I'm Feeling Lucky")
         })
       });
     });

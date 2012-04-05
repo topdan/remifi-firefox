@@ -19,6 +19,10 @@ MobileRemote.Views.Form = function(view, env, url, options) {
     this.content.push('</ul>')
   }
   
+  this.br = function() {
+    this.content.push("<br/>")
+  }
+  
   this.url = function(name, options) {
     this.input('url', name, options);
   }
@@ -27,13 +31,7 @@ MobileRemote.Views.Form = function(view, env, url, options) {
     this.input('search', name, options);
   }
   
-  this.buttons = function(klass, callback) {
-    this.content.push('<div class="buttons ' + klass + '">')
-    callback();
-    this.content.push('</div>');
-  }
-  
-  this.submit = function(name, options) {
+  this.submit = function(name, url, options) {
     if (options == null) options = {};
     
     var klass = null;
@@ -49,7 +47,7 @@ MobileRemote.Views.Form = function(view, env, url, options) {
     } else {
       klass = "grayButton";
     }
-    this.content.push('<button class="' + klass + '">' + name + '</button>');
+    this.content.push('<a class="submit ' + klass + '" href="' + url + '" style="">' + name + '</a>')
   }
   
   this.input = function(type, name, options) {
