@@ -22,6 +22,9 @@ MobileRemote.Pages.Controls = function(remote) {
     } else if (request.path == '/controls/visit.html') {
       return this.visit(request, response);
       
+    } else if (request.path == '/controls/google.html') {
+      return this.google(request, response);
+      
     } else if (request.path == '/controls/wait.html') {
       return this.wait(request, response);
       
@@ -62,6 +65,12 @@ MobileRemote.Pages.Controls = function(remote) {
     if (url)
       remote.currentBrowser().contentDocument.location.href = url;
     return self.wait('/', request, response);
+  }
+  
+  this.google = function(request, response) {
+    var search = request.params["q"] || "";
+    request.params.url = 'http://www.google.com/search?q=' + encodeURIComponent(search) + '&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a';
+    return this.visit(request, response)
   }
   
   this.wait = function(url, request, response) {

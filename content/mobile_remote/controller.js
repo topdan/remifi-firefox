@@ -40,8 +40,6 @@ MobileRemote.Controller = function(remote, request, response) {
       return remote.pages.controls;
     } else if (MobileRemote.startsWith(request.path, '/mouse/')) {
       return remote.pages.mouse;
-    } else if (MobileRemote.startsWith(request.path, '/go/')) {
-      return remote.pages.go;
     } else {
       return remote.pages.notFound;
     }

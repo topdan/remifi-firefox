@@ -10,7 +10,7 @@ MobileRemote.Pages.Home = function(remote) {
     return remote.views(function(v) {
       
       v.page('home', function() {
-        v.toolbar('Home', {right: {title: 'back', url: '/'}});
+        v.toolbar('Home', {left: {title: 'nav', url: '#nav'}, right: {title: 'back', url: '/'}});
         
         v.apps([
           {
@@ -29,13 +29,10 @@ MobileRemote.Pages.Home = function(remote) {
             url: "/mouse/index.html"
           },
           null,
+          null,
           {
             title: "tabs",
             url: "/tabs/index.html"
-          },
-          {
-            title: "go",
-            url: "/go/index.html"
           }
         ]);
         
