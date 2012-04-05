@@ -3,15 +3,17 @@ MobileRemote.App = {}
 // eventually this will be one base class that uses a sandbox to
 // allow downloaded apps to produce a neat remote UI for webpages
 
-MobileRemote.App.Sandbox = function(remote, path) {
+MobileRemote.App.Sandbox = function(remote, name) {
   var self = this;
   
+  this.remote = remote;
+  this.name = name;
   this.code = null;
-  this.filename = '/apps/' + path.replace(/\./g, '/') + '.js';
+  this.filename = '/apps/' + name.replace(/\./g, '/') + '.js';
   this.url = null;
   this.uri = null;
   this.domain = null;
-  this.imports = ['lib/zepto'];
+  this.imports = ['lib/zepto', 'lib/json2'];
   this.metadata = {};
   this.sandbox = null;
   
@@ -22,10 +24,17 @@ MobileRemote.App.Sandbox = function(remote, path) {
   
   this.render = function(uri, request, response) {
     var sandbox = createSandbox();
-    var result = Components.utils.evalInSandbox('render({path: "/", action: null});', sandbox);
-    throw result
-    if (typeof result == "string") {
-      return result;
+    
+    var action = request.path.match(/\/([^\/]+)$/)
+    if (action) action = action[1];
+    
+    var limitedRequest = {path: uri.path, action: action, params: request.params};
+    var json = Components.utils.evalInSandbox('render(' + JSON.stringify(limitedRequest) + ');', sandbox);
+    
+    if (typeof json == "string") {
+      var hash = JSON.parse(json);
+      var c = new MobileRemote.Views.Hash(self, request, response);
+      return c.perform(hash);
     } else {
       return null;
     }
@@ -35,6 +44,7 @@ MobileRemote.App.Sandbox = function(remote, path) {
     var sandbox = Components.utils.Sandbox(self.url);
     sandbox.window = remote.currentBrowser().contentWindow;
     sandbox.document = remote.currentBrowser().contentDocument;
+    evalInSandbox('app', 'app = ' + JSON.stringify({name: self.name}), sandbox)
     evalInSandbox('navigator', 'navigator = {userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.5; rv:11.0) Gecko/20100101 Firefox/11.0"}', sandbox);
     
     for (var i=0 ; i < self.imports.length ; i++) {

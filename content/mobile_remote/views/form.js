@@ -3,7 +3,7 @@ if (MobileRemote.Views == null) MobileRemote.Views = {}
 MobileRemote.Views.Form = function(view, env, url, options) {
   if (options == null) options = {};
   
-  var inFieldSet = null;
+  var inFieldset = null;
   this.out = ['<form action="' + url + '" method="GET">'];
   
   this.html = function() {
@@ -13,9 +13,9 @@ MobileRemote.Views.Form = function(view, env, url, options) {
   
   this.fieldset = function(callback) {
     this.out.push('<ul class="edit">')
-    inFieldSet = true;
+    inFieldset = true;
     callback();
-    inFieldSet = false;
+    inFieldset = false;
     this.out.push('</ul>')
   }
   
@@ -60,8 +60,8 @@ MobileRemote.Views.Form = function(view, env, url, options) {
       rest = rest + ' value="' + options.value + '"';
     
     var code = '<input type="' + type + '" name="' + name + '"' + rest + '/>';
-    if (inFieldSet)
-      content = '<li>' + code + '</li>'
+    if (inFieldset)
+      code = '<li>' + code + '</li>'
     this.out.push(code);
   }
   

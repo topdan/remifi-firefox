@@ -31,6 +31,7 @@
   
   <script src="mobile_remote/views/base.js"/>
   <script src="mobile_remote/views/form.js"/>
+  <script src="mobile_remote/views/hash.js"/>
   
   <script src="mobile_remote/utils/jquery-1.7.js"/>
   <script src="mobile_remote/utils/microtemplate.js"/>

@@ -3,44 +3,41 @@
 // @url    http://www.google.com
 //
 
-page("/", "index", function() {
+route("/", "index", function() {
   action("doSearch");
 });
 
-page("/search", "search", function() {
+route("/search", "search", function() {
   action("doNext");
 });
 
 function index() {
-  return "index"
-  // toolbar("Google");
-  // br();
-  // br();
-  // 
-  // form('doSearch', function(f) {
-  //   
-  //   f.fieldset(function() {
-  //     f.search('q', {placeholder: 'Google Search'});
-  //   })
-  //   
-  //   f.submit('Google Search');
-  // });
+  toolbar("Google");
+  br();
+  br();
+  
+  form('doSearch', function(f) {
+    
+    f.fieldset(function() {
+      f.search('q', {placeholder: 'Google Search'});
+    })
+    f.br();
+    f.br();
+    f.submit('Google Search');
+  });
 }
 
-function doSearch() {
-  return "doSearch"
-  // fill in the text field
-  // press the appropriate button
+function doSearch(request) {
+  document.location.href = 'http://www.google.com/search?q=' + encodeURIComponent(request.params.q) + '&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a';
+  wait();
 }
 
 function search() {
-  return "search"
   // display the results
   // paginate
 }
 
 function doNext() {
-  return "doNext"
   // follow the next page link
   // go back to search
 }
