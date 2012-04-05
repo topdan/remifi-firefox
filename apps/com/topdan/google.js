@@ -33,8 +33,17 @@ function doSearch(request) {
 }
 
 function search() {
-  // display the results
-  // paginate
+  toolbar("Google");
+  
+  var results = [];
+  $('#rso h3 a').each(function() {
+    results.push({
+      url: $(this).attr('href'),
+      title: $(this).text()
+    })
+  });
+  
+  list(results);
 }
 
 function doNext() {

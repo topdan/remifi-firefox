@@ -65,6 +65,17 @@ function setupPages() {
     
   }
   
+  $('a').click(function(e) {
+    var remoteUrl = $(this).attr('data-remote-url');
+    
+    if (remoteUrl) {
+      mobileRemote.visit(remoteUrl);
+    }
+    
+    e.preventDefault();
+    return false;
+  });
+  
   $('#jqt').each(function() {
     var e = $(this);
     
@@ -109,6 +120,15 @@ MobileRemote = function(jQT) {
       url: '/controls/wait.js?url=' + encodeURIComponent(url),
       success: function(script, status, request) {
         eval(script);
+      }
+    })
+  }
+  
+  this.visit = function(url) {
+    $.ajax({
+      url: '/controls/visit.html?url=' + encodeURIComponent(url),
+      success: function(data) {
+        jQT.insertPages(data, 'fade');
       }
     })
   }

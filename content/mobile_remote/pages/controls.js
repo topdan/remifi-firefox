@@ -19,11 +19,15 @@ MobileRemote.Pages.Controls = function(remote) {
     } else if (request.path == '/controls/forward.html') {
       return this.forward(request, response);
       
+    } else if (request.path == '/controls/visit.html') {
+      return this.visit(request, response);
+      
     } else if (request.path == '/controls/wait.html') {
       return this.wait(request, response);
       
     } else if (request.path == '/controls/wait.js') {
       return this.waitJS(request, response);
+      
     }
   }
   
@@ -51,6 +55,13 @@ MobileRemote.Pages.Controls = function(remote) {
   this.forward = function(request, response) {
     remote.currentBrowser().goForward();
     return this.wait(request.params['url'], request, response);
+  }
+  
+  this.visit = function(request, response) {
+    var url = request.params["url"];
+    if (url)
+      remote.currentBrowser().contentDocument.location.href = url;
+    return self.wait('/', request, response);
   }
   
   this.wait = function(url, request, response) {

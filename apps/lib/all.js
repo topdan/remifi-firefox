@@ -95,10 +95,7 @@ function error(message) {
 }
 
 function list(items, options) {
-  $.each(items, function(index, item) {
-    
-  });
-  
+  if (options == null) options = {};
   currentPage().push({type: 'list', items: items, rounded: options.rounded});
 }
 
