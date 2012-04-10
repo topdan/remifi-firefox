@@ -1,5 +1,11 @@
-<div class="toolbar">
-  <h1><%= name %></h1>
-  <% if (left) { %><a href="<%= left.url %>" class="button leftButton" style=""><%= left.title %></a><% } %>
-  <% if (right) { %><a href="<%= right.url %>" class="button" style=""><%= right.title %></a><% } %>
+<div class="toolbar<% if (stop) { %> loading<% } %><% if (back) { %> system <% } %>">
+  <a href="/controls/back.html?url=%2F" class="button backButton">&lt;</a>
+  <a href="/controls/forward.html?url=%2F" class="button forwardButton">&gt;</a>
+  <a href="/controls/refresh.html?url=%2F" class="button reloadButton">O</a>
+  <a href="/controls/stop.html?url=%2F" class="button stopButton">X</a>
+  <a href="#url" class="button urlButton">U</a>
+  <a href="#search" class="button searchButton">S</a>
+  
+  <a href="/home.html" class="button homeButton">home</a>
+  <a href="/" class="button returnButton">back</a>
 </div>

@@ -37,11 +37,11 @@ function results(request) {
   $('#search-results > div.result-item').each(function() {
     var e = $(this);
     var link = e.find('h3 a');
-    
+    var img = e.find('.thumb-container img');
     results.push({
       title: link.text(),
       url:   externalURL(link.attr('href')),
-      image: externalURL(e.find('.thumb-container img').attr('src'))
+      image: externalURL(img.attr('data-thumb') || img.attr('src'))
     });
   });
   

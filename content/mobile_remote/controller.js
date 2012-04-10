@@ -51,7 +51,8 @@ MobileRemote.Controller = function(remote, request, response) {
       this.layout = MobileRemote.microtemplate(code);
     }
     
-    return this.layout({body: body});
+    var views = new MobileRemote.Views.Base(remote.env);
+    return this.layout({body: body, views: views});
   }
   
 }

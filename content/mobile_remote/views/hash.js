@@ -32,7 +32,7 @@ MobileRemote.Views.Hash = function(app, request, response) {
   }
   
   this.pageTypes.toolbar = function(hash) {
-    view.toolbar(hash.name);
+    view.toolbar();
   }
   
   this.pageTypes.button = function(hash) {

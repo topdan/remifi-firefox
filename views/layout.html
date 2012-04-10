@@ -17,78 +17,46 @@
   <body>
     <div id="jqt">
 <%= body %>
+      
       <div id="ajax_error">
-        <div class="toolbar">
-          <h1>Error</h1>
-          <a class="button" href="/home.html">home</a>
-        </div>
+        <%= views.toolbar() %>
         
         <p id="error-message"></p>
       </div>
-      <div id="nav">
-        <div class="toolbar">
-          <h1>Nav</h1>
-          <a class="button leftButton" href="#nav">nav</a>
-          <a class="button" href="/home.html">home</a>
-        </div>
-        
+      
+      <div id="url">
+        <%= views.toolbar({back: true}) %>
+        <br/>
+        <br/>
         <form method="GET" action="/controls/visit.html">
           <ul class="edit">
             <li>
-              <input type="url" placeholder="Web Address" name="url">
+              <input type="url" placeholder="URL Address" name="url">
             </li>
           </ul>
+          <br/>
+          <br/>
+          <a style="" href="#" class="submit grayButton">Visit URL</a>
         </form>
         
+      </div>
+      
+      <div id="search">
+        <%= views.toolbar({back: true}) %>
+        <br/>
+        <br/>
         <form method="GET" action="/controls/google.html">
           <ul class="edit">
             <li>
               <input type="search" placeholder="Google Search" name="q">
             </li>
           </ul>
+          <br/>
+          <br/>
+          <a style="" href="#" class="submit grayButton">Google Search</a>
         </form>
-        
-        <table class="app-icons system-app-icons">
-          <tbody>
-            <tr class="icons">
-              <td>
-                <a href="/controls/back.html?url=%2F">
-                  <img width="60" height="60" src="/static/images/bhg.png">
-                </a>
-              </td>
-              <td>
-                <a href="/controls/home.html?url=%2F">
-                  <img width="60" height="60" src="/static/images/bhg.png">
-                </a>
-              </td>
-              <td>
-                <a href="/controls/refresh.html?url=%2F">
-                  <img width="60" height="60" src="/static/images/bhg.png">
-                </a>
-              </td>
-              <td>
-                <a href="/controls/forward.html?url=%2F">
-                  <img width="60" height="60" src="/static/images/bhg.png">
-                </a>
-              </td>
-            </tr>
-            <tr class="titles">
-              <td>
-                <a href="/controls/back.html?url=%2F">back</a>
-              </td>
-              <td>
-                <a href="/controls/home.html?url=%2F">home</a>
-              </td>
-              <td>
-                <a href="/controls/refresh.html?url=%2F">refresh</a>
-              </td>
-              <td>
-                <a href="/controls/forward.html?url=%2F">forward</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
+      
     </div>
   </body>
 </html>

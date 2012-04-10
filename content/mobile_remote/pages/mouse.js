@@ -37,7 +37,7 @@ MobileRemote.Pages.Mouse = function(remote) {
   this.index = function(request, response) {
     return remote.views(function(v) {
       v.page('mouse-page', function() {
-        v.toolbar('Mouse');
+        v.toolbar();
         
         width = 310;
         height = 232;

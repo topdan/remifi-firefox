@@ -17,6 +17,7 @@ MobileRemote.Views.Base = function(env) {
     var func = MobileRemote.microtemplate(code);
     var html = data ? func(data) : func();
     this.out.push(html);
+    return html;
   }
   
   this.escape = function(javascript) {
@@ -29,12 +30,10 @@ MobileRemote.Views.Base = function(env) {
     this.out.push('</div>');
   }
   
-  this.toolbar = function(name, options) {
+  this.toolbar = function(options) {
     if (options == null) options = {};
-    var left = options.left || {title: 'nav', url: '#nav'};
     var right = options.right || {title: 'home', url: '/home.html'};
-    
-    this.template('/views/toolbar.html', {name: name, left: left, right: right});
+    return this.template('/views/toolbar.html', {back: options.back, stop: options.stop, right: right});
   }
   
   this.button = function(name, url, options) {

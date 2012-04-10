@@ -45,7 +45,7 @@ MobileRemote.Pages.Controls = function(remote) {
   }
   
   this.refresh = function(request, response) {
-    var doc = remote.currentBrowser().outDocument;
+    var doc = remote.currentBrowser().contentDocument;
     doc.location.href = doc.location.href;
     return this.wait(request.params['url'], request, response);
   }
@@ -62,8 +62,15 @@ MobileRemote.Pages.Controls = function(remote) {
   
   this.visit = function(request, response) {
     var url = request.params["url"];
+    if (url == null || url == "") {
+      // do nothing
+    } else if (!MobileRemote.startsWith(url, 'http://') && !MobileRemote.startsWith(url, 'https://')) {
+      url = "http://" + url;
+    }
+    
     if (url)
       remote.currentBrowser().contentDocument.location.href = url;
+    
     return self.wait('/', request, response);
   }
   
@@ -76,12 +83,10 @@ MobileRemote.Pages.Controls = function(remote) {
   this.wait = function(url, request, response) {
     return remote.views(function(v) {
       v.page('controls', function() {
-        v.toolbar('Controls');
+        v.toolbar({stop: true});
         
         v.out.push('<div id="waiting"><p class="wait-message"><span class="title">Loading...</span><br/><img src="/static/images/loading.gif" width="220" height="19"/><br/><span class="description">&nbsp;</span></p></div>')
         v.out.push('<script type="text/javascript">$(function() { mobileRemote.wait("' + url + '"); })</script>');
-        
-        self.buttons(v, url);
       });
     });
   }

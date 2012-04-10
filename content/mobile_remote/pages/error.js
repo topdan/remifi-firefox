@@ -8,7 +8,7 @@ MobileRemote.Pages.Error = function(remote) {
         v.safeOut('mobileRemote.error("' + v.escape(err) + '")');
       } else {
         v.page('no_body', function() {
-          v.toolbar('Error');
+          v.toolbar();
           
           v.error("You encountered an internal Error");
           v.error(err);

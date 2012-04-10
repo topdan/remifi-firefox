@@ -22,7 +22,7 @@ MobileRemote.App.About = function(remote) {
   this.sessionRestore = function(request, response) {
     return remote.views(function(v) {
       v.page('firefox-session-restore', function() {
-        v.toolbar("Restore Session");
+        v.toolbar();
         v.br();
         v.br();
         v.button("Start New Session", '/apps/about/sessionrestore/start-new-session.html', {type: 'primary'});

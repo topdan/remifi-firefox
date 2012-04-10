@@ -10,7 +10,7 @@ MobileRemote.Pages.Home = function(remote) {
     return remote.views(function(v) {
       
       v.page('home', function() {
-        v.toolbar('Home', {left: {title: 'nav', url: '#nav'}, right: {title: 'back', url: '/'}});
+        v.toolbar({back: true});
         
         v.apps([
           {
