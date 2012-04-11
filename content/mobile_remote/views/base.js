@@ -15,6 +15,8 @@ MobileRemote.Views.Base = function(env) {
   this.template = function(path, data) {
     if (data == null) data = {};
     var code = env.fileContent(path);
+    if (code == null)
+      throw "viewpath not found: " + path;
     var func = MobileRemote.microtemplate(code);
     var html = data ? func(data) : func();
     this.out.push(html);
@@ -72,7 +74,7 @@ MobileRemote.Views.Base = function(env) {
   }
   
   this.error = function(message) {
-    this.out.push('<p id="error-message">', message, '</p>');
+    this.out.push('<p class="error-message">', message, '</p>');
   }
   
   this.list = function(items, options) {

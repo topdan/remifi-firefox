@@ -29,6 +29,9 @@ MobileRemote.Firefox.Env = function() {
   
   this.template = function(viewpath, data) {
     var code = this.fileContent(viewpath);
+    if (code == null)
+      throw "viewpath not found: " + viewpath;
+    
     var func = MobileRemote.microtemplate(code);
     return data ? func(data) : func();
   }

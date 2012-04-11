@@ -18,7 +18,8 @@ MobileRemote.Firefox.View = function() {
     while (wenum.hasMoreElements()) {
       var win = wenum.getNext();
       var button = win.document.getElementById('mobile-remote-button');
-      button.setAttribute('class', klass);
+      if (button)
+        button.setAttribute('class', klass);
     }
   }
   

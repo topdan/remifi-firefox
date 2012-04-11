@@ -11,6 +11,7 @@
     <em:creator>Dan Cunning</em:creator>
     <!-- optional items -->
     <em:homepageURL>http://www.topdan.com/mobile-remote/</em:homepageURL>
+    <em:unpack>true</em:unpack>
 
     <!-- Firefox -->
     <em:targetApplication>

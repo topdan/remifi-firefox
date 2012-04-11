@@ -38,7 +38,7 @@ MobileRemote.App.About = function(remote) {
     // by firefox and is pretty safe
     var s = Components.utils.Sandbox(content);
     s.win = content;
-    Components.utils.evalInSandbox("win.startNewSession();", s);
+    Components.utils.evalInSandbox("if (win.startNewSession) win.startNewSession();", s);
     
     return remote.pages.controls.wait('/', request, response);
   }
@@ -49,7 +49,7 @@ MobileRemote.App.About = function(remote) {
     // by firefox and is pretty safe
     var s = Components.utils.Sandbox(content);
     s.win = content;
-    Components.utils.evalInSandbox("win.restoreSession();", s);
+    Components.utils.evalInSandbox("if (win.restoreSession) win.restoreSession();", s);
     
     return remote.pages.controls.wait('/', request, response);
   }

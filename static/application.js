@@ -5,6 +5,11 @@ function setupPages() {
     this.select();
   })
   
+  $('p a.show-internal-error').click(function() {
+    $(this).parent('p').next('p.internal-error-details').toggle();
+    return false;
+  })
+  
   var isMoving = false;
   var waitingX = null;
   var waitingY = null;
@@ -107,8 +112,8 @@ function setupPages() {
 MobileRemote = function(jQT) {
   
   this.error = function(message) {
-    $('#error-message').html(message);
-    jQT.goTo('#ajax_error');
+    $('#error .error-message').html(message);
+    jQT.goTo('#error');
   }
   
   this.show = function(url) {

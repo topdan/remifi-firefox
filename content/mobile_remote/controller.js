@@ -52,6 +52,8 @@ MobileRemote.Controller = function(remote, request, response) {
   var withLayout = function(body) {
     if (this.layout == null) {
       var code = remote.env.fileContent('/views/layout.html');
+      if (code == null)
+        throw "/views/layout.html was not found"
       this.layout = MobileRemote.microtemplate(code);
     }
     

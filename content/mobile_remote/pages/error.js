@@ -7,12 +7,16 @@ MobileRemote.Pages.Error = function(remote) {
       if (request.isScript) {
         v.safeOut('mobileRemote.error("' + v.escape(err) + '")');
       } else {
-        v.page('no_body', function() {
+        v.page('internal_error', function() {
           v.toolbar();
           v.title("Error");
           
-          v.error("You encountered an internal Error");
-          v.error(err);
+          v.out.push('<p class="error-message">You\'ve encounted an internal error. <a href="#" class="show-internal-error">Show details</a></p>');
+          v.out.push('<p class="error-message internal-error-details" style="display:none">' + err + '</p>');
+          
+          v.br();
+          v.br();
+          v.button('Use Mouse App', '/mouse/index.html', {type: 'primary'})
         })
       }
     });
