@@ -16,6 +16,12 @@ MobileRemote.Pages.Keyboard = function(remote) {
     } else if (request.path == '/keyboard/type.html') {
       return this.typeText(request, response);
       
+    } else if (request.path == '/keyboard/escape.js') {
+      return this.pressEscape(request, response);
+      
+    } else if (request.path == '/keyboard/return.js') {
+      return this.pressReturn(request, response);
+      
     }
   }
   
@@ -47,6 +53,14 @@ MobileRemote.Pages.Keyboard = function(remote) {
     Components.utils.evalInSandbox(code, sandbox);
     
     return this.index(request, response);
+  }
+  
+  this.pressEscape = function(request, response) {
+    remote.env.exec("/bin/keyboard", ['-key', 'escape'])
+  }
+  
+  this.pressReturn = function(request, response) {
+    remote.env.exec("/bin/keyboard", ['-key', 'return'])
   }
   
   var currentText = function() {
