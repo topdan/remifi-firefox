@@ -122,7 +122,7 @@ MobileRemote.Pages.Mouse = function(remote) {
     s.window = remote.currentBrowser().contentWindow;
     s.document = remote.currentBrowser().contentDocument;
     
-    Components.utils.evalInSandbox("window.scrollTo(0, Math.min(window.scrollY + window.innerHeight, document.body.offsetHeight));", s);
+    Components.utils.evalInSandbox("window.scrollTo(0, window.scrollY + window.innerHeight);", s);
   }
   
   var actualMouseAction = function(type, x, y, x2, y2, up) {
