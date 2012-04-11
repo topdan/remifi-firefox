@@ -52,7 +52,7 @@ MobileRemote.App.Sandbox = function(remote, name) {
   }
   
   var createSandbox = function() {
-    var sandbox = remote.createSandbox(self.url, {zepto: true});
+    var sandbox = remote.createSandbox(null, {zepto: true});
     evalInSandbox('app', 'app = ' + JSON.stringify({name: self.name}), sandbox)
     
     for (var i=0 ; i < self.imports.length ; i++) {

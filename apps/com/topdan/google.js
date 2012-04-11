@@ -24,7 +24,6 @@ function index() {
     f.br();
     f.br();
     
-    throw 'hi';
     f.submit('Google Search');
   });
 }

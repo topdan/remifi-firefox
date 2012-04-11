@@ -114,7 +114,7 @@ MobileRemote.Pages.Mouse = function(remote) {
     s.window = remote.currentBrowser().contentWindow;
     s.document = remote.currentBrowser().contentDocument;
     
-    Components.utils.evalInSandbox("window.scrollTo(0, Math.max(0, window.scrollY - window.innerHeight));", s);
+    Components.utils.evalInSandbox("window.scrollTo(0, Math.max(0, window.scrollY - window.innerHeight/2));", s);
   }
   
   this.pageDown = function(request, response) {
@@ -122,7 +122,7 @@ MobileRemote.Pages.Mouse = function(remote) {
     s.window = remote.currentBrowser().contentWindow;
     s.document = remote.currentBrowser().contentDocument;
     
-    Components.utils.evalInSandbox("window.scrollTo(0, window.scrollY + window.innerHeight);", s);
+    Components.utils.evalInSandbox("window.scrollTo(0, window.scrollY + window.innerHeight/2);", s);
   }
   
   var actualMouseAction = function(type, x, y, x2, y2, up) {
