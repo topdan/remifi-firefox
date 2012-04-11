@@ -8,6 +8,7 @@ MobileRemote.Pages.NotFound = function(remote) {
       
       v.page('not_found', function() {
         v.toolbar();
+        v.title("Page Not Found");
 
         v.error("Sorry, that page was not found.");
       })

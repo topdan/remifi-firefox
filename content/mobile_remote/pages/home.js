@@ -14,26 +14,29 @@ MobileRemote.Pages.Home = function(remote) {
         
         v.apps([
           {
+            title: "bookmarklet",
+            url: "bookmarklets/index.html"
+          },
+          {
             title: "bookmarks",
             url: "bookmarks.html"
           },
           {
             title: "history",
             url: "history.html"
-          }
-        ]);
-        
-        v.systemApps([
+          },
+          {
+            title: "tabs",
+            url: "/tabs/index.html"
+          },
+          {
+            title: "windows",
+            url: "/windows/index.html"
+          },
           {
             title: "mouse",
             url: "/mouse/index.html"
           },
-          null,
-          null,
-          {
-            title: "tabs",
-            url: "/tabs/index.html"
-          }
         ]);
         
       })

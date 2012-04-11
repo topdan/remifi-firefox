@@ -9,6 +9,7 @@ MobileRemote.Pages.NoBody = function(remote) {
       return remote.views(function(v) {
         v.page('no_body', function() {
           v.toolbar();
+          v.title("Invalid Page");
           
           v.error("Internal Error: That page didn't contain anything.");
         })

@@ -16,6 +16,7 @@ MobileRemote.Base = function(env) {
   this.pages.error     = new MobileRemote.Pages.Error(this);
   this.pages.notFound  = new MobileRemote.Pages.NotFound(this);
   this.pages.noBody    = new MobileRemote.Pages.NoBody(this);
+  this.pages.bookmarklets = new MobileRemote.Pages.Bookmarklets(this);
   
   this.currentWindow = function() {
     var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);

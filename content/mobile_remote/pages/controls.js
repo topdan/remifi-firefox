@@ -61,12 +61,7 @@ MobileRemote.Pages.Controls = function(remote) {
   }
   
   this.visit = function(request, response) {
-    var url = request.params["url"];
-    if (url == null || url == "") {
-      // do nothing
-    } else if (!MobileRemote.startsWith(url, 'http://') && !MobileRemote.startsWith(url, 'https://')) {
-      url = "http://" + url;
-    }
+    var url = this.polishURL(request.params["url"]);
     
     if (url)
       remote.currentBrowser().contentDocument.location.href = url;
@@ -91,6 +86,16 @@ MobileRemote.Pages.Controls = function(remote) {
     });
   }
   
+  this.polishURL = function(url) {
+    if (url == null || url == "") {
+      // do nothing
+    } else if (!MobileRemote.startsWith(url, 'http://') && !MobileRemote.startsWith(url, 'https://')) {
+      url = "http://" + url;
+    }
+    
+    return url;
+  }
+  
   this.waitJS = function(request, response) {
     var url = request.params["url"];
     if (remote.currentBrowser().webProgress.isLoadingDocument) {
@@ -98,26 +103,6 @@ MobileRemote.Pages.Controls = function(remote) {
     } else {
       return 'mobileRemote.show("' + url + '")'
     }
-  }
-  
-  this.buttons = function(v, url) {
-    if (url == null) throw "URL required";
-    var browser = remote.currentBrowser();
-    
-    url = encodeURIComponent(url);
-    
-    var back = browser.canGoBack ? {title: 'back', url: '/controls/back.html?url=' + url} : null;
-    var home = {title: 'home', url: '/controls/home.html?url=' + url};
-    
-    var stop = null;
-    if (browser.webProgress.isLoadingDocument)
-      stop = {title: 'stop', url: '/controls/stop.html?url=' + url};
-    else
-      stop = {title: 'refresh', url: '/controls/refresh.html?url=' + url}
-    
-    var forward = browser.canGoForward ? {title: 'forward', url: '/controls/forward.html?url=' + url} : null;
-    
-    v.systemApps([back, home, stop, forward]);
   }
   
 };

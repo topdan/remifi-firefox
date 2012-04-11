@@ -44,3 +44,5 @@ p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black
 
 #jqt .system .homeButton { display: none; }
 #jqt .system .returnButton { display: block; }
+
+#jqt textarea.bookmarklet { height: 40px; }

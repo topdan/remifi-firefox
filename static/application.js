@@ -1,5 +1,10 @@
 function setupPages() {
   
+  $('textarea.bookmarklet').click(function() {
+    this.focus();
+    this.select();
+  })
+  
   var isMoving = false;
   var waitingX = null;
   var waitingY = null;

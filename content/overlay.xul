@@ -19,6 +19,7 @@
   <script src="mobile_remote/firefox/view.js"/>
   
   <script src="mobile_remote/pages/apps.js"/>
+  <script src="mobile_remote/pages/bookmarklets.js"/>
   <script src="mobile_remote/pages/controls.js"/>
   <script src="mobile_remote/pages/error.js"/>
   <script src="mobile_remote/pages/home.js"/>

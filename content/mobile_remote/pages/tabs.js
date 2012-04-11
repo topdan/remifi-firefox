@@ -26,7 +26,8 @@ MobileRemote.Pages.Tabs = function(remote) {
   }
   
   this.add = function(request, response) {
-    gBrowser.selectedTab = remote.currentBrowser().addTab("")
+    var url = remote.pages.controls.polishURL(request.params["url"]) || "";
+    gBrowser.selectedTab = remote.currentBrowser().addTab(url);
     return remote.pages.apps.render(request, response);
   }
   
@@ -51,6 +52,7 @@ MobileRemote.Pages.Tabs = function(remote) {
       
       v.page('tabs', function() {
         v.toolbar();
+        v.title("Tabs");
         
         var tabs = [];
         for (var i=0 ; i < currentBrowser.mTabs.length ; i++) {

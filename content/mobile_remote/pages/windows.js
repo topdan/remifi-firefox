@@ -40,7 +40,15 @@ MobileRemote.Pages.Windows = function(remote) {
   
   this.add = function(request, response) {
     // window.open("chrome://to/your/window.xul", windowName, "features");
-    window.open();
+    var url = null;
+    if (request.params["url"])
+      url = remote.pages.controls.polishURL(request.params["url"]);
+    
+    if (url)
+      window.open(url);
+    else
+      window.open();
+    
     return this.index(request, response);
   }
   
@@ -69,6 +77,7 @@ MobileRemote.Pages.Windows = function(remote) {
       
       v.page('windows', function() {
         v.toolbar();
+        v.title("Windows");
         
         var windows = [];
         var wenum = Components.classes["@mozilla.org/embedcomp/window-watcher;1"].getService(Components.interfaces.nsIWindowWatcher).getWindowEnumerator();
