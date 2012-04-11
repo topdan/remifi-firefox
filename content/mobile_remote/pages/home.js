@@ -41,8 +41,19 @@ MobileRemote.Pages.Home = function(remote) {
             title: "mouse",
             url: "/mouse/index.html"
           },
+          {
+            title: "youtube",
+            url: "/controls/visit.html?url=http://www.youtube.com"
+          },
+          {
+            title: "hulu",
+            url: "/controls/visit.html?url=http://www.hulu.com"
+          },
+          {
+            title: "netflix",
+            url: "/controls/visit.html?url=http://www.netflix.com"
+          },
         ]);
-        
       })
       
     });
