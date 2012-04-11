@@ -46,3 +46,7 @@ p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black
 #jqt .system .returnButton { display: block; }
 
 #jqt textarea.bookmarklet { height: 40px; }
+
+#jqt .mouseClick { width: 50%; float: left; }
+#jqt #mouseNav { margin-top: 5px; }
+#jqt #mouseNav .button { position: inherit; right: inherit; margin-left: 10px; padding-top: 3px; padding-bottom: 3px; }
