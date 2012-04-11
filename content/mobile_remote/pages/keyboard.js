@@ -22,6 +22,12 @@ MobileRemote.Pages.Keyboard = function(remote) {
     } else if (request.path == '/keyboard/return.js') {
       return this.pressReturn(request, response);
       
+    // } else if (request.path == '/keyboard/tab-up.js') {
+    //   return this.tabUp(request, response);
+    //   
+    // } else if (request.path == '/keyboard/tab-down.js') {
+    //   return this.tabDown(request, response);
+      
     }
   }
   
@@ -35,8 +41,8 @@ MobileRemote.Pages.Keyboard = function(remote) {
         v.systemApps([
           {title: 'mouse', url: '/mouse/'},
           null,
-          {title: 'page up', url: '/mouse/page-up.js'},
-          {title: 'page down', url: '/mouse/page-down.js'},
+          {title: 'tab up', url: '/keyboard/tab-up.js'},
+          {title: 'tab down', url: '/keyboard/tab-down.js'},
         ]);
         
       });
@@ -50,7 +56,12 @@ MobileRemote.Pages.Keyboard = function(remote) {
     
     var view = new MobileRemote.Views.Base(remote.env);
     var code = 'Zepto(":focus").val("' + view.escape(text) + '")';
-    Components.utils.evalInSandbox(code, sandbox);
+    
+    try {
+      Components.utils.evalInSandbox(code, sandbox);
+    } catch (err) {
+      // can't type text onto this page
+    }
     
     return this.index(request, response);
   }
@@ -63,13 +74,38 @@ MobileRemote.Pages.Keyboard = function(remote) {
     remote.env.exec("/bin/keyboard", ['-key', 'return'])
   }
   
+  // this.tabUp = function(request, response) {
+  //   var sandbox = remote.createSandbox(null, {zepto: true});
+  //   try {
+  //     var code = "var e = $(':focus').get(0) || $('form').get(0).elements[0]; var f = e.form ; for (var i=0 ; i < f.elements.length ; i++) { if (e == f.elements[i]) { $(f.elements[i+1]).focus(); } }";
+  //     
+  //     Components.utils.evalInSandbox(code, sandbox);
+  //   } catch (err) {
+  //     
+  //   }
+  // }
+  // 
+  // this.tabDown = function(request, response) {
+  //   var sandbox = remote.createSandbox(null, {zepto: true});
+  //   try {
+  //     var code = "var e = $(':focus').get(0) || $('form').get(0).elements[0]; var f = e.form ; for (var i=0 ; i < f.elements.length ; i++) { if (e == f.elements[i]) { $(f.elements[i-1]).focus(); } }";
+  //     
+  //     Components.utils.evalInSandbox(code, sandbox);
+  //   } catch (err) {
+  //     
+  //   }
+  // }
+  
   var currentText = function() {
-    var sandbox = remote.createSandbox(null, {zepto: true});
-    
-    var code = 'Zepto(":focus").val()';
-    var current = Components.utils.evalInSandbox(code, sandbox);
-    if (typeof current == "string") {
-      return current;
+    try {
+      var sandbox = remote.createSandbox(null, {zepto: true});
+      var code = 'Zepto(":focus").val()';
+      var current = Components.utils.evalInSandbox(code, sandbox);
+      if (typeof current == "string") {
+        return current;
+      }
+    } catch (err) {
+      return null;
     }
   }
   
