@@ -13,7 +13,7 @@ MobileRemote.App.Sandbox = function(remote, name) {
   this.url = null;
   this.uri = null;
   this.domains = null;
-  this.imports = ['lib/zepto', 'lib/json2'];
+  this.imports = ['lib/json2'];
   this.metadata = {};
   this.sandbox = null;
   
@@ -52,19 +52,14 @@ MobileRemote.App.Sandbox = function(remote, name) {
   }
   
   var createSandbox = function() {
-    var sandbox = Components.utils.Sandbox(self.url);
-    sandbox.window = remote.currentBrowser().contentWindow;
-    sandbox.document = remote.currentBrowser().contentDocument;
+    var sandbox = remote.createSandbox(self.url, {zepto: true});
     evalInSandbox('app', 'app = ' + JSON.stringify({name: self.name}), sandbox)
-    evalInSandbox('navigator', 'navigator = {userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.5; rv:11.0) Gecko/20100101 Firefox/11.0"}', sandbox);
     
     for (var i=0 ; i < self.imports.length ; i++) {
       var file = '/apps/' + self.imports[i] + '.js';
       var code = remote.env.fileContent(file);
       evalInSandbox(file, code, sandbox);
     }
-    
-    evalInSandbox('$', '$ = Zepto', sandbox);
     
     // OPTIMIZE save this once there's a development reload mode going
     var code = remote.env.fileContent(self.filename);

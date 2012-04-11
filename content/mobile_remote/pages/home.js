@@ -34,6 +34,10 @@ MobileRemote.Pages.Home = function(remote) {
             url: "/windows/index.html"
           },
           {
+            title: "keyboard",
+            url: "/keyboard/index.html"
+          },
+          {
             title: "mouse",
             url: "/mouse/index.html"
           },

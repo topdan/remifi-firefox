@@ -22,7 +22,7 @@ MobileRemote.Views.Base = function(env) {
   }
   
   this.escape = function(javascript) {
-    return javascript.toString().replace(/\"/g, '\\\"')
+    return javascript.toString().replace(/\"/g, '\\\"').replace(/\n/g, '\\\n')
   }
   
   this.page = function(id, callback) {
