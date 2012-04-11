@@ -31,6 +31,12 @@ MobileRemote.Pages.Mouse = function(remote) {
     } else if (request.path == '/mouse/click.js') {
       return this.click(request, response);
       
+    } else if (request.path == '/mouse/page-up.js') {
+      return this.pageUp(request, response);
+      
+    } else if (request.path == '/mouse/page-down.js') {
+      return this.pageDown(request, response);
+      
     }
   }
   
@@ -45,8 +51,8 @@ MobileRemote.Pages.Mouse = function(remote) {
         v.template('/views/mouse.html', {width: width, height: height});
         
         v.systemApps([
-          {title: 'left', url: '/mouse/left.js'},
-          {title: 'up', url: '/mouse/up.js'},
+          {title: 'page up', url: '/mouse/page-up.js'},
+          {title: 'page down', url: '/mouse/page-down.js'},
           {title: 'down', url: '/mouse/down.js'},
           {title: 'right', url: '/mouse/right.js'}
         ]);
@@ -101,6 +107,22 @@ MobileRemote.Pages.Mouse = function(remote) {
     if (this.x && this.y) {
       actualMouseAction('click', this.x, this.y);
     }
+  }
+  
+  this.pageUp = function(request, response) {
+    var s = Components.utils.Sandbox(content);
+    s.window = remote.currentBrowser().contentWindow;
+    s.document = remote.currentBrowser().contentDocument;
+    
+    Components.utils.evalInSandbox("window.scrollTo(0, Math.max(0, window.scrollY - window.innerHeight));", s);
+  }
+  
+  this.pageDown = function(request, response) {
+    var s = Components.utils.Sandbox(content);
+    s.window = remote.currentBrowser().contentWindow;
+    s.document = remote.currentBrowser().contentDocument;
+    
+    Components.utils.evalInSandbox("window.scrollTo(0, Math.min(window.scrollY + window.innerHeight, document.body.offsetHeight));", s);
   }
   
   var actualMouseAction = function(type, x, y, x2, y2, up) {
