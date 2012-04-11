@@ -43,15 +43,18 @@ MobileRemote.Pages.Home = function(remote) {
           },
           {
             title: "youtube",
-            url: "/controls/visit.html?url=http://www.youtube.com"
+            url: "/controls/visit.html?url=http://www.youtube.com",
+            icon: {url: '/static/images/youtube.png'}
           },
           {
             title: "hulu",
-            url: "/controls/visit.html?url=http://www.hulu.com"
+            url: "/controls/visit.html?url=http://www.hulu.com",
+            icon: {url: '/static/images/hulu.png'}
           },
           {
             title: "netflix",
-            url: "/controls/visit.html?url=http://www.netflix.com"
+            url: "/controls/visit.html?url=http://www.netflix.com",
+            icon: {url: '/static/images/netflix.png'}
           },
         ]);
       })

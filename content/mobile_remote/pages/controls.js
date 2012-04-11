@@ -80,7 +80,7 @@ MobileRemote.Pages.Controls = function(remote) {
       v.page('controls', function() {
         v.toolbar({stop: true});
         
-        v.out.push('<div id="waiting"><p class="wait-message"><span class="title">Loading...</span><br/><img src="/static/images/loading.gif" width="220" height="19"/><br/><span class="description">&nbsp;</span></p></div>')
+        v.template('/views/loading.html');
         v.out.push('<script type="text/javascript">$(function() { mobileRemote.wait("' + url + '"); })</script>');
       });
     });

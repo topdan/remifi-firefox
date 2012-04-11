@@ -19,11 +19,12 @@ function index(request) {
   $('.feed-item-main').each(function() {
     var e = $(this);
     var link = e.find('h4 a');
+    var img = e.find('.feed-item-thumb img');
     
     results.push({
       title: link.text(),
       url:   externalURL(link.attr('href')),
-      image: externalURL(e.find('.feed-item-thumb img').attr('src'))
+      image: externalURL(img.attr('data-thumb') || img.attr('src'))
     });
   });
   
