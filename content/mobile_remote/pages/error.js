@@ -11,7 +11,7 @@ MobileRemote.Pages.Error = function(remote) {
           v.toolbar();
           v.title("Error");
           
-          v.out.push('<p class="error-message">You\'ve encounted an internal error. <a href="#" class="show-internal-error">Show details</a></p>');
+          v.out.push('<p class="error-message">I had trouble understanding this page. <a href="#" class="show-internal-error">Show details</a></p>');
           v.out.push('<p class="error-message internal-error-details" style="display:none">' + err + '</p>');
           
           v.br();
