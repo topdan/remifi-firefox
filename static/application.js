@@ -80,6 +80,12 @@ function setupPages() {
   }
   
   $('a').click(function(e) {
+    var message = $(this).attr('data-disabled-message');
+    if (message) {
+      alert(message);
+      return false;
+    }
+    
     var remoteUrl = $(this).attr('data-remote-url');
     
     if (remoteUrl) {

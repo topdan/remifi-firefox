@@ -142,7 +142,7 @@ function br() {
 
 function button(name, url, options) {
   if (options == null) options = {};
-  currentPage().push({type: 'button', name: name, url: url, buttonType: options.type});
+  currentPage().push({type: 'button', name: name, url: url, buttonType: options.type, disabled: options.disabled});
 }
 
 function error(message) {

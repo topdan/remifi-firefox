@@ -76,8 +76,11 @@ function watch(request) {
   var color = player().isFullscreen ? 'primary' : null
   title($('#eow-title').attr('title'));
   button('Play/Pause', 'playPause');
-  button('Start Over', 'startOver');
   button('Toogle Fullscreen', 'toggleFullscreen', {type: color});
+  if (player().isFullscreen)
+    button('Start Over', 'startOver', {disabled: 'Exit fullscreen first'});
+  else
+    button('Start Over', 'startOver');
   
   var results = [];
   $('#watch-related > .video-list-item').each(function() {
@@ -94,7 +97,7 @@ function watch(request) {
 }
 
 function player() {
-  var player = new Player('#movie_player-flash,#movie_player');
+  var player = new Player('#movie_player-flash,#movie_player,#movie_player-html5');
   
   if (player.isFullscreen) {
     player.setBox({width: 'full', valign: 'bottom', height: 40});

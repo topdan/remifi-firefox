@@ -41,7 +41,7 @@ MobileRemote.Views.Hash = function(app, request, response) {
   
   this.pageTypes.button = function(hash) {
     var url = actionUrlFor(hash.url)
-    view.button(hash.name, url, {type: hash.buttonType})
+    view.button(hash.name, url, {type: hash.buttonType, disabled: hash.disabled})
   }
   
   this.pageTypes.mouse = function(hash) {

@@ -69,7 +69,14 @@ MobileRemote.Views.Base = function(env) {
     } else {
       klass = "grayButton";
     }
-    this.out.push('<a class="' + this.escape(klass) + '" href="' + this.escape(url) + '" style="">' + this.escapeHTML(name) + '</a>')
+    
+    var rest = 'class="' + this.escape(klass) + '"'
+    if (typeof options.disabled == "string")
+      rest += ' href="#" data-disabled-message="' + options.disabled + '"'
+    else
+      rest += ' href="' + this.escape(url) + '"'
+    
+    this.out.push('<a ' + rest + '>' + this.escapeHTML(name) + '</a>')
   }
   
   this.br = function() {
