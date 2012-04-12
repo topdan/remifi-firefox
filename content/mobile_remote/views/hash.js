@@ -35,8 +35,36 @@ MobileRemote.Views.Hash = function(app, request, response) {
     view.toolbar();
   }
   
+  this.pageTypes.title = function(hash) {
+    view.title(hash.name);
+  }
+  
   this.pageTypes.button = function(hash) {
-    view.button(hash.name, hash.url, {type: hash.buttonType})
+    var url = actionUrlFor(hash.url)
+    view.button(hash.name, url, {type: hash.buttonType})
+  }
+  
+  this.pageTypes.mouse = function(hash) {
+    var action = hash.action;
+    switch (action) {
+      case 'click':
+        app.remote.pages.mouse.action('click', hash.x, hash.y)
+        break;
+      case 'over':
+        app.remote.pages.mouse.action('over', hash.x, hash.y)
+        break
+    }
+  }
+  
+  this.pageTypes.keyboard = function(hash) {
+    var action = hash.action;
+    var key = hash.key;
+    
+    switch (action) {
+      case 'press':
+        app.remote.pages.keyboard.press(hash.key);
+        break;
+    }
   }
   
   this.pageTypes.br = function(hash) {
@@ -46,7 +74,7 @@ MobileRemote.Views.Hash = function(app, request, response) {
   this.pageTypes.form = function(hash) {
     if (self.currentForm) return
     
-    var url = '/apps/' + app.name + '/' + hash.action;
+    var url = actionUrlFor(hash.action);
     view.form(url, function(f) {
       self.currentForm = f;
       
@@ -110,6 +138,10 @@ MobileRemote.Views.Hash = function(app, request, response) {
           convert(item);
       }
     }
+  }
+  
+  var actionUrlFor = function(action) {
+    return '/apps/' + app.name + '/' + action;
   }
   
 }

@@ -67,11 +67,16 @@ MobileRemote.Pages.Keyboard = function(remote) {
   }
   
   this.pressEscape = function(request, response) {
-    remote.env.exec("/bin/keyboard", ['-key', 'escape'])
+    this.press('escape');
   }
   
   this.pressReturn = function(request, response) {
-    remote.env.exec("/bin/keyboard", ['-key', 'return'])
+    this.press('return');
+  }
+  
+  this.press = function(key) {
+    if (key == 'escape' || key == 'return')
+      remote.env.exec("/bin/keyboard", ['-key', key])
   }
   
   // this.tabUp = function(request, response) {

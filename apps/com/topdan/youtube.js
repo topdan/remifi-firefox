@@ -12,6 +12,51 @@ route("/results", "results", function() {
   action("doSearch");
 })
 
+route("/watch", "watch", function() {
+  action('playPause');
+  action('startOver');
+  action('toggleFullscreen');
+});
+
+function watch(request) {
+  title($('#eow-title').attr('title'));
+  button('Play/Pause', 'playPause');
+  button('Start Over', 'startOver');
+  button('Toogle Fullscreen', 'toggleFullscreen');
+}
+
+function player() {
+  var player = new Player('#movie_player-flash');
+  
+  player.setBox({width: 'full', valign: 'bottom', height: 35});
+  player.setPlay({x: 28, y: 25});
+  
+  player.setFullscreenOff({key: 'escape'})
+  player.setFullscreenOn({align: 'right', x: 17, y: 23})
+  
+  if (player.isFullscreen)
+    player.setSeek({x1: 0, x2: player.box.width, y: 0})
+  else
+    player.setSeek({x1: 3, x2: player.box.width, y: 0})
+  
+  return player;
+}
+
+function playPause(request) {
+  player().play();
+  watch(request);
+}
+
+function startOver(request) {
+  player().seek(0);
+  watch(request);
+}
+
+function toggleFullscreen(request) {
+  player().toggleFullscreen();
+  watch(request);
+}
+
 function index(request) {
   searchForm();
   
