@@ -14,17 +14,27 @@ MobileRemote.Views.Base = function(env) {
   
   this.template = function(path, data) {
     if (data == null) data = {};
+    data.escape = this.escape;
+    data.escapeHTML = this.escapeHTML;
+    
     var code = env.fileContent(path);
     if (code == null)
       throw "viewpath not found: " + path;
+    
     var func = MobileRemote.microtemplate(code);
-    var html = data ? func(data) : func();
+    var html = func(data);
+    
     this.out.push(html);
+    
     return html;
   }
   
-  this.escape = function(javascript) {
-    return javascript.toString().replace(/\"/g, '\\\"').replace(/\n/g, '\\\n')
+  this.escape = function(string) {
+    return MobileRemote.escape(string);
+  }
+  
+  this.escapeHTML = function(string) {
+    return MobileRemote.escapeHTML(string);
   }
   
   this.page = function(id, callback) {
@@ -40,7 +50,7 @@ MobileRemote.Views.Base = function(env) {
   }
   
   this.title = function(title) {
-    this.out.push('<h1>' + title + '</h1>');
+    this.out.push('<h1>' + this.escapeHTML(title) + '</h1>');
   }
   
   this.button = function(name, url, options) {
@@ -59,7 +69,7 @@ MobileRemote.Views.Base = function(env) {
     } else {
       klass = "grayButton";
     }
-    this.out.push('<a class="' + klass + '" href="' + url + '" style="">' + name + '</a>')
+    this.out.push('<a class="' + this.escape(klass) + '" href="' + this.escape(url) + '" style="">' + this.escapeHTML(name) + '</a>')
   }
   
   this.br = function() {
@@ -74,7 +84,7 @@ MobileRemote.Views.Base = function(env) {
   }
   
   this.error = function(message) {
-    this.out.push('<p class="error-message">', message, '</p>');
+    this.out.push('<p class="error-message">', this.escapeHTML(message), '</p>');
   }
   
   this.list = function(items, options) {

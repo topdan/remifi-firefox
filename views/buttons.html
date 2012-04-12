@@ -1,10 +1,10 @@
-<table <% if (tableId) { %>id="<%= tableId %>" <% } %>class="app-icons<% if (tableClass) { %> <%= tableClass %><% } %>">
+<table <% if (tableId) { %>id="<%= escape(tableId) %>" <% } %>class="app-icons<% if (tableClass) { %> <%= escape(tableClass) %><% } %>">
   <% for(var i=0 ; i < rows.length ; i++) { var row = rows[i]; %>
     <tr class="icons">
       <% for(var j=0 ; j < row.length ; j++) { var item = row[j]; %>
         <td>
           <% if (!item.isBlank) { %>
-          <a href="<%= item.url %>"><% if (item.icon) { %><img width="<%= item.icon.width %>" height="<%= item.icon.height %>" src="<%= item.icon.url %>"/><% } %></a>
+          <a href="<%= escape(item.url) %>"><% if (item.icon) { %><img width="<%= escape(item.icon.width) %>" height="<%= escape(item.icon.height) %>" src="<%= escape(item.icon.url) %>"/><% } %></a>
           <% } %>
         </td>
       <% } %>
@@ -13,7 +13,7 @@
       <% for(var j=0 ; j < row.length ; j++) { var item = row[j]; %>
         <td>
           <% if (!item.isBlank) { %>
-          <a href="<%= item.url %>"><%= item.title %></a>
+          <a href="<%= escape(item.url) %>"><%= escapeHTML(item.title) %></a>
           <% } %>
         </td>
       <% } %>

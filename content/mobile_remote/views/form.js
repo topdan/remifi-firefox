@@ -11,6 +11,14 @@ MobileRemote.Views.Form = function(view, env, url, options) {
     return this.out.join("");
   }
   
+  this.escape = function(string) {
+    return MobileRemote.escape(string);
+  }
+  
+  this.escapeHTML = function(string) {
+    return MobileRemote.escapeHTML(string);
+  }
+  
   this.fieldset = function(callback) {
     this.out.push('<ul class="edit">')
     inFieldset = true;
@@ -47,7 +55,7 @@ MobileRemote.Views.Form = function(view, env, url, options) {
     } else {
       klass = "grayButton";
     }
-    this.out.push('<a class="submit ' + klass + '" href="' + url + '" style="">' + name + '</a>')
+    this.out.push('<a class="submit ' + this.escape(klass) + '" href="' + this.escape(url) + '" style="">' + this.escapeHTML(name) + '</a>')
   }
   
   this.input = function(type, name, options) {
@@ -55,11 +63,11 @@ MobileRemote.Views.Form = function(view, env, url, options) {
     
     var rest = "";
     if (options.placeholder)
-      rest = rest + ' placeholder="' + options.placeholder + '"';
+      rest = rest + ' placeholder="' + this.escape(options.placeholder) + '"';
     if (options.value)
-      rest = rest + ' value="' + options.value + '"';
+      rest = rest + ' value="' + this.escape(options.value) + '"';
     
-    var code = '<input type="' + type + '" name="' + name + '"' + rest + '/>';
+    var code = '<input type="' + this.escape(type) + '" name="' + this.escape(name) + '"' + rest + '/>';
     if (inFieldset)
       code = '<li>' + code + '</li>'
     this.out.push(code);

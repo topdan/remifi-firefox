@@ -12,6 +12,11 @@ MobileRemote.endsWith = function(base, str) {
   return (base.match(str+"$")==str);
 }
 
+MobileRemote.escape = function(string) {
+  if (string == null || typeof(string) == "undefined") return "";
+  return string.toString().replace(/\"/g, '\\\"').replace(/\n/g, '\\\n')
+}
+
 MobileRemote.escapeHTML = function(html) {
   if (typeof(html) != "string")
     html = html.toString();

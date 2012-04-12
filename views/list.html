@@ -2,14 +2,14 @@
   <% for(var i=0 ; i < items.length ; i++) { var item = items[i]; %>
   <li>
     <% if (MobileRemote.startsWith(item.url, "/")) { %>
-    <a href="<%= item.url %>" class="title <% if (item.active) { %>current<% } %>">
+    <a href="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>">
       <%= item.title %>
-      <% if (item.image) { %><br/><img src="<%= item.image %>" class="thumb"/><% } %>
+      <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"/><% } %>
     </a> 
     <% } else { %>
-      <a href="#" data-remote-url="<%= item.url %>" class="title <% if (item.active) { %>current<% } %>">
-      <%= item.title %>
-      <% if (item.image) { %><br/><img src="<%= item.image %>" class="thumb"/><% } %>
+      <a href="#" data-remote-url="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>">
+      <%= escapeHTML(item.title) %>
+      <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"/><% } %>
       </a> 
     <% } %>
     
@@ -18,9 +18,9 @@
         <% for (var j=0 ; j < item.actions.length ; j++) { var action = item.actions[j]; %>
         <li class="inline-links">
           <% if (MobileRemote.startsWith(action.url, "/")) { %>
-          <a href="<%= action.url %>"><%= action.title %></a>
+          <a href="<%= escape(action.url) %>"><%= escapeHTML(action.title) %></a>
           <% } else { %>
-          <a href="#" data-remote-url="<%= action.url %>"><%= action.title %></a>
+          <a href="#" data-remote-url="<%= action.url %>"><%= escapeHTML(action.title) %></a>
           <% } %>
         </li>
         <% } %>
