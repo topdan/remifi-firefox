@@ -28,7 +28,8 @@ a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px
 #waiting .title { font-size: 125%; font-weight: bold; }
 p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black; background-color: #CCC;}
 
-#mouse .touchpad { display: block; margin: 0px auto; background-color: #CCC; }
+#mouse .touchpad { display: block; margin: 0px auto; background-color: #CCC; text-align: center; text-decoration: none; }
+#mouse .touchpad span { color: #555555; display: block; font-size: 140%; line-height: 50px; padding-top: 50px; }
 
 #jqt .backButton { left: 6px; right: auto; }
 #jqt .forwardButton { left: 50px; right: auto; }

@@ -1,5 +1,9 @@
 function setupPages() {
   
+  $('form').submit(function() {
+    $(':focus').blur();
+  })
+  
   $('textarea.bookmarklet').click(function() {
     this.focus();
     this.select();
