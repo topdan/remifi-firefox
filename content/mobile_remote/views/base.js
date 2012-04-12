@@ -94,6 +94,10 @@ MobileRemote.Views.Base = function(env) {
     this.out.push('<p class="error-message">', this.escapeHTML(message), '</p>');
   }
   
+  this.paginate = function(items) {
+    this.template('/views/paginate.html', {items: items});
+  }
+  
   this.list = function(items, options) {
     if (options == null) options = {};
     if (items == null || items.length == 0) return;

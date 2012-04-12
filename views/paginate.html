@@ -1,0 +1,17 @@
+<ul>
+  <li class="paginate-container">
+    <ul class="paginate paginate-<%= items.length %>">
+      <% for (var j=0 ; j < items.length ; j++) { var item = items[j]; %>
+        <% if (item.name == 'prev') { %>
+          <li><a href="<%= escape(item.url) %>">&laquo;</a></li>
+        <% } else if (item.name == 'next') { %>
+          <li><a href="<%= escape(item.url) %>">&raquo;</a></li>
+        <% } else if (item.name == 'ellipsis') { %>
+          <li class="ellipsis">...</li>
+        <% } else { %>
+          <li><a href="<%= escape(item.url) %>"><%= escapeHTML(item.name) %></a></li>
+        <% } %>
+      <% } %>
+    </ul>
+  </li>
+</ul>

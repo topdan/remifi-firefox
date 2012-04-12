@@ -97,6 +97,10 @@ MobileRemote.Views.Hash = function(app, request, response) {
     view.error(hash.message);
   }
   
+  this.pageTypes.paginate = function(hash) {
+    view.paginate(hash.items);
+  }
+  
   this.pageTypes.list = function(hash) {
     view.list(hash.items, {rounded: hash.rounded});
   }
