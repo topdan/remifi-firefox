@@ -19,25 +19,41 @@ route("/watch", "watch", function() {
 });
 
 function watch(request) {
+  var color = player().isFullscreen ? 'primary' : null
   title($('#eow-title').attr('title'));
   button('Play/Pause', 'playPause');
   button('Start Over', 'startOver');
-  button('Toogle Fullscreen', 'toggleFullscreen');
+  button('Toogle Fullscreen', 'toggleFullscreen', {type: color});
+  
+  var results = [];
+  $('#watch-related > .video-list-item').each(function() {
+    var e = $(this);
+    var img = e.find('.clip-inner img');
+    results.push({
+      title: e.find('.title').text(),
+      url:   externalURL(e.find('a').attr('href')),
+      image: externalURL(img.attr('data-thumb') || img.attr('src'))
+    });
+  });
+  
+  list(results);
 }
 
 function player() {
-  var player = new Player('#movie_player-flash');
+  var player = new Player('#movie_player-flash,#movie_player');
   
-  player.setBox({width: 'full', valign: 'bottom', height: 35});
-  player.setPlay({x: 28, y: 25});
+  if (player.isFullscreen) {
+    player.setBox({width: 'full', valign: 'bottom', height: 60});
+    player.setSeek({x1: 5, x2: player.box.width, y: 0})
+    player.setPlay({x: 47, y: 45});
+  } else {
+    player.setBox({width: 'full', valign: 'bottom', height: 35});
+    player.setSeek({x1: 3, x2: player.box.width, y: 0})
+    player.setPlay({x: 29, y: 25});
+  }
   
   player.setFullscreenOff({key: 'escape'})
   player.setFullscreenOn({align: 'right', x: 17, y: 23})
-  
-  if (player.isFullscreen)
-    player.setSeek({x1: 0, x2: player.box.width, y: 0})
-  else
-    player.setSeek({x1: 3, x2: player.box.width, y: 0})
   
   return player;
 }

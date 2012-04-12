@@ -112,7 +112,7 @@ function currentPage() {
 }
 
 function mouseClick(x, y, delay) {
-  currentPage().push({type: 'mouse', action: 'over', x: x, y: y, delay: delay});
+  currentPage().push({type: 'mouse', action: 'click', x: x, y: y, delay: delay});
 }
 
 function mouseOver(x, y, delay) {
@@ -121,6 +121,11 @@ function mouseOver(x, y, delay) {
 
 function keyboardPress(key) {
   currentPage().push({type: 'keyboard', action: 'press', key: key});
+}
+
+function fullscreen(bool) {
+  document.isFullscreen = bool == true
+  currentPage().push({type: 'fullscreen', value: document.isFullscreen})
 }
 
 function toolbar(name) {
@@ -262,7 +267,7 @@ Player = function(selector) {
   var mouse = new Mouse();
   var keyboard = new Keyboard();
   
-  this.isFullscreen = document.remoteFullscreen == true;
+  this.isFullscreen = document.isFullscreen == true;
   this.actions = {}
   this.buttons = {}
   this.lines = {}
@@ -353,6 +358,8 @@ Player = function(selector) {
     } else {
       mouse.click(button.x, button.y)
     }
+    
+    if (button.callback) button.callback()
   }
   
   this.overButton = function(name) {
@@ -371,10 +378,12 @@ Player = function(selector) {
   }
   
   this.setFullscreenOff = function(options) {
+    options.callback = function() { fullscreen(false) }
     this.addButton('fullscreen-off', options)
   }
   
   this.setFullscreenOn = function(options) {
+    options.callback = function() { fullscreen(true) }
     this.addButton('fullscreen-on', options)
   }
   
@@ -420,7 +429,7 @@ Player = function(selector) {
   }
   
   this.addButton = function(name, options) {
-    var button = {}
+    var button = {callback: options.callback}
     
     if (options.key) {
       button.key = options.key;

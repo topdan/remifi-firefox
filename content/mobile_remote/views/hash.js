@@ -67,6 +67,10 @@ MobileRemote.Views.Hash = function(app, request, response) {
     }
   }
   
+  this.pageTypes.fullscreen = function(hash) {
+    app.remote.currentDocument().mobileRemoteFullscreen = hash.value == true
+  }
+  
   this.pageTypes.br = function(hash) {
     view.br();
   }
