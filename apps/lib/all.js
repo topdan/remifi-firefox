@@ -222,11 +222,7 @@ Form = function() {
 
 Mouse = function() {
   
-  this.delay = 200
-  
   this.click = function(x, y, delay) {
-    if (delay == null) delay = this.delay
-    
     x = Math.floor(x)
     y = Math.floor(y)
     
@@ -234,8 +230,6 @@ Mouse = function() {
   }
   
   this.over = function(x, y, delay) {
-    if (delay == null) delay = this.delay
-    
     x = Math.floor(x)
     y = Math.floor(y)
     
@@ -345,7 +339,7 @@ Player = function(selector) {
       y = line.y;
     }
     
-    mouse.click(x, y);
+    mouse.click(x, y, line.delay);
   }
   
   this.clickButton = function(name) {
@@ -356,7 +350,7 @@ Player = function(selector) {
     if (button.key) {
       keyboard.press(button.key)
     } else {
-      mouse.click(button.x, button.y)
+      mouse.click(button.x, button.y, button.delay)
     }
     
     if (button.callback) button.callback()
@@ -429,7 +423,7 @@ Player = function(selector) {
   }
   
   this.addButton = function(name, options) {
-    var button = {callback: options.callback}
+    var button = {delay: options.delay, callback: options.callback}
     
     if (options.key) {
       button.key = options.key;
@@ -443,7 +437,7 @@ Player = function(selector) {
   }
   
   this.addLine = function(name, options) {
-    var line = {}
+    var line = {delay: options.delay}
     
     if (typeof options.x  == "number") line.x  = alignX(options.align, options.x)
     if (typeof options.x1 == "number") line.x1 = alignX(options.align, options.x1)

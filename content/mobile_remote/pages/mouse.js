@@ -99,13 +99,13 @@ MobileRemote.Pages.Mouse = function(remote) {
   this.right = function(request, response) {
     if (this.x && this.y) {
       this.x += 5;
-      actualMouseAction('over', this.x, this.y);
+      actualMouseAction('over', null, this.x, this.y);
     }
   }
   
   this.click = function(request, response) {
     if (this.x && this.y) {
-      actualMouseAction('click', this.x, this.y);
+      actualMouseAction('click', null, this.x, this.y);
     }
   }
   
@@ -125,11 +125,11 @@ MobileRemote.Pages.Mouse = function(remote) {
     Components.utils.evalInSandbox("window.scrollTo(0, window.scrollY + window.innerHeight/2);", s);
   }
   
-  this.action = function(type, x, y, x2, y2, up) {
-    actualMouseAction(type, x, y, x2, y2, up);
+  this.action = function(type, delay, x, y, x2, y2, up) {
+    actualMouseAction(type, delay, x, y, x2, y2, up);
   }
   
-  var actualMouseAction = function(type, x, y, x2, y2, up) {
+  var actualMouseAction = function(type, delay, x, y, x2, y2, up) {
     var args = null;
     
     if (x >= screen.width)
@@ -159,7 +159,11 @@ MobileRemote.Pages.Mouse = function(remote) {
         break;
     }
     
-    if (args) {
+    if (type == 'click' && delay && delay != 0) {
+      actualMouseAction('over', null, x, y);
+      setTimeout(function() { remote.env.exec(self.program, args) }, delay);
+      
+    } else if (args) {
       remote.env.exec(self.program, args)
     }
   }

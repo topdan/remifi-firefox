@@ -97,12 +97,12 @@ function player() {
   var player = new Player('#movie_player-flash,#movie_player');
   
   if (player.isFullscreen) {
-    player.setBox({width: 'full', valign: 'bottom', height: 60});
-    player.setSeek({x1: 5, x2: player.box.width, y: 0})
-    player.setPlay({x: 47, y: 45});
+    player.setBox({width: 'full', valign: 'bottom', height: 40});
+    player.setSeek({x1: 5, x2: player.box.width, y: 0, delay: 500})
+    player.setPlay({x: 35, y: 26, delay: 500});
   } else {
     player.setBox({width: 'full', valign: 'bottom', height: 35});
-    player.setSeek({x1: 3, x2: player.box.width, y: 0})
+    player.setSeek({x1: 3, x2: player.box.width, y: 5, delay: 250})
     player.setPlay({x: 29, y: 25});
   }
   
