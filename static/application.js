@@ -10,7 +10,7 @@ function setupPages() {
   })
   
   $('p a.show-internal-error').click(function() {
-    $(this).parent('p').next('p.internal-error-details').toggle();
+    $(this).parent('p').next().toggle();
     return false;
   })
   

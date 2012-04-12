@@ -9,8 +9,13 @@ MobileRemote.Controller = function(remote, request, response) {
     var page = this.findPage();
     var body = null;
     try {
-      body = page.render(request, response);
+      if (page == remote.pages.apps && doc.mobileRemoteError)
+        body = remote.pages.mouse.index(doc.mobileRemoteError, request, response);
+      else
+        body = page.render(request, response);
+      
     } catch (err) {
+      doc.mobileRemoteError = err;
       Components.utils.reportError(err);
       body = remote.pages.error.render(err, request, response);
     }
