@@ -46,12 +46,15 @@ MobileRemote.Views.Hash = function(app, request, response) {
   
   this.pageTypes.mouse = function(hash) {
     var action = hash.action;
+    var x = hash.x;
+    var y = Math.max(hash.y, 25);
+    
     switch (action) {
       case 'click':
-        app.remote.pages.mouse.action('click', hash.x, hash.y)
+        app.remote.pages.mouse.action('click', x, y);
         break;
       case 'over':
-        app.remote.pages.mouse.action('over', hash.x, hash.y)
+        app.remote.pages.mouse.action('over', x, y);
         break
     }
   }
