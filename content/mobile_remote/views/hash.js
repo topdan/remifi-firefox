@@ -153,7 +153,10 @@ MobileRemote.Views.Hash = function(app, request, response) {
   }
   
   var actionUrlFor = function(action) {
-    return '/apps/' + app.name + '/' + action;
+    if (MobileRemote.startsWith(action, 'http://') || MobileRemote.startsWith(action, 'https://'))
+      return action;
+    else
+      return '/apps/' + app.name + '/' + action;
   }
   
 }

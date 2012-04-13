@@ -1,15 +1,15 @@
 // http://www.tek-tips.com/faqs.cfm?fid=6620
 
 MobileRemote.trim = function(base){
-  return (base.replace(/^[\s\xA0]+/, "").replace(/[\s\xA0]+$/, ""));
+  return base && (base.replace(/^[\s\xA0]+/, "").replace(/[\s\xA0]+$/, ""));
 }
 
 MobileRemote.startsWith = function(base, str) {
-  return (base.match("^"+str)==str);
+  return base && (base.match("^"+str)==str);
 }
 
 MobileRemote.endsWith = function(base, str) {
-  return (base.match(str+"$")==str);
+  return base && (base.match(str+"$")==str);
 }
 
 MobileRemote.escape = function(string) {
@@ -18,6 +18,7 @@ MobileRemote.escape = function(string) {
 }
 
 MobileRemote.escapeHTML = function(html) {
+  if (html == null || typeof(html) == "undefined") return "";
   if (typeof(html) != "string")
     html = html.toString();
   

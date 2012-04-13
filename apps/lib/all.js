@@ -4,6 +4,11 @@ function route(path, funcName, block) {
   var route = {path: path, funcName: funcName, actions: []};
   var context = {};
   
+  if (typeof path == "string")
+    route.string = path;
+  else if (typeof path == "object")
+    route.regex = path;
+  
   this.currentRoute = route;
   if (block)
     block.call(context);
@@ -25,8 +30,11 @@ function render(request) {
   var action = null;
   
   $.each(this.routes, function(index, p) {
-    if (request.path == p.path) 
+    if (p.regex && request.path.match(p.regex)) {
       route = p;
+    } else if (p.string && request.path == p.path) {
+      route = p;
+    }
   })
   
   if (route == null)
@@ -49,7 +57,8 @@ function render(request) {
   if (typeof handler == 'function')
     handler(request);
   else
-    throw "Function not found: " + action.funcName || route.funcName;
+    throw "View not found for " + request.path;
+  
   this.request = null;
   
   if (this.isWaiting)
@@ -95,7 +104,7 @@ function externalURL(url) {
     return this.request.protocol + "://" + this.request.host + url;
     
   // absolute url
-  } else if (url.match(/^http:\/\//) || (url.match(/^http:\/\//))) {
+  } else if (url.match(/^http:\/\//) || (url.match(/^https:\/\//))) {
     return url;
     
   // relative url

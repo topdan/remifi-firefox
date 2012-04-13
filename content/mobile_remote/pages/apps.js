@@ -7,7 +7,7 @@ MobileRemote.Pages.Apps = function(remote) {
   this.list = [
     new MobileRemote.App.Sandbox(remote, 'com.topdan.google'),
     new MobileRemote.App.Sandbox(remote, 'com.topdan.youtube'),
-    new MobileRemote.App.Sandbox(remote, 'com.topdan.nextflix')
+    new MobileRemote.App.Sandbox(remote, 'com.topdan.netflix')
   ];
   
   // throw this.list[0].domain;

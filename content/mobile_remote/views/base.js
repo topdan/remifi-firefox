@@ -37,6 +37,10 @@ MobileRemote.Views.Base = function(env) {
     return MobileRemote.escapeHTML(string);
   }
   
+  this.externalURL = function(url) {
+    return MobileRemote.startsWith(url, "http://") || MobileRemote.startsWith(url, "https://")
+  }
+  
   this.page = function(id, callback) {
     this.out.push('<div id="' + id + '">');
     callback();
@@ -73,6 +77,8 @@ MobileRemote.Views.Base = function(env) {
     var rest = 'class="' + this.escape(klass) + '"'
     if (typeof options.disabled == "string")
       rest += ' href="#" data-disabled-message="' + options.disabled + '"'
+    else if (this.externalURL(url))
+      rest += ' data-remote-url="' + this.escape(url) + '"'
     else
       rest += ' href="' + this.escape(url) + '"'
     
@@ -108,12 +114,12 @@ MobileRemote.Views.Base = function(env) {
           name = this.escape(this.name);
         
         var url, remoteURL;
-        if (MobileRemote.startsWith(item.url, "/")) {
-          url = item.url;
-          remoteURL = null;
-        } else {
+        if (this.externalURL(item.url)) {
           url = "#";
           remoteURL = item.url;
+        } else {
+          url = item.url;
+          remoteURL = null;
         }
         
         polished.push({name: name, url: url, remoteURL: remoteURL});
