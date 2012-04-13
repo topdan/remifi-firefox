@@ -79,14 +79,24 @@ function doSearch(request) {
 }
 
 function watch(request) {
-  var color = player().isFullscreen ? 'primary' : null
   title($('#eow-title').attr('title'));
-  button('Play/Pause', 'playPause');
-  button('Toogle Fullscreen', 'toggleFullscreen', {type: color});
-  if (player().isFullscreen)
-    button('Start Over', 'startOver', {disabled: 'Exit fullscreen first'});
-  else
-    button('Start Over', 'startOver');
+  
+  var unavailable = $('#unavailable-message');
+  
+  if (unavailable.length > 0) {
+    error(unavailable.find('.yt-alert-message').text());
+    
+  } else {
+    var p = player();
+    var color = player().isFullscreen ? 'primary' : null
+    title($('#eow-title').attr('title'));
+    button('Play/Pause', 'playPause');
+    button('Toogle Fullscreen', 'toggleFullscreen', {type: color});
+    if (player().isFullscreen)
+      button('Start Over', 'startOver', {disabled: 'Exit fullscreen first'});
+    else
+      button('Start Over', 'startOver');
+  }
   
   var results = [];
   $('#watch-related > .video-list-item').each(function() {

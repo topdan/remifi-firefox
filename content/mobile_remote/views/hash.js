@@ -94,7 +94,7 @@ MobileRemote.Views.Hash = function(app, request, response) {
   }
   
   this.pageTypes.error = function(hash) {
-    view.error(hash.message);
+    view.error(hash.text);
   }
   
   this.pageTypes.paginate = function(hash) {
