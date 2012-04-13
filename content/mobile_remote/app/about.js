@@ -1,7 +1,11 @@
 MobileRemote.App.About = function(remote) {
   
   this.render = function(uri, request, response) {
-    if (uri.toString() == "about:sessionrestore") {
+    
+    if (uri.toString() == 'about:home') {
+      return remote.pages.home.index(request, response);
+      
+    } else if (uri.toString() == "about:sessionrestore") {
       
       if (request.path == "/apps/about/sessionrestore/start-new-session.html") {
         return sessionRestoreStartNewSession(request, response);
