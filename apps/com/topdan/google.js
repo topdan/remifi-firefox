@@ -34,6 +34,8 @@ function doSearch(request) {
 }
 
 function search() {
+  title($('title').text());
+  
   var results = [];
   $('#rso h3 a').each(function() {
     results.push({
@@ -43,6 +45,11 @@ function search() {
   });
   
   list(results);
+  
+  paginate([
+    {name: 'prev', url: externalURL($('#pnprev').attr('href'))},
+    {name: 'next', url: externalURL($('#pnnext').attr('href'))}
+  ]);
 }
 
 function doNext() {

@@ -95,7 +95,32 @@ MobileRemote.Views.Base = function(env) {
   }
   
   this.paginate = function(items) {
-    this.template('/views/paginate.html', {items: items});
+    var polished = [];
+    for (var i=0 ; i < items.length ; i++) {
+      var item = items[i];
+      if (item.name && item.url) {
+        var name = item.name;
+        if (item.name == "prev")
+          name = items.length < 3 ? "&laquo; Previous" : "&laquo;"
+        else if (item.name == "next")
+        name = items.length < 3 ? "Next &raquo;" : "&raquo;"
+        else
+          name = this.escape(this.name);
+        
+        var url, remoteURL;
+        if (MobileRemote.startsWith(item.url, "/")) {
+          url = item.url;
+          remoteURL = null;
+        } else {
+          url = "#";
+          remoteURL = item.url;
+        }
+        
+        polished.push({name: name, url: url, remoteURL: remoteURL});
+      }
+    }
+    
+    this.template('/views/paginate.html', {items: polished});
   }
   
   this.list = function(items, options) {

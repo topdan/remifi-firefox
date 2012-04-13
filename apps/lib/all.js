@@ -84,7 +84,7 @@ function page(id, callback) {
 }
 
 function externalURL(url) {
-  if (this.request == null) return;
+  if (this.request == null || url == null) return;
   
   // absolute url using same protocol
   if (url.match(/^\/\//)) {
@@ -152,6 +152,10 @@ function error(message) {
 function list(items, options) {
   if (options == null) options = {};
   currentPage().push({type: 'list', items: items, rounded: options.rounded});
+}
+
+function paginate(items) {
+  currentPage().push({type: 'paginate', items: items})
 }
 
 function form(action, callback) {

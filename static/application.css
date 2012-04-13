@@ -25,6 +25,7 @@ a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px
 #jqt li.paginate-container { padding: 0; }
 #jqt ul.paginate { margin: 0; border: 0; background: none; }
 #jqt ul.paginate li { border: 0; float: left; background: none; padding: 0.5em 0 0.5em 0; text-align: center; }
+#jqt ul.paginate-1 li { width: 100%; }
 #jqt ul.paginate-2 li { width: 50%; }
 #jqt ul.paginate-3 li { width: 33.333%; }
 #jqt ul.paginate-4 li { width: 25%; }

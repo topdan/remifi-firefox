@@ -38,7 +38,13 @@ function index(request) {
 }
 
 function results(request) {
+  var pages = [
+    {name: 'prev', url: externalURL($('#search-footer-box .yt-uix-pager-prev').attr('href'))},
+    {name: 'next', url: externalURL($('#search-footer-box .yt-uix-pager-next').attr('href'))}
+  ];
+  
   searchForm();
+  paginate(pages);
   
   var results = [];
   $('#search-results > div.result-item').each(function() {
@@ -53,6 +59,7 @@ function results(request) {
   });
   
   list(results);
+  paginate(pages);
 }
 
 function searchForm() {
@@ -62,7 +69,6 @@ function searchForm() {
     f.fieldset(function() {
       f.search('q', {placeholder: 'YouTube Search', value: $('#masthead-search-term').val()});
     })
-    f.br();
     
   });
 }
