@@ -71,28 +71,28 @@ MobileRemote.Pages.Mouse = function(remote) {
       
       this.x = Math.floor(sx * x);
       this.y = Math.floor(sy * y);
-      actualMouseAction('over', this.x, this.y);
+      actualMouseAction('over', null, this.x, this.y);
     }
   }
   
   this.up = function(request, response) {
     if (this.x && this.y) {
       this.y -= 5;
-      actualMouseAction('over', this.x, this.y);
+      actualMouseAction('over', null, this.x, this.y);
     }
   }
   
   this.down = function(request, response) {
     if (this.x && this.y) {
       this.y += 5;
-      actualMouseAction('over', this.x, this.y);
+      actualMouseAction('over', null, this.x, this.y);
     }
   }
   
   this.left = function(request, response) {
     if (this.x && this.y) {
       this.x -= 5;
-      actualMouseAction('over', this.x, this.y);
+      actualMouseAction('over', null, this.x, this.y);
     }
   }
   
