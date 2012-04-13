@@ -41,7 +41,7 @@ MobileRemote.Pages.Controls = function(remote) {
   
   this.stop = function(request, response) {
     remote.currentBrowser().stop();
-    return this.wait(request.params['url'], request, response);
+    return remote.pages.apps.render(request, response);
   }
   
   this.refresh = function(request, response) {
@@ -99,7 +99,7 @@ MobileRemote.Pages.Controls = function(remote) {
   this.waitJS = function(request, response) {
     var url = request.params["url"];
     if (remote.currentBrowser().webProgress.isLoadingDocument) {
-      return 'setTimeout(function() { mobileRemote.wait("' + url + '")}, 250);'
+      return 'setTimeout(function() { mobileRemote.waitUnlessStopped("' + url + '")}, 250);'
     } else {
       return 'mobileRemote.show("' + url + '")'
     }

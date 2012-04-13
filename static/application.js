@@ -96,6 +96,20 @@ function setupPages() {
     return false;
   });
   
+  $('#waiting .stopLoading').click(function(e) {
+    mobileRemote.stop();
+    mobileRemote.show('/controls/stop.html?url=%2F');
+    e.preventDefault();
+    return false;
+  });
+  
+  $('#waiting .stopWaiting').click(function(e) {
+    mobileRemote.stop();
+    mobileRemote.show('/');
+    e.preventDefault();
+    return false;
+  })
+  
   $('#jqt').each(function() {
     var e = $(this);
     
@@ -120,6 +134,7 @@ function setupPages() {
 }
 
 MobileRemote = function(jQT) {
+  var self = this;
   
   this.error = function(message) {
     $('#error .error-message').html(message);
@@ -135,11 +150,24 @@ MobileRemote = function(jQT) {
     })
   }
   
+  this.stop = function() {
+    this.forceStop = true;
+  }
+  
+  this.waitUnlessStopped = function(url) {
+    if (!this.forceStop) {
+      this.wait(url);
+    }
+  }
+  
   this.wait = function(url) {
+    this.forceStop = false;
+    
     $.ajax({
       url: '/controls/wait.js?url=' + encodeURIComponent(url),
       success: function(script, status, request) {
-        eval(script);
+        if (!self.forceStop)
+          eval(script);
       }
     })
   }
