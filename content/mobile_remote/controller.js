@@ -2,16 +2,16 @@ MobileRemote.Controller = function(remote, request, response) {
   
   this.layout = null;
   
-  this.process = function() {
+  this.process = function(request, response) {
     var doc = remote.currentBrowser().contentDocument;
     var uri = new MobileRemote.URI(doc.location.href);
     
     var page = this.findPage();
     var body = null;
     try {
-      if (page == remote.pages.apps && doc.mobileRemoteError)
-        body = remote.pages.mouse.index(doc.mobileRemoteError, request, response);
-      else
+      // if (page == remote.pages.apps && doc.mobileRemoteError)
+      //   body = remote.pages.mouse.index(doc.mobileRemoteError, request, response);
+      // else
         body = page.render(request, response);
       
     } catch (err) {
@@ -26,6 +26,9 @@ MobileRemote.Controller = function(remote, request, response) {
     if (request.isXhr && request.isScript) {
       return body;
     } else if (request.isXhr) {
+      // we're ripping data from rendered HTML, it has weird characters when transferring via defaults
+      response.headers["Content-Type"] = "text/html; charset=ISO-8859-1"
+      
       return body + '<script type="text/javascript" charset="utf-8">\nsetupPages()\n</script>';
     } else {
       return withLayout(body);
