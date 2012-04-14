@@ -2,7 +2,6 @@
 // @import lib/all
 // @url    http://movies.netflix.com
 //
-this.header = "Netflix"
 
 route("/WiHome", "index", function() {
   action("doSearch");

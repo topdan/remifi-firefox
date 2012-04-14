@@ -98,6 +98,10 @@ MobileRemote.Views.Hash = function(app, request, response) {
   }
   
   this.pageTypes.paginate = function(hash) {
+    for (var i=0 ; i < hash.items.length ; i++) {
+      var item = hash.items[i];
+      item.url = actionUrlFor(item.url)
+    }
     view.paginate(hash.items);
   }
   
@@ -153,7 +157,9 @@ MobileRemote.Views.Hash = function(app, request, response) {
   }
   
   var actionUrlFor = function(action) {
-    if (MobileRemote.startsWith(action, 'http://') || MobileRemote.startsWith(action, 'https://'))
+    if (action == null)
+      return null;
+    else if (MobileRemote.startsWith(action, 'http://') || MobileRemote.startsWith(action, 'https://'))
       return action;
     else
       return '/apps/' + app.name + '/' + action;

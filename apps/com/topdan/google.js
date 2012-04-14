@@ -2,7 +2,6 @@
 // @import lib/all
 // @url    http://www.google.com
 //
-this.header = "Google"
 
 route("/", "index", function() {
   action("doSearch");

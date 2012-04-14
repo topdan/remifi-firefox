@@ -78,16 +78,14 @@ function ensurePage() {
   if (this.pages.content.length == 0) {
     this.pages.content.push({type: 'page', content: []});
     
-    if (this.header)
-      toolbar(this.header)
+    toolbar()
   }
 }
 
 function page(id, callback) {
   this.pages.content.push({type: 'page', id: id, content: []})
   
-  if (this.header)
-    toolbar(this.header)
+  toolbar()
   
   callback();
 }
@@ -137,8 +135,8 @@ function fullscreen(bool) {
   currentPage().push({type: 'fullscreen', value: document.isFullscreen})
 }
 
-function toolbar(name) {
-  currentPage().push({type: 'toolbar', name: name});
+function toolbar() {
+  currentPage().push({type: 'toolbar'});
 }
 
 function title(name) {
