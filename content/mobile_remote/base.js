@@ -37,10 +37,9 @@ MobileRemote.Base = function(env) {
   }
   
   this.createSandbox = function(url, options) {
-    if (url == null) url = this.currentURL();
     if (options == null) options = {};
     
-    var sandbox = Components.utils.Sandbox(url);
+    var sandbox = Components.utils.Sandbox(content);
     
     if (options.zepto) {
       sandbox.window = this.currentBrowser().contentWindow;

@@ -106,6 +106,10 @@ MobileRemote.Views.Hash = function(app, request, response) {
   }
   
   this.pageTypes.list = function(hash) {
+    for (var i=0 ; i < hash.items.length ; i++) {
+      var item = hash.items[i];
+      item.url = actionUrlFor(item.url)
+    }
     view.list(hash.items, {rounded: hash.rounded});
   }
   

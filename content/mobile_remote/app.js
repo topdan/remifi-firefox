@@ -16,6 +16,7 @@ MobileRemote.App.Sandbox = function(remote, name) {
   this.imports = ['lib/json2'];
   this.metadata = {};
   this.sandbox = null;
+  this.crossDomains = [];
   
   var init = function() {
     self.code = remote.env.fileContent(self.filename);
@@ -53,6 +54,7 @@ MobileRemote.App.Sandbox = function(remote, name) {
   
   var createSandbox = function() {
     var sandbox = remote.createSandbox(null, {zepto: true});
+    sandbox.importFunction(crossDomainGet);
     evalInSandbox('app', 'app = ' + JSON.stringify({name: self.name}), sandbox)
     
     for (var i=0 ; i < self.imports.length ; i++) {
@@ -65,6 +67,27 @@ MobileRemote.App.Sandbox = function(remote, name) {
     var code = remote.env.fileContent(self.filename);
     evalInSandbox(self.filename, code, sandbox);
     return sandbox;
+  }
+  
+  function crossDomainGet(url) {
+    // SECURITY TODO: get the domain's crossdomain.xml and see if it allows from this domain
+    
+    if (typeof url != "string")
+      return null;
+    
+    var uri = new MobileRemote.URI(url);
+    if (self.crossDomains.indexOf(uri.host) == -1)
+      return null;
+    
+    var request = new XMLHttpRequest();
+    request.open('GET', url, false);
+    request.send(null);
+    
+    if (request.status === 200) {
+      return request.responseText;
+    } else {
+      return null;
+    }
   }
   
   var evalInSandbox = function(file, code, sandbox) {
@@ -106,6 +129,11 @@ MobileRemote.App.Sandbox = function(remote, name) {
         if (self.domains == null)
           self.domains = [];
         self.domains.push(value);
+        break;
+        
+      case 'crossdomain':
+        self.crossDomains.push(value);
+        break;
         
       default:
         self.metadata[key] = value
