@@ -88,7 +88,6 @@ function watch(request) {
   } else {
     var p = player();
     var color = player().isFullscreen ? 'primary' : null
-    title($('#eow-title').attr('title'));
     button('Play/Pause', 'playPause');
     button('Toogle Fullscreen', 'toggleFullscreen', {type: color});
     if (player().isFullscreen)
