@@ -9,6 +9,7 @@ route('/', "index", {anchor: 'home/'})
 route('/', "section", {anchor: /^[^\/]+\/$/})
 route('/', "category", {anchor: /browseMode=browseGrid\?browseID=/})
 route('/', 'video', {anchor: /\/video&/})
+route('/', "notFound", {anchor: /.*/})
 
 function video() {
   title("HBO video player not implemented")
@@ -78,7 +79,7 @@ function sectionFeatured(code) {
     
     results.push({
       title:  e.find('title').text(),
-      url: '/',
+      url: urlForSomething(code, e),
       image: findThumb(e)
     })
   })
@@ -108,6 +109,23 @@ function category(request) {
   }
 }
 
+function urlForSomething(code, e) {
+  var typeCode = e.find('typeCode').text();
+  
+  if (typeCode == "ASSET") {
+    return externalURL(urlFor('/#' + code + '/video&assetID=' + e.find('TKey').text() + '?videoMode=embeddedVideo?showSpecialFeatures=false/'))
+    
+  } else if (typeCode == "BUNDLE") {
+    return externalURL(urlFor('/#' + code + '/browse&assetID=' + e.find('TKey').text() + '?seriesID=' + e.find('categoryTkey').text() + '?assetType=SEASON?browseMode=browseGrid/'))
+    
+  } else if (typeCode == "PACKAGE") {
+    return externalURL(urlFor('/#' + code + '/browse&assetID=' + e.find('TKey').text() + '?assetType=PACKAGE?browseMode=browseGrid/'))
+    
+  } else {
+    return '/';
+  }
+}
+
 function seriesEpisodes(request, xml) {
   var code = request.anchor.match(/([^\/]+)/)[1]
   var results = []
@@ -121,7 +139,7 @@ function seriesEpisodes(request, xml) {
       title: title,
       subtitle: subtitle,
       episode: episode,
-      url: externalURL(urlFor('/#' + code + '/video&assetID=' + e.find('TKey').text() + '?videoMode=embeddedVideo?showSpecialFeatures=false/')),
+      url: urlForSomething(code, e),
       image: findThumb(e)
     })
   })

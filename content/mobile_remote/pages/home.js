@@ -56,6 +56,16 @@ MobileRemote.Pages.Home = function(remote) {
             url: "/controls/visit.html?url=http://www.netflix.com",
             icon: {url: '/static/images/netflix.png'}
           },
+          {
+            title: "hbogo",
+            url: "/controls/visit.html?url=http://www.hbogo.com/#home/",
+            icon: {url: '/static/images/hbogo.png'}
+          },
+          {
+            title: "maxgo",
+            url: "/controls/visit.html?url=http://www.maxgo.com/#home/",
+            icon: {url: '/static/images/maxgo.jpg'}
+          },
         ]);
       })
       
