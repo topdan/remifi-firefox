@@ -1,20 +1,33 @@
-this.routes = {};
+this.routes = [];
 
-function route(path, funcName, block) {
-  var route = {path: path, funcName: funcName, actions: []};
-  var context = {};
+function route(path, funcName, options, block) {
+  if (typeof options == 'function') {
+    block = options
+    options = {};
+  } else if (options == null) {
+    options = {};
+  }
+  
+  var route = {funcName: funcName, actions: []}
   
   if (typeof path == "string")
-    route.string = path;
+    route.pathString = path;
   else if (typeof path == "object")
-    route.regex = path;
+    route.pathRegex = path;
   
+  route.anchor = options.anchor
+  if (typeof options.anchor == "string")
+    route.anchorString = options.anchor;
+  else if (typeof options.anchor == "object")
+    route.anchorRegex = options.anchor;
+
   this.currentRoute = route;
+  var context = {};
   if (block)
     block.call(context);
   this.currentRoute = null;
   
-  this.routes[path] = route;
+  this.routes.push(route);
 }
 
 function action(name, funcName) {
@@ -25,17 +38,49 @@ function action(name, funcName) {
   }
 }
 
-function render(request) {
+function matchRoutePath(route, request) {
+  if (route.pathRegex && request.path.match(route.pathRegex)) {
+    return route;
+  } else if (route.pathString && request.path == route.pathString) {
+    return route;
+  } else {
+    return null;
+  }
+}
+
+
+function matchRouteAnchor(route, request) {
+  if (route.anchorRegex && request.anchor.match(route.anchorRegex)) {
+    return route;
+  } else if (route.anchorString && request.anchor == route.anchorString) {
+    return route;
+  } else {
+    return null;
+  }
+}
+
+function findRoute(request) {
   var route = null;
-  var action = null;
+  var baseRoute = null;
   
   $.each(this.routes, function(index, p) {
-    if (p.regex && request.path.match(p.regex)) {
-      route = p;
-    } else if (p.string && request.path == p.path) {
-      route = p;
+    if (p.anchor == null) {
+      if (baseRoute == null) baseRoute = matchRoutePath(p, request);
+      
+    } else if (matchRouteAnchor(p, request)) {
+      if (route == null) route = p;
+      
     }
   })
+  
+  if (route == null) route = baseRoute;
+  return route;
+}
+
+
+function render(request) {
+  var route = findRoute(request);
+  var action = null;
   
   if (route == null)
     return null;
@@ -88,6 +133,10 @@ function page(id, callback) {
   toolbar()
   
   callback();
+}
+
+function urlFor(path) {
+  return request.protocol + '://' + request.host + path
 }
 
 function externalURL(url) {
@@ -229,6 +278,12 @@ Form = function() {
     this.out({type: type, name: name, placeholder: options.placeholder, value: options.value});
   }
   
+}
+
+HTTP = {};
+
+HTTP.get = function(url) {
+  return crossDomainGet(url);
 }
 
 Mouse = function() {

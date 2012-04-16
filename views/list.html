@@ -3,13 +3,15 @@
   <li>
     <% if (MobileRemote.startsWith(item.url, "/")) { %>
     <a href="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>">
-      <%= item.title %>
+      <%= escapeHTML(item.title) %>
       <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"/><% } %>
+      <% if (item.subtitle) { %><br/><%= escapeHTML(item.subtitle) %><% } %>
     </a> 
     <% } else { %>
       <a href="#" data-remote-url="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>">
       <%= escapeHTML(item.title) %>
       <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"/><% } %>
+      <% if (item.subtitle) { %><br/><%= escapeHTML(item.subtitle) %><% } %>
       </a> 
     <% } %>
     

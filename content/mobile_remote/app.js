@@ -71,6 +71,7 @@ MobileRemote.App.Sandbox = function(remote, name) {
   
   function crossDomainGet(url) {
     // SECURITY TODO: get the domain's crossdomain.xml and see if it allows from this domain
+    // TODO: timeout protection
     
     if (typeof url != "string")
       return null;
