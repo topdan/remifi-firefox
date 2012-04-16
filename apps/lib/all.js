@@ -1,4 +1,13 @@
 this.routes = [];
+this.beforeFilters = [];
+
+function beforeFilter(funcName) {
+  this.beforeFilters.push(funcName);
+}
+
+function notFound() {
+  // do nothing
+}
 
 function route(path, funcName, options, block) {
   if (typeof options == 'function') {
@@ -77,32 +86,50 @@ function findRoute(request) {
   return route;
 }
 
+function runBeforeFilters(request) {
+  var self = this;
+  $.each(this.beforeFilters, function(index, filterName) {
+    var func = self[filterName];
+    if (func == null)
+      throw "filter not found: " + filterName;
+    func(request);
+  })
+}
+
+function isPerformed() {
+  return this.pages.content.length != 0;
+}
+
 
 function render(request) {
-  var route = findRoute(request);
-  var action = null;
-  
-  if (route == null)
-    return null;
-  
-  if (request.action) {
-    $.each(route.actions, function(index, a) {
-      if (request.action == a.name) 
-        action = a;
-    })
-  }
-  
-  var handler = null;
-  if (action)
-    handler = this[action.funcName];
-  else
-    handler = this[route.funcName]
-  
   this.request = request;
-  if (typeof handler == 'function')
-    handler(request);
-  else
-    throw "View not found for " + request.path;
+  runBeforeFilters(request);
+  
+  if (!isPerformed()) {
+    var route = findRoute(request);
+    var action = null;
+    
+    if (route == null)
+      return null;
+    
+    if (request.action) {
+      $.each(route.actions, function(index, a) {
+        if (request.action == a.name) 
+          action = a;
+      })
+    }
+    
+    var handler = null;
+    if (action)
+      handler = this[action.funcName];
+    else
+      handler = this[route.funcName]
+      
+    if (typeof handler == 'function')
+      handler(request);
+    else
+      throw "View not found for " + request.path;
+  }
   
   this.request = null;
   
