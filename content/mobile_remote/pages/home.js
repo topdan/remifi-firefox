@@ -14,18 +14,6 @@ MobileRemote.Pages.Home = function(remote) {
         
         v.apps([
           {
-            title: "bookmarklet",
-            url: "bookmarklets/index.html"
-          },
-          {
-            title: "keyboard",
-            url: "/keyboard/index.html"
-          },
-          {
-            title: "mouse",
-            url: "/mouse/index.html"
-          },
-          {
             title: "youtube",
             url: "/controls/visit.html?url=http://www.youtube.com",
             icon: {url: '/static/images/youtube.png'}
@@ -49,8 +37,26 @@ MobileRemote.Pages.Home = function(remote) {
             title: "maxgo",
             url: "/controls/visit.html?url=http%3A%2F%2Fwww.maxgo.com%2F%23home%2F",
             icon: {url: '/static/images/maxgo.jpg'}
-          },
+          }
         ]);
+        
+        v.systemApps([
+          {
+            title: "bookmarklet",
+            url: "bookmarklets/index.html"
+          },
+          null,
+          {
+            title: "keyboard",
+            url: "/keyboard/index.html",
+            icon: {url: '/static/images/keyboard.png'}
+          },
+          {
+            title: "mouse",
+            url: "/mouse/index.html",
+            icon: {url: '/static/images/mouse.png'}
+          }
+        ])
         
         v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
       })
