@@ -43,19 +43,15 @@ function tvShowOrMovie(request) {
 function tvShow(request) {
   title($('meta[property="og:title"]').attr('content'));
   
-  var results = [];
-  $('#episode-container .vsl li').each(function() {
+  $('#episode-container .vsl li').list(function(r) {
     var e = $(this);
     var title = e.find('.video-info');
     var thumb = e.find('.thumbnail');
     
-    results.push({
-      title: title.text(),
-      url:   externalURL(title.attr('href')),
-      image: externalURL(thumb.attr('data-src') || thumb.attr('src'))
-    });
+    r.title = title.text();
+    r.url   = title.attr('href');
+    r.image = thumb.attr('data-src') || thumb.attr('src');
   });
-  list(results);
   
   paginate([{name: 'next', url: 'loadMoreEpisodes'}])
 }
@@ -133,14 +129,12 @@ function browse(request) {
 function search(request) {
   searchForm();
   
-  var main = $('#show-page')
-  if (main.length > 0) {
-    list([{
-      title: main.find('.top-show-title a').text(),
-      url:   main.find('.top-show-title a').attr('href'),
-      image: externalURL(main.find('.thumbnail').attr('data-src'))
-    }])
-  }
+  $('#show-page').list(function(r) {
+    var e = $(this);
+    r.title = e.find('.top-show-title a').text();
+    r.url   = e.find('.top-show-title a').attr('href');
+    r.image = e.find('.thumbnail').attr('data-src');
+  })
   
   results('#serp-results td');
 }
@@ -151,19 +145,15 @@ function results(selector) {
     {name: 'next', url: 'nextPage'},
   ])
   
-  var results = [];
-  $(selector).each(function() {
+  $(selector).list(function(r) {
     var e = $(this);
     var title = e.find('.show-title-gray,.show-title-container a.beaconid');
     var thumb = e.find('.thumbnail');
     
-    results.push({
-      title: title.text(),
-      url:   externalURL(title.attr('href')),
-      image: externalURL(thumb.attr('data-src') || thumb.attr('src'))
-    });
+    r.title = title.text();
+    r.url   = title.attr('href');
+    r.image = thumb.attr('data-src') || thumb.attr('src');
   });
-  list(results);
   
   paginate([
     {name: 'prev', url: 'prevPage'},

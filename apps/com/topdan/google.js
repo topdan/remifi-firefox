@@ -35,15 +35,10 @@ function doSearch(request) {
 function search() {
   title($('title').text());
   
-  var results = [];
-  $('#rso h3 a').each(function() {
-    results.push({
-      url: externalURL($(this).attr('href')),
-      title: $(this).text()
-    })
+  $('#rso h3 a').list(function(r) {
+    r.title = $(this).text();
+    r.url = $(this).attr('href');
   });
-  
-  list(results);
   
   paginate([
     {name: 'prev', url: externalURL($('#pnprev').attr('href'))},

@@ -56,16 +56,13 @@ function doSearch(request) {
 function search(request) {
   searchForm();
   
-  var results = [];
-  $('#searchResultsPrimary .mresult').each(function() {
+  $('#searchResultsPrimary .mresult').list(function(r) {
     var e = $(this);
-    results.push({
-      title: e.find('.mdpLink').text(),
-      url:   externalURL(e.find('.mdpLink').attr('href')),
-      image: externalURL(e.find('img').attr('src'))
-    });
+    
+    r.title = e.find('.mdpLink').text();
+    r.url   = e.find('.mdpLink').attr('href');
+    r.image = e.find('img').attr('src');
   });
-  list(results);
   
   paginate([
     {name: 'prev', url: $('.prev').attr('href')},
@@ -75,28 +72,19 @@ function search(request) {
 
 function instantQueue(request) {
   title("Recently Watched");
-  var results = [];
-  $('#athome tbody tr').each(function() {
+  $('#athome tbody tr').list(function(r) {
     var e = $(this);
-    results.push({
-      title: e.find('.title a').text(),
-      url:   externalURL(e.find('.title a').attr('href'))
-    });
+    
+    r.title = e.find('.title a').text();
+    r.url   = e.find('.title a').attr('href');
   });
-  list(results);
-  
   
   title("Instant Queue");
-  var results = [];
-  $('#queue tbody tr').each(function() {
+  $('#queue tbody tr').list(function(r) {
     var e = $(this);
-    results.push({
-      title: e.find('.title a').text(),
-      url:   externalURL(e.find('.title a').attr('href'))
-    });
+    r.title = e.find('.title a').text();
+    r.url   = e.find('.title a').attr('href');
   });
-  list(results);
-  
 }
 
 function movie(request) {

@@ -20,21 +20,16 @@ function video() {
 function index(request) {
   var xml = getXML('/apps/mediacatalog/rest/navigationBarService/HBO/navigationBar/NO_PC');
   
-  var results = []
-  xml.find('navBarelementResponses').each(function() {
+  xml.find('navBarelementResponses').list(function(r) {
     var e = $(this);
     var title = e.find('title').text();
     var anchor = title.toLowerCase();
     if (anchor == 'free') anchor = 'preview'
+    if (anchor == 'home') return;
     
-    if (anchor != "home") {
-      results.push({
-        title: title,
-        url: externalURL(urlFor('/#' + anchor + '/'))
-      })
-    }
+    r.title = title;
+    r.url   = '/#' + anchor + '/';
   })
-  list(results);
   
   sectionFeatured('HO');
 }
@@ -48,13 +43,7 @@ function section(request) {
 function sectionCategories(code) {
   var xml = getXML('/apps/mediacatalog/rest/quicklinkService/HBO/quicklink/' + code);
   
-  var results = [];
-  quicklinkElements(xml, results);
-  list(results)
-}
-
-function quicklinkElements(xml, results) {
-  xml.find('quicklinkElement,quicklinkElements').each(function(element) {
+  xml.find('quicklinkElement,quicklinkElements').list(function(r) {
     var e = $(this);
     var url = e.find('uri').text();
     var m = url.match(/\/([^\/]+)\/([^\/]+)$/)
@@ -62,10 +51,8 @@ function quicklinkElements(xml, results) {
     var id = m ? m[2] : null;
     
     if (e.find('quicklinkElements').length == 0) {
-      results.push({
-        title:  e.find('displayName').text(),
-        url: externalURL('/#' + request.anchor + 'browse&browseMode=browseGrid?browseID=' + type + '.' + id + '/')
-      })
+      r.title = e.find('displayName').text();
+      r.url   = '/#' + request.anchor + 'browse&browseMode=browseGrid?browseID=' + type + '.' + id + '/'
     }
   })
 }
@@ -73,18 +60,13 @@ function quicklinkElements(xml, results) {
 function sectionFeatured(code) {
   var xml = getXML('/apps/mediacatalog/rest/landingService/HBO/landing/' + code);
   
-  var results = [];
-  xml.find('adminProxyContentResponse').each(function(element) {
+  xml.find('adminProxyContentResponse').list(function(r) {
     var e = $(this);
     
-    results.push({
-      title:  e.find('title').text(),
-      url: urlForSomething(code, e),
-      image: findThumb(e)
-    })
+    r.title = e.find('title').text();
+    r.url   = urlForSomething(code, e);
+    r.image = findThumb(e)
   })
-
-  list(results)
 }
 
 function category(request) {
@@ -113,13 +95,13 @@ function urlForSomething(code, e) {
   var typeCode = e.find('typeCode').text();
   
   if (typeCode == "ASSET") {
-    return externalURL(urlFor('/#' + code + '/video&assetID=' + e.find('TKey').text() + '?videoMode=embeddedVideo?showSpecialFeatures=false/'))
+    return '/#' + code + '/video&assetID=' + e.find('TKey').text() + '?videoMode=embeddedVideo?showSpecialFeatures=false/'
     
   } else if (typeCode == "BUNDLE") {
-    return externalURL(urlFor('/#' + code + '/browse&assetID=' + e.find('TKey').text() + '?seriesID=' + e.find('categoryTkey').text() + '?assetType=SEASON?browseMode=browseGrid/'))
+    return '/#' + code + '/browse&assetID=' + e.find('TKey').text() + '?seriesID=' + e.find('categoryTkey').text() + '?assetType=SEASON?browseMode=browseGrid/'
     
   } else if (typeCode == "PACKAGE") {
-    return externalURL(urlFor('/#' + code + '/browse&assetID=' + e.find('TKey').text() + '?assetType=PACKAGE?browseMode=browseGrid/'))
+    return '/#' + code + '/browse&assetID=' + e.find('TKey').text() + '?assetType=PACKAGE?browseMode=browseGrid/'
     
   } else {
     return '/';
@@ -128,59 +110,38 @@ function urlForSomething(code, e) {
 
 function seriesEpisodes(request, xml) {
   var code = request.anchor.match(/([^\/]+)/)[1]
-  var results = []
-  xml.find('featureResponses').each(function() {
+  xml.find('featureResponses').list(function(r) {
     var e = $(this);
-    var title = e.find('title').text();
-    var episode = parseInt(e.find('episodeInSeries').text());
-    var subtitle = e.find('season').text() + " Episode " + e.find('episodeInSeason').text();
     
-    results.push({
-      title: title,
-      subtitle: subtitle,
-      episode: episode,
-      url: urlForSomething(code, e),
-      image: findThumb(e)
-    })
-  })
-  
-  results.sort(function(a, b) {
-    return a.episode - b.episode;
-  })
-  
-  list(results)
+    r.title    = e.find('title').text();
+    r.episode  = parseInt(e.find('episodeInSeries').text());
+    r.subtitle = e.find('season').text() + " Episode " + e.find('episodeInSeason').text();
+    
+    r.url = urlForSomething(code, e);
+    r.image = findThumb(e);
+  }, {sort: function(a, b) { return a.episode - b.episode }})
 }
 
 function seriesCategory(request, xml) {
   var code = request.anchor.match(/([^\/]+)/)[1]
-  var results = []
-  xml.find('bundleCategory').each(function() {
+  xml.find('bundleCategory').list(function(r) {
     var e = $(this);
-    var title = e.find('title').text();
     
-    results.push({
-      title: title,
-      url: externalURL(urlFor('/#' + code + '/browse&assetID=' + e.find('TKey').text() + '?assetType=SERIES?browseMode=browseGrid?browseID=category.INDB464/')),
-      image: findThumb(e)
-    })
+    r.title = e.find('title').text();
+    r.url   = '/#' + code + '/browse&assetID=' + e.find('TKey').text() + '?assetType=SERIES?browseMode=browseGrid?browseID=category.INDB464/';
+    r.image = findThumb(e);
   })
-  list(results)
 }
 
 function featureCategory(request, xml) {
   var code = request.anchor.match(/([^\/]+)/)[1]
-  var results = []
-  xml.find('featureResponse').each(function() {
+  xml.find('featureResponse').list(function(r) {
     var e = $(this);
-    var title = e.find('title').text();
     
-    results.push({
-      title: title,
-      url: externalURL(urlFor('/#' + code + '/video&assetID=' + e.find('TKey').text() + '?videoMode=embeddedVideo?showSpecialFeatures=false/')),
-      image: findThumb(e)
-    })
+    r.title = e.find('title').text();
+    r.url   = '/#' + code + '/video&assetID=' + e.find('TKey').text() + '?videoMode=embeddedVideo?showSpecialFeatures=false/';
+    r.image = findThumb(e);
   })
-  list(results)
 }
 
 function findCode(anchor) {

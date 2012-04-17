@@ -1,6 +1,30 @@
 this.routes = [];
 this.beforeFilters = [];
 
+Zepto.fn.list = function(callback, options) {
+  if (options == null) options = {};
+  var results = [];
+  
+  this.each(function() {
+    var result = {};
+    callback.call(this, result);
+    if (result.title) {
+      results.push(result);
+    }
+  });
+  
+  if (options.sort) {
+    results.sort(options.sort);
+  }
+  
+  Zepto.each(results, function(index, item) {
+    if (item.url) item.url = externalURL(item.url);
+    if (item.image) item.image = externalURL(item.image);
+  })
+  
+  list(results)
+}
+
 function beforeFilter(funcName) {
   this.beforeFilters.push(funcName);
 }
@@ -160,10 +184,6 @@ function page(id, callback) {
   toolbar()
   
   callback();
-}
-
-function urlFor(path) {
-  return request.protocol + '://' + request.host + path
 }
 
 function externalURL(url) {
