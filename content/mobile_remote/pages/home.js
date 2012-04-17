@@ -58,12 +58,12 @@ MobileRemote.Pages.Home = function(remote) {
           },
           {
             title: "hbogo",
-            url: "/controls/visit.html?url=http://www.hbogo.com/#home/",
+            url: "/controls/visit.html?url=http%3A%2F%2Fwww.hbogo.com%2F%23home%2F",
             icon: {url: '/static/images/hbogo.png'}
           },
           {
             title: "maxgo",
-            url: "/controls/visit.html?url=http://www.maxgo.com/#home/",
+            url: "/controls/visit.html?url=http%3A%2F%2Fwww.maxgo.com%2F%23home%2F",
             icon: {url: '/static/images/maxgo.jpg'}
           },
         ]);

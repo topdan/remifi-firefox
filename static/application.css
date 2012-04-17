@@ -41,14 +41,17 @@ p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black
 #mouse .touchpad { display: block; margin: 0px auto; background-color: #CCC; text-align: center; text-decoration: none; }
 #mouse .touchpad span { color: #555555; display: block; font-size: 140%; line-height: 50px; padding-top: 50px; }
 
-#jqt .backButton { left: 6px; right: auto; }
-#jqt .forwardButton { left: 50px; right: auto; }
-#jqt .reloadButton { left: 94px; right: auto; }
-#jqt .stopButton { left: 94px; right: auto; display: none; }
-#jqt .urlButton { left: 138px; right: auto; }
-#jqt .searchButton { left: 182px; right: auto; }
-/*#jqt .homeButton { }*/
-#jqt .returnButton { display: none; }
+
+#jqt .toolbar a { height: 30px; }
+#jqt .icon { display: inline-block; width: 14px; height: 14px; line-height: 14px; vertical-align: text-top; background-image: url("/static/images/glyphicons-halflings-white.png"); background-position: 14px 14px; background-repeat: no-repeat; *margin-right: .3em; }
+#jqt .backButton { left: 6px; right: auto; background-position: -422px -64px; }
+#jqt .forwardButton { left: 58px; right: auto; background-position: -448px -64px; }
+#jqt .reloadButton { left: 110px; right: auto; background-position: -230px -16px; } /*10 x 8*/
+#jqt .stopButton { left: 110px; right: auto; display: none; background-position: -302px 8px; }
+#jqt .tabsButton { left: 162px; right: auto; background-position: -206px 8px; }
+#jqt .searchButton { left: 214px; right: auto; background-position: -38px 8px; }
+#jqt .homeButton { background-position: 10px -16px; }
+#jqt .returnButton { display: none; background-position: -326px -88px; }
 
 #jqt .loading .reloadButton { display: none; }
 #jqt .loading .stopButton { display: block; }

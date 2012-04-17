@@ -24,26 +24,8 @@
         <p class="error-message"></p>
       </div>
       
-      <div id="url">
-        <%= views.toolbar({back: true}) %>
-        <br/>
-        <br/>
-        <form method="GET" action="/controls/visit.html">
-          <ul class="edit">
-            <li>
-              <input type="url" placeholder="URL Address" name="url">
-            </li>
-          </ul>
-          <br/>
-          <br/>
-          <a style="" href="#" class="submit grayButton">Visit URL</a>
-        </form>
-        
-      </div>
-      
       <div id="search">
         <%= views.toolbar({back: true}) %>
-        <br/>
         <br/>
         <form method="GET" action="/controls/google.html">
           <ul class="edit">
@@ -52,9 +34,19 @@
             </li>
           </ul>
           <br/>
-          <br/>
           <a style="" href="#" class="submit grayButton">Google Search</a>
         </form>
+        <br/>
+        <form method="GET" action="/controls/visit.html">
+          <ul class="edit">
+            <li>
+              <input type="url" placeholder="URL Address" name="url">
+            </li>
+          </ul>
+          <br/>
+          <a style="" href="#" class="submit grayButton">Visit URL</a>
+        </form>
+        
       </div>
       
     </div>

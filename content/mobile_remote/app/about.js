@@ -53,7 +53,7 @@ MobileRemote.App.About = function(remote) {
     // by firefox and is pretty safe
     var s = Components.utils.Sandbox(content);
     s.win = content;
-    Components.utils.evalInSandbox("if (win.restoreSession) win.restoreSession();", s);
+    Components.utils.evalInSandbox("try { win.restoreSession(); } catch(err) { }", s);
     
     return remote.pages.controls.wait('/', request, response);
   }
