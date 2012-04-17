@@ -18,22 +18,6 @@ MobileRemote.Pages.Home = function(remote) {
             url: "bookmarklets/index.html"
           },
           {
-            title: "bookmarks",
-            url: "bookmarks.html"
-          },
-          {
-            title: "history",
-            url: "history.html"
-          },
-          {
-            title: "tabs",
-            url: "/tabs/index.html"
-          },
-          {
-            title: "windows",
-            url: "/windows/index.html"
-          },
-          {
             title: "keyboard",
             url: "/keyboard/index.html"
           },
@@ -67,6 +51,8 @@ MobileRemote.Pages.Home = function(remote) {
             icon: {url: '/static/images/maxgo.jpg'}
           },
         ]);
+        
+        v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
       })
       
     });

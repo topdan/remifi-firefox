@@ -22,7 +22,7 @@ MobileRemote.Pages.Controls = function(remote) {
     } else if (request.path == '/controls/visit.html') {
       return this.visit(request, response);
       
-    } else if (request.path == '/controls/google.html') {
+    } else if (request.path == '/controls/search.html') {
       return this.google(request, response);
       
     } else if (request.path == '/controls/wait.html') {

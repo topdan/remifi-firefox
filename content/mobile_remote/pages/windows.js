@@ -113,7 +113,7 @@ MobileRemote.Pages.Windows = function(remote) {
         
         v.list(windows);
         
-        apps = [null, null]
+        apps = [{title: 'tabs', url: "/tabs/index.html"}, null]
         if (currentWindowIndex != null)
           apps.push({title: 'close', url: "/windows/close.html?index=" + currentWindowIndex})
         else

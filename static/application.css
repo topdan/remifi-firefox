@@ -32,6 +32,9 @@ a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px
 #jqt ul.paginate-5 li { width: 20%; }
 #jqt ul.paginate-6 li { width: 16.666%; }
 
+#jqt #home .info { margin-top: 3em; }
+#jqt.fullscreen #home .info { display: none;}
+
 .error-message { margin: 0.5em; padding: 0.5em; color: #800000; background-color: #EEB4B4;}
 
 #waiting { padding-top: 4em; }
