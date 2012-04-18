@@ -67,8 +67,8 @@ namespace :plugin do
   
   desc 'remove all the plugin build files'
   task :clean do
-    # FileUtils.rm(version_file)
-    # FileUtils.rm('mobile-remote.xpi')
+    FileUtils.rm(version_file)
+    FileUtils.rm('mobile-remote.xpi')
   end
   
 end
