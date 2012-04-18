@@ -73,28 +73,6 @@ int main(int argc, char *argv[]) {
       PostMouseEvent(kCGMouseButtonLeft, kCGEventLeftMouseUp, pt);
       break;
     
-    // drag
-    case 5:
-      pt.x = [args integerForKey:@"x1"];
-      pt.y = [args integerForKey:@"y1"];
-      
-      PostMouseEvent(kCGMouseButtonLeft, kCGEventMouseMoved, pt);
-      PostMouseEvent(kCGMouseButtonLeft, kCGEventLeftMouseDown, pt);
-      
-      pt.x = [args integerForKey:@"x2"];
-      pt.y = [args integerForKey:@"y2"];
-      
-      PostMouseEvent(kCGMouseButtonLeft, kCGEventMouseMoved, pt);
-      
-      up = [args integerForKey:@"up"];
-      
-      if (up != 0)
-      {
-        PostMouseEvent(kCGMouseButtonLeft, kCGEventLeftMouseUp, pt);
-      }
-      
-      break;
-    
     default:
       break;
   }
