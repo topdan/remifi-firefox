@@ -77,6 +77,8 @@ MobileRemote.Views.Base = function(env) {
     var rest = 'class="' + this.escape(klass) + '"'
     if (typeof options.disabled == "string")
       rest += ' href="#" data-disabled-message="' + options.disabled + '"'
+    else if (options.openLocally)
+      rest += ' target="_blank" href="' + this.escape(url) + '"'
     else if (this.externalURL(url))
       rest += ' data-remote-url="' + this.escape(url) + '"'
     else

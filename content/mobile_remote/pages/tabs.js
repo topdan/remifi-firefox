@@ -78,6 +78,8 @@ MobileRemote.Pages.Tabs = function(remote) {
         
         v.list(tabs);
         
+        v.button('Open in Remote', remote.currentURL(), {openLocally: true});
+        
         apps = [{title: 'windows', url: "/windows/index.html"}, null]
         if (currentTabIndex != null && (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true))
           apps.push({title: 'close', url: "/tabs/close.html?index=" + currentTabIndex})

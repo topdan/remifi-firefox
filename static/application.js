@@ -87,13 +87,10 @@ function setupPages() {
     }
     
     var remoteUrl = $(this).attr('data-remote-url');
-    
     if (remoteUrl) {
       mobileRemote.visit(remoteUrl);
+      return false;
     }
-    
-    e.preventDefault();
-    return false;
   });
   
   $('#waiting .stopLoading').click(function(e) {
