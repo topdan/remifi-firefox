@@ -1,54 +1,76 @@
-if (MobileRemote.Pages == null) MobileRemote.Pages = {}
+(function() {
+  var Bookmarklets,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-MobileRemote.Pages.Bookmarklets = function(remote) {
-  
-  this.render = function(request, response) {
-    if (request.path == '/bookmarklets/index.html' || request.path == '/bookmarklets/') {
-      return this.index(request, response);
-      
-    } else if (request.path == '/bookmarklets/new-tab.html') {
-      return this.newTab(request, response);
-      
-    } else if (request.path == '/bookmarklets/new-window.html') {
-      return this.newWindow(request, response);
-      
-    } else if (request.path == '/bookmarklets/visit.html') {
-      return this.visit(request, response);
-      
+  Bookmarklets = (function() {
+
+    Bookmarklets.name = 'Bookmarklets';
+
+    MobileRemote.Pages.Bookmarklets = Bookmarklets;
+
+    function Bookmarklets(remote) {
+      this.remote = remote;
+      this.newWindow = __bind(this.newWindow, this);
+
+      this.newTab = __bind(this.newTab, this);
+
+      this.visit = __bind(this.visit, this);
+
+      this.index = __bind(this.index, this);
+
+      this.render = __bind(this.render, this);
+
     }
-  }
-  
-  this.index = function(request, response) {
-    return remote.views(function(v) {
-      v.page('bookmarklets-page', function() {
-        v.toolbar();
-        v.title("Bookmarklets");
-        
-        var referer = request.headers["Referer"];
-        referer = referer.match('(http://[^\/]+)')[0];
-        var viewJS = "javascript:document.location = '" + referer + "/bookmarklets/visit.html?url=' + encodeURIComponent(document.location.href);";
-        var newTab = "javascript:document.location = '" + referer + "/bookmarklets/new-tab.html?url=' + encodeURIComponent(document.location.href);";
-        var newWindow = "javascript:document.location = '" + referer + "/bookmarklets/new-window.html?url=' + encodeURIComponent(document.location.href);";
-        
-        v.template('/views/bookmarklets.html', {viewJS: viewJS, newTab: newTab, newWindow: newWindow});
-        
+
+    Bookmarklets.prototype.render = function(request, response) {
+      if (request.path === '/bookmarklets/index.html' || request.path === '/bookmarklets/') {
+        return this.index(request, response);
+      } else if (request.path === '/bookmarklets/new-tab.html') {
+        return this.newTab(request, response);
+      } else if (request.path === '/bookmarklets/new-window.html') {
+        return this.newWindow(request, response);
+      } else if (request.path === '/bookmarklets/visit.html') {
+        return this.visit(request, response);
+      }
+    };
+
+    Bookmarklets.prototype.index = function(request, response) {
+      return this.remote.views(function(v) {
+        return v.page('bookmarklets-page', function() {
+          var newTab, newWindow, referer, viewJS;
+          v.toolbar();
+          v.title("Bookmarklets");
+          referer = request.headers["Referer"];
+          referer = referer.match('(http://[^\/]+)')[0];
+          viewJS = "javascript:document.location = '" + referer + "/bookmarklets/visit.html?url=' + encodeURIComponent(document.location.href);";
+          newTab = "javascript:document.location = '" + referer + "/bookmarklets/new-tab.html?url=' + encodeURIComponent(document.location.href);";
+          newWindow = "javascript:document.location = '" + referer + "/bookmarklets/new-window.html?url=' + encodeURIComponent(document.location.href);";
+          return v.template('/views/bookmarklets.html', {
+            viewJS: viewJS,
+            newTab: newTab,
+            newWindow: newWindow
+          });
+        });
       });
-    });
-  };
-  
-  this.visit = function(request, response) {
-    remote.pages.controls.visit(request, response);
-    return remote.pages.controls.wait('/', request, response);
-  };
-  
-  this.newTab = function(request, response) {
-    remote.pages.tabs.add(request, response);
-    return remote.pages.controls.wait('/', request, response);
-  };
-  
-  this.newWindow = function(request, response) {
-    remote.pages.windows.add(request, response);
-    return remote.pages.controls.wait('/', request, response);
-  };
-  
-};
+    };
+
+    Bookmarklets.prototype.visit = function(request, response) {
+      this.remote.pages.controls.visit(request, response);
+      return this.remote.pages.controls.wait('/', request, response);
+    };
+
+    Bookmarklets.prototype.newTab = function(request, response) {
+      this.remote.pages.tabs.add(request, response);
+      return this.remote.pages.controls.wait('/', request, response);
+    };
+
+    Bookmarklets.prototype.newWindow = function(request, response) {
+      this.remote.pages.windows.add(request, response);
+      return this.remote.pages.controls.wait('/', request, response);
+    };
+
+    return Bookmarklets;
+
+  })();
+
+}).call(this);
