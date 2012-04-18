@@ -402,8 +402,8 @@ Player = function(selector) {
       var elemWidth  = elem.width()
       
       // TODO remove the hardcoded height of the toolbars
-      self.top = window.screenY + 87 + elemOffset.top
-      self.left = window.screenX + elemOffset.left
+      self.top = window.browserY + elemOffset.top
+      self.left = window.browserX + elemOffset.left
       self.height = elemHeight
       self.width = elemWidth
     }

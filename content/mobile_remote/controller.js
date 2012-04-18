@@ -52,6 +52,8 @@ MobileRemote.Controller = function(remote, request, response) {
       return remote.pages.keyboard;
     } else if (MobileRemote.startsWith(request.path, '/bookmarklets/')) {
       return remote.pages.bookmarklets;
+    } else if (MobileRemote.startsWith(request.path, '/settings/')) {
+      return remote.pages.settings;
     } else {
       return remote.pages.notFound;
     }

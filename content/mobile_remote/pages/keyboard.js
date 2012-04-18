@@ -39,7 +39,7 @@ MobileRemote.Pages.Keyboard = function(remote) {
         v.template('/views/keyboard.html', {current: currentText()});
         
         v.systemApps([
-          {title: 'mouse', url: '/mouse/'},
+          {title: 'mouse', url: '/mouse/', icon: {url: '/static/images/mouse.png'}},
           null,
           null, // {title: 'tab up', url: '/keyboard/tab-up.js'},
           null, // {title: 'tab down', url: '/keyboard/tab-down.js'},

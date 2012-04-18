@@ -17,6 +17,7 @@ MobileRemote.Base = function(env) {
   this.pages.error     = new MobileRemote.Pages.Error(this);
   this.pages.notFound  = new MobileRemote.Pages.NotFound(this);
   this.pages.noBody    = new MobileRemote.Pages.NoBody(this);
+  this.pages.settings  = new MobileRemote.Pages.Settings(this);
   this.pages.bookmarklets = new MobileRemote.Pages.Bookmarklets(this);
   
   this.currentURL = function() {
@@ -45,10 +46,17 @@ MobileRemote.Base = function(env) {
       sandbox.window = this.currentBrowser().contentWindow;
       sandbox.document = this.currentBrowser().contentDocument;
       
+      var browserX = window.mozInnerScreenX;
+      var browserY = window.mozInnerScreenY;
+      if (!window.fullScreen)
+        browserY += document.getElementById("navigator-toolbox").clientHeight;
+      
       var zepto = env.fileContent('/apps/lib/zepto.js');
       Components.utils.evalInSandbox('navigator = {userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.5; rv:11.0) Gecko/20100101 Firefox/11.0"}', sandbox);
       Components.utils.evalInSandbox('screen = {width: ' + screen.width + ', height: ' + screen.height + '}', sandbox)
       Components.utils.evalInSandbox('document.isFullscreen = ' + (this.currentDocument().mobileRemoteFullscreen == true), sandbox);
+      Components.utils.evalInSandbox('window.browserX = ' + browserX + '; window.browserY = ' + browserY, sandbox);
+      
       Components.utils.evalInSandbox(zepto, sandbox);
       Components.utils.evalInSandbox('$ = Zepto', sandbox);
     }

@@ -42,8 +42,9 @@ MobileRemote.Pages.Home = function(remote) {
         
         v.systemApps([
           {
-            title: "bookmarklet",
-            url: "bookmarklets/index.html"
+            title: "settings",
+            url: "/settings/index.html",
+            icon: {url: '/static/images/gears.png'}
           },
           null,
           {

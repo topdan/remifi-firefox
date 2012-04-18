@@ -51,10 +51,10 @@ MobileRemote.Pages.Mouse = function(remote) {
         v.template('/views/mouse.html', {width: width, height: height});
         
         v.systemApps([
-          {title: 'keyboard', url: '/keyboard/'},
+          {title: 'keyboard', url: '/keyboard/', icon: {url: '/static/images/keyboard.png'}},
           null,
-          {title: 'page up', url: '/mouse/page-up.js'},
-          {title: 'page down', url: '/mouse/page-down.js'},
+          {title: 'page up', url: '/mouse/page-up.js', icon: {url: '/static/images/pageup.png'}},
+          {title: 'page down', url: '/mouse/page-down.js', icon: {url: '/static/images/pagedown.png'}},
         ]);
         
       });
