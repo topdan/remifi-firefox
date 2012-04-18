@@ -1,3 +1,10 @@
+MobileRemote = {};
+MobileRemote.App = {};
+MobileRemote.Firefox = {};
+MobileRemote.Pages = {};
+MobileRemote.Util = {};
+MobileRemote.Views = {};
+
 window.addEventListener("load", function(e) {
   // check for the server already running inside another window and copy its reference
   var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
