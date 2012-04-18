@@ -15,11 +15,11 @@ class Controller
       # if (page == @remote.pages.apps && doc.mobileRemoteError)
       #   body = @remote.pages.mouse.index(doc.mobileRemoteError, request, response)
       # else
-        body = page.render(request, response)
-    # catch err
-    #   doc.mobileRemoteError = err
-    #   Components.utils.reportError(err)
-    #   body = @remote.pages.error.render(err, request, response)
+      body = page.render(request, response)
+    catch err
+      doc.mobileRemoteError = err
+      Components.utils.reportError(err)
+      body = @remote.pages.error.render(err, request, response)
     
     body ||= @remote.pages.noBody.render(request, response)
     

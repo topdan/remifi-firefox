@@ -27,7 +27,11 @@
       body = null;
       try {
         body = page.render(request, response);
-      } catch (_error) {}
+      } catch (err) {
+        doc.mobileRemoteError = err;
+        Components.utils.reportError(err);
+        body = this.remote.pages.error.render(err, request, response);
+      }
       body || (body = this.remote.pages.noBody.render(request, response));
       if (request.isXhr && request.isScript) {
         return body;

@@ -1,17 +1,32 @@
-MobileRemote.Response = function() {
-  var self = this;
-  
-  this.code = 200;
-  this.message = "OK";
-  this.headers = {};
-  
-  this.headersString = function() {
-    var webpage = "HTTP/1.1 " + this.code + " " + this.message + "\r\n";
-    for (var key in this.headers) {
-      webpage += key + ": " + this.headers[key] + "\r\n";
+(function() {
+  var Response;
+
+  Response = (function() {
+
+    Response.name = 'Response';
+
+    MobileRemote.Response = Response;
+
+    function Response() {
+      this.code = 200;
+      this.message = "OK";
+      this.headers = {};
     }
-    webpage += "\r\n";
-    return webpage;
-  }
-  
-}
+
+    Response.prototype.headersString = function() {
+      var key, webpage, _i, _len, _ref;
+      webpage = "HTTP/1.1 " + this.code + " " + this.message + "\r\n";
+      _ref = this.headers;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        key = _ref[_i];
+        webpage += key + ("" + key + ": " + this.headers[key] + "\r\n");
+      }
+      webpage += "\r\n";
+      return webpage;
+    };
+
+    return Response;
+
+  })();
+
+}).call(this);
