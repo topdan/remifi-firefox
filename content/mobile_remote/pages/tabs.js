@@ -46,51 +46,92 @@ MobileRemote.Pages.Tabs = function(remote) {
   this.index = function(request, response) {
     return remote.views(function(v) {
       
-      var currentWindow = remote.currentWindow();
-      var currentBrowser = remote.currentBrowser();
-      var currentTabIndex = null;
-      
       v.page('tabs', function() {
         v.toolbar();
-        v.title("Tabs");
+        tabsList(v);
+        windowsList(v);
         
-        var tabs = [];
-        for (var i=0 ; i < currentBrowser.mTabs.length ; i++) {
-          var tab = currentBrowser.mTabs[i];
-          var browser = currentBrowser.getBrowserForTab(tab);
-          
-          if (tab == currentBrowser.mCurrentTab)
-            currentTabIndex = i;
-          
-          var actions = null;
-          if (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true)
-            actions = [{title: 'close', url: '/tabs/close.html?index=' + i}]
-          else
-            actions = [{title: "can't close last tab", url: '/tabs/index.html'}]
-          
-          tabs.push({
-            title: browser.contentDocument.title || "(Untitled)",
-            url: '/tabs/open.html?index=' + i,
-            active: (tab == currentBrowser.mCurrentTab),
-            actions: actions
-          })
-        }
-        
-        v.list(tabs);
-        
-        v.button('Open in Remote', remote.currentURL(), {openLocally: true});
-        
-        apps = [{title: 'windows', url: "/windows/index.html"}, null]
-        if (currentTabIndex != null && (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true))
-          apps.push({title: 'close', url: "/tabs/close.html?index=" + currentTabIndex})
-        else
-          apps.push(null);
-        
-        apps.push({title: 'add tab', url: '/tabs/add.html'});
-        v.systemApps(apps);
+        v.br();
+        v.button('Open on Mobile', remote.currentURL(), {openLocally: true});
+        v.button('New Tab', '/tabs/add.html');
+        v.button('New Window', '/windows/add.html');
       });
       
     });
+    
   };
+  
+  
+  var tabsList = function(v) {
+    var currentWindow = remote.currentWindow();
+    var currentBrowser = remote.currentBrowser();
+    var currentTabIndex = null;
+    
+    var tabs = [];
+    for (var i=0 ; i < currentBrowser.mTabs.length ; i++) {
+      var tab = currentBrowser.mTabs[i];
+      var browser = currentBrowser.getBrowserForTab(tab);
+      
+      if (tab == currentBrowser.mCurrentTab)
+        currentTabIndex = i;
+      
+      var actions = null;
+      if (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true)
+        actions = [{title: 'close', url: '/tabs/close.html?index=' + i}]
+      else
+        actions = [{title: "can't close last tab", url: '/tabs/index.html'}]
+      
+      tabs.push({
+        title: browser.contentDocument.title || "(Untitled)",
+        url: '/tabs/open.html?index=' + i,
+        active: (tab == currentBrowser.mCurrentTab),
+        actions: actions
+      })
+    }
+    
+    v.title("Tabs");
+    v.list(tabs);
+  }
+  
+  var windowsList = function(v) {
+    var currentWindowIndex = null;
+    var orderedWindows = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+    var currentWindow = orderedWindows.getZOrderDOMWindowEnumerator(null, true).getNext();
+    
+    var windows = [];
+    var wenum = Components.classes["@mozilla.org/embedcomp/window-watcher;1"].getService(Components.interfaces.nsIWindowWatcher).getWindowEnumerator();
+    var count = 0;
+    while (wenum.hasMoreElements()) {
+      var win = wenum.getNext();
+      
+      var actions = null;
+      if (count == 0) {
+        actions = [{
+          title: "can't close main window",
+          url: '/windows/index.html'
+        }]
+      } else {
+        actions = [{
+          title: 'close',
+          url: '/windows/close.html?index=' + count
+        }]
+      }
+      
+      if (currentWindow == win && win.MobileRemote.isReference == true)
+        currentWindowIndex = count
+      
+      windows.push({
+        title: win.name || win.document.title || "(Untitled)",
+        url: '/windows/open.html?index=' + count,
+        actions: actions,
+        active: (currentWindow == win)
+      })
+      
+      count++;
+    }
+    
+    v.title("Windows");
+    v.list(windows);
+  }
   
 };

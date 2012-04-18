@@ -35,7 +35,7 @@ MobileRemote.Pages.Windows = function(remote) {
       }
     }
     
-    return this.tabs.index(request, response);
+    return remote.pages.apps.render(request, response);
   }
   
   this.add = function(request, response) {
@@ -49,7 +49,7 @@ MobileRemote.Pages.Windows = function(remote) {
     else
       window.open();
     
-    return this.index(request, response);
+    return remote.pages.apps.render(request, response);
   }
   
   this.close = function(request, response) {
@@ -69,61 +69,6 @@ MobileRemote.Pages.Windows = function(remote) {
   }
   
   this.index = function(request, response) {
-    return remote.views(function(v) {
-      
-      var currentWindowIndex = null;
-      var orderedWindows = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-      var currentWindow = orderedWindows.getZOrderDOMWindowEnumerator(null, true).getNext();
-      
-      v.page('windows', function() {
-        v.toolbar();
-        v.title("Windows");
-        
-        var windows = [];
-        var wenum = Components.classes["@mozilla.org/embedcomp/window-watcher;1"].getService(Components.interfaces.nsIWindowWatcher).getWindowEnumerator();
-        var count = 0;
-        while (wenum.hasMoreElements()) {
-          var win = wenum.getNext();
-          
-          var actions = null;
-          if (count == 0) {
-            actions = [{
-              title: "can't close main window",
-              url: '/windows/index.html'
-            }]
-          } else {
-            actions = [{
-              title: 'close',
-              url: '/windows/close.html?index=' + count
-            }]
-          }
-          
-          if (currentWindow == win && win.MobileRemote.isReference == true)
-            currentWindowIndex = count
-          
-          windows.push({
-            title: win.name || win.document.title || "(Untitled)",
-            url: '/windows/open.html?index=' + count,
-            actions: actions,
-            active: (currentWindow == win)
-          })
-          
-          count++;
-        }
-        
-        v.list(windows);
-        
-        apps = [{title: 'tabs', url: "/tabs/index.html"}, null]
-        if (currentWindowIndex != null)
-          apps.push({title: 'close', url: "/windows/close.html?index=" + currentWindowIndex})
-        else
-          apps.push(null);
-        
-        apps.push({title: 'add window', url: '/windows/add.html'});
-        v.systemApps(apps);
-      });
-      
-    });
+    return this.tabs.index(request, response);
   };
-  
 };
