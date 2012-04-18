@@ -102,6 +102,10 @@ MobileRemote.Views.Base = function(env) {
     this.out.push('<p class="error-message">', this.escapeHTML(message), '</p>');
   }
   
+  this.info = function(message) {
+    this.out.push('<p class="info-message">', this.escapeHTML(message), '</p>');
+  }
+  
   this.paginate = function(items) {
     var polished = [];
     for (var i=0 ; i < items.length ; i++) {
