@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'aws/s3'
 require 'yaml'
+require 'fileutils'
 
 def version_file
   File.join('content', 'VERSION')
@@ -53,6 +54,23 @@ namespace :plugin do
     `./build_mac.sh`
   end
   
+  desc "compiles all the coffee script"
+  task :compile do
+    puts "Compiling CoffeeScript"
+    
+    Dir.glob(File.join('content.coffee', '**', '*.coffee')) do |coffee_file|
+      puts "  compiling #{coffee_file}"
+      
+      js_file_src = coffee_file.sub(/\.coffee$/, '.js')
+      js_file_dest = js_file_src.sub /^content.coffee/, 'content'
+      
+      FileUtils.mkdir_p File.dirname(js_file_dest)
+      unless Kernel.system "coffee -c #{coffee_file} ; mv #{js_file_src} #{js_file_dest}"
+        raise "Could not compile #{coffee_file}"
+      end
+    end
+  end
+  
   desc 'upload the xpi to amazon s3'
   task :upload => ['s3:init'] do
     xpi = File.join('mobile-remote.xpi')
@@ -61,7 +79,7 @@ namespace :plugin do
   end
   
   desc 'package and upload the xpi to amazon s3'
-  task :deploy => ['plugin:package', 'plugin:upload', 'plugin:clean'] do
+  task :deploy => ['plugin:compile', 'plugin:package', 'plugin:upload', 'plugin:clean'] do
     
   end
   
