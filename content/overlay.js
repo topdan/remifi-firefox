@@ -1,51 +1,73 @@
-MobileRemote = {};
-MobileRemote.App = {};
-MobileRemote.Firefox = {};
-MobileRemote.Pages = {};
-MobileRemote.Util = {};
-MobileRemote.Views = {};
+(function() {
+  var Overlay, onLoad, unLoad;
 
-window.addEventListener("load", function(e) {
-  // check for the server already running inside another window and copy its reference
-  var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-  var wenum = wm.getEnumerator(null);
-  while (wenum.hasMoreElements()) {
-    var win = wenum.getNext();
-    if (win.MobileRemote.instance) {
-      MobileRemote.instance = win.MobileRemote.instance;
-      MobileRemote.isReference = true;
-      MobileRemote.instance.refresh();
-      return;
+  window.MobileRemote = {};
+
+  Overlay = (function() {
+
+    Overlay.name = 'Overlay';
+
+    function Overlay() {}
+
+    MobileRemote.App = {};
+
+    MobileRemote.Firefox = {};
+
+    MobileRemote.Pages = {};
+
+    MobileRemote.Util = {};
+
+    MobileRemote.Views = {};
+
+    return Overlay;
+
+  })();
+
+  onLoad = function(e) {
+    var env, remote, wenum, win, wm;
+    wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+    wenum = wm.getEnumerator(null);
+    while (true) {
+      if (!wenum.hasMoreElements()) {
+        break;
+      }
+      win = wenum.getNext();
+      if (win.MobileRemote.instance) {
+        MobileRemote.instance = win.MobileRemote.instance;
+        MobileRemote.isReference = true;
+        MobileRemote.instance.refresh();
+        return;
+      }
     }
-  }
-  
-  // the server is not initialized anywhere, so let's do it!
-  
-  var env = new MobileRemote.Firefox.Env();
-  var remote = new MobileRemote.Base(env);
-  
-  remote.view = new MobileRemote.Firefox.View();
-  remote.views = function(callback) {
-    var views = new MobileRemote.Views.Base(env);
-    callback(views);
-    return views.html();
-  }
-  
-  remote.server = new MobileRemote.Firefox.Server();
-  remote.server.dynamicRequest = remote.handleRequest;
-  remote.server.getStaticFilePath = function(request) {
-    if (MobileRemote.startsWith(request.fullpath, '/static/')) {
-      return env.extensionPath + request.fullpath;
+    env = new MobileRemote.Firefox.Env();
+    remote = new MobileRemote.Base(env);
+    remote.view = new MobileRemote.Firefox.View();
+    remote.views = function(callback) {
+      var views;
+      views = new MobileRemote.Views.Base(env);
+      callback(views);
+      return views.html();
+    };
+    remote.server = new MobileRemote.Firefox.Server();
+    remote.server.dynamicRequest = remote.handleRequest;
+    remote.server.getStaticFilePath = function(request) {
+      if (MobileRemote.startsWith(request.fullpath, '/static/')) {
+        return env.extensionPath + request.fullpath;
+      }
+    };
+    MobileRemote.instance = remote;
+    return remote.load();
+  };
+
+  unLoad = function(e) {
+    if (MobileRemote.instance && MobileRemote.isReference !== true) {
+      MobileRemote.instance.unload();
+      return MobileRemote.instance = null;
     }
   };
-  
-  MobileRemote.instance = remote;
-  remote.load();
-}, false);
 
-window.addEventListener("unload", function(e) { 
-  if (MobileRemote.instance && MobileRemote.isReference != true) {
-    MobileRemote.instance.unload();
-    MobileRemote.instance = null;
-  }
-}, false);
+  window.addEventListener("load", onLoad, false);
+
+  window.addEventListener("unload", unLoad, false);
+
+}).call(this);
