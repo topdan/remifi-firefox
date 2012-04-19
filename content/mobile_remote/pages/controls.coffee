@@ -71,8 +71,8 @@ class Controls
         v.out.push('<script type="text/javascript">$(function() { mobileRemote.wait("' + url + '"); })</script>');
 
   polishURL: (url) =>
-    if url == null || url == ""
-      url
+    if typeof url == "undefined" || url == null || url == ""
+      null
     else if !MobileRemote.startsWith(url, 'http://') && !MobileRemote.startsWith(url, 'https://')
       "http://" + url
     else

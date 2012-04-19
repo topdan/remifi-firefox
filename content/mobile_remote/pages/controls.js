@@ -112,8 +112,8 @@
     };
 
     Controls.prototype.polishURL = function(url) {
-      if (url === null || url === "") {
-        return url;
+      if (typeof url === "undefined" || url === null || url === "") {
+        return null;
       } else if (!MobileRemote.startsWith(url, 'http://') && !MobileRemote.startsWith(url, 'https://')) {
         return "http://" + url;
       } else {

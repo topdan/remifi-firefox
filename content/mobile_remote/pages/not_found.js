@@ -1,18 +1,31 @@
-if (MobileRemote.Pages == null) MobileRemote.Pages = {}
+(function() {
+  var NotFound,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-MobileRemote.Pages.NotFound = function(remote) {
-  
-  this.render = function(request, response) {
-    return remote.views(function(v) {
-      // TODO actually go back
-      
-      v.page('not_found', function() {
-        v.toolbar();
-        v.title("Page Not Found");
+  NotFound = (function() {
 
-        v.error("Sorry, that page was not found.");
-      })
-    });
-  }
-  
-};
+    NotFound.name = 'NotFound';
+
+    MobileRemote.Pages.NotFound = NotFound;
+
+    function NotFound(remote) {
+      this.remote = remote;
+      this.render = __bind(this.render, this);
+
+    }
+
+    NotFound.prototype.render = function(request, response) {
+      return this.remote.views(function(v) {
+        return v.page('not_found', function() {
+          v.toolbar();
+          v.title("Page Not Found");
+          return v.error("Sorry, that page was not found.");
+        });
+      });
+    };
+
+    return NotFound;
+
+  })();
+
+}).call(this);
