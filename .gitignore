@@ -1,4 +1,11 @@
 .rvmrc
 .s3.yml
+content/*.js
+content/mobile_remote/*.js
+content/mobile_remote/app/*.js
+content/mobile_remote/firefox/*.js
+content/mobile_remote/pages/*.js
+content/mobile_remote/utils/*.js
+content/mobile_remote/views/*.js
 content/VERSION
 mobile-remote.xpi
