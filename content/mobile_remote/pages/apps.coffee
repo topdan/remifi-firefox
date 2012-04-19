@@ -20,6 +20,7 @@ class Apps
     
     if MobileRemote.startsWith(url, 'about:')
       body = this.about.render(uri, request, response);
+      throw '<b>hi</b>'
     else
       app = @findApp(uri, request, response);
       body = app.render(uri, request, response) if app

@@ -1,60 +1,85 @@
-// parseUri 1.2.2
-// (c) Steven Levithan <stevenlevithan.com>
-// MIT License
+(function() {
+  var URI,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-MobileRemote.URI = function(str) {
-  var uri = this;
-  var o = MobileRemote.parseUriOptions,
-    m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
-    i   = 14;
+  URI = (function() {
 
-  while (i--) this[o.key[i]] = m[i] || "";
+    URI.name = 'URI';
 
-  this[o.q.name] = {};
-  this[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
-    if ($1) uri[o.q.name][$1] = $2;
-  });
-  
-  this.toString = function() {
-    return str;
-  }
-  
-  this.clone = function() {
-    return MobileRemote.cloneHash(this);
-  }
-}
+    MobileRemote.URI = URI;
 
-MobileRemote.parseUriOptions = {
-  strictMode: false,
-  key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
-  q:   {
-    name:   "queryKey",
-    parser: /(?:^|&)([^&=]*)=?([^&]*)/g
-  },
-  parser: {
-    strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
-    loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
-  }
-};
+    function URI(str) {
+      var i, m, o;
+      this.str = str;
+      this.clone = __bind(this.clone, this);
 
+      this.toString = __bind(this.toString, this);
 
-MobileRemote.addUriQuery = function(url, params) {
-  if (params != null) {
-    var count = 0;
-    if (url.indexOf("?") != -1) count = 1;
-    
-    for (var key in params) {
-      var val = params[key];
-      
-      if (val != null) {
-        if (count++ == 0)
-          url += "?";
-        else
-          url += "&";
-        url += key + "=" + encodeURIComponent(val);
+      o = MobileRemote.parseUriOptions;
+      i = 14;
+      if (o.parser[o.strictMode]) {
+        m = 'strict';
+      } else {
+        m = 'loose';
+      }
+      m = o.parser[m].exec(this.str);
+      while (i--) {
+        this[o.key[i]] = m[i] || "";
+      }
+      this[o.q.name] = {};
+      this[o.key[12]].replace(o.q.parser, function($0, $1, $2) {
+        if ($1) {
+          return uri[o.q.name][$1] = $2;
+        }
+      });
+    }
+
+    URI.prototype.toString = function() {
+      return this.str;
+    };
+
+    URI.prototype.clone = function() {
+      return MobileRemote.cloneHash(this);
+    };
+
+    return URI;
+
+  })();
+
+  MobileRemote.parseUriOptions = {
+    strictMode: false,
+    key: ["source", "protocol", "authority", "userInfo", "user", "password", "host", "port", "relative", "path", "directory", "file", "query", "anchor"],
+    q: {
+      name: "queryKey",
+      parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+    },
+    parser: {
+      strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+      loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+    }
+  };
+
+  MobileRemote.addUriQuery = function(url, params) {
+    var count, key, val, _i, _len;
+    if (params !== null) {
+      count = 0;
+      if (url.indexOf("?") !== -1) {
+        count = 1;
+      }
+      for (_i = 0, _len = params.length; _i < _len; _i++) {
+        key = params[_i];
+        val = params[key];
+        if (val !== null) {
+          if (count++ === 0) {
+            url += "?";
+          } else {
+            url += "&";
+          }
+          url += key + "=" + encodeURIComponent(val);
+        }
       }
     }
-  }
-  
-  return url;
-}
+    return url;
+  };
+
+}).call(this);

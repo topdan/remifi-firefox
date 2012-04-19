@@ -4,7 +4,6 @@ class About
   constructor: (@remote) ->
   
   render: (uri, request, response) =>
-    
     if uri.toString() == 'about:home'
       @remote.pages.home.index(request, response)
       

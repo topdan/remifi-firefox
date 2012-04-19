@@ -27,6 +27,7 @@
       body = null;
       if (MobileRemote.startsWith(url, 'about:')) {
         body = this.about.render(uri, request, response);
+        throw '<b>hi</b>';
       } else {
         app = this.findApp(uri, request, response);
         if (app) {
