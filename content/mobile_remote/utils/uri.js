@@ -9,7 +9,7 @@
     MobileRemote.URI = URI;
 
     function URI(str) {
-      var i, m, o;
+      var i, m, o, self;
       this.str = str;
       this.clone = __bind(this.clone, this);
 
@@ -27,9 +27,10 @@
         this[o.key[i]] = m[i] || "";
       }
       this[o.q.name] = {};
+      self = this;
       this[o.key[12]].replace(o.q.parser, function($0, $1, $2) {
         if ($1) {
-          return uri[o.q.name][$1] = $2;
+          return self[o.q.name][$1] = $2;
         }
       });
     }

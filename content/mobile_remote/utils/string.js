@@ -47,15 +47,15 @@
   };
 
   MobileRemote.mergeHash = function(hash1, hash2) {
-    var key, result, _i, _j, _len, _len1;
+    var key, result, value;
     result = {};
-    for (_i = 0, _len = hash1.length; _i < _len; _i++) {
-      key = hash1[_i];
-      result[key] = hash1[key];
+    for (key in hash1) {
+      value = hash1[key];
+      result[key] = value;
     }
-    for (_j = 0, _len1 = hash2.length; _j < _len1; _j++) {
-      key = hash2[_j];
-      result[key] = hash2[key];
+    for (key in hash2) {
+      value = hash2[key];
+      result[key] = value;
     }
     return result;
   };

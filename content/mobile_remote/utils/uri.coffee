@@ -15,8 +15,9 @@ class URI
     this[o.key[i]] = m[i] || "" while (i--)
     
     this[o.q.name] = {};
+    self = this
     this[o.key[12]].replace(o.q.parser, ($0, $1, $2) ->
-      uri[o.q.name][$1] = $2 if $1
+      self[o.q.name][$1] = $2 if $1
     )
     
   toString: =>

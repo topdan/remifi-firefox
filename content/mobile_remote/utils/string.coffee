@@ -37,11 +37,11 @@ MobileRemote.joinAttributes = (attributes) ->
 MobileRemote.mergeHash = (hash1, hash2) ->
   result = {};
   
-  for key in hash1
-    result[key] = hash1[key]
+  for key,value of hash1
+    result[key] = value
   
-  for key in hash2
-    result[key] = hash2[key]
+  for key,value of hash2
+    result[key] = value
   
   result
 
