@@ -10,7 +10,7 @@ class Sandbox
     @uri = null
     @domains = null
     @imports = []
-    @all_imports = ['lib/json2', 'lib/render', 'lib/routes', 'lib/url', 'lib/view', 'lib/zepto-ext']
+    @std_imports = ['lib/json2', 'lib/render', 'lib/routes', 'lib/url', 'lib/view', 'lib/zepto-ext']
     @view_imports = ['lib/view/form', 'lib/view/http', 'lib/view/keyboard', 'lib/view/mouse', 'lib/view/page', 'lib/view/player']
     @metadata = {}
     @sandbox = null
@@ -63,9 +63,9 @@ class Sandbox
       @importFile(sandbox, name)
   
   importFile: (sandbox, name) =>
-    if name == "lib/all"
-      @importFiles sandbox, @all_imports
-    else if name == "lib/view"
+    if name == "lib/std"
+      @importFiles sandbox, @std_imports
+    else if name == 'lib/view'
       @importFiles sandbox, @view_imports
     else
       file = "/apps/#{name}.js"

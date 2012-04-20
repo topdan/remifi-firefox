@@ -1,6 +1,6 @@
 ###
 //
-// @import lib/all
+// @import lib/std
 // @url    http://www.google.com
 //
 ###

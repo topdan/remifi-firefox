@@ -11,7 +11,7 @@ runBeforeFilters = (request) ->
     throw "filter not found: " + filterName if func == null
 
 this.isPerformed = ->
-  @pages.content.length != 0
+  @pages != null && typeof @pages != 'undefined' && @pages.content.length != 0
 
 this.wait = ->
   @isWaiting = true
@@ -45,4 +45,4 @@ this.render = (request) ->
   
   @pages = {type: 'wait'} if @isWaiting
   
-  JSON.stringify(this.pages)
+  JSON.stringify(@pages)
