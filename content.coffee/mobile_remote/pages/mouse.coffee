@@ -37,7 +37,7 @@ class Mouse
   
   index: (request, response) =>
     @remote.views (v) ->
-      v.page 'mouse-page', ->
+      v.page 'mouse', ->
         v.toolbar();
 
         width = 310;
