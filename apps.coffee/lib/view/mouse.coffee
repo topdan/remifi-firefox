@@ -4,7 +4,7 @@ this.mouseClick = (x, y, delay) ->
 this.mouseOver = (x, y, delay) ->
   currentPage().push({type: 'mouse', action: 'over', x: x, y: y, delay: delay})
 
-class Mouse
+class this.Mouse
   
   click: (x, y, delay) ->
     x = Math.floor(x)

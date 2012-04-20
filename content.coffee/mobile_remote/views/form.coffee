@@ -27,6 +27,17 @@ class Form
   br: =>
     @out.push("<br/>")
 
+  toggle: (title, isOn, options) =>
+    rest = "";
+    rest = rest + ' name="' + options.name + '"' if options.name
+    rest = rest + ' class="standalone-toggle"' if options.standAlone
+    rest = rest + ' checked="CHECKED"' if isOn
+    
+    input = '<input type="checkbox"' + rest + '/>';
+    code = title + '<span class="toggle">' + input + '</span>'
+    code = '<li>' + code + '</li>' if @inFieldset
+    @out.push(code)
+
   url: (name, options) =>
     @input('url', name, options)
 

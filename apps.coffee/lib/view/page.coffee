@@ -34,6 +34,10 @@ this.button = (name, url, options) ->
   options ||= {}
   currentPage().push({type: 'button', name: name, url: url, buttonType: options.type, disabled: options.disabled})
 
+this.toggle = (title, url, isOn, options) ->
+  options ||= {}
+  currentPage().push({type: 'toggle', title: title, url: url, isOn: isOn, name: options.name})
+
 this.error = (message) ->
   currentPage().push({type: 'error', text: message})
 

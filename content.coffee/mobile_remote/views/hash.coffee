@@ -52,6 +52,10 @@ class Hash
     title: (hash) =>
       @p.view.title(hash.name)
 
+    toggle: (hash) =>
+      url = @p.actionUrlFor(hash.url)
+      @p.view.toggle(hash.title, url, hash.isOn, {name: hash.name})
+
     button: (hash) =>
       url = @p.actionUrlFor(hash.url)
       @p.view.button(hash.name, url, {type: hash.buttonType, disabled: hash.disabled})
@@ -120,6 +124,9 @@ class Hash
 
     br: (hash) =>
       @p.currentForm.br()
+
+    toggle: (hash) =>
+      @p.currentForm.toggle(hash.title, hash.isOn, {name: hash.name})
 
     url: (hash) =>
       @p.currentForm.url(hash.name, {placeholder: hash.placeholder, value: hash.value})

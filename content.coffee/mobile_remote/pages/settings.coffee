@@ -2,7 +2,7 @@ class Settings
   MobileRemote.Pages.Settings = Settings
   
   constructor: (@remote) ->
-    @version = @remote.env.fileContent('/content/VERSION');
+    @remote.version = @remote.env.fileContent('/content/VERSION');
     @xpiPath = "http://mobile-remote.topdan.com.s3.amazonaws.com/mobile-remote-edge.xpi";
   
   render: (request, response) =>
@@ -34,18 +34,15 @@ class Settings
           }
         ])
 
-        v.button('Check for Updates', '/settings/update.html');
-
-        if window.fullScreen
-          v.button('Turn fullscreen off', '/settings/fullscreen.html')
-        else
-          v.button('Turn fullscreen on', '/settings/fullscreen.html')
+        v.toggle 'Fullscreen Mode', '/settings/fullscreen.html', window.fullScreen
+        v.button('Check for Updates', '/settings/update.html', {type: 'info'})
 
   fullscreen: (request, response) =>
     window.fullScreen = !window.fullScreen;
     @index(request, response);
 
   update: (request, response) =>
+    remote = @remote
     @remote.views (v) ->
       v.page 'update', ->
         v.toolbar();

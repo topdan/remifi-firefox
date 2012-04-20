@@ -27,6 +27,9 @@ class Form
   br: =>
     @out({type: 'br'})
   
+  toggle: (title, isOn) =>
+    @out({type: 'toggle', isOn: isOn, title: title})
+
   url: (name, options) =>
     @input('url', name, options)
   

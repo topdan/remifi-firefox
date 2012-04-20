@@ -52,7 +52,7 @@ class Base
     
     klass = null;
     if options.type == "info"
-      klass = "white"
+      klass = "whiteButton"
     else if options.type == "danger"
       klass = "redButton";
     else if options.type == "primary"
@@ -85,6 +85,14 @@ class Base
 
   info: (message) =>
     @out.push('<p class="info-message">', @escapeHTML(message), '</p>')
+
+  toggle: (title, url, isOn, options) =>
+    options ||= {}
+    options.standAlone = true
+    
+    @form url, (f) ->
+      f.fieldset ->
+        f.toggle title, isOn, options
 
   paginate: (items) =>
     polished = [];

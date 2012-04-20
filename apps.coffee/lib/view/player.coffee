@@ -1,4 +1,4 @@
-class Player
+class this.Player
   
   constructor: (@selector) ->
     @mouse = new Mouse()
@@ -74,7 +74,7 @@ class Player
     throw "no button named " + name if button == null
     
     if button.key
-      keyboard.press(button.key)
+      @keyboard.press(button.key)
     else
       @mouse.click(button.x, button.y, button.delay)
     
@@ -93,7 +93,7 @@ class Player
     @addButton('play', options)
   
   setFullscreenOff: (options) =>
-    options.callback = -> @fullscreen(false)
+    options.callback = -> fullscreen(false)
     @addButton('fullscreen-off', options)
   
   setFullscreenOn: (options) =>
@@ -140,13 +140,13 @@ class Player
   addLine: (name, options) =>
     line = {delay: options.delay}
     
-    line.x  = alignX(options.align, options.x)  if typeof options.x  == "number"
-    line.x1 = alignX(options.align, options.x1) if typeof options.x1 == "number"
-    line.x2 = alignX(options.align, options.x2) if typeof options.x2 == "number"
+    line.x  = @alignX(options.align, options.x)  if typeof options.x  == "number"
+    line.x1 = @alignX(options.align, options.x1) if typeof options.x1 == "number"
+    line.x2 = @alignX(options.align, options.x2) if typeof options.x2 == "number"
     
-    line.y  = alignY(options.valign, options.y)  if typeof options.y  == "number"
-    line.y1 = alignY(options.valign, options.y1) if typeof options.y1 == "number"
-    line.y2 = alignY(options.valign, options.y2) if typeof options.y2 == "number"
+    line.y  = @alignY(options.valign, options.y)  if typeof options.y  == "number"
+    line.y1 = @alignY(options.valign, options.y1) if typeof options.y1 == "number"
+    line.y2 = @alignY(options.valign, options.y2) if typeof options.y2 == "number"
     
     @lines[name] = line
   

@@ -68,14 +68,15 @@ this.watch = (request) ->
     
   else
     p = player()
-    color = player().isFullscreen ? 'primary' : null
     button('Play/Pause', 'playPause')
-    button('Toogle Fullscreen', 'toggleFullscreen', {type: color})
+    
     if (player().isFullscreen)
       button('Start Over', 'startOver', {disabled: 'Exit fullscreen first'})
     else
       button('Start Over', 'startOver')
-  
+    
+    toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
+
   $('#watch-related > .video-list-item').list (r) ->
     e = $(this)
     img = e.find('.clip-inner img')

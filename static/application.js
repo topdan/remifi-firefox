@@ -107,6 +107,11 @@ function setupPages() {
     return false;
   })
   
+  $('input.standalone-toggle').click(function(e) {
+    var checked = $(this).is(':checked')
+    $(this).parents('form').submit()
+  })
+  
   $('#jqt').each(function() {
     var e = $(this);
     
