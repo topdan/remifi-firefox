@@ -1,4 +1,4 @@
-@HTTP = {}
+this.HTTP = {}
 
-@HTTP.get = (url) ->
+this.HTTP.get = (url) ->
   crossDomainGet(url)

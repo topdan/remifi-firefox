@@ -1,4 +1,4 @@
-@externalURL = (url) ->
+this.externalURL = (url) ->
   return if @request == null || url == null || typeof url == "undefined"
   
   # absolute url using same protocol

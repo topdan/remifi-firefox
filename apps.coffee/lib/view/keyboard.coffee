@@ -1,4 +1,4 @@
-@keyboardPress = (key) ->
+this.keyboardPress = (key) ->
   currentPage().push({type: 'keyboard', action: 'press', key: key})
 
 class Keyboard

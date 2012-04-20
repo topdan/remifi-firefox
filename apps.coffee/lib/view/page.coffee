@@ -6,40 +6,40 @@ ensurePage = ->
     
     toolbar()
 
-@page = (id, callback) ->
+this.page = (id, callback) ->
   @pages.content.push({type: 'page', id: id, content: []})
   
   toolbar()
   
   callback()
 
-@currentPage = ->
+this.currentPage = ->
   ensurePage()
   @pages.content[@pages.content.length - 1].content
 
-@fullscreen = (bool) ->
+this.fullscreen = (bool) ->
   document.isFullscreen = bool == true
   currentPage().push({type: 'fullscreen', value: document.isFullscreen})
 
-@toolbar = ->
+this.toolbar = ->
   currentPage().push({type: 'toolbar'})
 
-@title = (name) ->
+this.title = (name) ->
   currentPage().push({type: 'title', name: name});
 
-@br = ->
+this.br = ->
   currentPage().push({type: 'br'})
 
-@button = (name, url, options) ->
+this.button = (name, url, options) ->
   options ||= {}
   currentPage().push({type: 'button', name: name, url: url, buttonType: options.type, disabled: options.disabled})
 
-@error = (message) ->
+this.error = (message) ->
   currentPage().push({type: 'error', text: message})
 
-@list = (items, options) ->
+this.list = (items, options) ->
   options ||= {}
   currentPage().push({type: 'list', items: items, rounded: options.rounded})
 
-@paginate = (items) ->
+this.paginate = (items) ->
   currentPage().push({type: 'paginate', items: items})

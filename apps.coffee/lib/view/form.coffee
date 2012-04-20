@@ -1,4 +1,4 @@
-@form = (action, callback) ->
+this.form = (action, callback) ->
   form = new Form()
   callback(form)
   currentPage().push({type: 'form', action: action, content: form.toArray()})

@@ -1,7 +1,7 @@
 @beforeFilters = []
 @isWaiting = false
 
-@beforeFilter = (funcName) ->
+this.beforeFilter = (funcName) ->
   @beforeFilters.push(funcName)
 
 runBeforeFilters = (request) ->
@@ -10,13 +10,13 @@ runBeforeFilters = (request) ->
     func = self[filterName];
     throw "filter not found: " + filterName if func == null
 
-isPerformed = ->
+this.isPerformed = ->
   @pages.content.length != 0
 
-@wait = ->
+this.wait = ->
   @isWaiting = true
 
-@render = (request) ->
+this.render = (request) ->
   @request = request
   runBeforeFilters(request);
   

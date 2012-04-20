@@ -1,6 +1,6 @@
 @routes = []
 
-@route = (path, funcName, options, block) ->
+this.route = (path, funcName, options, block) ->
   if typeof options == 'function'
     block = options
     options = {}
@@ -29,15 +29,15 @@
   
   @routes.push(route)
 
-@action = (name, funcName) ->
+this.action = (name, funcName) ->
   if currentRoute
     funcName ||= name
     currentRoute.actions.push({name: name, funcName: funcName})
 
-@notFound = ->
+this.notFound = ->
   # do nothing
 
-@findRoute = (request) ->
+this.findRoute = (request) ->
   route = null;
   baseRoute = null;
   

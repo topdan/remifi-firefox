@@ -1,7 +1,7 @@
-@mouseClick = (x, y, delay) ->
+this.mouseClick = (x, y, delay) ->
   currentPage().push({type: 'mouse', action: 'click', x: x, y: y, delay: delay})
 
-@mouseOver = (x, y, delay) ->
+this.mouseOver = (x, y, delay) ->
   currentPage().push({type: 'mouse', action: 'over', x: x, y: y, delay: delay})
 
 class Mouse
