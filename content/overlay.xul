@@ -8,12 +8,12 @@
   
   <script src="mobile_remote/base.js"/>
   <script src="mobile_remote/api.js"/>
-  <script src="mobile_remote/app.js"/>
   <script src="mobile_remote/controller.js"/>
   <script src="mobile_remote/request.js"/>
   <script src="mobile_remote/response.js"/>
   
   <script src="mobile_remote/app/about.js"/>
+  <script src="mobile_remote/app/sandbox.js"/>
   
   <script src="mobile_remote/firefox/env.js"/>
   <script src="mobile_remote/firefox/server.js"/>

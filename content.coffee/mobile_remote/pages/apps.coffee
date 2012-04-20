@@ -21,7 +21,7 @@ class Apps
     if MobileRemote.startsWith(url, 'about:')
       body = this.about.render(uri, request, response);
     else
-      app = @findApp(uri, request, response);
+      app = @findApp(uri, request, response)
       body = app.render(uri, request, response) if app
     
     body || @remote.pages.mouse.index(request, response)

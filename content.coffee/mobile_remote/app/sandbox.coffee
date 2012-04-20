@@ -1,5 +1,5 @@
-class App
-  MobileRemote.App.Sandbox = App
+class Sandbox
+  MobileRemote.App.Sandbox = Sandbox
   
   constructor: (@remote, @name) ->
     @remote = remote
@@ -9,11 +9,13 @@ class App
     @url = null
     @uri = null
     @domains = null
-    @imports = ['lib/json2']
+    @imports = []
+    @all_imports = ['lib/json2', 'lib/render', 'lib/routes', 'lib/url', 'lib/view', 'lib/zepto-ext']
+    @view_imports = ['lib/view/form', 'lib/view/http', 'lib/view/keyboard', 'lib/view/mouse', 'lib/view/page', 'lib/view/player']
     @metadata = {}
     @sandbox = null
     @crossDomains = []
-    @api = new MobileRemote.Api(@);
+    @api = new MobileRemote.Api(@)
     
     @code = @remote.env.fileContent(@filename)
     @extractMetadata(@code, @setMetadata)
@@ -49,15 +51,26 @@ class App
     sandbox = @api.createSandbox(null, {zepto: true})
     @evalInSandbox('app', "app = #{JSON.stringify({name: @name})}", sandbox)
     
-    for importName in @imports
-      file = "/apps/#{importName}.js"
-      code = @remote.env.fileContent(file)
-      @evalInSandbox(file, code, sandbox)
+    @importFiles(sandbox, @imports)
     
     # OPTIMIZE save this once there's a development reload mode going
     code = @remote.env.fileContent(@filename)
     @evalInSandbox(@filename, code, sandbox)
     sandbox
+  
+  importFiles: (sandbox, names) =>
+    for name in names
+      @importFile(sandbox, name)
+  
+  importFile: (sandbox, name) =>
+    if name == "lib/all"
+      @importFiles sandbox, @all_imports
+    else if name == "lib/view"
+      @importFiles sandbox, @view_imports
+    else
+      file = "/apps/#{name}.js"
+      code = @remote.env.fileContent(file)
+      @evalInSandbox(file, code, sandbox)
   
   evalInSandbox: (file, code, sandbox) =>
     try
@@ -97,4 +110,3 @@ class App
         @metadata[key] = value
     
     value
-    

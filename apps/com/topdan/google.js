@@ -44,6 +44,7 @@ function search() {
     {name: 'prev', url: externalURL($('#pnprev').attr('href'))},
     {name: 'next', url: externalURL($('#pnnext').attr('href'))}
   ]);
+  
 }
 
 function doNext() {

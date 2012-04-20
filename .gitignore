@@ -1,5 +1,10 @@
 .rvmrc
 .s3.yml
+apps/lib/view
+apps/lib/render.js
+apps/lib/routes.js
+apps/lib/url.js
+apps/lib/zepto-ext.js
 content/*.js
 content/mobile_remote/*.js
 content/mobile_remote/app/*.js
