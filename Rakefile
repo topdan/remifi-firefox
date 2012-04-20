@@ -23,6 +23,20 @@ def s3_upload s3_filename, local_filename, options = {}
   AWS::S3::S3Object.store(s3_filename, open(local_filename), bucket, options)
 end
 
+def compile directory
+  Dir.glob(File.join("#{directory}.coffee", '**', '*.coffee')) do |coffee_file|
+    puts "  compiling #{coffee_file}"
+    
+    js_file_src = coffee_file.sub(/\.coffee$/, '.js')
+    js_file_dest = js_file_src.sub /^#{directory}.coffee/, directory
+    
+    FileUtils.mkdir_p File.dirname(js_file_dest)
+    unless Kernel.system "coffee -c #{coffee_file} ; mv #{js_file_src} #{js_file_dest}"
+      raise "Could not compile #{coffee_file}"
+    end
+  end
+end
+
 namespace :s3 do
   
   task :init => [:connect, :test]
@@ -58,17 +72,8 @@ namespace :plugin do
   task :compile do
     puts "Compiling CoffeeScript"
     
-    Dir.glob(File.join('content.coffee', '**', '*.coffee')) do |coffee_file|
-      puts "  compiling #{coffee_file}"
-      
-      js_file_src = coffee_file.sub(/\.coffee$/, '.js')
-      js_file_dest = js_file_src.sub /^content.coffee/, 'content'
-      
-      FileUtils.mkdir_p File.dirname(js_file_dest)
-      unless Kernel.system "coffee -c #{coffee_file} ; mv #{js_file_src} #{js_file_dest}"
-        raise "Could not compile #{coffee_file}"
-      end
-    end
+    compile 'content'
+    compile 'apps'
   end
   
   desc 'upload the xpi to amazon s3'
