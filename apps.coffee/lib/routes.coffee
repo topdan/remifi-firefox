@@ -6,6 +6,8 @@
     options = {}
   else if options == null
     options = {}
+  else
+    options ||= {}
   
   route = {funcName: funcName, actions: []}
   

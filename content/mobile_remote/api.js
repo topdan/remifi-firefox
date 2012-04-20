@@ -18,7 +18,7 @@ MobileRemote.Api = function(app) {
       return null;
   
     var uri = new MobileRemote.URI(url);
-    if (self.crossDomains.indexOf(uri.host) == -1)
+    if (app.crossDomains.indexOf(uri.host) == -1)
       return null;
   
     var request = new XMLHttpRequest();

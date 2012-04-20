@@ -9,17 +9,17 @@ class Apps
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.netflix'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.hulu'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.hbo')
-    ];
+    ]
   
   render: (request, response) =>
-    doc = @remote.currentBrowser().contentDocument;
+    doc = @remote.currentBrowser().contentDocument
     url = doc.location.href
-    uri = new MobileRemote.URI(url);
-    app = null;
-    body = null;
+    uri = new MobileRemote.URI(url)
+    app = null
+    body = null
     
     if MobileRemote.startsWith(url, 'about:')
-      body = this.about.render(uri, request, response);
+      body = this.about.render(uri, request, response)
     else
       app = @findApp(uri, request, response)
       body = app.render(uri, request, response) if app

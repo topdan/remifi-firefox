@@ -1,5 +1,6 @@
 .rvmrc
 .s3.yml
+apps/com
 apps/lib/view
 apps/lib/render.js
 apps/lib/routes.js
