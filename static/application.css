@@ -60,8 +60,17 @@ p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black
 #jqt .loading .reloadButton { display: none; }
 #jqt .loading .stopButton { display: block; }
 
-#jqt .system .homeButton { display: none; }
-#jqt .system .returnButton { display: block; }
+#jqt #tabs .tabsButton { display: none; }
+#jqt #tabs .tabsReturnButton { display: block; }
+#jqt .tabsReturnButton { left: 162px; right: auto; display: none; }
+
+#jqt #search .searchButton { display: none; }
+#jqt #search .searchReturnButton { display: block; }
+#jqt .searchReturnButton { left: 214px; right: auto; display: none; }
+
+#jqt #home .homeButton { display: none; }
+#jqt #home .homeReturnButton { display: block; }
+#jqt .homeReturnButton { display: none; }
 
 #jqt textarea.bookmarklet { height: 40px; }
 
