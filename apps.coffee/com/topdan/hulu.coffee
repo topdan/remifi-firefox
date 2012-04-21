@@ -42,16 +42,17 @@ this.tvShow = (request) ->
     title = e.find('.video-info')
     thumb = e.find('.thumbnail')
     
-    r.title = title.text()
-    r.url   = title.attr('href')
+    r.title = e.children('a').text()
+    r.url   = e.find('a').attr('href')
     r.image = thumb.attr('data-src') || thumb.attr('src')
+    r.subtitle = title.text()
   
   paginate([{name: 'next', url: 'loadMoreEpisodes'}])
 
 this.loadMoreEpisodes = (request) ->
   elem = $('#episode-container .pages li.next')
   clickOn(elem)
-  wait()
+  wait ms: 500
 
 this.movie = (request) ->
 
@@ -68,14 +69,27 @@ this.nextPage = (request) ->
 this.index = (request) ->
   searchForm()
   
+  title "TV Shows"
   list [
-    { title: "Most Popular TV Shows", url: "http://www.hulu.com/browse/popular/tv?src=topnav" },
-    { title: "Most Popular TV Episodes", url: "http://www.hulu.com/popular/episodes?src=topnav" },
-    { title: "Recently Added TV Episodes", url: "http://www.hulu.com/recent/episodes?src=topnav" },
-    { title: "Most Popular Movies", url: "http://www.hulu.com/popular/feature_films?src=topnav" },
-    { title: "Most Popular Trailers", url: "http://www.hulu.com/popular/film_trailers?src=topnav" },
-    { title: "Recently Added Movies", url: "http://www.hulu.com/recent/feature_films?src=topnav" },
-    { title: "Recently Added Trailers", url: "http://www.hulu.com/recent/film_trailers?src=topnav" },
+    { title: "Most Popular", url: "http://www.hulu.com/browse/popular/tv?src=topnav" },
+  ]
+  
+  title "TV Episodes"
+  list [
+    { title: "Most Popular", url: "http://www.hulu.com/popular/episodes?src=topnav" },
+    { title: "Recently Added", url: "http://www.hulu.com/recent/episodes?src=topnav" }
+  ]
+  
+  title "Movies"
+  list [
+    { title: "Most Popular", url: "http://www.hulu.com/popular/feature_films?src=topnav" },
+    { title: "Recently Added", url: "http://www.hulu.com/recent/feature_films?src=topnav" }
+  ]
+  
+  title "Trailers"
+  list [
+    { title: "Most Popular", url: "http://www.hulu.com/popular/film_trailers?src=topnav" },
+    { title: "Recently Added", url: "http://www.hulu.com/recent/film_trailers?src=topnav" },
   ]
 
 this.browse = (request) ->
