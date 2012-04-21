@@ -36,6 +36,8 @@ class this.Player
     
     @bottom = @top + @height
     @right = @left + @width
+    
+    @box = { top: @top, left: @left, right: @right, bottom: @bottom, width: @width, height: @height }
   
   play: =>
     @clickButton('play')
@@ -76,7 +78,7 @@ class this.Player
     if button.key
       @keyboard.press(button.key)
     else
-      @mouse.click(button.x, button.y, button.delay)
+      @mouse.click(button.x - window.scrollX, button.y - window.scrollY, button.delay)
     
     button.callback() if button.callback
   

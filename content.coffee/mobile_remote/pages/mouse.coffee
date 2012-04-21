@@ -60,9 +60,9 @@ class Mouse
       sx = screen.width;
       sy = screen.height;
 
-      @x = Math.floor(sx * x);
-      @y = Math.floor(sy * y);
-      @actualMouseAction('over', null, @x, @y);
+      sx = Math.floor(sx * x);
+      sy = Math.floor(sy * y);
+      @actualMouseAction('over', null, sx, sy);
 
   up: (request, response) =>
     if @x && @y
@@ -118,6 +118,9 @@ class Mouse
     else if y < 0
       y = 0;
 
+    @x = x
+    @y = y
+    
     switch type
       when 'click'
         args = ["-a", 1, "-x", x, "-y", y];

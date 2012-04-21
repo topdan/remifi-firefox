@@ -28,6 +28,11 @@ class Home
             icon: {url: '/static/images/netflix.png'}
           },
           {
+            title: "settings",
+            url: "/settings/index.html",
+            icon: {url: '/static/images/gears.png'}
+          },
+          {
             title: "hbogo",
             url: "/controls/visit.html?url=http%3A%2F%2Fwww.hbogo.com%2F%23home%2F",
             icon: {url: '/static/images/hbogo.png'}
@@ -51,26 +56,17 @@ class Home
             title: "south park",
             url: "/controls/visit.html?url=http://www.southparkstudios.com/full-episodes",
             icon: {url: '/static/images/southpark.png'}
-          }
+          },
+          {
+            title: "ted",
+            url: "/controls/visit.html?url=http://www.ted.com",
+            icon: {url: '/static/images/ted.png'}
+          },
+          {
+            title: "revision3",
+            url: "/controls/visit.html?url=http://revision3.com",
+            icon: {url: '/static/images/revision3.png'}
+          },
         ]);
-
-        v.systemApps([
-          {
-            title: "settings",
-            url: "/settings/index.html",
-            icon: {url: '/static/images/gears.png'}
-          },
-          null,
-          {
-            title: "keyboard",
-            url: "/keyboard/index.html",
-            icon: {url: '/static/images/keyboard.png'}
-          },
-          {
-            title: "mouse",
-            url: "/mouse/index.html",
-            icon: {url: '/static/images/mouse.png'}
-          }
-        ])
 
         v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
