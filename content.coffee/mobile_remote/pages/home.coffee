@@ -67,6 +67,11 @@ class Home
             url: "/controls/visit.html?url=http://revision3.com",
             icon: {url: '/static/images/revision3.png'}
           },
+          {
+            title: "railscasts",
+            url: "/controls/visit.html?url=http://railscasts.com",
+            icon: {url: '/static/images/railscasts.png'}
+          },
         ]);
 
         v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')

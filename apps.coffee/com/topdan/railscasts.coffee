@@ -1,6 +1,109 @@
 ###
 //
 // @import lib/std
-// @domain www.railscasts.com
+// @domain railscasts.com
 //
 ###
+
+route '/', 'index', ->
+  action 'doSearch'
+
+route '/episodes', 'search', ->
+  action 'doSearch'
+
+route /^\/episodes\//, 'episodeOrVideo', ->
+  action 'startEpisode'
+  action 'playPause'
+  action 'toggleFullscreen'
+  
+this.index = (request) ->
+  searchForm()
+  
+  types = $($('.search_option').get(0))
+  types.find('li a').list (r) ->
+    r.title = $(this).text()
+    r.url   = $(this).attr('href')
+  
+  episodes()
+
+this.search = (request) ->
+  searchForm()
+  episodes()
+
+this.episodes = (request) ->
+  $('.episodes .episode').list (r) ->
+    r.title = $(this).find('h2 a').text()
+    r.url   = $(this).find('h2 a').attr('href')
+    r.image = $(this).find('img').attr('src')
+    r.subtitle = $(this).find('.info .number').text() + " - " + $(this).find('.info .published_at').text()
+
+this.episodeOrVideo = (request) ->
+  if $('#video_wrapper').length
+    video request
+  else
+    episode request
+
+this.paginateEpisode = ->
+  paginate [
+    {name: 'prev', url: externalURL($('.nav .previous a').attr('href'))},
+    {name: 'next', url: externalURL($('.nav .next a').attr('href'))},
+  ]
+
+this.episode = (request) ->
+  paginateEpisode()
+  br()
+  title $('title').text()
+  br()
+  info $('.description').text()
+  br()
+  button 'Play Video', 'startEpisode', type: 'primary'
+  
+  browseCode = $('.nav_section .browse_code a')
+  if browseCode.length > 0
+    br()
+    button 'Browse Source Code', browseCode.attr('href')
+
+this.startEpisode = (request) ->
+  clickOn $('.play_video')
+  wait()
+
+this.searchForm = () ->
+  form 'doSearch', (f) ->
+    f.br()
+    f.fieldset ->
+      f.search('q', {placeholder: 'Search', value: $('#search').val()})
+
+this.doSearch = (request) ->
+  $('#search').val(request.params['q']).parents('form').submit()
+  wait()
+
+this.video = (request) ->
+  paginateEpisode()
+  title $('title').text()
+
+  unless player().isFullscreen
+    button('Play/Pause', 'playPause')
+  
+  toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
+
+this.player = () ->
+  player = new Player('#video_wrapper')
+
+  if player.isFullscreen
+    # draggable control?
+  else
+    player.setBox({width: 'full', valign: 'bottom', height: 26})
+    player.setPlay({x: 12, y: 12, delay: 500})
+
+  player.setFullscreenOff({key: 'escape'})
+  player.setFullscreenOn({align: 'right', x: 15, y: 15})
+
+  player
+
+this.playPause = (request) ->
+  player().play()
+  video(request)
+
+this.toggleFullscreen = (request) ->
+  player().toggleFullscreen()
+  video(request)

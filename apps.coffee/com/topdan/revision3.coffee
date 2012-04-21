@@ -101,7 +101,6 @@ this.player = () ->
   if player.isFullscreen
     player.setPlay({x: 35, y: 26, delay: 500})
   else
-    player.setBox({width: 'full', valign: 'bottom', height: 40})
     player.setPlay({x: 31, y: 21, delay: 500})
 
   player.setFullscreenOff({key: 'escape'})
