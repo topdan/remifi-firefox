@@ -38,12 +38,15 @@ this.toggle = (title, url, isOn, options) ->
   options ||= {}
   currentPage().push({type: 'toggle', title: title, url: url, isOn: isOn, name: options.name})
 
+this.info = (message) ->
+  currentPage().push({type: 'info', text: message})
+
 this.error = (message) ->
   currentPage().push({type: 'error', text: message})
 
 this.list = (items, options) ->
   options ||= {}
-  currentPage().push({type: 'list', items: items, rounded: options.rounded})
+  currentPage().push({type: 'list', items: items, rounded: options.rounded, wrap: options.wrap})
 
 this.paginate = (items) ->
   currentPage().push({type: 'paginate', items: items})

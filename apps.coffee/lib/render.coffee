@@ -1,5 +1,5 @@
 @beforeFilters = []
-@isWaiting = false
+@waitOptions = null
 
 this.beforeFilter = (funcName) ->
   @beforeFilters.push(funcName)
@@ -13,8 +13,9 @@ runBeforeFilters = (request) ->
 this.isPerformed = ->
   @pages != null && typeof @pages != 'undefined' && @pages.content.length != 0
 
-this.wait = ->
-  @isWaiting = true
+this.wait = (options) ->
+  options ||= {}
+  @waitOptions = options
 
 this.render = (request) ->
   @request = request
@@ -43,6 +44,8 @@ this.render = (request) ->
   
   @request = null;
   
-  @pages = {type: 'wait'} if @isWaiting
+  if @waitOptions
+    @pages = {type: 'wait', ms: @waitOptions.ms}
+    @waitOptions = null
   
   JSON.stringify(@pages)

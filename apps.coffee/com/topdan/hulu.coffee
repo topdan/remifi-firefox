@@ -1,7 +1,7 @@
 ###
 //
 // @import lib/std
-// @url    http://www.hulu.com
+// @domain www.hulu.com
 //
 ###
 
@@ -54,21 +54,6 @@ this.loadMoreEpisodes = (request) ->
   wait()
 
 this.movie = (request) ->
-
-this.clickOn = (elem, options) ->
-  options ||= {}
-  options.control ||= false
-  options.alt ||= false
-  options.shift ||= false
-  options.meta ||= false
-  options.button ||= 0
-  
-  elem = elem.get(0)
-  
-  evt = document.createEvent("MouseEvents")
-  evt.initMouseEvent('click', true, true, null, 0, 0, 0, 0, 0, options.control, options.alt, options.shift, options.meta, options.button, null)
-  
-  elem.dispatchEvent(evt)
 
 this.prevPage = (request) ->
   elem = $($('.page li').get(2)).find('a')

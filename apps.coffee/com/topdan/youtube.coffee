@@ -1,7 +1,7 @@
 ###
 //
 // @import lib/std
-// @url    http://www.youtube.com
+// @domain www.youtube.com
 //
 ###
 

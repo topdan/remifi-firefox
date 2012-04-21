@@ -62,13 +62,19 @@ class Controls
     request.params.url = 'http://www.google.com/search?q=' + encodeURIComponent(search) + '&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a';
     @visit(request, response)
 
-  wait: (url, request, response) =>
+  wait: (url, request, response, options) =>
+    options ||= {}
+    
     @remote.views (v) ->
       v.page 'controls', ->
         v.toolbar({stop: true});
 
         v.template('/views/loading.html');
-        v.out.push('<script type="text/javascript">$(function() { mobileRemote.wait("' + url + '"); })</script>');
+        
+        waitCall = 'mobileRemote.wait("' + url + '", {'
+        waitCall += 'ms: ' + options.ms if options.ms
+        waitCall += '});'
+        v.out.push('<script type="text/javascript">$(function() { ' + waitCall + ' })</script>');
 
   polishURL: (url) =>
     if typeof url == "undefined" || url == null || url == ""

@@ -1,7 +1,7 @@
 ###
 //
 // @import lib/std
-// @url    http://movies.netflix.com
+// @domain movies.netflix.com
 //
 ###
 
@@ -14,9 +14,12 @@ route "/WiSearch", "search", ->
 route '/Queue', 'instantQueue', ->
   action "doSearch"
 
-route /^\/WiMovie/, 'movie'
+route /^\/WiMovie/, 'movie', ->
+  action 'selectSeason'
 
 route '/WiRoleDisplay', 'roleDisplay'
+
+route '/Quac', 'moreLike'
 
 this.roleDisplay = (request) ->
   title($('#page-title').text())
@@ -77,6 +80,41 @@ this.instantQueue = (request) ->
     r.url   = e.find('.title a').attr('href')
 
 this.movie = (request) ->
-  $('#sdp-actions a').each ->
+  title $('h2').text()
+  info $('.synopsis').text()
+  
+  $('#sdp-actions a,#mdp-actions a').each ->
     br()
     button($(this).find('span').text(), externalURL($(this).attr('href')))
+  
+  seasons(request)
+  episodes(request)
+  
+this.seasons = (request) ->
+  $('#seasons .seasonItem').list (r, i) ->
+    r.title = $(this).find('a').text()
+    r.active = $(this).hasClass('selected')
+    r.url = 'selectSeason?num=' + i
+  , internalURL: true
+
+this.selectSeason = (request) ->
+  e = $('#seasons .seasonItem').get(request.params['num'])
+  clickOn $(e)
+  wait ms: 500
+
+this.episodes = (request) ->
+  $('#episodeColumn li').list (r) ->
+    r.title = $(this).find('.episodeTitle').text()
+    r.url   = $(this).find('.btn-play').attr('data-vid') || $(this).find('.btn-play').attr('href')
+
+this.moreLike = (request) ->
+  title $('h3').text()
+
+  button 'Move to position #1', $('.queueMoveToTop a').attr('href')
+  movieSet(request)
+
+this.movieSet = (request) ->
+  $('.agMovieSet .agMovie').list (r) ->
+    r.title = $(this).find('.title a').text()
+    r.url   = $(this).find('.title a').attr('href')
+    r.image = $(this).find('.boxShot img').attr('src')

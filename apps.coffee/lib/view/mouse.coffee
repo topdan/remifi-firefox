@@ -4,6 +4,21 @@ this.mouseClick = (x, y, delay) ->
 this.mouseOver = (x, y, delay) ->
   currentPage().push({type: 'mouse', action: 'over', x: x, y: y, delay: delay})
 
+this.clickOn = (elem, options) ->
+  options ||= {}
+  options.control ||= false
+  options.alt ||= false
+  options.shift ||= false
+  options.meta ||= false
+  options.button ||= 0
+
+  elem = elem.get(0)
+
+  evt = document.createEvent("MouseEvents")
+  evt.initMouseEvent('click', true, true, null, 0, 0, 0, 0, 0, options.control, options.alt, options.shift, options.meta, options.button, null)
+
+  elem.dispatchEvent(evt)
+
 class this.Mouse
   
   click: (x, y, delay) ->

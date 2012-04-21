@@ -21,6 +21,9 @@ a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px
 #jqt ul.list ul.actions-4 li { width: 25%;}
 #jqt ul.list ul.actions-5 li { width: 20%;}
 #jqt ul.list ul.actions li a.danger { background-color: #EE5F5B;}
+#jqt ul.list .subtitle { font-size: 80%; }
+#jqt ul.list .subtitle-no-image { margin-top: 5px;}
+#jqt ul.list.wrap li a { overflow: inherit; white-space: inherit; }
 
 #jqt li.paginate-container { padding: 0; }
 #jqt ul.paginate { margin: 0; border: 0; background: none; }
@@ -35,8 +38,9 @@ a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px
 #jqt #home .info { margin-top: 3em; }
 #jqt.fullscreen #home .info { display: none;}
 
+.important-message  { margin: 0.5em; padding: 0.5em; color: #3A87AD; background-color: #D9EDF7;}
 .error-message { margin: 0.5em; padding: 0.5em; color: #800000; background-color: #EEB4B4;}
-.info-message  { margin: 0.5em; padding: 0.5em; color: #3A87AD; background-color: #D9EDF7;}
+.info-message { margin: 0.5em; padding: 0.5em; background-color: #CCC; color: #444; }
 
 #waiting { padding-top: 2em; }
 #waiting .title { font-size: 125%; font-weight: bold; }

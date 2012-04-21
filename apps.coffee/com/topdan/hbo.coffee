@@ -1,7 +1,7 @@
 ###
 //
 // @import lib/std
-// @url    http://www.hbogo.com
+// @domain www.hbogo.com
 // @crossdomain catalog.lv3.hbogo.com
 //
 ###

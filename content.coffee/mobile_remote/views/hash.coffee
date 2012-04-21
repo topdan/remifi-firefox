@@ -11,7 +11,7 @@ class Hash
     type = items.type;
 
     if type == 'wait'
-      @app.remote.pages.controls.wait('/', @request, @response)
+      @app.remote.pages.controls.wait('/', @request, @response, ms: items.ms)
 
     else if type == 'pages' && typeof items.content == "object" && items.content.length > 0
       p = @
@@ -96,6 +96,9 @@ class Hash
         p.performArray(hash.content, p.formTypes) if hash.content
         p.currentForm = null;
 
+    info: (hash) =>
+      @p.view.info(hash.text)
+
     error: (hash) =>
       @p.view.error(hash.text)
 
@@ -107,7 +110,7 @@ class Hash
     list: (hash) =>
       for item in hash.items
         item.url = @p.actionUrlFor(item.url)
-      @p.view.list(hash.items, {rounded: hash.rounded})
+      @p.view.list(hash.items, {rounded: hash.rounded, wrap: hash.wrap})
 
     apps: (hash) =>
 

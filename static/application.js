@@ -162,16 +162,23 @@ MobileRemote = function(jQT) {
     }
   }
   
-  this.wait = function(url) {
+  this.wait = function(url, options) {
+    if (options == null) options = {}
     this.forceStop = false;
     
-    $.ajax({
+    var ajaxOptions = {
       url: '/controls/wait.js?url=' + encodeURIComponent(url),
       success: function(script, status, request) {
         if (!self.forceStop)
           eval(script);
       }
-    })
+    }
+    
+    if (options.ms) {
+      setTimeout(function() { $.ajax(ajaxOptions) }, options.ms);
+    } else {
+      $.ajax(ajaxOptions)
+    }
   }
   
   this.visit = function(url) {
