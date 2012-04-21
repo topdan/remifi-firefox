@@ -66,7 +66,7 @@ class Base
     else if options.openLocally
       rest += ' target="_blank" href="' + @escape(url) + '"'
     else if @externalURL(url)
-      rest += ' data-remote-url="' + @escape(url) + '"'
+      rest += ' href="#" data-remote-url="' + @escape(url) + '"'
     else
       rest += ' href="' + @escape(url) + '"'
 

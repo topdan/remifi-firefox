@@ -8,7 +8,12 @@ class Apps
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.youtube'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.netflix'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.hulu'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.hbo')
+      new MobileRemote.App.Sandbox(@remote, 'com.topdan.hbo'),
+      new MobileRemote.App.Sandbox(@remote, 'com.topdan.reddit'),
+      new MobileRemote.App.Sandbox(@remote, 'com.topdan.southparkstudios'),
+      new MobileRemote.App.Sandbox(@remote, 'com.topdan.ted'),
+      new MobileRemote.App.Sandbox(@remote, 'com.topdan.railscasts'),
+      new MobileRemote.App.Sandbox(@remote, 'com.topdan.revision3'),
     ]
   
   render: (request, response) =>

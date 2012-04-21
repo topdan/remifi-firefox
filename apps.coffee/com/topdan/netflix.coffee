@@ -16,6 +16,14 @@ route '/Queue', 'instantQueue', ->
 
 route /^\/WiMovie/, 'movie'
 
+route '/WiRoleDisplay', 'roleDisplay'
+
+this.roleDisplay = (request) ->
+  title($('#page-title').text())
+  
+  $('.agMovie').list (r) ->
+    r.image = $(this).find('.boxShotImg').attr('src')
+
 this.index = (request) ->
   searchForm()
   

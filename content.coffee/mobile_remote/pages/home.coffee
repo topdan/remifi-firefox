@@ -36,6 +36,21 @@ class Home
             title: "maxgo",
             url: "/controls/visit.html?url=http%3A%2F%2Fwww.maxgo.com%2F%23home%2F",
             icon: {url: '/static/images/maxgo.jpg'}
+          },
+          {
+            title: "reddit/music",
+            url: "/controls/visit.html?url=http://www.reddit.com/r/music/",
+            icon: {url: '/static/images/reddit.png'}
+          },
+          {
+            title: "reddit/netflix",
+            url: "/controls/visit.html?url=http://www.reddit.com/r/netflix/",
+            icon: {url: '/static/images/reddit.png'}
+          },
+          {
+            title: "south park",
+            url: "/controls/visit.html?url=http://www.southparkstudios.com",
+            icon: {url: '/static/images/southpark.png'}
           }
         ]);
 

@@ -6,8 +6,6 @@ class Sandbox
     @name = name
     @code = null
     @filename = "/apps/#{name.replace(/\./g, '/')}.js"
-    @url = null
-    @uri = null
     @domains = null
     @imports = []
     @std_imports = ['lib/json2', 'lib/render', 'lib/routes', 'lib/url', 'lib/view', 'lib/zepto-ext']
@@ -91,11 +89,6 @@ class Sandbox
   
   setMetadata: (key, value) =>
     switch(key)
-      when 'url'
-        @url = value
-        @uri = new MobileRemote.URI(@url);
-        @domains = [@uri.host];
-      
       when 'import'
         @imports.push(value)
       

@@ -5,7 +5,7 @@ Zepto.fn.list = (callback, options) ->
   @each ->
     result = {}
     callback.call(this, result)
-    results.push(result) if result.title
+    results.push(result) if result.title || result.image
   
   results.sort(options.sort) if options.sort
   
