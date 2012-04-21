@@ -15,18 +15,16 @@ class this.Player
       @height = screen.height - 1
 
     else
-      elem = $(selector)
+      @elem = $(selector)
       
-      if elem.length == 0
+      if @elem.length == 0
         @error = true
         throw 'element not found: ' + selector
         return
       
-      # window.scrollTo(elem);
-      
-      elemOffset = elem.offset()
-      elemHeight = elem.height()
-      elemWidth  = elem.width()
+      elemOffset = @elem.offset()
+      elemHeight = @elem.height()
+      elemWidth  = @elem.width()
       
       # TODO remove the hardcoded height of the toolbars
       @top = window.browserY + elemOffset.top
@@ -78,6 +76,7 @@ class this.Player
     if button.key
       @keyboard.press(button.key)
     else
+      @scrollToPlayer()
       @mouse.click(button.x - window.scrollX, button.y - window.scrollY, button.delay)
     
     button.callback() if button.callback
@@ -86,6 +85,10 @@ class this.Player
     button = @buttons[name]
     throw "no button named " + name if button == null
     @mouse.over(button.x, button.y)
+  
+  scrollToPlayer: =>
+    if @bottom > window.scrollY + window.innerHeight
+      window.scrollTo window.scrollX, @bottom - window.innerHeight - window.browserY
   
   #
   # Setting up the player
