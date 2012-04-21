@@ -26,6 +26,7 @@ class Sandbox
     
     limitedRequest = {
       protocol: uri.protocol,
+      url: uri.toString(),
       host: uri.host,
       port: uri.port,
       path: uri.path,

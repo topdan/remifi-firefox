@@ -49,7 +49,7 @@ class Home
           },
           {
             title: "south park",
-            url: "/controls/visit.html?url=http://www.southparkstudios.com",
+            url: "/controls/visit.html?url=http://www.southparkstudios.com/full-episodes",
             icon: {url: '/static/images/southpark.png'}
           }
         ]);

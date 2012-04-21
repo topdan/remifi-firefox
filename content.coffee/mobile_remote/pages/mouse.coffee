@@ -128,7 +128,7 @@ class Mouse
 
     if type == 'click' && delay && delay != 0
       @actualMouseAction('over', null, x, y);
-      callback = -> @remote.env.exec(@program, args)
+      callback = => @remote.env.exec(@program, args)
       setTimeout(callback, delay);
 
     else if args
