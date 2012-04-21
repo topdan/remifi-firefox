@@ -9,6 +9,7 @@ class Apps
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.netflix'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.hulu'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.hbo'),
+      new MobileRemote.App.Sandbox(@remote, 'com.topdan.cinemax'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.reddit'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.southparkstudios'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.ted'),
