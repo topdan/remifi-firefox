@@ -6,10 +6,10 @@ class Response
     @message = "OK";
     @headers = {};
   
-  headersString: ->
+  headersString: =>
     webpage = "HTTP/1.1 #{@code} #{@message}\r\n"
-    for key in @headers
-      webpage += key + "#{key}: #{@headers[key]}\r\n"
+    for key,value of @headers
+      webpage += "#{key}: #{value}\r\n"
     
     webpage += "\r\n"
     webpage

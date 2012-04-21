@@ -120,7 +120,7 @@ class Server
       
       @response.headers["Content-Length"] = f.fileSize
       @response.headers["Content-Type"] = contentType
-      @response.headers['Server'] = self.signature
+      @response.headers['Server'] = @server.signature
       
       @server.staticRequest(@request, @response) if @staticRequest
       
@@ -145,11 +145,10 @@ class Server
       @outstream.close()
     
     respondWithPage: =>
-      @response.headers["Server"] = @signature
+      @response.headers["Server"] = @server.signature
       
       code = @server.dynamicRequest(@request, @response)
       @response.headers["Content-Length"] = code.length
-      
       webpage = @response.headersString() + code
       
       @outstream.write(webpage, webpage.length)
