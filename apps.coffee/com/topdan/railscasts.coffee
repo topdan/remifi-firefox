@@ -21,8 +21,7 @@ this.index = (request) ->
   
   types = $($('.search_option').get(0))
   types.find('li a').list (r) ->
-    r.title = $(this).text()
-    r.url   = $(this).attr('href')
+    r.titleURL = $(this)
   
   episodes()
 
@@ -32,9 +31,8 @@ this.search = (request) ->
 
 this.episodes = (request) ->
   $('.episodes .episode').list (r) ->
-    r.title = $(this).find('h2 a').text()
-    r.url   = $(this).find('h2 a').attr('href')
-    r.image = $(this).find('img').attr('src')
+    r.titleURL = $(this).find('h2 a')
+    r.image = $(this).find('img')
     r.subtitle = $(this).find('.info .number').text() + " - " + $(this).find('.info .published_at').text()
 
 this.episodeOrVideo = (request) ->
@@ -52,9 +50,9 @@ this.paginateEpisode = ->
 this.episode = (request) ->
   paginateEpisode()
   br()
-  title $('title').text()
+  title $('title')
   br()
-  info $('.description').text()
+  info $('.description')
   br()
   button 'Play Video', 'startEpisode', type: 'primary'
   
@@ -79,7 +77,7 @@ this.doSearch = (request) ->
 
 this.video = (request) ->
   paginateEpisode()
-  title $('title').text()
+  title $('title')
 
   unless player().isFullscreen
     button('Play/Pause', 'playPause')

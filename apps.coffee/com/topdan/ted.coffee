@@ -36,7 +36,6 @@ this.index = (request) ->
     r.title = $(this).find('.overlayText').text()
     r.url = $(this).find('a').attr('href')
     r.image = $(this).find('img.gridTileImage').attr('src')
-  , wrap: true
 
 this.selectGrid = (request) ->
   clickOn $('#' + request.params['type'])
@@ -56,7 +55,6 @@ this.search = (request) ->
   $('dt').list (r) ->
     r.title = $(this).find('a').text()
     r.url = $(this).find('a').attr('href')
-  , wrap: true
 
 this.talk = (request) ->
   title $('title').text()
@@ -68,21 +66,18 @@ this.talk = (request) ->
     r.title = $(this).find('h4').text()
     r.url = $(this).find('a').attr('href')
     r.image = $($(this).find('img').get(1)).attr('src')
-  , wrap: true
 
 this.speaker = (request) ->
   $('#contextual dl.box').list (r) ->
     r.title = $(this).find('h4').text()
     r.url = $(this).find('a').attr('href')
     r.image = $($(this).find('img').get(1)).attr('src')
-  , wrap: true
 
 this.theme = (request) ->
   $('.talkMedallion').list (r) ->
     r.title = $(this).find('h4').text()
     r.url = $(this).find('a').attr('href')
     r.image = $($(this).find('img').get(1)).attr('src')
-  , wrap: true
 
 this.player = () ->
   player = new Player('#streamingPlayerSWF')

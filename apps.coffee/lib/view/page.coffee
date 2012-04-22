@@ -25,6 +25,7 @@ this.toolbar = ->
   currentPage().push({type: 'toolbar'})
 
 this.title = (name) ->
+  name = name.text() if typeof name == 'object' && name['text']
   currentPage().push({type: 'title', name: name});
 
 this.br = ->
@@ -39,14 +40,16 @@ this.toggle = (title, url, isOn, options) ->
   currentPage().push({type: 'toggle', title: title, url: url, isOn: isOn, name: options.name})
 
 this.info = (message) ->
+  message = message.text() if typeof message == 'object' && message['text']
   currentPage().push({type: 'info', text: message})
 
 this.error = (message) ->
+  message = message.text() if typeof message == 'object' && message['text']
   currentPage().push({type: 'error', text: message})
 
 this.list = (items, options) ->
   options ||= {}
-  currentPage().push({type: 'list', items: items, rounded: options.rounded, wrap: options.wrap})
+  currentPage().push({type: 'list', items: items, rounded: options.rounded, nowrap: options.nowrap})
 
 this.paginate = (items) ->
   currentPage().push({type: 'paginate', items: items})

@@ -110,7 +110,7 @@ class Hash
     list: (hash) =>
       for item in hash.items
         item.url = @p.actionUrlFor(item.url)
-      @p.view.list(hash.items, {rounded: hash.rounded, wrap: hash.wrap})
+      @p.view.list(hash.items, {rounded: hash.rounded, nowrap: hash.nowrap})
 
     apps: (hash) =>
 

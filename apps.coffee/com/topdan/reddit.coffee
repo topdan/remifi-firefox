@@ -19,4 +19,3 @@ this.subreddit = (request) ->
     r.url   = $(this).find('a.title').attr('href')
     r.image = $(this).find('.thumbnail img').attr('src')
     r.subtitle = $(this).find('.domain a').text()
-  , wrap: true

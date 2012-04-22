@@ -44,7 +44,6 @@ this.show = (request) ->
   $('#eps-just-released .episode-list-container tbody tr').list (r) ->
     r.title = $(this).find('.title').text()
     r.url   = $(this).find('a').attr('href')
-  , wrap: true
 
 this.search = (request) ->
   searchForm()

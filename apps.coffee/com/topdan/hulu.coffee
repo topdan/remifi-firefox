@@ -59,12 +59,12 @@ this.movie = (request) ->
 this.prevPage = (request) ->
   elem = $($('.page li').get(2)).find('a')
   clickOn(elem)
-  wait()
+  wait ms: 500
 
 this.nextPage = (request) ->
   elem = $($('.page li').get(6)).find('a')
   clickOn(elem)
-  wait()
+  wait ms: 500
 
 this.index = (request) ->
   searchForm()

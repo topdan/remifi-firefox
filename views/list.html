@@ -1,4 +1,4 @@
-<ul class="list<% if (rounded) { %> rounded<% } %><% if (wrap) { %> wrap<% } %>">
+<ul class="list<% if (rounded) { %> rounded<% } %><% if (!nowrap) { %> wrap<% } %>">
   <% for(var i=0 ; i < items.length ; i++) { var item = items[i]; %>
   <li>
     <% if (MobileRemote.startsWith(item.url, "/")) { %>
