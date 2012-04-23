@@ -18,32 +18,33 @@ route /^\/speakers\//, 'speaker'
 route /^\/themes\//, 'theme'
 
 this.index = (request) ->
-  title $('title').text()
+  page 'index', ->
+    title $('title').text()
+    
+    searchForm()
+    
+    button 'Categories', '#categories'
+    
+    $('#theAppContainer .gridTile').list (r) ->
+      r.title = $(this).find('.overlayText').text()
+      r.url = $(this).find('a').attr('href')
+      r.image = $(this).find('img.gridTileImage').attr('src')
   
-  searchForm()
-  
-  br()
-  button "Surprise Me", $('#surpriseMe').attr('href'), type: 'info'
-  br()
-  
-  $('#grid li').list (r) ->
-    label = $(this).find('label')
-    r.title = label.text()
-    r.url   = 'selectGrid?type=' + label.attr('for')
-  , internalURL: true
-  
-  $('#theAppContainer .gridTile').list (r) ->
-    r.title = $(this).find('.overlayText').text()
-    r.url = $(this).find('a').attr('href')
-    r.image = $(this).find('img.gridTileImage').attr('src')
-
+  page 'categories', ->
+    button 'Cancel', '#index'
+    
+    $('#grid li').list (r) ->
+      label = $(this).find('label')
+      r.title = label.text()
+      r.url   = 'selectGrid?type=' + label.attr('for')
+    , internalURL: true
+    
 this.selectGrid = (request) ->
   clickOn $('#' + request.params['type'])
   wait ms: 2000
 
 this.searchForm = () ->
   form 'doSearch', (f) ->
-    f.br()
     f.fieldset ->
       f.search('q', {placeholder: 'TED Search', value: $('#search_field').val()})
 
