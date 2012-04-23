@@ -10,11 +10,17 @@ route '/', 'index', ->
   action 'playPause'
   action 'toggleFullscreen'
 
-route /.*/, 'video', ->
+route /.*/, 'videoPage', ->
   action 'playPause'
   action 'toggleFullscreen'
 
 this.index = (request) ->
+  video(request)
+
+this.videoPage = (request) ->
+  return if $('#featured_player,#video').length == 0
+  
+  title $('title')
   video(request)
 
 this.featuredVideos = (request) ->
