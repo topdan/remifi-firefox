@@ -6,17 +6,16 @@ Zepto.fn.list = (callback, options) ->
   @each ->
     result = {}
     callback.call(this, result, count)
-    results.push(result) if result.title || result.image
+    results.push(result) if result.title || result.image || result.titleURL
     count++
   
   results.sort(options.sort) if options.sort
   
   Zepto.each results, (index, item) ->
     if item.titleURL
-      e = item.titleURL
+      item.title = item.titleURL
+      item.url = item.titleURL
       item.titleURL = null
-      item.title = e
-      item.url = e
     
     item.title = item.title.text()      if typeof item.title == 'object' && item.title['text']
     item.url   = item.url.attr('href')  if typeof item.url == 'object' && item.url['attr']

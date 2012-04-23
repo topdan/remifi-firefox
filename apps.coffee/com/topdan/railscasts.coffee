@@ -17,13 +17,34 @@ route /^\/episodes\//, 'episodeOrVideo', ->
   action 'toggleFullscreen'
   
 this.index = (request) ->
-  searchForm()
+  page 'railscasts_index', ->
+    searchForm()
+    
+    list [
+      {title: 'Types', url: '#railscasts_types'},
+      {title: 'Categories', url: '#railscasts_categories'}
+    ]
+    
+    button 'Remove Filter', 'http://railscasts.com' if $('.filters').length > 0
+    
+    episodes()
   
-  types = $($('.search_option').get(0))
-  types.find('li a').list (r) ->
-    r.titleURL = $(this)
+  page 'railscasts_types', ->
+    button 'Cancel', '#railscasts_index'
+    
+    types = $($('.search_option').get(0))
+    types.find('li a').list (r) ->
+      r.titleURL = $(this)
+    
   
-  episodes()
+  page 'railscasts_categories', ->
+    button 'Cancel', '#railscasts_index'
+    
+    types = $($('.search_option').get(1))
+    types.find('li a').list (r) ->
+      r.titleURL = $(this)
+      
+    button 'Cancel', '#railscasts_index'
 
 this.search = (request) ->
   searchForm()
@@ -34,6 +55,11 @@ this.episodes = (request) ->
     r.titleURL = $(this).find('h2 a')
     r.image = $(this).find('img')
     r.subtitle = $(this).find('.info .number').text() + " - " + $(this).find('.info .published_at').text()
+  
+  paginate [
+   {name: 'prev', url: externalURL($('a.previous_page').attr('href'))},
+   {name: 'next', url: externalURL($('a.next_page').attr('href'))}
+  ]
 
 this.episodeOrVideo = (request) ->
   if $('#video_wrapper').length
@@ -49,12 +75,9 @@ this.paginateEpisode = ->
 
 this.episode = (request) ->
   paginateEpisode()
-  br()
   title $('title')
-  br()
   info $('.description')
-  br()
-  button 'Play Video', 'startEpisode', type: 'primary'
+  button $('.watch a').text(), 'startEpisode', type: 'primary'
   
   browseCode = $('.nav_section .browse_code a')
   if browseCode.length > 0
@@ -62,7 +85,7 @@ this.episode = (request) ->
     button 'Browse Source Code', browseCode.attr('href')
 
 this.startEpisode = (request) ->
-  clickOn $('.play_video')
+  clickOn $('.pretty_button')
   wait()
 
 this.searchForm = () ->

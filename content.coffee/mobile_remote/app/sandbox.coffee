@@ -30,6 +30,8 @@ class Sandbox
       host: uri.host,
       port: uri.port,
       path: uri.path,
+      query: uri.query,
+      queries: uri.queryKey,
       directory: uri.directory,
       file: uri.file,
       anchor: uri.anchor,

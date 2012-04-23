@@ -39,7 +39,7 @@ class Home
           },
           {
             title: "maxgo",
-            url: "/controls/visit.html?url=http%3A%2F%2Fwww.maxgo.com%2F%23home%2F",
+            url: "/controls/visit.html?url=http%3A%2F%2Fwww.maxgo.com%2F%23movies%2F",
             icon: {url: '/static/images/maxgo.jpg'}
           },
           {
@@ -71,6 +71,11 @@ class Home
             title: "railscasts",
             url: "/controls/visit.html?url=http://railscasts.com",
             icon: {url: '/static/images/railscasts.png'}
+          },
+          {
+            title: "vimeo",
+            url: "/controls/visit.html?url=http://vimeo.com",
+            icon: {url: '/static/images/vimeo.png'}
           },
         ]);
 

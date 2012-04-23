@@ -1,5 +1,5 @@
 this.externalURL = (url) ->
-  return if @request == null || url == null || typeof url == "undefined"
+  return null if @request == null || url == null || typeof url == "undefined"
   
   # absolute url using same protocol
   if url.match(/^\/\//)
