@@ -19,3 +19,17 @@ this.subreddit = (request) ->
     r.url   = $(this).find('a.title').attr('href')
     r.image = $(this).find('.thumbnail img').attr('src')
     r.subtitle = $(this).find('.domain a').text()
+  
+  prev = null
+  next = null
+  $('.nextprev a').each ->
+    rel = $(this).attr('rel')
+    if rel == 'nofollow prev'
+      prev = $(this).attr('href')
+    else if rel == 'nofollow next'
+      next = $(this).attr('href')
+  
+  paginate [
+    {name: 'prev', url: prev },
+    {name: 'next', url: next }
+  ]
