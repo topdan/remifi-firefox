@@ -32,7 +32,7 @@ class Base
     MobileRemote.escapeHTML(string)
 
   externalURL: (url) =>
-    MobileRemote.startsWith(url, "http://") || MobileRemote.startsWith(url, "https://")
+    MobileRemote.externalURL(url)
 
   page: (id, callback) =>
     @out.push('<div id="' + id + '">');

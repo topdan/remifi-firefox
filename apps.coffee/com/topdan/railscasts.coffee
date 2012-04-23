@@ -17,34 +17,34 @@ route /^\/episodes\//, 'episodeOrVideo', ->
   action 'toggleFullscreen'
   
 this.index = (request) ->
-  page 'railscasts_index', ->
+  page 'index', ->
     searchForm()
     
     list [
-      {title: 'Types', url: '#railscasts_types'},
-      {title: 'Categories', url: '#railscasts_categories'}
+      {title: 'Types', url: '#types'},
+      {title: 'Categories', url: '#categories'}
     ]
     
     button 'Remove Filter', 'http://railscasts.com' if $('.filters').length > 0
     
     episodes()
   
-  page 'railscasts_types', ->
-    button 'Cancel', '#railscasts_index'
+  page 'types', ->
+    button 'Cancel', '#index'
     
     types = $($('.search_option').get(0))
     types.find('li a').list (r) ->
       r.titleURL = $(this)
     
   
-  page 'railscasts_categories', ->
-    button 'Cancel', '#railscasts_index'
+  page 'categories', ->
+    button 'Cancel', '#index'
     
     types = $($('.search_option').get(1))
     types.find('li a').list (r) ->
       r.titleURL = $(this)
       
-    button 'Cancel', '#railscasts_index'
+    button 'Cancel', '#index'
 
 this.search = (request) ->
   searchForm()

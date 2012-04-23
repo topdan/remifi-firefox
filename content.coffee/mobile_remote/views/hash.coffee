@@ -32,8 +32,14 @@ class Hash
       null
     else if MobileRemote.startsWith(action, 'http://') || MobileRemote.startsWith(action, 'https://') || MobileRemote.startsWith(action, '/')
       action
+    else if MobileRemote.startsWith(action, '#')
+      '#' + @actionUrlForPage action.substring(1)
     else
       '/apps/' + @app.name + '/' + action
+  
+  actionUrlForPage: (page) =>
+    @app.pageName ||= @app.name.replace(/[\.\/\_]/g, '-')
+    "#{@app.pageName}-#{page}"
   
   class PageTypes
     
@@ -41,7 +47,7 @@ class Hash
     
     page: (hash) =>
       @p.pageCount++;
-      id = hash.id || "app-page-" + @p.pageCount;
+      id = @p.actionUrlForPage(hash.id || @p.pageCount)
       p = @p
       @p.view.page id, ->
         p.performArray(hash.content, p.pageTypes) if hash.content
