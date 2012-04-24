@@ -19,7 +19,7 @@
       <ul class="actions actions-<%= item.actions.length %>" style="display:none">
         <% for (var j=0 ; j < item.actions.length ; j++) { var action = item.actions[j]; %>
         <li class="inline-links">
-          <% if (MobileRemote.startsWith(action.url, "/")) { %>
+          <% if (MobileRemote.externalURL(action.url)) { %>
             <a href="#" data-remote-url="<%= action.url %>"><%= escapeHTML(action.title) %></a>
           <% } else { %>
             <a href="<%= escape(action.url) %>"><%= escapeHTML(action.title) %></a>

@@ -3,7 +3,7 @@ class Settings
   
   constructor: (@remote) ->
     @remote.version = @remote.env.fileContent('/content/VERSION');
-    @xpiPath = "http://mobile-remote.topdan.com.s3.amazonaws.com/mobile-remote-edge.xpi";
+    @remote.xpiPath = "http://mobile-remote.topdan.com.s3.amazonaws.com/mobile-remote-edge.xpi";
   
   render: (request, response) =>
     if request.path == '/settings/index.html' || request.path == '/settings/'
@@ -63,7 +63,7 @@ class Settings
         else
           v.info("There is an updated version of the mobile remote. Use the mouse app to agree to install the new version when the download is finished.");
           v.br();
-          v.button("Get the Update", '/controls/visit.html?url=' + encodeURIComponent(@xpiPath), {type: "primary"})
+          v.button("Get the Update", remote.xpiPath, {type: "primary"})
 
   about: (request, response) =>
     @remote.views (v) ->
