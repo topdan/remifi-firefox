@@ -1,6 +1,7 @@
 ###
 //
 // @import lib/std
+// @import com.topdan.youtube.player
 // @domain www.youtube.com
 //
 ###
@@ -75,7 +76,7 @@ this.user = (request) ->
   title $('h1')
 
   try
-    video()
+    player().controls()
 
   button 'Playlists', externalURL("#{request.path}/videos?view=1")
   
@@ -91,18 +92,6 @@ this.userVideos = (request) ->
     r.url   = $(this).find('a')
     r.image = $(this).find('img')
 
-this.video = (request) ->
-  p = player()
-  button('Play/Pause', 'playPause')
-  
-  if (player().isFullscreen)
-    button('Start Over', 'startOver', {disabled: 'Exit fullscreen first'})
-  else
-    button('Start Over', 'startOver')
-  
-  toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
-  
-
 this.watch = (request) ->
   title($('#eow-title').attr('title'))
   
@@ -111,7 +100,7 @@ this.watch = (request) ->
   if unavailable.length > 0
     error(unavailable.find('.yt-alert-message').text())
   else
-    video()
+    player().controls()
   
   $('#watch-related > .video-list-item').list (r) ->
     e = $(this)
@@ -122,21 +111,7 @@ this.watch = (request) ->
     r.image = img.attr('data-thumb') || img.attr('src')
 
 this.player = () ->
-  player = new Player('#movie_player-flash,#movie_player,#movie_player-html5')
-  
-  if player.isFullscreen
-    player.setBox({width: 'full', valign: 'bottom', height: 40})
-    player.setSeek({x1: 5, x2: player.box.width, y: 0, delay: 500})
-    player.setPlay({x: 35, y: 26, delay: 500})
-  else
-    player.setBox({width: 'full', valign: 'bottom', height: 35})
-    player.setSeek({x1: 3, x2: player.box.width, y: 5, delay: 250})
-    player.setPlay({x: 29, y: 25})
-  
-  player.setFullscreenOff({key: 'escape'})
-  player.setFullscreenOn({align: 'right', x: 17, y: 23})
-  
-  player
+  new YouTubePlayer('#movie_player-flash,#movie_player,#movie_player-html5')
 
 this.playPause = (request) ->
   player().play()

@@ -93,7 +93,7 @@ class Sandbox
   setMetadata: (key, value) =>
     switch(key)
       when 'import'
-        @imports.push(value)
+        @imports.push(value.replace(/\./g, '/'))
       
       when 'domain'
         @domains ||= []
