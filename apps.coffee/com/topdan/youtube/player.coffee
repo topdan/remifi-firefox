@@ -16,7 +16,7 @@ class YouTubePlayer extends Player
       @setPlay({x: 35, y: 26, delay: 500})
     else
       @setBox({width: 'full', valign: 'bottom', height: 35})
-      @setSeek({x1: 3, x2: @box.width, y: 5, delay: 250})
+      @setSeek({x1: 5, x2: @box.width, y: 3, delay: 250})
       @setPlay({x: 29, y: 25})
 
     @setFullscreenOff({key: 'escape'})

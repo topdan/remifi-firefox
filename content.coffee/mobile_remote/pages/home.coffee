@@ -77,6 +77,11 @@ class Home
             url: "/controls/visit.html?url=http://vimeo.com",
             icon: {url: '/static/images/vimeo.png'}
           },
+          {
+            title: "khan acad",
+            url: "/controls/visit.html?url=http://www.khanacademy.com",
+            icon: {url: '/static/images/khan-academy.png'}
+          },
         ]);
 
         v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')

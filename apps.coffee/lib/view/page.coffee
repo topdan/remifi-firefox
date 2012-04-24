@@ -33,6 +33,7 @@ this.br = ->
 
 this.button = (name, url, options) ->
   options ||= {}
+  name = name.text() if typeof name == 'object' && name['text']
   currentPage().push({type: 'button', name: name, url: url, buttonType: options.type, disabled: options.disabled})
 
 this.toggle = (title, url, isOn, options) ->

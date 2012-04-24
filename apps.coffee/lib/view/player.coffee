@@ -67,7 +67,7 @@ class this.Player
       x = @mouse.line(t, line.x1, line.x2)
       y = line.y;
     
-    @mouse.click(x, y, line.delay)
+    @mouse.click(x - window.scrollX, y - window.scrollY, line.delay)
   
   clickButton: (name) =>
     button = @buttons[name]

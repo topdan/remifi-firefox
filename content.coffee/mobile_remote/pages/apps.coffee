@@ -16,6 +16,7 @@ class Apps
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.railscasts'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.revision3'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.vimeo'),
+      new MobileRemote.App.Sandbox(@remote, 'com.topdan.khanacademy'),
     ]
   
   render: (request, response) =>
