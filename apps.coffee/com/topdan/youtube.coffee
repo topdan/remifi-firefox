@@ -16,6 +16,11 @@ route "/watch", "watch", ->
   action 'startOver'
   action 'toggleFullscreen'
 
+route /\/user\/[^\/]+$/, 'user'
+route /\/user\/[^\/]+\/videos$/, 'userVideos'
+
+route '/playlist', 'playlist'
+
 this.index = (request) ->
   searchForm()
   
@@ -58,6 +63,46 @@ this.doSearch = (request) ->
   document.location.href = 'http://www.youtube.com/results?search_query=' + encodeURIComponent(request.params.q)
   wait()
 
+this.playlist = (request) ->
+  title $('h1')
+
+  $('.playlist-video-item').list (r) ->
+    r.title = $(this).find('.title')
+    r.url   = $(this).find('a')
+    r.image = $(this).find('img').attr('data-thumb') || $(this).find('img').attr('src')
+
+this.user = (request) ->
+  title $('h1')
+
+  try
+    video()
+
+  button 'Playlists', externalURL("#{request.path}/videos?view=1")
+  
+  $('li.video').list (r) ->
+    r.titleURL = $(this).find('h3 a')
+    r.image = $(this).find('img').attr('data-thumb') || $(this).find('img').attr('src')
+
+this.userVideos = (request) ->
+  title $('h1')
+
+  $('.playlist').list (r) ->
+    r.title = $(this).find('a span')
+    r.url   = $(this).find('a')
+    r.image = $(this).find('img')
+
+this.video = (request) ->
+  p = player()
+  button('Play/Pause', 'playPause')
+  
+  if (player().isFullscreen)
+    button('Start Over', 'startOver', {disabled: 'Exit fullscreen first'})
+  else
+    button('Start Over', 'startOver')
+  
+  toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
+  
+
 this.watch = (request) ->
   title($('#eow-title').attr('title'))
   
@@ -65,18 +110,9 @@ this.watch = (request) ->
   
   if unavailable.length > 0
     error(unavailable.find('.yt-alert-message').text())
-    
   else
-    p = player()
-    button('Play/Pause', 'playPause')
-    
-    if (player().isFullscreen)
-      button('Start Over', 'startOver', {disabled: 'Exit fullscreen first'})
-    else
-      button('Start Over', 'startOver')
-    
-    toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
-
+    video()
+  
   $('#watch-related > .video-list-item').list (r) ->
     e = $(this)
     img = e.find('.clip-inner img')
