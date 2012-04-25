@@ -43,13 +43,8 @@ class Home
             icon: {url: '/static/images/maxgo.jpg'}
           },
           {
-            title: "r/music",
-            url: "/controls/visit.html?url=http://www.reddit.com/r/music/",
-            icon: {url: '/static/images/reddit.png'}
-          },
-          {
-            title: "r/NetflixBestOf",
-            url: "/controls/visit.html?url=http://www.reddit.com/r/NetflixBestOf/",
+            title: "reddit",
+            url: "/controls/visit.html?url=http://www.reddit.com",
             icon: {url: '/static/images/reddit.png'}
           },
           {

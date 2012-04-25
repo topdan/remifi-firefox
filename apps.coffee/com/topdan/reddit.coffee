@@ -5,8 +5,27 @@
 //
 ###
 
-route '/', 'subreddit'
+route '/', 'index'
 route /^\/r\/[^\/]*\/?$/, 'subreddit'
+
+this.index = (request) ->
+  page 'index', ->
+    list [{title: 'Media Reddits', url: '#media-reddits'}, {title: 'My Reddits', url: '#my-reddits'}]
+    
+    subreddit(request)
+    
+  page 'media-reddits', ->
+    title "Media Subreddits"
+    list [
+      {title: "r/NetflixBestOf", url: "http://www.reddit.com/r/NetflixBestOf/"},
+      {title: "r/music", url: "http://www.reddit.com/r/music/"}
+    ]
+    
+  page 'my-reddits', ->
+    title "My Reddits"
+
+    $('#sr-bar li a').list (r) ->
+      r.titleURL = $(this)
 
 this.subreddit = (request) ->
   if (request.path == '/')
