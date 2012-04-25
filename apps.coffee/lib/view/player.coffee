@@ -67,7 +67,10 @@ class this.Player
       x = @mouse.line(t, line.x1, line.x2)
       y = line.y;
     
-    @mouse.click(x - window.scrollX, y - window.scrollY, line.delay)
+    if @isFullscreen
+      @mouse.click(x, y, line.delay)
+    else
+      @mouse.click(x - window.scrollX, y - window.scrollY, line.delay)
   
   clickButton: (name) =>
     button = @buttons[name]
@@ -75,6 +78,8 @@ class this.Player
     
     if button.key
       @keyboard.press(button.key)
+    else if @isFullscreen
+      @mouse.click(button.x, button.y, button.delay)
     else
       @scrollToPlayer()
       @mouse.click(button.x - window.scrollX, button.y - window.scrollY, button.delay)

@@ -87,6 +87,11 @@ class Home
             url: "/controls/visit.html?url=http://penny-arcade.com/patv",
             icon: {url: '/static/images/penny-arcade.png'}
           },
+          {
+            title: "my damn",
+            url: "/controls/visit.html?url=http://www.mydamnchannel.com",
+            icon: {url: '/static/images/my-damn-channel.png'}
+          },
         ]);
 
         v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
