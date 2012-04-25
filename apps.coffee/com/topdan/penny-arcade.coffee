@@ -63,8 +63,8 @@ this.episode = (request) ->
   toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
   
   paginate [
-    {name: 'prev', url: externalURL($('.btnNext').attr('href'))},
-    {name: 'next', url: externalURL($('.btnPrev').attr('href'))},
+    {name: 'prev', url: externalURL($('.btnPrev').attr('href'))},
+    {name: 'next', url: externalURL($('.btnNext').attr('href'))},
   ]
   
   button 'More Episodes', $('.btnViewAll').attr('href')
