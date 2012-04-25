@@ -82,6 +82,11 @@ class Home
             url: "/controls/visit.html?url=http://www.khanacademy.com",
             icon: {url: '/static/images/khan-academy.png'}
           },
+          {
+            title: "pa tv",
+            url: "/controls/visit.html?url=http://penny-arcade.com/patv",
+            icon: {url: '/static/images/penny-arcade.png'}
+          },
         ]);
 
         v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
