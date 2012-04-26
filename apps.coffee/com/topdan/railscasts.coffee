@@ -101,11 +101,9 @@ this.doSearch = (request) ->
 this.video = (request) ->
   paginateEpisode()
   title $('title')
-
-  unless player().isFullscreen
-    button('Play/Pause', 'playPause')
-  
   toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
+  
+  button('Play/Pause', 'playPause') unless player().isFullscreen
 
 this.player = () ->
   player = new Player('#video_wrapper')

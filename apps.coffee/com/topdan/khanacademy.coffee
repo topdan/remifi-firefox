@@ -69,6 +69,8 @@ this.thumbnails = ->
     style = $(this).find('.thumb').attr('style')
     r.image = style.match(/\'([^\']+)\'/)[1] if style && style['match']
     r.image ||= $(this).find('.thumb').attr('data-src')
+    r.imageWidth = 160
+    r.imageHeight = 120
     
 this.category = (request) ->
   category = $("##{request.anchor}-container")
@@ -82,7 +84,7 @@ this.category = (request) ->
 
 this.video = (request) ->
   title $('span.title')
-  info $('.long-description').text().substring(2)
+  info $('.long-description').text().substring(2) if $('.long-description').length > 0
   
   player().controls()
   
