@@ -24,7 +24,7 @@ this.index = (request) ->
     
     searchForm()
     
-    button 'Categories', '#categories'
+    linkTo 'Categories', '#categories'
     
     $('#theAppContainer .gridTile').list (r) ->
       r.title = $(this).find('.overlayText').text()
@@ -32,7 +32,7 @@ this.index = (request) ->
       r.image = $(this).find('img.gridTileImage').attr('src')
   
   page 'categories', ->
-    button 'Cancel', '#index'
+    linkTo 'Cancel', '#index'
     
     $('#grid li').list (r) ->
       label = $(this).find('label')

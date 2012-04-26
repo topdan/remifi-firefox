@@ -55,7 +55,7 @@ this.index = (request) ->
     name = b.substring(0, b.length - a.length)
     
     page dashize(name), =>
-      button 'Topics', '#topics'
+      linkTo 'Topics', '#topics'
       
       $(this).find('li').list (r) ->
         r.title = $(this).text()
@@ -75,7 +75,7 @@ this.thumbnails = ->
 this.category = (request) ->
   category = $("##{request.anchor}-container")
 
-  button 'Back to Home', externalURL('/#')
+  linkTo 'Back to Home', externalURL('/#')
   title category.find('h2')
 
   category.find('li').list (r) ->
@@ -88,8 +88,8 @@ this.video = (request) ->
   
   player().controls()
   
-  button $('.previous-video span'), $('.previous-video').attr('href')
-  button $('.next-video span'), $('.next-video').attr('href')
+  linkTo $('.previous-video span'), $('.previous-video').attr('href')
+  linkTo $('.next-video span'), $('.next-video').attr('href')
 
 this.player = () ->
   new YouTubePlayer('#main-video-link,.youtube-video')

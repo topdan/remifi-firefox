@@ -78,7 +78,7 @@ this.user = (request) ->
   try
     player().controls()
 
-  button 'Playlists', externalURL("#{request.path}/videos?view=1")
+  linkTo 'Playlists', externalURL("#{request.path}/videos?view=1")
   
   $('li.video').list (r) ->
     r.titleURL = $(this).find('h3 a')

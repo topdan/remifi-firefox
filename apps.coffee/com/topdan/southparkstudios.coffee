@@ -25,7 +25,7 @@ this.index = (request) ->
   
   title "South Park"
   searchForm()
-  button "Watch Full Episodes"
+  linkTo "Watch Full Episodes"
 
 this.fullEpisodes = (request) ->
   if $('#fep_topsearches').length > 0

@@ -67,7 +67,7 @@ this.episode = (request) ->
     {name: 'next', url: externalURL($('.btnNext').attr('href'))},
   ]
   
-  button 'More Episodes', $('.btnViewAll').attr('href')
+  linkTo 'More Episodes', $('.btnViewAll').attr('href')
 
 this.player = () ->
   player = new Player('#player')

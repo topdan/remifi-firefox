@@ -31,6 +31,9 @@ this.title = (name) ->
 this.br = ->
   currentPage().push({type: 'br'})
 
+this.linkTo = (name, url) ->
+  list [{title: name, url: url}]
+
 this.button = (name, url, options) ->
   options ||= {}
   name = name.text() if typeof name == 'object' && name['text']

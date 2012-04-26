@@ -25,12 +25,12 @@ this.index = (request) ->
       {title: 'Categories', url: '#categories'}
     ]
     
-    button 'Remove Filter', 'http://railscasts.com' if $('.filters').length > 0
+    linkTo 'Remove Filter', 'http://railscasts.com' if $('.filters').length > 0
     
     episodes()
   
   page 'types', ->
-    button 'Cancel', '#index'
+    linkTo 'Cancel', '#index'
     
     types = $($('.search_option').get(0))
     types.find('li a').list (r) ->
@@ -38,13 +38,13 @@ this.index = (request) ->
     
   
   page 'categories', ->
-    button 'Cancel', '#index'
+    linkTo 'Cancel', '#index'
     
     types = $($('.search_option').get(1))
     types.find('li a').list (r) ->
       r.titleURL = $(this)
       
-    button 'Cancel', '#index'
+    linkTo 'Cancel', '#index'
 
 this.search = (request) ->
   searchForm()
@@ -82,7 +82,7 @@ this.episode = (request) ->
   browseCode = $('.nav_section .browse_code a')
   if browseCode.length > 0
     br()
-    button 'Browse Source Code', browseCode.attr('href')
+    linkTo 'Browse Source Code', browseCode.attr('href')
 
 this.startEpisode = (request) ->
   clickOn $('.pretty_button')
