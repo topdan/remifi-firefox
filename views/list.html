@@ -1,6 +1,6 @@
-<ul class="list<% if (rounded) { %> rounded<% } %><% if (!nowrap) { %> wrap<% } %>">
+<ul class="list<% if (rounded) { %> rounded<% } %><% if (striped) { %> striped<% } %><% if (!nowrap) { %> wrap<% } %>">
   <% for(var i=0 ; i < items.length ; i++) { var item = items[i]; %>
-  <li>
+  <li<% if (i % 2 == 1) { %> class="even"<% } %>>
     <% if (MobileRemote.externalURL(item.url)) { %>
       <a href="#" data-remote-url="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>">
       <%= escapeHTML(item.title) %>

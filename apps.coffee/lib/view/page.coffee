@@ -53,7 +53,7 @@ this.error = (message) ->
 
 this.list = (items, options) ->
   options ||= {}
-  currentPage().push({type: 'list', items: items, rounded: options.rounded, nowrap: options.nowrap})
+  currentPage().push({type: 'list', items: items, rounded: options.rounded, striped: options.striped, nowrap: options.nowrap})
 
 this.paginate = (items) ->
   currentPage().push({type: 'paginate', items: items})

@@ -11,7 +11,7 @@ route "/", "index"
 route '/', "index", anchor: 'home/'
 route '/', "section", anchor: /^[^\/]+\/$/
 route '/', "category", anchor: /browseMode=browseGrid\?browseID=/
-route '/', 'video', anchor: /\/video&/
+# route '/', 'video', anchor: /\/video&/
 route '/', "notFound", anchor: /.*/
 
 this.catalogURL = (path) ->

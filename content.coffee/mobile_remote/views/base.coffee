@@ -129,7 +129,7 @@ class Base
     options ||= {}
     return if items == null || items.length == 0
     
-    @template("/views/list.html", {items: items, rounded: options.rounded, nowrap: options.nowrap})
+    @template("/views/list.html", {items: items, rounded: options.rounded, striped: options.striped, nowrap: options.nowrap})
 
   apps: (apps, options) =>
     options ||= {}
