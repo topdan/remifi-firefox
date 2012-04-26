@@ -104,7 +104,7 @@ this.watch = (request) ->
   
   $('#watch-related > .video-list-item').list (r) ->
     e = $(this)
-    img = e.find('.clip-inner img')
+    img = e.find('img')
     
     r.title = e.find('.title').text()
     r.url   = e.find('a').attr('href')

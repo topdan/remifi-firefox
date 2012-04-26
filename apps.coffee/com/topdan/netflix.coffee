@@ -83,22 +83,27 @@ this.movie = (request) ->
   title $('h2').text()
   info $('.synopsis').text()
   
-  $('#sdp-actions a,#mdp-actions a').each ->
-    br()
-    button($(this).find('span').text(), externalURL($(this).attr('href')))
+  button "Play", externalURL($('#displaypage-overview-image a').attr('href')), type: 'primary'
+  
+  $('#displaypage-overview-details .actions a').each ->
+    text = $(this).text()
+    text = "Add to Instant Queue" if text == "Instant Queue"
+    
+    button text, externalURL($(this).attr('href'))
   
   seasons(request)
   episodes(request)
+  br()
   
 this.seasons = (request) ->
-  $('#seasons .seasonItem').list (r, i) ->
-    r.title = $(this).find('a').text()
+  $('#seasonsNav li').list (r, i) ->
+    r.title = "Season " + $(this).find('a').text()
     r.active = $(this).hasClass('selected')
     r.url = 'selectSeason?num=' + i
   , internalURL: true
 
 this.selectSeason = (request) ->
-  e = $('#seasons .seasonItem').get(request.params['num'])
+  e = $('#seasonsNav li a').get(request.params['num'])
   clickOn $(e)
   wait ms: 500
 

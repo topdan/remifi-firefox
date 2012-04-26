@@ -1,6 +1,7 @@
 ###
 //
 // @import lib/std
+// @import com.topdan.youtube.player
 // @domain www.ted.com
 //
 ###
@@ -81,11 +82,14 @@ this.theme = (request) ->
     r.image = $($(this).find('img').get(1)).attr('src')
 
 this.player = () ->
-  player = new Player('#streamingPlayerSWF')
-  player.setPlay({x: 42, y: 58, valign: 'bottom'})
-  player.setFullscreenOff({key: 'escape'})
-  player.setFullscreenOn({align: 'right', x: 23, y: 17})
-  player
+  if $('.external_player').length > 0
+    new YouTubePlayer('.external_player')
+  else
+    player = new Player('#streamingPlayerSWF')
+    player.setPlay({x: 42, y: 58, valign: 'bottom'})
+    player.setFullscreenOff({key: 'escape'})
+    player.setFullscreenOn({align: 'right', x: 23, y: 17})
+    player
 
 this.playPause = (request) ->
   player().play()
