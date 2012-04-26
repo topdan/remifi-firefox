@@ -2,6 +2,7 @@
 //
 // @import lib/std
 // @domain vimeo.com
+// @import com.topdan.vimeo.player
 //
 ###
 
@@ -54,11 +55,4 @@ this.toggleFullscreen = (request) ->
   video(request)
 
 this.player = () ->
-  player = new Player('#featured_player,#video')
-
-  player.setBox({width: 'full', valign: 'bottom', height: 42})
-  player.setPlay({x: 41, y: 20})
-  player.setFullscreenOff({key: 'escape'})
-  player.setFullscreenOn({align: 'right', x: 35, y: 18})
-
-  player
+  new VimeoPlayer('#featured_player,#video')

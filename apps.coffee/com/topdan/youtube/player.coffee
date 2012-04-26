@@ -1,6 +1,3 @@
-this.youtube_player = (selector) ->
-  new YouTubePlayer(selector)
-
 class YouTubePlayer extends Player
   
   constructor: (@selector) ->
@@ -27,7 +24,7 @@ class YouTubePlayer extends Player
     @startOverButton()
     @fullscreenToggle()
   
-  playButton: (action) =>
+  playButton: () =>
     button('Play/Pause', @playAction)
   
   startOverButton: =>
