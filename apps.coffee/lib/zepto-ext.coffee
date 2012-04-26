@@ -19,8 +19,12 @@ Zepto.fn.list = (callback, options) ->
     
     item.title = item.title.text()      if typeof item.title == 'object' && item.title['text']
     item.url   = item.url.attr('href')  if typeof item.url == 'object' && item.url['attr']
-    item.image = item.image.attr('src') if typeof item.image == 'object' && item.image['attr']
     item.subtitle = item.subtitle.text() if typeof item.subtitle == 'object' && item.subtitle['text']
+    
+    if typeof item.image == 'object' && item.image['attr']
+      item.imageWidth = item.image.attr('width')
+      item.imageHeight = item.image.attr('height')
+      item.image = item.image.attr('src')
     
     item.title = null if typeof item.title == 'object'
     item.url = null if typeof item.url == 'object'

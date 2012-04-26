@@ -5,37 +5,37 @@ class Tabs
   
   render: (request, response) =>
     if request.path == '/tabs/index.html' || request.path == '/tabs/'
-      @index(request, response);
+      @index(request, response)
 
     else if request.path == '/tabs/open.html'
-      @open(request, response);
+      @open(request, response)
 
     else if request.path == '/tabs/add.html'
-      @add(request, response);
+      @add(request, response)
 
     else if request.path == '/tabs/close.html'
-      @close(request, response);
+      @close(request, response)
 
   open: (request, response) =>
-    index = request.params["index"];
+    index = request.params["index"]
     @remote.currentBrowser().selectTabAtIndex(index) if index
-    @remote.pages.apps.render(request, response);
+    @remote.pages.apps.render(request, response)
 
   add: (request, response) =>
-    url = @remote.pages.controls.polishURL(request.params["url"]) || "";
-    gBrowser.selectedTab = @remote.currentBrowser().addTab(url);
-    @remote.pages.apps.render(request, response);
+    url = @remote.pages.controls.polishURL(request.params["url"]) || ""
+    gBrowser.selectedTab = @remote.currentBrowser().addTab(url)
+    @remote.pages.apps.render(request, response)
 
   close: (request, response) =>
-    currentWindow = @remote.currentWindow();
-    currentBrowser = @remote.currentBrowser();
-    index = request.params['index'];
+    currentWindow = @remote.currentWindow()
+    currentBrowser = @remote.currentBrowser()
+    index = request.params['index']
     
     if index && (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true)
-      tab = @remote.currentBrowser().mTabs[index];
+      tab = @remote.currentBrowser().mTabs[index]
       @remote.currentBrowser().removeTab(tab) if tab
     
-    @index(request, response);
+    @index(request, response)
 
   index: (request, response) =>
     tabsList = @tabsList
@@ -44,28 +44,31 @@ class Tabs
     
     @remote.views (v) ->
       v.page 'tabs', ->
-        v.toolbar();
-        tabsList(v);
-        windowsList(v);
+        v.toolbar()
+        tabsList(v)
 
-        v.br();
-        v.button('Open on Mobile', remote.currentURL(), {openLocally: true});
-        v.button('New Tab', '/tabs/add.html');
-        v.button('New Window', '/windows/add.html');
-
+        v.br()
+        v.button('Open on Mobile', remote.currentURL(), {openLocally: true})
+        v.button('New Tab', '/tabs/add.html')
+        # v.button('New Window', '/windows/add.html')
+        v.br()
+        
+        windowsList(v)
+        v.br()
+        
   tabsList: (v) =>
-    currentWindow = @remote.currentWindow();
-    currentBrowser = @remote.currentBrowser();
-    currentTabIndex = null;
+    currentWindow = @remote.currentWindow()
+    currentBrowser = @remote.currentBrowser()
+    currentTabIndex = null
     tabs = []
     i = -1
     for tab in currentBrowser.mTabs
       i++
-      browser = currentBrowser.getBrowserForTab(tab);
+      browser = currentBrowser.getBrowserForTab(tab)
 
       currentTabIndex = i if tab == currentBrowser.mCurrentTab
 
-      actions = null;
+      actions = null
       if currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true
         actions = [{title: 'close', url: '/tabs/close.html?index=' + i}]
       else
@@ -78,22 +81,22 @@ class Tabs
         actions: actions
       })
 
-    v.title("Tabs");
-    v.list(tabs);
+    v.title "Tabs"
+    v.list tabs, nowrap: true
 
   windowsList: (v) =>
-    currentWindowIndex = null;
-    orderedWindows = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-    currentWindow = orderedWindows.getZOrderDOMWindowEnumerator(null, true).getNext();
+    currentWindowIndex = null
+    orderedWindows = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator)
+    currentWindow = orderedWindows.getZOrderDOMWindowEnumerator(null, true).getNext()
 
-    windows = [];
-    wenum = Components.classes["@mozilla.org/embedcomp/window-watcher;1"].getService(Components.interfaces.nsIWindowWatcher).getWindowEnumerator();
-    count = 0;
+    windows = []
+    wenum = Components.classes["@mozilla.org/embedcomp/window-watcher;1"].getService(Components.interfaces.nsIWindowWatcher).getWindowEnumerator()
+    count = 0
     loop
       break unless wenum.hasMoreElements()
-      win = wenum.getNext();
+      win = wenum.getNext()
 
-      actions = null;
+      actions = null
       if count == 0
         actions = [{
           title: "can't close main window",
@@ -115,7 +118,7 @@ class Tabs
         active: (currentWindow == win)
       })
 
-      count++;
+      count++
 
-    v.title("Windows");
-    v.list(windows);
+    v.title "Windows"
+    v.list windows, nowrap: true

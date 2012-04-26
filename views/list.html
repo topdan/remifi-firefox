@@ -4,13 +4,13 @@
     <% if (MobileRemote.externalURL(item.url)) { %>
       <a href="#" data-remote-url="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>">
       <%= escapeHTML(item.title) %>
-      <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"/><% } %>
+      <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"<% if (item.imageWidth) { %> width="<%= item.imageWidth %>"<% } %><% if (item.imageHeight) { %> width="<%= item.imageHeight %>"<% } %>/><% } %>
       <% if (item.subtitle) { %><br/><% if (!item.image) { %><br/><% } %><span class="subtitle"><%= escapeHTML(item.subtitle) %></span><% } %>
       </a> 
     <% } else { %>
       <a href="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>">
         <%= escapeHTML(item.title) %>
-        <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"/><% } %>
+        <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"<% if (item.imageWidth) { %> width="<%= item.imageWidth %>"<% } %><% if (item.imageHeight) { %> width="<%= item.imageHeight %>"<% } %>/><% } %>
         <% if (item.subtitle) { %><br/><% if (!item.image) { %><br/><% } %><span class="subtitle"><%= escapeHTML(item.subtitle) %></span><% } %>
       </a> 
     <% } %>

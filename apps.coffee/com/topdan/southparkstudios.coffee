@@ -5,8 +5,12 @@
 //
 ###
 
-route '/', 'index'
-route '/full-episodes', 'fullEpisodes'
+route '/', 'index', ->
+  action 'doSearch'
+
+route '/full-episodes', 'fullEpisodes', ->
+  action 'doSearch'
+
 route /^\/full-episodes\/season-[^\/]+$/, 'season'
 route /^\/full-episodes\/special$/, 'season'
 
@@ -15,10 +19,20 @@ route /^\/full-episodes\/.*/, 'episode', ->
   action 'toggleFullscreen'
 
 this.index = (request) ->
+  if $('#fep_topsearches').length > 0
+    searchResults(request)
+    return
+  
   title "South Park"
+  searchForm()
   button "Watch Full Episodes"
 
 this.fullEpisodes = (request) ->
+  if $('#fep_topsearches').length > 0
+    searchResults(request)
+    return
+  
+  searchForm()
   button "Watch Random Episode", $('#randomep').attr('href')
   
   $('a.seasonbtn').list (r) ->
@@ -29,6 +43,24 @@ this.fullEpisodes = (request) ->
       r.title = $(this).text()
     else
       r.title = "Season #{i}"
+
+this.searchResults = (request) ->
+  searchForm()
+  
+  $('.search_results .search_entry').list (r) ->
+    r.titleURL = $(this).find('h3 a')
+    r.image = $(this).find('img')
+    r.subtitle = $(this).find('.searchEpisodeDescription')
+
+this.searchForm = () ->
+  form 'doSearch', (f) ->
+    f.br()
+    f.fieldset ->
+      f.search('q', {placeholder: 'Search', value: $('#epsearchterm').val()})
+
+this.doSearch = (request) ->
+  $('#epsearchterm').val(request.params.q).parents('form').submit()
+  wait ms: 500
 
 this.season = (request) ->
   $('.content_carouselwrap > ol > li').list (r) ->
