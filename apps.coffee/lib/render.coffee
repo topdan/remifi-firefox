@@ -8,7 +8,8 @@ runBeforeFilters = (request) ->
   self = @
   $.each this.beforeFilters, (index, filterName) ->
     func = self[filterName];
-    throw "filter not found: " + filterName if func == null
+    throw "filter not found: " + filterName if func == null || typeof func == 'undefined'
+    func.call self, request
 
 this.isPerformed = ->
   @pages != null && typeof @pages != 'undefined' && @pages.content.length != 0

@@ -18,3 +18,40 @@ this.externalURL = (url) ->
     i = @request.path.lastIndexOf('/');
     dir = @request.path.substring(0, i);
     @request.protocol + "://" + @request.host + dir + '/' + url
+
+class URI
+  constructor: (@str) ->
+    o = {
+      strictMode: false,
+      key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+      q:   {
+        name:   "params",
+        parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+      },
+      parser: {
+        strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+        loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+      }
+    }
+
+    i = 14
+
+    if o.parser[o.strictMode]
+      m = 'strict'
+    else
+      m = 'loose'
+
+    m = o.parser[m].exec(@str)
+
+    this[o.key[i]] = m[i] || "" while (i--)
+
+    this[o.q.name] = {};
+    self = this
+    this[o.key[12]].replace(o.q.parser, ($0, $1, $2) ->
+      self[o.q.name][$1] = $2 if $1
+    )
+
+  toString: =>
+    @str
+
+this.URI = URI
