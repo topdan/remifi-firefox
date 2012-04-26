@@ -29,6 +29,8 @@ class Bookmarklets
         newWindow = "javascript:document.location = '#{referer}/bookmarklets/new-window.html?url=' + encodeURIComponent(document.location.href);";
 
         v.template('/views/bookmarklets.html', {viewJS: viewJS, newTab: newTab, newWindow: newWindow});
+        v.br()
+        v.button("Back to Settings", '/settings/index.html', {type: 'primary'})
 
   visit: (request, response) =>
     @remote.pages.controls.visit(request, response);
