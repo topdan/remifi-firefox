@@ -28,7 +28,7 @@ class Hash
         convert(item) if typeof convert == "function"
 
   actionUrlFor: (action) =>
-    if action == null
+    if action == null || typeof action == 'undefined'
       null
     else if MobileRemote.startsWith(action, 'http://') || MobileRemote.startsWith(action, 'https://') || MobileRemote.startsWith(action, '/')
       action

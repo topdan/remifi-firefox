@@ -44,7 +44,9 @@ class Sandbox
     
     json = Components.utils.evalInSandbox("render(#{JSON.stringify(limitedRequest)});", sandbox)
     
-    return "// #{@name}##{action}" if format == "js"
+    if format == "js"
+      response.headers["Content-Type"] = 'text/javascript'
+      return "// #{@name}##{action}"
     
     if typeof json == "string"
       hash = JSON.parse(json)

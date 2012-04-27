@@ -112,7 +112,7 @@ class Base
             name = "&raquo;"
         
         else
-          name = @escape(@name);
+          name = @escape(name);
 
         if @externalURL(item.url)
           url = "#";

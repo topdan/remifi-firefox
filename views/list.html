@@ -2,17 +2,17 @@
   <% for(var i=0 ; i < items.length ; i++) { var item = items[i]; %>
   <li<% if (i % 2 == 1) { %> class="even"<% } %>>
     <% if (MobileRemote.externalURL(item.url)) { %>
-      <a href="#" data-remote-url="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>">
+      <% if (item.url) { %><a href="#" data-remote-url="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>"><% } %>
       <%= escapeHTML(item.title) %>
       <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"<% if (item.imageWidth) { %> width="<%= item.imageWidth %>"<% } %><% if (item.imageHeight) { %> height="<%= item.imageHeight %>"<% } %>/><% } %>
       <% if (item.subtitle) { %><br/><% if (!item.image) { %><br/><% } %><span class="subtitle"><%= escapeHTML(item.subtitle) %></span><% } %>
-      </a> 
+      <% if (item.url) { %></a><% } %>
     <% } else { %>
-      <a href="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>">
+      <% if (item.url) { %><a href="<%= escape(item.url) %>" class="title <% if (item.active) { %>current<% } %>"><% } %>
         <%= escapeHTML(item.title) %>
         <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"<% if (item.imageWidth) { %> width="<%= item.imageWidth %>"<% } %><% if (item.imageHeight) { %> height="<%= item.imageHeight %>"<% } %>/><% } %>
         <% if (item.subtitle) { %><br/><% if (!item.image) { %><br/><% } %><span class="subtitle"><%= escapeHTML(item.subtitle) %></span><% } %>
-      </a> 
+      <% if (item.url) { %></a><% } %>
     <% } %>
     
     <% if (item.actions && item.actions.length > 0) { %>

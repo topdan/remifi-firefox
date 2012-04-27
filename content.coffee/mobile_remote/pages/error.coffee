@@ -6,6 +6,7 @@ class Error
   render: (err, request, response) =>
     @remote.views (v) ->
       if request.isScript
+        response.headers["Content-Type"] = 'text/javascript'
         v.safeOut('mobileRemote.error("' + v.escape(v.escapeHTML(err)) + '")');
       else
         v.page 'internal_error', ->
