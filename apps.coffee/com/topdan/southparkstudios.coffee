@@ -19,7 +19,7 @@ route /^\/full-episodes\/.*/, 'episode', ->
   action 'toggleFullscreen'
 
 this.index = (request) ->
-  if $('#fep_topsearches').length > 0
+  if hasSearchResults()
     searchResults(request)
     return
   
@@ -28,7 +28,7 @@ this.index = (request) ->
   linkTo "Watch Full Episodes"
 
 this.fullEpisodes = (request) ->
-  if $('#fep_topsearches').length > 0
+  if hasSearchResults()
     searchResults(request)
     return
   
@@ -43,6 +43,9 @@ this.fullEpisodes = (request) ->
       r.title = $(this).text()
     else
       r.title = "Season #{i}"
+
+this.hasSearchResults = ->
+  $('.search_results .search_entry').length > 0
 
 this.searchResults = (request) ->
   searchForm()
