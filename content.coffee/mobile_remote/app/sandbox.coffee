@@ -19,10 +19,12 @@ class Sandbox
     @extractMetadata(@code, @setMetadata)
   
   render: (uri, request, response) ->
-    sandbox = @createSandbox();
+    sandbox = @createSandbox()
     
-    action = request.path.match(/\/([^\/]+)$/)
-    action = action[1] if action
+    match = request.path.match(/\/([^\/\.]+)\.?(js)?$/)
+    if match
+      action = match[1]
+      format = match[2] || "html"
     
     limitedRequest = {
       protocol: uri.protocol,
@@ -35,11 +37,14 @@ class Sandbox
       directory: uri.directory,
       file: uri.file,
       anchor: uri.anchor,
-      action: action, 
+      action: action,
+      format: format,
       params: request.params
     };
     
     json = Components.utils.evalInSandbox("render(#{JSON.stringify(limitedRequest)});", sandbox)
+    
+    return "// #{@name}##{action}" if format == "js"
     
     if typeof json == "string"
       hash = JSON.parse(json)
