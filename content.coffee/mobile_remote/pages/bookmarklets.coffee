@@ -10,9 +10,6 @@ class Bookmarklets
     else if request.path == '/bookmarklets/new-tab.html'
       return @newTab(request, response)
       
-    else if request.path == '/bookmarklets/new-window.html'
-      return @newWindow(request, response)
-      
     else if request.path == '/bookmarklets/visit.html'
       @visit(request, response)
     
@@ -30,16 +27,21 @@ class Bookmarklets
 
         v.template('/views/bookmarklets.html', {viewJS: viewJS, newTab: newTab, newWindow: newWindow});
         v.br()
-        v.button("Back to Settings", '/settings/index.html', {type: 'primary'})
+        v.button("Back to Settings", '/settings/index.html')
 
   visit: (request, response) =>
+    @convertMobileURL(request)
     @remote.pages.controls.visit(request, response);
     @remote.pages.controls.wait('/', request, response)
 
   newTab: (request, response) =>
+    @convertMobileURL(request)
     @remote.pages.tabs.add(request, response);
     @remote.pages.controls.wait('/', request, response);
 
-  newWindow: (request, response) =>
-    @remote.pages.windows.add(request, response);
-    @remote.pages.controls.wait('/', request, response);
+  convertMobileURL: (request) =>
+    url = request.params.url
+    return unless url
+    
+    if url.indexOf('://m.') != -1
+      request.params.url = url.replace('://m.', '://')
