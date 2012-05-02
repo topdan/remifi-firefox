@@ -64,7 +64,7 @@ class Settings
           v.button("Get the Update", remote.xpiPath, {type: "primary"})
 
         v.br()
-        v.button("Back to Settings", '/settings/index.html', {type: 'primary'})
+        v.button("Back to Settings", '/settings/index.html')
 
   about: (request, response) =>
     @remote.views (v) ->

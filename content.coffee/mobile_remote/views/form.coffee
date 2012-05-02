@@ -49,7 +49,7 @@ class Form
     
     klass = null;
     if options.type == "info"
-      klass = "white";
+      klass = "grayButton";
 
     else if options.type == "danger"
       klass = "redButton";
@@ -58,7 +58,7 @@ class Form
       klass = "greenButton";
 
     else
-      klass = "grayButton";
+      klass = "whiteButton";
 
     @out.push('<a class="submit ' + @escape(klass) + '" href="' + @escape(url) + '" style="">' + @escapeHTML(name) + '</a>')
 

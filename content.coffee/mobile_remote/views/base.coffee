@@ -52,13 +52,13 @@ class Base
     
     klass = null;
     if options.type == "info"
-      klass = "whiteButton"
+      klass = "grayButton"
     else if options.type == "danger"
       klass = "redButton";
     else if options.type == "primary"
       klass = "greenButton";
     else
-      klass = "grayButton"
+      klass = "whiteButton"
 
     rest = 'class="' + @escape(klass) + '"'
     if typeof options.disabled == "string"

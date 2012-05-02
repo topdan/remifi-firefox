@@ -196,7 +196,7 @@ $(function() {
   jQT = new $.jQTouch({
       icon: '/static/images/icon.png',
       addGlossToIcon: false,
-      startupScreen: '/static/jqtouch/images/jqt_startup.png',
+      startupScreen: '/static/images/splash.png',
       statusBar: 'black',
       useAnimations: false
   });

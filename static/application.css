@@ -6,9 +6,11 @@ table.app-icons tr td a img { border: none; }
 table.app-icons tr.icons td { padding-top: 0.75em; width: 60px; height: 60px;}
 table.app-icons tr.titles { font-family: "Lucida Grande", Verdana, Courier, sans-serif; }
 table.app-icons tr.titles td { padding-top: 0; overflow: hidden;}
-table.app-icons tr.titles td a { text-decoration: none; color: white; font-size: 75%; vertical-align: top;}
+table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-size: 75%; vertical-align: top;}
 
-a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px 0 #5CC801 inset; color: white; text-shadow: 0 -1px 0 #3C8101; }
+#jqt .whiteButton, #jqt .grayButton, #jqt .redButton, #jqt .blueButton, #jqt .greenButton { box-shadow: none; }
+
+#jqt a.current { background-color: #476489; background-image: none; box-shadow: 0 1px 0 #5CC801 inset; color: white; text-shadow: 0 -1px 0 #3C8101; }
 
 #jqt ul.list { text-align: center; }
 #jqt ul.list ul.actions { list-style: none; width: 100%; padding: 0; margin: 0; border: 0; }
@@ -22,7 +24,7 @@ a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px
 #jqt ul.list .subtitle { font-size: 80%; }
 #jqt ul.list .subtitle-no-image { margin-top: 5px;}
 #jqt ul.list.wrap li a { overflow: inherit; white-space: inherit; }
-#jqt ul.list.striped li.even { background-color: rgba(150, 150, 150, 0.5); }
+#jqt ul.list.striped li.even { background-color: rgba(100, 100, 100, 0.2); }
 
 #jqt li.paginate-container { padding: 0; }
 #jqt ul.paginate { margin: 0; border: 0; background: none; }
@@ -37,15 +39,15 @@ a.current { background-color: #53B401; background-image: none; box-shadow: 0 1px
 #jqt #home .info { margin-top: 3em; }
 #jqt.fullscreen #home .info { display: none;}
 
-.important-message  { margin: 0.5em; padding: 0.5em; color: #3A87AD; background-color: #D9EDF7;}
+.important-message  { margin: 0.5em; padding: 0.5em; color: #3A87AD; background-color: white; border: 1px solid black;}
 .error-message { margin: 0.5em; padding: 0.5em; color: #800000; background-color: #EEB4B4;}
-.info-message { margin: 0.5em; padding: 0.5em; background-color: #CCC; color: #444; }
+.info-message { margin: 0.5em; padding: 0.5em; background-color: white; color: #444; border: 1px solid black; }
 
 #waiting { padding-top: 2em; }
 #waiting .title { font-size: 125%; font-weight: bold; }
-p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black; background-color: #CCC;}
+p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black; background-color: white; border: 1px solid black; }
 
-#mouse .touchpad { display: block; margin: 0px auto; background-color: #CCC; text-align: center; text-decoration: none; }
+#mouse .touchpad { display: block; margin: 0px auto; border: 1px solid #476489; border-top: 0; background-color: white; text-align: center; text-decoration: none; }
 #mouse .touchpad span { color: #555555; display: block; font-size: 140%; line-height: 50px; padding-top: 50px; }
 
 
@@ -77,7 +79,7 @@ p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black
 
 #jqt textarea.bookmarklet { height: 40px; }
 
-#jqt .mouseClick { width: 50%; float: left; margin-right: 5px; }
+#jqt .mouseClick { width: 50%; float: left; margin-left: 8px; }
 #jqt #mouseNav { margin-top: 5px; }
 #jqt #mouseNav div { float: left; }
 #jqt #mouseNav .icon { display: inline-block; width: 14px; height: 14px; line-height: 14px; vertical-align: text-top; background-image: url("/static/images/glyphicons-halflings-white.png"); background-position: 14px 14px; background-repeat: no-repeat; *margin-right: .3em; }
@@ -88,4 +90,4 @@ p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black
 #jqt #mouseNav .icon { display: block; height: 30px; position: inherit; right: inherit; }
 
 #jqt #keyboard-page textarea { height: 80px; }
-#jqt #special_keys .grayButton { width: 30%; float: left; }
+#jqt #special_keys a { width: 30%; float: left; }
