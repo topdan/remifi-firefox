@@ -32,7 +32,8 @@ onLoad = (e) ->
     callback(views);
     views.html();
   
-  remote.server = new MobileRemote.Firefox.Server();
+  port = Application.prefs.getValue('extensions.mobile-remote.port', 6670)
+  remote.server = new MobileRemote.Firefox.Server(port);
   remote.server.dynamicRequest = remote.handleRequest;
   remote.server.getStaticFilePath = (request) ->
     if MobileRemote.startsWith(request.fullpath, '/static/')

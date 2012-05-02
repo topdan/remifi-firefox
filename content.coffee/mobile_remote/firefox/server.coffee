@@ -1,9 +1,8 @@
 class Server
   MobileRemote.Firefox.Server = Server
   
-  constructor: () ->
+  constructor: (@port) ->
     @signature = 'Mobile-Remote/0.1'
-    @port = 6670
     @loopbackOnly = false
 
     # application-specific functions
