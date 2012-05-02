@@ -1,4 +1,5 @@
 @routes = []
+@globalActions = []
 
 this.route = (path, funcName, options, block) ->
   if typeof options == 'function'
@@ -9,7 +10,7 @@ this.route = (path, funcName, options, block) ->
   else
     options ||= {}
   
-  route = {funcName: funcName, actions: []}
+  route = {funcName: funcName, actions: [].concat(@globalActions)}
   
   if typeof path == "string"
     route.pathString = path
@@ -30,9 +31,12 @@ this.route = (path, funcName, options, block) ->
   @routes.push(route)
 
 this.action = (name, funcName) ->
-  if currentRoute
-    funcName ||= name
-    currentRoute.actions.push({name: name, funcName: funcName})
+  funcName ||= name
+  action = {name: name, funcName: funcName}
+  if @currentRoute
+    @currentRoute.actions.push(action)
+  else
+    @globalActions.push(action)
 
 this.notFound = ->
   # do nothing

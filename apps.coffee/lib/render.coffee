@@ -32,7 +32,7 @@ this.render = (request) ->
       $.each route.actions, (index, a) ->
         action = a if request.action == a.name
     
-    handler = null;
+    handler = null
     if action
       handler = this[action.funcName]
     else

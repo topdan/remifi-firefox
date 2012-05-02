@@ -7,29 +7,24 @@
 
 beforeFilter 'readHashbang'
 
-this.controlActions = ->
-  action 'doSearch'
-  action 'playPause'
-  action 'prevSong'
-  action 'nextSong'
-  action 'index'
-  action 'clearQueue'
-  action 'removeCurrentSong'
-  action 'queueSong'
+action 'doSearch'
+action 'playPause'
+action 'prevSong'
+action 'nextSong'
+action 'index'
+action 'clearQueue'
+action 'removeCurrentSong'
+action 'queueSong'
 
-route '/', 'index', ->
-  controlActions()
+route '/', 'index'
   
-route '/', 'search', anchor: /^!\/search/, ->
-  controlActions()
+route '/', 'search', anchor: /^!\/search/
 
 route '/', 'album', anchor: /^!\/album/, ->
   action 'queueAlbum'
-  controlActions()
 
 route '/', 'artist', anchor: /^!\/artist/, ->
   action 'playTopSongs'
-  controlActions()
 
 this.artist = (request) ->
   controls()
