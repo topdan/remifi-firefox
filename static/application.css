@@ -77,9 +77,15 @@ p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black
 
 #jqt textarea.bookmarklet { height: 40px; }
 
-#jqt .mouseClick { width: 50%; float: left; }
+#jqt .mouseClick { width: 50%; float: left; margin-right: 5px; }
 #jqt #mouseNav { margin-top: 5px; }
-#jqt #mouseNav .button { position: inherit; right: inherit; margin-left: 10px; padding-top: 3px; padding-bottom: 3px; }
+#jqt #mouseNav div { float: left; }
+#jqt #mouseNav .icon { display: inline-block; width: 14px; height: 14px; line-height: 14px; vertical-align: text-top; background-image: url("/static/images/glyphicons-halflings-white.png"); background-position: 14px 14px; background-repeat: no-repeat; *margin-right: .3em; }
+#jqt #mouseNav .mouseLeft { margin-top: 16px; background-position: -229px -88px; }
+#jqt #mouseNav .mouseRight { margin-top: 16px; background-position: -253px -88px; }
+#jqt #mouseNav .mouseUp { background-position: -278px -88px; }
+#jqt #mouseNav .mouseDown { background-position: -301px -88px; }
+#jqt #mouseNav .icon { display: block; height: 30px; position: inherit; right: inherit; }
 
 #jqt #keyboard-page textarea { height: 80px; }
 #jqt #special_keys .grayButton { width: 30%; float: left; }

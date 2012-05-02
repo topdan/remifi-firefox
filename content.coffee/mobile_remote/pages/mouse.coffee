@@ -72,7 +72,7 @@ class Mouse
   down: (request, response) =>
     if @x && @y
       @y += 5;
-      @actualMouseAction('over', null, x, y);
+      @actualMouseAction('over', null, @x, @y);
 
   left: (request, response) =>
     if @x && @y
