@@ -45,7 +45,7 @@ class Mouse
 
         v.template('/views/mouse.html', {width: width, height: height});
 
-        v.systemApps([
+        v.apps([
           {title: 'keyboard', url: '/keyboard/', icon: {url: '/static/images/keyboard.png'}},
           null,
           {title: 'page up', url: '/mouse/page-up.js', icon: {url: '/static/images/pageup.png'}},

@@ -29,7 +29,7 @@ class Keyboard
 
         v.template('/views/keyboard.html', {current: currentText()});
 
-        v.systemApps([
+        v.apps([
           {title: 'mouse', url: '/mouse/', icon: {url: '/static/images/mouse.png'}},
           null,
           null, # {title: 'tab up', url: '/keyboard/tab-up.js'},

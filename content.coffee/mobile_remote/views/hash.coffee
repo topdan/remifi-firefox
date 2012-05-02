@@ -120,8 +120,6 @@ class Hash
 
     apps: (hash) =>
 
-    systemApps: (hash) =>
-
   class FormTypes
     
     constructor: (@p) ->

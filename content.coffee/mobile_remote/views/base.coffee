@@ -166,10 +166,3 @@ class Base
     row.push({isBlank: true}) while (row.length < 4)
 
     @template("/views/buttons.html", {rows: rows, tableId: options.tableId, tableClass: options.tableClass});
-
-  systemApps: (apps, options) =>
-    options ||= {}
-    options = MobileRemote.mergeHash(options, {tableClass: 'system-app-icons'})
-    @apps(apps, options)
-
-
