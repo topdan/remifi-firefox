@@ -61,7 +61,7 @@ class Controller
       code = @remote.env.fileContent('/views/layout.html');
       if code == null
         throw "/views/layout.html was not found"
-      @layout = MobileRemote.microtemplate(code);
+      @layout = MobileRemote.microtemplate(code)
     
     views = new MobileRemote.Views.Base(@remote.env);
     @layout({body: body, views: views});

@@ -15,11 +15,7 @@ class Base
     data.escape = @escape;
     data.escapeHTML = @escapeHTML;
 
-    code = @env.fileContent(path);
-    throw "viewpath not found: " + path if code == null
-
-    func = MobileRemote.microtemplate(code);
-    html = func(data);
+    html = @env.template(path, data)
 
     @out.push(html);
 

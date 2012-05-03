@@ -9,6 +9,9 @@ class Env
     extensionsPath = profilePath + '/extensions'
     @extensionPath = extensionsPath + '/mobile-remote@topdan.com'
     
+    @isDevMode = Application.prefs.getValue('extensions.mobile-remote.development', false)
+    @templates = {}
+    
     f = @_fileHandle(@extensionPath)
     if f.exists() && !f.isDirectory()
       file = @_fileHandle(@extensionPath)
@@ -23,12 +26,17 @@ class Env
       null
   
   template: (viewpath, data) =>
-    code = @fileContent(viewpath)
-    throw "viewpath not found: " + viewpath if code == null
+    view = @templates[viewpath]
     
-    func = MobileRemote.microtemplate(code)
+    if view == null || typeof view == 'undefined'
+      code = @fileContent(viewpath)
+      throw "viewpath not found: " + viewpath if code == null
+      
+      view = MobileRemote.microtemplate(code)
+      @templates[viewpath] = view unless @isDevMode
+    
     data ||= {}
-    func(data)
+    view(data)
   
   exec: (path, args) =>
     path = @_fullpath(path)

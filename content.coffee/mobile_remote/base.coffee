@@ -56,6 +56,11 @@ class Base
     
     sandbox
   
+  views: (callback) =>
+    views = new MobileRemote.Views.Base(@env)
+    callback(views)
+    views.html()
+    
   isRunning: =>
     @server.isRunning
   

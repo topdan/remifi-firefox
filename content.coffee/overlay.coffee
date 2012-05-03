@@ -27,10 +27,6 @@ onLoad = (e) ->
   remote = new MobileRemote.Base(env);
   
   remote.view = new MobileRemote.Firefox.View();
-  remote.views = (callback) ->
-    views = new MobileRemote.Views.Base(env);
-    callback(views);
-    views.html();
   
   port = Application.prefs.getValue('extensions.mobile-remote.port', 6670)
   remote.server = new MobileRemote.Firefox.Server(port);
