@@ -11,7 +11,7 @@ class Sandbox
     @std_imports = ['lib/json2', 'lib/render', 'lib/routes', 'lib/url', 'lib/view', 'lib/zepto-ext']
     @view_imports = ['lib/view/form', 'lib/view/http', 'lib/view/keyboard', 'lib/view/mouse', 'lib/view/page', 'lib/view/player']
     @metadata = {}
-    @sandbox = null
+    @sandboxes = {}
     @crossDomains = []
     @api = new MobileRemote.Api(@)
     
@@ -19,7 +19,10 @@ class Sandbox
     @extractMetadata(@code, @setMetadata)
   
   render: (uri, request, response) ->
-    sandbox = @createSandbox()
+    sandbox = @sandboxes[uri.host] if uri.host
+    if typeof sandbox == 'undefined'
+      sandbox = @createSandbox()
+      @sandboxes[uri.host] = sandbox unless @remote.env.isDevMode
     
     match = request.path.match(/\/([^\/\.]+)\.?(js)?$/)
     if match
