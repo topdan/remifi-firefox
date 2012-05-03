@@ -12,6 +12,8 @@ table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-siz
 
 #jqt a.current { background-color: #476489; background-image: none; box-shadow: 0 1px 0 #5CC801 inset; color: white; text-shadow: 0 -1px 0 #3C8101; }
 
+#jqt ul { color: black; }
+
 #jqt ul.list { text-align: center; }
 #jqt ul.list ul.actions { list-style: none; width: 100%; padding: 0; margin: 0; border: 0; }
 #jqt ul.list ul.actions li { float: left; padding: 0; margin: 0; border: 0; text-align: center; background: none; top:50%;}

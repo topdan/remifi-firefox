@@ -27,7 +27,7 @@ class Bookmarklets
 
         v.template('/views/bookmarklets.html', {viewJS: viewJS, newTab: newTab, newWindow: newWindow});
         v.br()
-        v.button("Back to Settings", '/settings/index.html')
+        v.button "Back to Settings", '/settings/index.html'
 
   visit: (request, response) =>
     @convertMobileURL(request)

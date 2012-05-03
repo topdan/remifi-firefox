@@ -23,7 +23,7 @@ class Settings
       v.page 'settings', ->
         v.toolbar()
         v.title("Settings")
-        v.list([
+        v.list [
           {
             title: "Bookmarklets",
             url: "/bookmarklets/"
@@ -32,10 +32,10 @@ class Settings
             title: "About Me",
             url: "/settings/about.html"
           }
-        ])
+        ], striped: true
 
         v.toggle 'Fullscreen Mode', '/settings/fullscreen.html', window.fullScreen
-        v.button('Check for Updates', '/settings/update.html', {type: 'info'})
+        v.button('Check for Updates', '/settings/update.html', {type: 'primary'})
 
   fullscreen: (request, response) =>
     window.fullScreen = !window.fullScreen
@@ -72,7 +72,7 @@ class Settings
         v.toolbar()
         v.title("About Me")
 
-        v.list([
+        v.list [
           {
             title: "Created By Dan Cunning",
             url: "http://www.topdan.com",
@@ -80,13 +80,14 @@ class Settings
           },
           {
             title: "Follow @itopdan",
-            url: "http://www.twitter.com/itopdan"
+            url: "http://www.twitter.com/itopdan",
+            external: true
           },
           {
             title: "Version: 0.1"
           }
-        ])
+        ], striped: true
         
         v.br()
-        v.button("Back to Settings", '/settings/index.html', {type: 'primary'})
+        v.button "Back to Settings", '/settings/index.html'
         
