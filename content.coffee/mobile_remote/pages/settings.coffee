@@ -90,4 +90,32 @@ class Settings
         
         v.br()
         v.button "Back to Settings", '/settings/index.html'
+        v.br()
+        
+        v.title "Other Credits"
+        v.list [
+          {
+            title: "jQtouch",
+            url: "http://www.jqtouch.com/",
+            external: true
+          },
+          {
+            title: "Plain Old Webserver",
+            url: "http://groups.google.com/group/firefoxpow",
+            external: true
+          },
+          {
+            title: "Crystal Clear",
+            url: "http://www.everaldo.com/crystal/",
+            external: true
+          },
+          {
+            title: "borncold",
+            url: "http://borncold.deviantart.com/",
+            external: true
+          }
+          {
+            title: "App rights reserved to website owner"
+          },
+        ]
         

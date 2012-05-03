@@ -11,6 +11,8 @@ class Home
       v.page 'home', ->
         v.toolbar({back: true});
 
+        v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
+
         v.apps([
           {
             title: "youtube",
@@ -93,5 +95,3 @@ class Home
             icon: {url: '/static/images/grooveshark.png'}
           },
         ]);
-
-        v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
