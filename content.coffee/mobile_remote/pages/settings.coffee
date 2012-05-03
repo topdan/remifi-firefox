@@ -74,7 +74,9 @@ class Settings
 
         v.list([
           {
-            title: "Created By Dan Cunning"
+            title: "Created By Dan Cunning",
+            url: "http://www.topdan.com",
+            external: true
           },
           {
             title: "Follow @itopdan",
