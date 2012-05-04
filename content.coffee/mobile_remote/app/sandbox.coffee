@@ -22,7 +22,8 @@ class Sandbox
     sandbox = @sandboxes[uri.host] if uri.host
     if typeof sandbox == 'undefined'
       sandbox = @createSandbox()
-      @sandboxes[uri.host] = sandbox unless @remote.env.isDevMode
+      # FIXME saved sandboxes need an updated document/window/etc
+      # @sandboxes[uri.host] = sandbox unless @remote.env.isDevMode
     
     match = request.path.match(/\/([^\/\.]+)\.?(js)?$/)
     if match
