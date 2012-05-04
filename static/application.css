@@ -28,6 +28,10 @@ table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-siz
 #jqt ul.list.wrap li a { overflow: inherit; white-space: inherit; }
 #jqt ul.list.striped li.even { background-color: rgba(100, 100, 100, 0.2); }
 
+#jqt .remote-page h1 { font-size: 450%; }
+#jqt .remote-page p { margin: 10px 20px 6px; font-size: 200%; }
+#jqt .remote-page ul { font-size: 150%; }
+
 #jqt li.paginate-container { padding: 0; }
 #jqt ul.paginate { margin: 0; border: 0; background: none; }
 #jqt ul.paginate li { border: 0; float: left; background: none; padding: 0.5em 0 0.5em 0; text-align: center; }
@@ -41,7 +45,7 @@ table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-siz
 #jqt #home .info { border: none; }
 #jqt.fullscreen #home .info { display: none;}
 
-.important-message  { margin: 0.5em; padding: 0.5em; color: #3A87AD; background-color: white; border: 1px solid black;}
+.important-message  { margin: 0.5em; padding: 0.5em; color: #3A87AD; background-color: #D9EDF7; border: 1px solid #BCE8F1;}
 .error-message { margin: 0.5em; padding: 0.5em; color: #800000; background-color: #EEB4B4;}
 .info-message { margin: 0.5em; padding: 0.5em; background-color: white; color: #444; border: 1px solid black; }
 

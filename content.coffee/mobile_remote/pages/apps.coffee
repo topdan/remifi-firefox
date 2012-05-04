@@ -3,6 +3,8 @@ class Apps
   
   constructor: (@remote) ->
     @about = new MobileRemote.App.About(@remote)
+    @localhost = new MobileRemote.App.LocalHost(@remote)
+    
     @list = [
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.google'),
       new MobileRemote.App.Sandbox(@remote, 'com.topdan.youtube'),
@@ -31,6 +33,10 @@ class Apps
     
     if MobileRemote.startsWith(url, 'about:')
       body = this.about.render(uri, request, response)
+      
+    else if (uri.host == 'localhost' || uri.host == '127.0.0.1') && uri.port == @remote.port.toString()
+      body = this.localhost.render(uri, request, response)
+      
     else
       app = @findApp(uri, request, response)
       body = app.render(uri, request, response) if app

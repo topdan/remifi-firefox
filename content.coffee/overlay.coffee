@@ -28,8 +28,8 @@ onLoad = (e) ->
   
   remote.view = new MobileRemote.Firefox.View();
   
-  port = Application.prefs.getValue('extensions.mobile-remote.port', 6670)
-  remote.server = new MobileRemote.Firefox.Server(port);
+  remote.port = Application.prefs.getValue('extensions.mobile-remote.port', 6670)
+  remote.server = new MobileRemote.Firefox.Server(remote.port);
   remote.server.dynamicRequest = remote.handleRequest;
   remote.server.getStaticFilePath = (request) ->
     if MobileRemote.startsWith(request.fullpath, '/static/')
@@ -37,7 +37,15 @@ onLoad = (e) ->
   
   MobileRemote.instance = remote;
   remote.load();
-
+  
+  firstSplash = "extensions.mobile-remote.firstSplash";
+  unless Application.prefs.getValue(firstSplash, false)
+    # won't work on the onLoad thread, not sure what event to hook into so just wait a bit
+    setTimeout ->
+      Application.prefs.setValue(firstSplash, true)
+      gBrowser.selectedTab = gBrowser.addTab "http://localhost:#{remote.port}/getting-started/"
+    , 1000
+  
 unLoad = (e) ->
   if MobileRemote.instance && MobileRemote.isReference != true
     MobileRemote.instance.unload();

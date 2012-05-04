@@ -17,6 +17,7 @@ class Base
     @pages.noBody    = new MobileRemote.Pages.NoBody(@)
     @pages.settings  = new MobileRemote.Pages.Settings(@)
     @pages.bookmarklets = new MobileRemote.Pages.Bookmarklets(@)
+    @pages.gettingStarted = new MobileRemote.Pages.GettingStarted(@)
   
   currentURL: =>
     @currentDocument().location.href

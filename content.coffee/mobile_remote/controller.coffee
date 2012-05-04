@@ -31,6 +31,9 @@ class Controller
       response.headers["Content-Type"] = "text/html; charset=ISO-8859-1"
       
       body + '<script type="text/javascript" charset="utf-8">\nsetupPages()\n</script>'
+    else if response.noLayout
+      body
+      
     else
       @withLayout(body)
   
@@ -53,6 +56,8 @@ class Controller
       @remote.pages.bookmarklets;
     else if MobileRemote.startsWith(request.path, '/settings/')
       @remote.pages.settings;
+    else if MobileRemote.startsWith(request.path, '/getting-started/')
+      @remote.pages.gettingStarted;
     else
       @remote.pages.notFound;
   

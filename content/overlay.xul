@@ -13,6 +13,7 @@
   <script src="mobile_remote/response.js"/>
   
   <script src="mobile_remote/app/about.js"/>
+  <script src="mobile_remote/app/localhost.js"/>
   <script src="mobile_remote/app/sandbox.js"/>
   
   <script src="mobile_remote/firefox/env.js"/>
@@ -23,6 +24,7 @@
   <script src="mobile_remote/pages/bookmarklets.js"/>
   <script src="mobile_remote/pages/controls.js"/>
   <script src="mobile_remote/pages/error.js"/>
+  <script src="mobile_remote/pages/getting_started.js"/>
   <script src="mobile_remote/pages/home.js"/>
   <script src="mobile_remote/pages/keyboard.js"/>
   <script src="mobile_remote/pages/mouse.js"/>

@@ -76,6 +76,9 @@ class Base
     callback(form);
     @out.push(form.html())
 
+  important: (message) =>
+    @out.push('<p class="important-message">', @escapeHTML(message), '</p>')
+
   error: (message) =>
     @out.push('<p class="error-message">', @escapeHTML(message), '</p>')
 
