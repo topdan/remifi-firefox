@@ -68,7 +68,28 @@ this.episode = (request) ->
   ]
   
   linkTo 'More Episodes', $('.btnViewAll').attr('href')
-
+  
+  if $('#iconNotes a').length > 0
+    title 'Episode Notes'
+    
+    $('#iconNotes a').list (r) ->
+      r.titleURL = $(this)
+      r.external = true
+  
+  else if $('#iconNotes li').length > 0
+    title 'Episode Notes'
+    
+    $('#iconNotes li').list (r) ->
+      r.title = $(this)
+  
+  if $('#iconMusic a').length > 0
+    title 'Like the music?'
+    
+    $('#iconMusic a').list (r) ->
+      r.titleURL = $(this)
+      r.external = true
+    
+  
 this.player = () ->
   player = new Player('#player')
 
