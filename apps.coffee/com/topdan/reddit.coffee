@@ -10,22 +10,21 @@ route /^\/r\/[^\/]*\/?$/, 'subreddit'
 
 this.index = (request) ->
   page 'index', ->
-    list [{title: 'Media Reddits', url: '#media-reddits'}, {title: 'My Reddits', url: '#my-reddits'}]
-    
-    subreddit(request)
-    
-  page 'media-reddits', ->
-    title "Media Subreddits"
     list [
+      {title: 'My Reddits', url: '#my-reddits'},
       {title: "r/NetflixBestOf", url: "http://www.reddit.com/r/NetflixBestOf/"},
       {title: "r/music", url: "http://www.reddit.com/r/music/"}
     ]
     
+    subreddit(request)
+    
   page 'my-reddits', ->
     title "My Reddits"
 
+    button 'Cancel', '#index'
     $('#sr-bar li a').list (r) ->
       r.titleURL = $(this)
+    button 'Cancel', '#index'
 
 this.subreddit = (request) ->
   if (request.path == '/')

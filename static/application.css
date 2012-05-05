@@ -57,7 +57,7 @@ table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-siz
 
 #waiting { padding-top: 2em; }
 #waiting .title { font-size: 125%; font-weight: bold; }
-p.wait-message { text-align: center; margin: 0.5em; padding: 0.5em; color: black; background-color: white; border: 1px solid black; }
+p.wait-message { text-align: center; margin: 10px 20px; padding: 0.5em; color: black; background-color: white; border: 1px solid black; }
 
 #mouse .touchpad { display: block; margin: 0px auto; border: 1px solid #476489; border-top: 0; background-color: white; text-align: center; text-decoration: none; }
 #mouse .touchpad span { color: #555555; display: block; font-size: 140%; line-height: 50px; padding-top: 50px; }

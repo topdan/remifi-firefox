@@ -1,7 +1,10 @@
 Zepto.fn.list = (callback, options) ->
   options ||= {}
   
+  paginateItems = null
+  page = null
   perPage = options.perPage || 50
+  
   if @length > perPage
     if request.anchor
       position = request.anchor.indexOf('+remotePage')

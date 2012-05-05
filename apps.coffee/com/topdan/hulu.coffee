@@ -47,7 +47,9 @@ this.tvShow = (request) ->
     r.image = thumb.attr('data-src') || thumb.attr('src')
     r.subtitle = title.text()
   
-  paginate([{name: 'next', url: 'loadMoreEpisodes'}])
+  nextUrl = 'loadMoreEpisodes' if $('#episode-container .pages li.next').length > 0
+  
+  paginate([{name: 'next', url: nextUrl}])
 
 this.loadMoreEpisodes = (request) ->
   elem = $('#episode-container .pages li.next')
