@@ -16,6 +16,7 @@
   <script src="mobile_remote/app/localhost.js"/>
   <script src="mobile_remote/app/sandbox.js"/>
   
+  <script src="mobile_remote/firefox/boot.js"/>
   <script src="mobile_remote/firefox/env.js"/>
   <script src="mobile_remote/firefox/server.js"/>
   <script src="mobile_remote/firefox/view.js"/>
