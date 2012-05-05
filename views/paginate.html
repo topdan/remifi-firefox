@@ -3,9 +3,11 @@
     <ul class="paginate paginate-<%= items.length %>">
       <% for (var j=0 ; j < items.length ; j++) { var item = items[j]; %>
         <% if (item.name == 'ellipsis') { %>
-          <li class="ellipsis">...</li>
-        <% } else { %>
+          <li class="no-link">...</li>
+        <% } else if (item.remoteURL) { %>
           <li><a href="<%= escape(item.url) %>" data-remote-url="<%= escape(item.remoteURL) %>"><%= item.name %></a></li>
+        <% } else { %>
+          <li class="no-link"><%= item.name %></li>
         <% } %>
       <% } %>
     </ul>

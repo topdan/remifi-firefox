@@ -28,7 +28,9 @@ this.index = (request) ->
     r.url   = $(this).find('a').attr('href')
     
   $('#homePromos li').list (r) ->
-    r.title = $(this).find('img').attr('alt')
+    r.title = $(this).find('img').attr('alt') || ""
+    r.title = r.title.substring("Promo image: ".length) if r.title.indexOf("Promo image: ") == 0
+    
     r.url   = $(this).find('a').attr('href')
     r.image = $(this).find('.logo img').attr('src')
 

@@ -12,6 +12,10 @@ this.externalURL = (url) ->
   # absolute url
   else if url.match(/^http:\/\//) || (url.match(/^https:\/\//))
     url
+  
+  # page anchor
+  else if url.match(/^#/)
+    @request.protocol + "://" + @request.host + @request.path + url
     
   # relative url
   else

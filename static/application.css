@@ -8,6 +8,11 @@ table.app-icons tr.titles { font-family: "Lucida Grande", Verdana, Courier, sans
 table.app-icons tr.titles td { padding-top: 0; overflow: hidden;}
 table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-size: 75%; vertical-align: top;}
 
+.greenButton { border: 2px solid #1F3D7A; }
+.whiteButton { border: 2px solid #AAAAAA; }
+.grayButton  { border: 2px solid #000000; }
+.redButton   { border: 2px solid #A10502; }
+
 #jqt .whiteButton, #jqt .grayButton, #jqt .redButton, #jqt .blueButton, #jqt .greenButton { box-shadow: none; }
 
 #jqt a.current { background-color: #476489; background-image: none; box-shadow: 0 1px 0 #5CC801 inset; color: white; text-shadow: 0 -1px 0 #3C8101; }
@@ -34,6 +39,7 @@ table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-siz
 
 #jqt li.paginate-container { padding: 0; }
 #jqt ul.paginate { margin: 0; border: 0; background: none; }
+#jqt ul.paginate li.no-link { color: #AAA; }
 #jqt ul.paginate li { border: 0; float: left; background: none; padding: 0.5em 0 0.5em 0; text-align: center; }
 #jqt ul.paginate-1 li { width: 100%; }
 #jqt ul.paginate-2 li { width: 50%; }

@@ -96,7 +96,7 @@ class Base
   paginate: (items) =>
     polished = [];
     for item in items
-      if item.name && item.url
+      if item.name && item.hasOwnProperty('url')
         name = item.name;
         if item.name == "prev"
           if items.length < 3

@@ -7,8 +7,6 @@
 //
 ###
 
-# http://www.maxgo.com/#AD/browse&assetID=MUGOROSTP31043?assetType=SERIES?browseMode=browseGrid/
-
 route "/", "index"
 route '/', "index", anchor: 'movies/'
 route '/', "section", anchor: /^[^\/]+\/$/
@@ -61,7 +59,7 @@ this.sectionFeatured = (code) ->
     r.image = findThumb(e)
 
 this.category = (request) ->
-  m = request.anchor.match(/browseID=([^\.]+).([^\.]+)\/$/)
+  m = request.anchor.match(/browseID=([^\.]+).([^\.]+)\//)
   type = m[1] if m
   id = m[2] if m
   

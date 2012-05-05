@@ -10,6 +10,7 @@ MobileRemote.endsWith = (base, str) ->
   base && base.match(str+"$") != null
 
 MobileRemote.externalURL = (url) ->
+  return false unless url
   MobileRemote.startsWith(url, "http://") || MobileRemote.startsWith(url, "https://")
 
 MobileRemote.escape =(string) ->
