@@ -7,6 +7,7 @@ class Boot
     unless @refreshWindow()
       @loadRemote()
       @checkForUpdates()
+      @loadPageListener()
       @tryFirstSplashPage()
   
   unload: () ->
@@ -27,6 +28,25 @@ class Boot
 
     @tryFirstSplashPage()
 
+  loadPageListener: () =>
+    # https://developer.mozilla.org/en/Code_snippets/On_page_load
+    appcontent = document.getElementById("appcontent")
+    if appcontent
+      pageLoad = (e) =>
+        doc = e.originalTarget
+        Components.utils.reportError "Load #{doc.location.href}"
+        doc.remifiIsLoaded = true
+      
+      appcontent.addEventListener("DOMContentLoaded", pageLoad, true)
+
+      progressListener = {}
+      stateStart = Components.interfaces.nsIWebProgressListener.STATE_START
+      progressListener.onStateChange = (aWebProgress, aRequest, aFlag, aStatus) =>
+        if aFlag & stateStart
+          @remote.currentDocument().remifiIsLoaded = null
+      
+      gBrowser.addProgressListener progressListener
+      
   checkForUpdates: () =>
     return if @remote.env.isDevMode
     

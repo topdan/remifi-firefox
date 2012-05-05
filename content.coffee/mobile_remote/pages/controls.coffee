@@ -85,8 +85,8 @@ class Controls
       url
 
   waitJS: (request, response) =>
-    url = request.params["url"];
-    if @remote.currentBrowser().webProgress.isLoadingDocument
+    url = request.params["url"]
+    if @remote.currentDocument().remifiIsLoaded != true
       'setTimeout(function() { mobileRemote.waitUnlessStopped("' + url + '")}, 250);'
     else
       'mobileRemote.show("' + url + '")'
