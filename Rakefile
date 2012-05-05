@@ -1,10 +1,16 @@
 require 'rubygems'
 require 'aws/s3'
 require 'yaml'
+require 'json'
 require 'fileutils'
+require 'digest/md5'
 
 def version_file
   File.join('content', 'VERSION')
+end
+
+def static_manifest_file
+  File.join('content', 'static.json')
 end
 
 def s3_settings
@@ -64,7 +70,7 @@ namespace :plugin do
   end
   
   desc 'create the xpi'
-  task :package => ['plugin:version'] do
+  task :package => ['plugin:version', 'plugin:static:manifest'] do
     `./build_mac.sh`
   end
   
@@ -89,9 +95,31 @@ namespace :plugin do
   end
   
   desc 'remove all the plugin build files'
-  task :clean do
+  task :clean => 'plugin:static:clean' do
     FileUtils.rm(version_file)
     FileUtils.rm('mobile-remote.xpi')
+  end
+  
+  namespace :static do
+    
+    task :manifest do
+      files = {}
+      
+      folder_files = File.join 'static', "**", "*"
+      Dir[folder_files].each do |file|
+        next if File.directory?(file)
+        
+        content = File.open(file, 'rb') {|f| f.read }
+        files["/#{file}"] = Digest::MD5.hexdigest content
+      end
+      
+      File.open(static_manifest_file, 'w') {|f| f.write files.to_json }
+    end
+    
+    task :clean do
+      FileUtils.rm(static_manifest_file)
+    end
+    
   end
   
 end

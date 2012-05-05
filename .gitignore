@@ -13,5 +13,6 @@ content/mobile_remote/firefox/*.js
 content/mobile_remote/pages/*.js
 content/mobile_remote/utils/*.js
 content/mobile_remote/views/*.js
+content/static.json
 content/VERSION
 mobile-remote.xpi
