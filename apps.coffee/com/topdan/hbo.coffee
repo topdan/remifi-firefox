@@ -95,17 +95,43 @@ this.category = (request) ->
     featureCategory(request, xml)
 
 this.seriesEpisodes = (request, xml) ->
-  code = request.anchor.match(/([^\/]+)/)[1]
-  xml.find('featureResponses').list (r) ->
+  seasons = {}
+  xml.find('featureResponses').each (r) ->
     e = $(this)
     
-    r.title    = e.find('title').text()
-    r.episode  = parseInt(e.find('episodeInSeries').text())
-    r.subtitle = e.find('season').text() + " Episode " + e.find('episodeInSeason').text()
+    seasonNum = parseInt e.find('season').text().substring('Season '.length)
+    episode = parseInt e.find('episodeInSeries').text()
     
-    r.url = urlForSomething(code, e)
-    r.image = findThumb(e)
-  , sort: (a, b) -> a.episode - b.episode
+    seasons[seasonNum] ||= []
+    seasons[seasonNum].push {
+      title: e.find('title').text(),
+      episode: parseInt(e.find('episodeInSeries').text()),
+      image: findThumb(e),
+      subtitle: e.find('season').text() + " Episode " + e.find('episodeInSeason').text()
+    }
+  
+  for num, season of seasons
+    season.sort (a, b) -> a.episode - b.episode
+  
+  if Object.keys(seasons).length == 1
+    list seasons[Object.keys(seasons)[0]]
+  else
+    page 'index', =>
+      title xml.find('hashTag')
+      
+      items = []
+      for num, season of seasons
+        num = parseInt num
+        items.push {title: "Season #{num}", url: "#season-#{num}", season: num}
+      
+      items.sort (a, b) -> a.season - b.season
+      list items
+      
+    for num, season of seasons
+      page "season-#{num}", =>
+        button "Back to Show", '#index'
+        list season
+        button "Back to Show", '#index'
 
 this.seriesCategory = (request, xml) ->
   code = request.anchor.match(/([^\/]+)/)[1]
