@@ -15,6 +15,11 @@ class Home
 
         v.apps([
           {
+            title: "settings",
+            url: "/settings/index.html",
+            icon: {url: '/static/images/gears.png'}
+          },
+          {
             title: "youtube",
             url: "/controls/visit.html?url=http://www.youtube.com",
             icon: {url: '/static/images/youtube.png'}
@@ -28,11 +33,6 @@ class Home
             title: "netflix",
             url: "/controls/visit.html?url=http://www.netflix.com",
             icon: {url: '/static/images/netflix.png'}
-          },
-          {
-            title: "settings",
-            url: "/settings/index.html",
-            icon: {url: '/static/images/gears.png'}
           },
           {
             title: "hbogo",
