@@ -28,6 +28,8 @@ class Boot
     @tryFirstSplashPage()
 
   checkForUpdates: () =>
+    return if @remote.env.isDevMode
+    
     request = new XMLHttpRequest()
     request.open('GET', 'http://mobile-remote.topdan.com/EDGE-VERSION', true)
     request.onreadystatechange = (e) =>
