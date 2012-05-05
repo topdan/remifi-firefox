@@ -7,11 +7,14 @@ class Home
     @index(request, response);
   
   index: (request, response) =>
-    @remote.views (v) ->
-      v.page 'home', ->
+    @remote.views (v) =>
+      v.page 'home', =>
         v.toolbar({back: true});
 
-        v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
+        if @remote.updateAvailable
+          v.safeOut("<a href=\"#\" data-remote-url=\"#{@remote.xpiPath}\" class=\"info update-available\">We've released a new version. Click here to download it.</a>")
+        else
+          v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
 
         v.apps([
           {

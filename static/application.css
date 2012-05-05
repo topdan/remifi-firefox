@@ -50,6 +50,7 @@ table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-siz
 
 #jqt #home .info { border: none; }
 #jqt.fullscreen #home .info { display: none;}
+#jqt #home .update-available { display: block; }
 
 .important-message  { margin: 0.5em; padding: 0.5em; color: #3A87AD; background-color: #D9EDF7; border: 1px solid #BCE8F1;}
 .error-message { margin: 0.5em; padding: 0.5em; color: #800000; background-color: #EEB4B4;}
