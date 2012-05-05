@@ -4,6 +4,9 @@ class Base
   constructor: (@env) ->
     @view = null
     
+    @version = @env.fileContent('/content/VERSION')
+    @xpiPath = "http://mobile-remote.topdan.com.s3.amazonaws.com/mobile-remote-edge.xpi"
+    
     @pages = {}
     @pages.apps      = new MobileRemote.Pages.Apps(@)
     @pages.home      = new MobileRemote.Pages.Home(@)

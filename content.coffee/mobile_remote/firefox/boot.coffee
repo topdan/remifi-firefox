@@ -6,6 +6,7 @@ class Boot
   load: () =>
     unless @refreshWindow()
       @loadRemote()
+      @checkForUpdates()
       @tryFirstSplashPage()
   
   unload: () ->
@@ -25,6 +26,25 @@ class Boot
     @remote.load()
 
     @tryFirstSplashPage()
+
+  checkForUpdates: () =>
+    request = new XMLHttpRequest()
+    request.open('GET', 'http://mobile-remote.topdan.com/EDGE-VERSION', true)
+    request.onreadystatechange = (e) =>
+      if request.readyState != 4
+        # keep waiting
+        
+      else if request.status != 200
+        Components.utils.reportError "Checking for updates failed: #{request.status}"
+        
+      else if request.responseText == @remote.version
+        Components.utils.reportError "No updates detected!"
+        
+      else
+        Components.utils.reportError "Updates detected!"
+        @remote.updateAvailable = true
+    
+    request.send(null)
 
   # check for the server already running inside another window and copy its reference
   refreshWindow: () =>
@@ -57,8 +77,8 @@ class Boot
   loadServer: () =>
     @remote.server = new MobileRemote.Firefox.Server(@remote.port)
     @remote.server.dynamicRequest = @remote.handleRequest
-    @remote.server.getStaticFilePath = (request) ->
+    @remote.server.getStaticFilePath = (request) =>
       if MobileRemote.startsWith(request.fullpath, '/static/')
-        env.extensionPath + request.fullpath
+        @remote.env.extensionPath + request.fullpath
     
   

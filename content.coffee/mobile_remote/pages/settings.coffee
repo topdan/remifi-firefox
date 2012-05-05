@@ -2,9 +2,7 @@ class Settings
   MobileRemote.Pages.Settings = Settings
   
   constructor: (@remote) ->
-    @remote.version = @remote.env.fileContent('/content/VERSION')
-    @remote.xpiPath = "http://mobile-remote.topdan.com.s3.amazonaws.com/mobile-remote-edge.xpi"
-  
+    
   render: (request, response) =>
     if request.path == '/settings/index.html' || request.path == '/settings/'
       @index(request, response)
