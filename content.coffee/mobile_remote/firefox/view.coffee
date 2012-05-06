@@ -1,5 +1,5 @@
 class View
-  MobileRemote.Firefox.View = View
+  Remifi.Firefox.View = View
   
   constructor: () ->
   
@@ -8,9 +8,9 @@ class View
     
     # TODO DRY class
     if isOn
-      klass = "toolbarbutton-1 chromeclass-toolbar-additional mobile-remote-button on"
+      klass = "toolbarbutton-1 chromeclass-toolbar-additional remifi-button on"
     else
-      klass = "toolbarbutton-1 chromeclass-toolbar-additional mobile-remote-button off"
+      klass = "toolbarbutton-1 chromeclass-toolbar-additional remifi-button off"
     
     wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator)
     wenum = wm.getEnumerator(null);
@@ -18,29 +18,22 @@ class View
       break unless wenum.hasMoreElements()
       
       win = wenum.getNext()
-      button = win.document.getElementById('mobile-remote-button')
+      button = win.document.getElementById('remifi-button')
       button.setAttribute('class', klass) if button
   
-  install: (toolbarId, id, afterId) =>
-    unless document.getElementById(id)
-      toolbar = document.getElementById(toolbarId)
-      
-      # If no afterId is given, then append the item to the toolbar
-      before = null
-      if afterId
-        elem = document.getElementById(afterId)
-        if elem && elem.parentNode == toolbar
-          before = elem.nextElementSibling
-      
-      toolbar.insertItem(id, before)
-      toolbar.setAttribute("currentset", toolbar.currentSet)
-      document.persist(toolbar.id, "currentset")
-      
-      if (toolbarId == "addon-bar")
-        toolbar.collapsed = false
+  installButton: (toolbarId, buttonId, afterId) =>
+    return if document.getElementById(buttonId)
+    toolbar = document.getElementById(toolbarId)
 
-firstRunPref = "extensions.mobile-remote.firstRunDone";
-unless Application.prefs.getValue(firstRunPref, false)
-  Application.prefs.setValue(firstRunPref, true)
-  this.install("nav-bar", "mobile-remote-button", "home-button")
+    # If no afterId is given, then append the item to the toolbar
+    before = null
+    if afterId
+      elem = document.getElementById(afterId)
+      if elem && elem.parentNode == toolbar
+        before = elem.nextElementSibling
 
+    toolbar.insertItem(buttonId, before)
+    toolbar.setAttribute("currentset", toolbar.currentSet)
+    document.persist(toolbar.id, "currentset")
+
+    toolbar.collapsed = false if toolbarId == "addon-bar"

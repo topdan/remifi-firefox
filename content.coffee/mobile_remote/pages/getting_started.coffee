@@ -1,5 +1,5 @@
 class GettingStarted
-  MobileRemote.Pages.GettingStarted = GettingStarted
+  Remifi.Pages.GettingStarted = GettingStarted
   
   constructor: (@remote) ->
   

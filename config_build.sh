@@ -2,7 +2,7 @@
 
 # Build config for the build script, build.sh. Look there for more info.
 
-APP_NAME=mobile-remote
+APP_NAME=remifi
 CHROME_PROVIDERS="apps bin content locale skin static views"
 CLEAN_UP=1
 ROOT_FILES="readme.txt"

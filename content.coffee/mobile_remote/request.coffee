@@ -1,5 +1,5 @@
 class Request
-  MobileRemote.Request = Request
+  Remifi.Request = Request
   
   constructor: ->
     @remote_ip = null;
@@ -14,10 +14,10 @@ class Request
     smoothPath = this.cleanPath(path);
     # Components.utils.reportError(smoothPath);
     
-    uri = new MobileRemote.URI("http://mobile-remote.topdan.com#{smoothPath}")
+    uri = new Remifi.URI("http://mobile-remote.topdan.com#{smoothPath}")
     @params = uri.queryKey;
     @path = uri.path;
-    @isScript = MobileRemote.endsWith(@path, '.js');
+    @isScript = Remifi.endsWith(@path, '.js');
     
     if @params
       for key, value of @params

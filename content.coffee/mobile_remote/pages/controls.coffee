@@ -1,5 +1,5 @@
 class Controls
-  MobileRemote.Pages.Controls = Controls
+  Remifi.Pages.Controls = Controls
   
   constructor: (@remote) ->
   
@@ -71,7 +71,7 @@ class Controls
 
         v.template('/views/loading.html');
         
-        waitCall = 'mobileRemote.wait("' + url + '", {'
+        waitCall = 'remifi.wait("' + url + '", {'
         waitCall += 'ms: ' + options.ms if options.ms
         waitCall += '});'
         v.out.push('<script type="text/javascript">$(function() { ' + waitCall + ' })</script>');
@@ -79,7 +79,7 @@ class Controls
   polishURL: (url) =>
     if typeof url == "undefined" || url == null || url == ""
       null
-    else if !MobileRemote.startsWith(url, 'http://') && !MobileRemote.startsWith(url, 'https://')
+    else if !Remifi.startsWith(url, 'http://') && !Remifi.startsWith(url, 'https://')
       "http://" + url
     else
       url
@@ -87,6 +87,6 @@ class Controls
   waitJS: (request, response) =>
     url = request.params["url"]
     if @remote.currentBrowser().webProgress.isLoadingDocument == false || @remote.currentDocument().remifiIsLoaded == true
-      'mobileRemote.show("' + url + '")'
+      'remifi.show("' + url + '")'
     else
-      'setTimeout(function() { mobileRemote.waitUnlessStopped("' + url + '")}, 250);'
+      'setTimeout(function() { remifi.waitUnlessStopped("' + url + '")}, 250);'

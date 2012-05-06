@@ -88,21 +88,21 @@ function setupPages() {
     
     var remoteUrl = $(this).attr('data-remote-url');
     if (remoteUrl) {
-      mobileRemote.visit(remoteUrl);
+      remifi.visit(remoteUrl);
       return false;
     }
   });
   
   $('#waiting .stopLoading').click(function(e) {
-    mobileRemote.stop();
-    mobileRemote.show('/controls/stop.html?url=%2F');
+    remifi.stop();
+    remifi.show('/controls/stop.html?url=%2F');
     e.preventDefault();
     return false;
   });
   
   $('#waiting .stopWaiting').click(function(e) {
-    mobileRemote.stop();
-    mobileRemote.show('/');
+    remifi.stop();
+    remifi.show('/');
     e.preventDefault();
     return false;
   })
@@ -135,7 +135,7 @@ function setupPages() {
   
 }
 
-MobileRemote = function(jQT) {
+Remifi = function(jQT) {
   var self = this;
   
   this.error = function(message) {
@@ -202,10 +202,10 @@ $(function() {
   });
   
   $(document).on('ajaxError', function(error, request) {
-    mobileRemote.error('We could not connect to your computer. Try restarting the server.')
+    remifi.error('We could not connect to your computer. Try restarting the server.')
   });
   
-  mobileRemote = new MobileRemote(jQT);
+  remifi = new Remifi(jQT);
   
   setupPages();
 })

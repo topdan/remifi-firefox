@@ -1,5 +1,5 @@
 class Mouse
-  MobileRemote.Pages.Mouse = Mouse
+  Remifi.Pages.Mouse = Mouse
   
   constructor: (@remote) ->
     @delay = 200;

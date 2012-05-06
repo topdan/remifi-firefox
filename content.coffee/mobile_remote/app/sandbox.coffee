@@ -1,5 +1,5 @@
 class Sandbox
-  MobileRemote.App.Sandbox = Sandbox
+  Remifi.App.Sandbox = Sandbox
   
   constructor: (@remote, @name) ->
     @remote = remote
@@ -13,7 +13,7 @@ class Sandbox
     @metadata = {}
     @sandboxes = {}
     @crossDomains = []
-    @api = new MobileRemote.Api(@)
+    @api = new Remifi.Api(@)
     
     @code = @remote.env.fileContent(@filename)
     @extractMetadata(@code, @setMetadata)
@@ -54,7 +54,7 @@ class Sandbox
     
     if typeof json == "string"
       hash = JSON.parse(json)
-      c = new MobileRemote.Views.Hash(@, request, response)
+      c = new Remifi.Views.Hash(@, request, response)
       c.perform(hash)
     else
       null

@@ -1,5 +1,5 @@
 class NotFound
-  MobileRemote.Pages.NotFound = NotFound
+  Remifi.Pages.NotFound = NotFound
   
   constructor: (@remote) ->
   

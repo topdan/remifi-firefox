@@ -1,5 +1,5 @@
 class LocalHost
-  MobileRemote.App.LocalHost = LocalHost
+  Remifi.App.LocalHost = LocalHost
   
   constructor: (@remote) ->
   

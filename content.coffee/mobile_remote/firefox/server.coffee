@@ -1,5 +1,5 @@
 class Server
-  MobileRemote.Firefox.Server = Server
+  Remifi.Firefox.Server = Server
   
   constructor: (@port) ->
     @signature = 'Mobile-Remote/0.1'
@@ -48,8 +48,8 @@ class Server
     onSocketAccepted: (serv, transport) =>
       transport.setTimeout(1, 30) # 30s timeout FF 1.0.0 does not allow this
       
-      request = new MobileRemote.Request()
-      response = new MobileRemote.Response()
+      request = new Remifi.Request()
+      response = new Remifi.Response()
       request.remote_ip = transport.host
       
       outstream = transport.openOutputStream(0, 10000000, 100000)

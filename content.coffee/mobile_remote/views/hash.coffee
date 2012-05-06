@@ -1,5 +1,5 @@
 class Hash
-  MobileRemote.Views.Hash = Hash
+  Remifi.Views.Hash = Hash
   
   constructor: (@app, @request, @response) ->
     @pageCount = 0
@@ -30,9 +30,9 @@ class Hash
   actionUrlFor: (action) =>
     if action == null || typeof action == 'undefined'
       null
-    else if MobileRemote.startsWith(action, 'http://') || MobileRemote.startsWith(action, 'https://') || MobileRemote.startsWith(action, '/')
+    else if Remifi.startsWith(action, 'http://') || Remifi.startsWith(action, 'https://') || Remifi.startsWith(action, '/')
       action
-    else if MobileRemote.startsWith(action, '#')
+    else if Remifi.startsWith(action, '#')
       '#' + @actionUrlForPage action.substring(1)
     else
       '/apps/' + @app.name + '/' + action
@@ -87,7 +87,7 @@ class Hash
           @p.app.remote.pages.keyboard.press(hash.key);
 
     fullscreen: (hash) =>
-      @p.app.remote.currentDocument().mobileRemoteFullscreen = hash.value == true
+      @p.app.remote.currentDocument().remifiFullscreen = hash.value == true
 
     br: (hash) =>
       @p.view.br()

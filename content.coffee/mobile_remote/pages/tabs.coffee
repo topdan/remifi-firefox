@@ -1,5 +1,5 @@
 class Tabs
-  MobileRemote.Pages.Tabs = Tabs
+  Remifi.Pages.Tabs = Tabs
   
   constructor: (@remote) ->
   
@@ -31,7 +31,7 @@ class Tabs
     currentBrowser = @remote.currentBrowser()
     index = request.params['index']
     
-    if index && (currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true)
+    if index && (currentBrowser.mTabs.length > 1 || currentWindow.Remifi.isReference == true)
       tab = @remote.currentBrowser().mTabs[index]
       @remote.currentBrowser().removeTab(tab) if tab
     
@@ -69,7 +69,7 @@ class Tabs
       currentTabIndex = i if tab == currentBrowser.mCurrentTab
 
       actions = null
-      if currentBrowser.mTabs.length > 1 || currentWindow.MobileRemote.isReference == true
+      if currentBrowser.mTabs.length > 1 || currentWindow.Remifi.isReference == true
         actions = [{title: 'close', url: '/tabs/close.html?index=' + i}]
       else
         actions = [{title: "can't close last tab", url: '/tabs/index.html'}]
@@ -108,7 +108,7 @@ class Tabs
           url: '/windows/close.html?index=' + count
         }]
 
-      if currentWindow == win && win.MobileRemote.isReference == true
+      if currentWindow == win && win.Remifi.isReference == true
         currentWindowIndex = count
 
       windows.push({

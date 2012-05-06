@@ -1,5 +1,5 @@
 class Home
-  MobileRemote.Pages.Home = Home
+  Remifi.Pages.Home = Home
   
   constructor: (@remote) ->
   

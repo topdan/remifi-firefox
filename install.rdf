@@ -1,16 +1,15 @@
 <?xml version="1.0"?>
-<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
-     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
   <Description about="urn:mozilla:install-manifest">
   
-    <em:id>mobile-remote@topdan.com</em:id>
-    <em:name>Mobile Remote</em:name>
+    <em:id>remifi@topdan.com</em:id>
+    <em:name>Remifi</em:name>
     <em:version>0.1</em:version>
-    <em:description>Use your mobile phone to control Firefox on your computer.</em:description>
+    <em:description>Use your mobile to control Firefox on your computer.</em:description>
     <em:creator>Dan Cunning</em:creator>
     <!-- optional items -->
-    <em:homepageURL>http://www.topdan.com/mobile-remote/</em:homepageURL>
+    <em:homepageURL>http://www.remifi.com/</em:homepageURL>
     <em:unpack>true</em:unpack>
 
     <!-- Firefox -->

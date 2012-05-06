@@ -2,7 +2,7 @@
 // which I'm not sure how to do via coffeescript
 // so this is a bit of a hack-indirection
 
-MobileRemote.Api = function(app) {
+Remifi.Api = function(app) {
   
   this.createSandbox = function(url, options) {
     sandbox = app.remote.createSandbox(url, options)
@@ -17,7 +17,7 @@ MobileRemote.Api = function(app) {
     if (typeof url != "string")
       return null;
   
-    var uri = new MobileRemote.URI(url);
+    var uri = new Remifi.URI(url);
     if (app.crossDomains.indexOf(uri.host) == -1)
       return null;
   

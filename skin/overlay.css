@@ -1,4 +1,4 @@
 /* This is just an example. You shouldn't do this. */
 
-#mobile-remote-button, #wrapper-mobile-remote-button {list-style-image: url("chrome://mobile-remote/content/button-on.png");}
-#mobile-remote-button.off, #wrapper-mobile-remote-button.off {list-style-image: url("chrome://mobile-remote/content/button-off.png");}
+#remifi-button, #wrapper-remifi-button {list-style-image: url("chrome://remifi/content/button-on.png");}
+#remifi-button.off, #wrapper-remifi-button.off {list-style-image: url("chrome://remifi/content/button-off.png");}

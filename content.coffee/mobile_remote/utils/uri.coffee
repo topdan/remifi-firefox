@@ -1,8 +1,8 @@
 class URI
-  MobileRemote.URI = URI
+  Remifi.URI = URI
   
   constructor: (@str) ->
-    o = MobileRemote.parseUriOptions
+    o = Remifi.parseUriOptions
     i = 14
     
     if o.parser[o.strictMode]
@@ -24,9 +24,9 @@ class URI
     @str
   
   clone: =>
-    MobileRemote.cloneHash(@)
+    Remifi.cloneHash(@)
 
-MobileRemote.parseUriOptions = {
+Remifi.parseUriOptions = {
   strictMode: false,
   key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
   q:   {
@@ -40,7 +40,7 @@ MobileRemote.parseUriOptions = {
 };
 
 
-MobileRemote.addUriQuery = (url, params) ->
+Remifi.addUriQuery = (url, params) ->
   unless params == null
     count = 0;
     count = 1 if url.indexOf("?") != -1

@@ -1,5 +1,5 @@
 class Env
-  MobileRemote.Firefox.Env = Env
+  Remifi.Firefox.Env = Env
   
   constructor: () ->
     @extensionPath = null
@@ -7,15 +7,15 @@ class Env
     profilePath = Components.classes["@mozilla.org/file/directory_service;1"].getService(Components.interfaces.nsIProperties).get("ProfD", Components.interfaces.nsIFile).path
 
     extensionsPath = profilePath + '/extensions'
-    @extensionPath = extensionsPath + '/mobile-remote@topdan.com'
+    @extensionPath = extensionsPath + '/remifi@topdan.com'
     
-    @isDevMode = Application.prefs.getValue('extensions.mobile-remote.development', false)
+    @isDevMode = Application.prefs.getValue('extensions.remifi.development', false)
     @templates = {}
     
     f = @_fileHandle(@extensionPath)
     if f.exists() && !f.isDirectory()
       file = @_fileHandle(@extensionPath)
-      @extensionPath = MobileRemote.trim(@_fileContent(file))
+      @extensionPath = Remifi.trim(@_fileContent(file))
   
   fileContent: (path) =>
     path = @_fullpath(path)
@@ -32,7 +32,7 @@ class Env
       code = @fileContent(viewpath)
       throw "viewpath not found: " + viewpath if code == null
       
-      view = MobileRemote.microtemplate(code)
+      view = Remifi.microtemplate(code)
       @templates[viewpath] = view unless @isDevMode
     
     data ||= {}

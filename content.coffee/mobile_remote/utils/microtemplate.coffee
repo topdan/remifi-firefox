@@ -1,7 +1,7 @@
 # Simple JavaScript Templating
 # John Resig - http://ejohn.org/ - MIT Licensed
 # repurposed by Dan Cunning - http://www.topdan.com - MIT Licensed
-MobileRemote.microtemplate = (code) ->
+Remifi.microtemplate = (code) ->
   new Function("obj",
       "var p=[],print=function(){p.push.apply(p,arguments);};" +
       

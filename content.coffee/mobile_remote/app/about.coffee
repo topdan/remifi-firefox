@@ -1,5 +1,5 @@
 class About
-  MobileRemote.App.About = About
+  Remifi.App.About = About
   
   constructor: (@remote) ->
   

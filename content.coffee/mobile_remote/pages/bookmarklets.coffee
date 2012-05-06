@@ -1,5 +1,5 @@
 class Bookmarklets
-  MobileRemote.Pages.Bookmarklets = Bookmarklets
+  Remifi.Pages.Bookmarklets = Bookmarklets
   
   constructor: (@remote) ->
   

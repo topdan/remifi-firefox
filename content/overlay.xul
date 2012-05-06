@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://mobile-remote/skin/overlay.css" type="text/css"?>
-<!DOCTYPE overlay SYSTEM "chrome://mobile-remote/locale/overlay.dtd">
-<overlay id="mobile-remote-overlay"
-         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<?xml-stylesheet href="chrome://remifi/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://remifi/locale/overlay.dtd">
+<overlay id="remifi-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   
   <script src="overlay.js"/>
   
@@ -46,9 +45,9 @@
   <script src="mobile_remote/utils/uri.js"/>
   
   <toolbarpalette id="BrowserToolbarPalette">
-    <toolbarbutton id="mobile-remote-button"/>
+    <toolbarbutton id="remifi-button"/>
   </toolbarpalette>
   
-  <toolbarbutton id="mobile-remote-button" label="&mobile-remote;" tooltiptext="&start-stop;" oncommand="MobileRemote.instance.toggle();" class="toolbarbutton-1 chromeclass-toolbar-additional mobile-remote-button off"/>
+  <toolbarbutton id="remifi-button" label="&remifi-name;" tooltiptext="&remifi-toggle;" oncommand="Remifi.instance.toggle();" class="toolbarbutton-1 chromeclass-toolbar-additional remifi-button off"/>
   
 </overlay>

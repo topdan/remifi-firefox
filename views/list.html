@@ -1,7 +1,7 @@
 <ul class="list<% if (rounded) { %> rounded<% } %><% if (striped) { %> striped<% } %><% if (!nowrap) { %> wrap<% } %>">
   <% for(var i=0 ; i < items.length ; i++) { var item = items[i]; %>
   <li<% if (i % 2 == 1) { %> class="even"<% } %>>
-    <% if (MobileRemote.externalURL(item.url)) { %>
+    <% if (Remifi.externalURL(item.url)) { %>
       <% if (item.url) { %><a <% if (item.mobile) { %>href="<%= escape(item.url) %>" target="_blank"<% } else { %>href="#" data-remote-url="<%= escape(item.url) %>"<% } %> class="title <% if (item.active) { %>current<% } %>"><% } %>
       <%= escapeHTML(item.title) %>
       <% if (item.image) { %><br/><img src="<%= escape(item.image) %>" class="thumb"<% if (item.imageWidth) { %> width="<%= item.imageWidth %>"<% } %><% if (item.imageHeight) { %> height="<%= item.imageHeight %>"<% } %>/><% } %>
@@ -19,7 +19,7 @@
       <ul class="actions actions-<%= item.actions.length %>" style="display:none">
         <% for (var j=0 ; j < item.actions.length ; j++) { var action = item.actions[j]; %>
         <li class="inline-links">
-          <% if (MobileRemote.externalURL(action.url)) { %>
+          <% if (Remifi.externalURL(action.url)) { %>
             <a href="#" data-remote-url="<%= action.url %>"><%= escapeHTML(action.title) %></a>
           <% } else { %>
             <a href="<%= escape(action.url) %>"><%= escapeHTML(action.title) %></a>

@@ -1,5 +1,5 @@
 class Base
-  MobileRemote.Views.Base = Base
+  Remifi.Views.Base = Base
   
   constructor: (@env) ->
     @out = []
@@ -22,13 +22,13 @@ class Base
     html
 
   escape: (string) =>
-    MobileRemote.escape(string)
+    Remifi.escape(string)
 
   escapeHTML: (string) =>
-    MobileRemote.escapeHTML(string)
+    Remifi.escapeHTML(string)
 
   externalURL: (url) =>
-    MobileRemote.externalURL(url)
+    Remifi.externalURL(url)
 
   page: (id, callback) =>
     @out.push('<div id="' + id + '">');
@@ -72,7 +72,7 @@ class Base
     @out.push("<br/>")
 
   form: (url, callback) =>
-    form = new MobileRemote.Views.Form(@, @env, url);
+    form = new Remifi.Views.Form(@, @env, url);
     callback(form);
     @out.push(form.html())
 

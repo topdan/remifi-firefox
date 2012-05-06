@@ -1,37 +1,37 @@
 class Apps
-  MobileRemote.Pages.Apps = Apps
+  Remifi.Pages.Apps = Apps
   
   constructor: (@remote) ->
-    @about = new MobileRemote.App.About(@remote)
-    @localhost = new MobileRemote.App.LocalHost(@remote)
+    @about = new Remifi.App.About(@remote)
+    @localhost = new Remifi.App.LocalHost(@remote)
     
     @list = [
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.google'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.youtube'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.netflix'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.hulu'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.hbo'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.cinemax'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.reddit'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.southparkstudios'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.ted'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.railscasts'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.revision3'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.vimeo'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.khanacademy'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.penny-arcade'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.my-damn-channel'),
-      new MobileRemote.App.Sandbox(@remote, 'com.topdan.grooveshark'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.google'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.youtube'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.netflix'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.hulu'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.hbo'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.cinemax'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.reddit'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.southparkstudios'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.ted'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.railscasts'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.revision3'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.vimeo'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.khanacademy'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.penny-arcade'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.my-damn-channel'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.grooveshark'),
     ]
   
   render: (request, response) =>
     doc = @remote.currentBrowser().contentDocument
     url = doc.location.href
-    uri = new MobileRemote.URI(url)
+    uri = new Remifi.URI(url)
     app = null
     body = null
     
-    if MobileRemote.startsWith(url, 'about:')
+    if Remifi.startsWith(url, 'about:')
       body = this.about.render(uri, request, response)
       
     else if (uri.host == 'localhost' || uri.host == '127.0.0.1') && uri.port == @remote.port.toString()

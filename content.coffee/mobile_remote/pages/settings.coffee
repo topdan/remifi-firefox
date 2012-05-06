@@ -1,5 +1,5 @@
 class Settings
-  MobileRemote.Pages.Settings = Settings
+  Remifi.Pages.Settings = Settings
   
   constructor: (@remote) ->
     

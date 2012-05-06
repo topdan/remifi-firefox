@@ -1,5 +1,5 @@
 class Response
-  MobileRemote.Response = Response
+  Remifi.Response = Response
   
   constructor: ->
     @code = 200;

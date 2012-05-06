@@ -1,5 +1,5 @@
 class Static
-  MobileRemote.Static = Static
+  Remifi.Static = Static
   
   constructor: (@remote, @filename) ->
     try

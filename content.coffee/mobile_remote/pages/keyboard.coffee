@@ -1,5 +1,5 @@
 class Keyboard
-  MobileRemote.Pages.Keyboard = Keyboard
+  Remifi.Pages.Keyboard = Keyboard
   
   constructor: (@remote) ->
     @delay = 200;
@@ -40,7 +40,7 @@ class Keyboard
     sandbox = @remote.createSandbox(null, {zepto: true});
     text = request.params["text"] || "";
 
-    view = new MobileRemote.Views.Base(@remote.env);
+    view = new Remifi.Views.Base(@remote.env);
     code = 'Zepto(":focus").val("' + view.escape(text) + '")';
 
     try

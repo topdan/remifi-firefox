@@ -1,5 +1,5 @@
 class Form
-  MobileRemote.Views.Form = Form
+  Remifi.Views.Form = Form
   
   constructor: (@view, @env, @formUrl, @options) ->
     @options ||= {}
@@ -12,10 +12,10 @@ class Form
     @out.join("");
 
   escape: (string) =>
-    MobileRemote.escape(string)
+    Remifi.escape(string)
 
   escapeHTML: (string) =>
-    MobileRemote.escapeHTML(string)
+    Remifi.escapeHTML(string)
 
   fieldset: (callback) =>
     @out.push('<ul class="edit">')

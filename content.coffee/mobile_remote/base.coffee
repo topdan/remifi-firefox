@@ -1,5 +1,5 @@
 class Base
-  MobileRemote.Base = Base
+  Remifi.Base = Base
   
   constructor: (@env) ->
     @view = null
@@ -8,19 +8,19 @@ class Base
     @xpiPath = "http://mobile-remote.topdan.com.s3.amazonaws.com/mobile-remote-edge.xpi"
     
     @pages = {}
-    @pages.apps      = new MobileRemote.Pages.Apps(@)
-    @pages.home      = new MobileRemote.Pages.Home(@)
-    @pages.tabs      = new MobileRemote.Pages.Tabs(@)
-    @pages.windows   = new MobileRemote.Pages.Windows(@)
-    @pages.controls  = new MobileRemote.Pages.Controls(@)
-    @pages.keyboard  = new MobileRemote.Pages.Keyboard(@)
-    @pages.mouse     = new MobileRemote.Pages.Mouse(@)
-    @pages.error     = new MobileRemote.Pages.Error(@)
-    @pages.notFound  = new MobileRemote.Pages.NotFound(@)
-    @pages.noBody    = new MobileRemote.Pages.NoBody(@)
-    @pages.settings  = new MobileRemote.Pages.Settings(@)
-    @pages.bookmarklets = new MobileRemote.Pages.Bookmarklets(@)
-    @pages.gettingStarted = new MobileRemote.Pages.GettingStarted(@)
+    @pages.apps      = new Remifi.Pages.Apps(@)
+    @pages.home      = new Remifi.Pages.Home(@)
+    @pages.tabs      = new Remifi.Pages.Tabs(@)
+    @pages.windows   = new Remifi.Pages.Windows(@)
+    @pages.controls  = new Remifi.Pages.Controls(@)
+    @pages.keyboard  = new Remifi.Pages.Keyboard(@)
+    @pages.mouse     = new Remifi.Pages.Mouse(@)
+    @pages.error     = new Remifi.Pages.Error(@)
+    @pages.notFound  = new Remifi.Pages.NotFound(@)
+    @pages.noBody    = new Remifi.Pages.NoBody(@)
+    @pages.settings  = new Remifi.Pages.Settings(@)
+    @pages.bookmarklets = new Remifi.Pages.Bookmarklets(@)
+    @pages.gettingStarted = new Remifi.Pages.GettingStarted(@)
   
   currentURL: =>
     @currentDocument().location.href
@@ -52,7 +52,7 @@ class Base
       zepto = @env.fileContent('/apps/lib/zepto.js')
       Components.utils.evalInSandbox('navigator = {userAgent: "Mozilla/5.0 (Macintosh Intel Mac OS X 10.5 rv:11.0) Gecko/20100101 Firefox/11.0"}', sandbox)
       Components.utils.evalInSandbox("screen = {width: #{screen.width}, height: #{screen.height}}", sandbox)
-      Components.utils.evalInSandbox("document.isFullscreen = #{@currentDocument().mobileRemoteFullscreen == true}", sandbox)
+      Components.utils.evalInSandbox("document.isFullscreen = #{@currentDocument().remifiFullscreen == true}", sandbox)
       Components.utils.evalInSandbox("window.browserX = #{browserX} ; window.browserY = #{browserY}", sandbox)
       
       Components.utils.evalInSandbox(zepto, sandbox)
@@ -61,7 +61,7 @@ class Base
     sandbox
   
   views: (callback) =>
-    views = new MobileRemote.Views.Base(@env)
+    views = new Remifi.Views.Base(@env)
     callback(views)
     views.html()
     
@@ -69,7 +69,7 @@ class Base
     @server.isRunning
   
   handleRequest: (request, response) =>
-    controller = new MobileRemote.Controller(@, request, response);
+    controller = new Remifi.Controller(@, request, response);
     controller.process(request, response)
   
   toggle: =>

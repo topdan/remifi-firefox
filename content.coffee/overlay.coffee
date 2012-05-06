@@ -1,19 +1,19 @@
 # the extension's namespace
-window.MobileRemote = {};
+window.Remifi = {};
 
 class Overlay
-  MobileRemote.App = {};
-  MobileRemote.Firefox = {};
-  MobileRemote.Pages = {};
-  MobileRemote.Util = {};
-  MobileRemote.Views = {};
+  Remifi.App = {};
+  Remifi.Firefox = {};
+  Remifi.Pages = {};
+  Remifi.Util = {};
+  Remifi.Views = {};
 
 onLoad = (e) ->
-  boot = new MobileRemote.Firefox.Boot()
+  boot = new Remifi.Firefox.Boot()
   boot.load()
   
 unLoad = (e) ->
-  boot = new MobileRemote.Firefox.Boot()
+  boot = new Remifi.Firefox.Boot()
   boot.unload()
 
 window.addEventListener "load", onLoad, false

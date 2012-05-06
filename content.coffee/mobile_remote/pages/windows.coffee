@@ -1,5 +1,5 @@
 class Windows
-  MobileRemote.Pages.Windows = Windows
+  Remifi.Pages.Windows = Windows
   
   constructor: (@remote) ->
   
@@ -53,7 +53,7 @@ class Windows
       loop 
         break unless wenum.hasMoreElements()
         win = wenum.getNext();
-        if index == count && win.MobileRemote.isReference == true
+        if index == count && win.Remifi.isReference == true
           win.close();
         count++
     

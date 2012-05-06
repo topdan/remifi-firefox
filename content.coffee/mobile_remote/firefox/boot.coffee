@@ -1,5 +1,5 @@
 class Boot
-  MobileRemote.Firefox.Boot = Boot
+  Remifi.Firefox.Boot = Boot
   
   constructor: () ->
     
@@ -8,26 +8,25 @@ class Boot
       @loadRemote()
       @checkForUpdates()
       @loadPageListener()
+      @installToolbarButton()
       @tryFirstSplashPage()
   
   unload: () ->
-    if MobileRemote.instance && MobileRemote.isReference != true
-      MobileRemote.instance.unload()
-      MobileRemote.instance = null
+    if Remifi.instance && Remifi.isReference != true
+      Remifi.instance.unload()
+      Remifi.instance = null
 
   loadRemote: () =>
-    env = new MobileRemote.Firefox.Env()
-    @remote = new MobileRemote.Base(env)
+    env = new Remifi.Firefox.Env()
+    @remote = new Remifi.Base(env)
     @remote.port = @port()
-    @remote.view = new MobileRemote.Firefox.View()
-    @remote.static = new MobileRemote.Static(@remote, '/content/static.json')
+    @remote.view = new Remifi.Firefox.View()
+    @remote.static = new Remifi.Static(@remote, '/content/static.json')
     
     @loadServer()
 
-    MobileRemote.instance = @remote
+    Remifi.instance = @remote
     @remote.load()
-
-    @tryFirstSplashPage()
 
   loadPageListener: () =>
     # https://developer.mozilla.org/en/Code_snippets/On_page_load
@@ -77,32 +76,38 @@ class Boot
       break unless wenum.hasMoreElements()
 
       win = wenum.getNext()
-      if win.MobileRemote.instance
-        MobileRemote.instance = win.MobileRemote.instance
-        MobileRemote.isReference = true
-        MobileRemote.instance.refresh()
+      if win.Remifi.instance
+        Remifi.instance = win.Remifi.instance
+        Remifi.isReference = true
+        Remifi.instance.refresh()
         return true
     false
   
   tryFirstSplashPage: () =>
-    firstSplash = "extensions.mobile-remote.firstSplash"
+    firstSplash = "extensions.remifi.firstSplash"
     return if Application.prefs.getValue(firstSplash, false)
     
     # won't work on the onLoad thread, not sure what event to hook into so just wait a bit
-    setTimeout ->
+    setTimeout =>
       Application.prefs.setValue(firstSplash, true)
       gBrowser.selectedTab = gBrowser.addTab "http://localhost:#{@remote.port}/getting-started/"
     , 1000
   
+  installToolbarButton: () =>
+    firstRunPref = "extensions.remifi.toolbarButtonAdded";
+    unless Application.prefs.getValue(firstRunPref, false)
+      Application.prefs.setValue(firstRunPref, true)
+      @remote.view.installButton 'nav-bar', 'remifi-button', 'home-button'
+  
   port: () =>
-    Application.prefs.getValue('extensions.mobile-remote.port', 6670)
+    Application.prefs.getValue('extensions.remifi.port', 6670)
   
   loadServer: () =>
-    @remote.server = new MobileRemote.Firefox.Server(@remote.port)
+    @remote.server = new Remifi.Firefox.Server(@remote.port)
     @remote.server.dynamicRequest = @remote.handleRequest
     @remote.server.getStaticFilePath = (request, response) =>
       fullpath = request.fullpath
-      if MobileRemote.startsWith(fullpath, '/static/')
+      if Remifi.startsWith(fullpath, '/static/')
         pos = fullpath.lastIndexOf("?")
         unless pos == -1
           fullpath = fullpath.substring(0, pos)

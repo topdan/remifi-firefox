@@ -1,5 +1,5 @@
 class Error
-  MobileRemote.Pages.Error = Error
+  Remifi.Pages.Error = Error
   
   constructor: (@remote) ->
   
@@ -7,7 +7,7 @@ class Error
     @remote.views (v) ->
       if request.isScript
         response.headers["Content-Type"] = 'text/javascript'
-        v.safeOut('mobileRemote.error("' + v.escape(v.escapeHTML(err)) + '")');
+        v.safeOut('remifi.error("' + v.escape(v.escapeHTML(err)) + '")');
       else
         v.page 'internal_error', ->
           v.toolbar();

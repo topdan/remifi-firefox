@@ -1,5 +1,5 @@
 class NoBody
-  MobileRemote.Pages.NoBody = NoBody
+  Remifi.Pages.NoBody = NoBody
   
   constructor: (@remote) ->
   
