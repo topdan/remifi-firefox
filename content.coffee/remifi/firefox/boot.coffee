@@ -98,6 +98,7 @@ class Boot
     unless Application.prefs.getValue(firstRunPref, false)
       Application.prefs.setValue(firstRunPref, true)
       @remote.view.installButton 'nav-bar', 'remifi-button', 'home-button'
+      @remote.refresh()
   
   port: () =>
     Application.prefs.getValue('extensions.remifi.port', 6670)
