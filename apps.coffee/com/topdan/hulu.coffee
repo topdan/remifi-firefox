@@ -25,6 +25,11 @@ route /^\/recent/, 'browse', ->
   action "prevPage"
   action "nextPage"
 
+route /^\/watch/, 'watch', ->
+  action 'playPause'
+  action 'toggleFullscreen'
+  action 'loadMoreEpisodes'
+
 route /^\/[^\/]+$/, 'tvShowOrMovie', ->
   action 'loadMoreEpisodes'
 
@@ -47,7 +52,7 @@ this.tvShow = (request) ->
     title = e.find('.video-info')
     thumb = e.find('.thumbnail')
     
-    r.title = e.children('a').text()
+    r.title = e.children('a.beaconid').text()
     r.url   = e.find('a').attr('href')
     r.image = thumb.attr('data-src') || thumb.attr('src')
     r.subtitle = title.text()
@@ -150,3 +155,27 @@ this.doSearch = (request) ->
   $('#video_search_term').val(request.params.q)
   $('#search_form').submit()
   wait()
+
+this.watch = (request) ->
+  button 'Play/Pause', 'playPause'
+  toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
+  
+  tvShowOrMovie(request)
+
+this.playPause = (request) ->
+  player().play()
+  watch(request)
+
+this.toggleFullscreen = (request) ->
+  player().toggleFullscreen()
+  watch(request)
+
+this.player = () ->
+  player = new Player('#player')
+
+  player.setBox({width: 'full', valign: 'bottom', height: 50})
+  player.setPlay({x: 15, y: 15, delay: 500})
+  player.setFullscreenOff({key: 'escape'})
+  player.setFullscreenOn({align: 'right', x: 24, y: 15})
+
+  player
