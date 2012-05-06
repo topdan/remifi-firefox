@@ -8,16 +8,16 @@
 route "/WiHome", "index", ->
   action "doSearch"
 
-route "/WiSearch", "search", ->
+route /\/(Wi)?Search/, "search", ->
   action "doSearch"
 
 route '/Queue', 'instantQueue', ->
   action "doSearch"
 
-route /^\/WiMovie/, 'movie', ->
+route /^\/(Wi)?Movie/i, 'movie', ->
   action 'selectSeason'
 
-route '/WiRoleDisplay', 'roleDisplay'
+route /\/(Wi)?RoleDisplay/, 'roleDisplay'
 
 route '/Quac', 'moreLike'
 
