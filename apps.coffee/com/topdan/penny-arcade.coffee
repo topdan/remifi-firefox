@@ -74,7 +74,7 @@ this.episode = (request) ->
     
     $('#iconNotes a').list (r) ->
       r.titleURL = $(this)
-      r.external = true
+      r.mobile = true
   
   else if $('#iconNotes li').length > 0
     title 'Episode Notes'
@@ -87,7 +87,7 @@ this.episode = (request) ->
     
     $('#iconMusic a').list (r) ->
       r.titleURL = $(this)
-      r.external = true
+      r.mobile = true
     
   
 this.player = () ->

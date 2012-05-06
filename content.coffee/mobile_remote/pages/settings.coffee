@@ -74,12 +74,12 @@ class Settings
           {
             title: "Created By Dan Cunning",
             url: "http://www.topdan.com",
-            external: true
+            mobile: true
           },
           {
             title: "Follow @itopdan",
             url: "http://www.twitter.com/itopdan",
-            external: true
+            mobile: true
           },
           {
             title: "Version: 0.1"
@@ -95,22 +95,22 @@ class Settings
           {
             title: "jQtouch",
             url: "http://www.jqtouch.com/",
-            external: true
+            mobile: true
           },
           {
             title: "Plain Old Webserver",
             url: "http://groups.google.com/group/firefoxpow",
-            external: true
+            mobile: true
           },
           {
             title: "Crystal Clear",
             url: "http://www.everaldo.com/crystal/",
-            external: true
+            mobile: true
           },
           {
             title: "borncold",
             url: "http://borncold.deviantart.com/",
-            external: true
+            mobile: true
           }
           {
             title: "App rights reserved to website owner"
