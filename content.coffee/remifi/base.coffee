@@ -5,7 +5,7 @@ class Base
     @view = null
     
     @version = @env.fileContent('/content/VERSION')
-    @xpiPath = "http://mobile-remote.topdan.com.s3.amazonaws.com/mobile-remote-edge.xpi"
+    @xpiPath = "http://files.remifi.com/firefox/edge.xpi"
     
     @pages = {}
     @pages.apps      = new Remifi.Pages.Apps(@)

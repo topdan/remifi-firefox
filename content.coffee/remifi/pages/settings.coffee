@@ -47,7 +47,7 @@ class Settings
         v.title("System Update")
 
         request = new XMLHttpRequest()
-        request.open('GET', 'http://mobile-remote.topdan.com/EDGE-VERSION', false)
+        request.open('GET', 'http://files.remifi.com/firefox/EDGE-VERSION', false)
         request.send(null)
 
         if request.status != 200

@@ -14,7 +14,7 @@ class Request
     smoothPath = this.cleanPath(path);
     # Components.utils.reportError(smoothPath);
     
-    uri = new Remifi.URI("http://mobile-remote.topdan.com#{smoothPath}")
+    uri = new Remifi.URI("http://local.remifi.com#{smoothPath}")
     @params = uri.queryKey;
     @path = uri.path;
     @isScript = Remifi.endsWith(@path, '.js');

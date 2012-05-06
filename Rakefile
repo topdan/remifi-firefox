@@ -83,9 +83,9 @@ namespace :plugin do
   
   desc 'upload the xpi to amazon s3'
   task :upload => ['s3:init'] do
-    xpi = File.join('mobile-remote.xpi')
-    s3_upload "mobile-remote-edge.xpi", xpi, :access => :public_read, :content_type => "application/x-xpinstall"
-    s3_upload 'EDGE-VERSION', version_file, :access => :public_read
+    xpi = File.join('remifi.xpi')
+    s3_upload "/firefox/edge.xpi", xpi, :access => :public_read, :content_type => "application/x-xpinstall"
+    s3_upload '/firefox/EDGE-VERSION', version_file, :access => :public_read
   end
   
   desc 'package and upload the xpi to amazon s3'
@@ -96,7 +96,7 @@ namespace :plugin do
   desc 'remove all the plugin build files'
   task :clean => 'plugin:static:clean' do
     FileUtils.rm(version_file)
-    FileUtils.rm('mobile-remote.xpi')
+    FileUtils.rm('remifi.xpi')
   end
   
   namespace :static do

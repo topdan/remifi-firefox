@@ -15,4 +15,4 @@ content/remifi/utils/*.js
 content/remifi/views/*.js
 content/static.json
 content/VERSION
-mobile-remote.xpi
+remifi.xpi
