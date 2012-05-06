@@ -2,9 +2,12 @@ class Static
   MobileRemote.Static = Static
   
   constructor: (@remote, @filename) ->
-    @timestamps = JSON.parse @remote.env.fileContent(@filename)
+    try
+      @timestamps = JSON.parse @remote.env.fileContent(@filename)
   
   urlFor: (filename) =>
+    return filename unless @timestamps
+    
     timestamp = @timestamps[filename]
     if timestamp
       "#{filename}?#{timestamp}"

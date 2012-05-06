@@ -102,7 +102,7 @@ class Boot
       if MobileRemote.startsWith(fullpath, '/static/')
         pos = fullpath.lastIndexOf("?")
         fullpath = fullpath.substring(0, pos) unless pos == -1
-        @response.headers['Expires'] = "Thu, 31 Dec 2037 23:55:55 GMT" unless @remote.env.isDevMode
+        response.headers['Expires'] = "Thu, 31 Dec 2037 23:55:55 GMT" unless @remote.env.isDevMode
         @remote.env.extensionPath + fullpath
     
   
