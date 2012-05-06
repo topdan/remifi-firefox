@@ -81,7 +81,7 @@ class Server
       
       @setupRequest(rawHeaders)
       
-      staticPath = @server.getStaticFilePath(@request)
+      staticPath = @server.getStaticFilePath(@request, @response)
       if staticPath
         @respondWithFile(staticPath)
       else

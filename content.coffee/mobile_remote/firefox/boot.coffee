@@ -20,7 +20,8 @@ class Boot
     @remote = new MobileRemote.Base(env)
     @remote.port = @port()
     @remote.view = new MobileRemote.Firefox.View()
-
+    @remote.static = new MobileRemote.Static(@remote, '/content/static.json')
+    
     @loadServer()
 
     MobileRemote.instance = @remote
@@ -33,9 +34,7 @@ class Boot
     appcontent = document.getElementById("appcontent")
     if appcontent
       pageLoad = (e) =>
-        doc = e.originalTarget
-        Components.utils.reportError "Load #{doc.location.href}"
-        doc.remifiIsLoaded = true
+        e.originalTarget.remifiIsLoaded = true
       
       appcontent.addEventListener("DOMContentLoaded", pageLoad, true)
 
@@ -60,10 +59,9 @@ class Boot
         Components.utils.reportError "Checking for updates failed: #{request.status}"
         
       else if request.responseText == @remote.version
-        Components.utils.reportError "No updates detected!"
+        # great, no updates
         
       else
-        Components.utils.reportError "Updates detected!"
         @remote.updateAvailable = true
     
     request.send(null)
@@ -99,8 +97,12 @@ class Boot
   loadServer: () =>
     @remote.server = new MobileRemote.Firefox.Server(@remote.port)
     @remote.server.dynamicRequest = @remote.handleRequest
-    @remote.server.getStaticFilePath = (request) =>
-      if MobileRemote.startsWith(request.fullpath, '/static/')
-        @remote.env.extensionPath + request.fullpath
+    @remote.server.getStaticFilePath = (request, response) =>
+      fullpath = request.fullpath
+      if MobileRemote.startsWith(fullpath, '/static/')
+        pos = fullpath.lastIndexOf("?")
+        fullpath = fullpath.substring(0, pos) unless pos == -1
+        @response.headers['Expires'] = "Thu, 31 Dec 2037 23:55:55 GMT" unless @remote.env.isDevMode
+        @remote.env.extensionPath + fullpath
     
   

@@ -3,7 +3,6 @@ require 'aws/s3'
 require 'yaml'
 require 'json'
 require 'fileutils'
-require 'digest/md5'
 
 def version_file
   File.join('content', 'VERSION')
@@ -109,8 +108,7 @@ namespace :plugin do
       Dir[folder_files].each do |file|
         next if File.directory?(file)
         
-        content = File.open(file, 'rb') {|f| f.read }
-        files["/#{file}"] = Digest::MD5.hexdigest content
+        files["/#{file}"] = File.mtime(file).to_i
       end
       
       File.open(static_manifest_file, 'w') {|f| f.write files.to_json }

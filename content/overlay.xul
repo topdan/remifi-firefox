@@ -41,6 +41,7 @@
   
   <script src="mobile_remote/utils/jquery-1.7.js"/>
   <script src="mobile_remote/utils/microtemplate.js"/>
+  <script src="mobile_remote/utils/static.js"/>
   <script src="mobile_remote/utils/string.js"/>
   <script src="mobile_remote/utils/uri.js"/>
   

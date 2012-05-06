@@ -69,5 +69,5 @@ class Controller
       @layout = MobileRemote.microtemplate(code)
     
     views = new MobileRemote.Views.Base(@remote.env);
-    @layout({body: body, views: views});
+    @layout({body: body, views: views, urlFor: @remote.static.urlFor});
     
