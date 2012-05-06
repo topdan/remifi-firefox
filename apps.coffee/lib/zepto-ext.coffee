@@ -13,7 +13,7 @@ Zepto.fn.list = (callback, options) ->
         page = parseInt(request.anchor.substring(position + '+remotePage'.length))
     
     page ||= 1
-    pagelessAnchor ||= request.anchor
+    pagelessAnchor ||= request.anchor unless typeof pagelessAnchor == 'string'
     maxItem = page * perPage
     minItem = maxItem - perPage
     maxPage = Math.ceil(@length / perPage)

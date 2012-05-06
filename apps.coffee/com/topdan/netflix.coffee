@@ -78,6 +78,7 @@ this.instantQueue = (request) ->
     e = $(this)
     r.title = e.find('.title a').text()
     r.url   = e.find('.title a').attr('href')
+  , perPage: 100
 
 this.movie = (request) ->
   title $('h2').text()
