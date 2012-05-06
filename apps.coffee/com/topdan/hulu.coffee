@@ -29,7 +29,7 @@ route /^\/[^\/]+$/, 'tvShowOrMovie', ->
   action 'loadMoreEpisodes'
 
 this.tvShowOrMovie = (request) ->
-  if $('#episode-container').length > 0
+  if $('#full-episode-container,#episode-container').length > 0
     tvShow(request)
   else
     movie(request)
@@ -37,7 +37,12 @@ this.tvShowOrMovie = (request) ->
 this.tvShow = (request) ->
   title($('meta[property="og:title"]').attr('content'))
   
-  $('#episode-container .vsl li').list (r) ->
+  if $('#full-episode-container').length > 0
+    baseId = '#full-episode-container'
+  else
+    baseId = '#episode-container'
+  
+  $("#{baseId} .vsl li").list (r) ->
     e = $(this)
     title = e.find('.video-info')
     thumb = e.find('.thumbnail')
@@ -47,12 +52,17 @@ this.tvShow = (request) ->
     r.image = thumb.attr('data-src') || thumb.attr('src')
     r.subtitle = title.text()
   
-  nextUrl = 'loadMoreEpisodes' if $('#episode-container .pages li.next').length > 0
+  nextUrl = 'loadMoreEpisodes' if $("#{baseId} .pages li.next").length > 0
   
   paginate([{name: 'next', url: nextUrl}])
 
 this.loadMoreEpisodes = (request) ->
-  elem = $('#episode-container .pages li.next')
+  if $('#full-episode-container').length > 0
+    baseId = '#full-episode-container'
+  else
+    baseId = '#episode-container'
+  
+  elem = $("#{baseId} .pages li.next")
   clickOn(elem)
   wait ms: 500
 
