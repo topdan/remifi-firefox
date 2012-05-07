@@ -26,7 +26,7 @@ class Boot
     @loadServer()
 
     Remifi.instance = @remote
-    @remote.load()
+    @remote.load() if Application.prefs.getValue(@remote.onSetting, true)
 
   loadPageListener: () =>
     # https://developer.mozilla.org/en/Code_snippets/On_page_load

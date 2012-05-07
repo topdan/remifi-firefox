@@ -7,6 +7,8 @@ class Base
     @version = @env.fileContent('/content/VERSION')
     @xpiPath = "http://files.remifi.com/firefox/edge.xpi"
     
+    @onSetting = "extensions.remifi.onByDefault"
+    
     @pages = {}
     @pages.apps      = new Remifi.Pages.Apps(@)
     @pages.home      = new Remifi.Pages.Home(@)
@@ -74,8 +76,10 @@ class Base
   
   toggle: =>
     if @server.isRunning
+      Application.prefs.setValue(@onSetting, false)
       @unload()
     else
+      Application.prefs.setValue(@onSetting, true)
       @load()
   
   refresh: =>
