@@ -34,7 +34,7 @@ table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-siz
 #jqt ul.list.striped li.even { background-color: rgba(100, 100, 100, 0.2); }
 
 #jqt .remote-page h1 { font-size: 450%; }
-#jqt .remote-page p { margin: 10px 20px 6px; font-size: 200%; }
+#jqt .remote-page p { margin: 10px 20px 6px; font-size: 200%; line-height: 50px; text-align: left; }
 #jqt .remote-page ul { font-size: 150%; }
 
 #jqt li.paginate-container { padding: 0; }
