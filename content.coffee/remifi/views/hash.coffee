@@ -50,6 +50,7 @@ class Hash
       id = @p.actionUrlForPage(hash.id || @p.pageCount)
       p = @p
       @p.view.page id, ->
+        p.view.toolbar()
         p.performArray(hash.content, p.pageTypes) if hash.content
   
     toolbar: (hash) =>

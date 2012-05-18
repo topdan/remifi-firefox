@@ -26,7 +26,6 @@ class this.Player
       elemHeight = @elem.height()
       elemWidth  = @elem.width()
       
-      # TODO remove the hardcoded height of the toolbars
       @top = window.browserY + elemOffset.top
       @left = window.browserX + elemOffset.left
       @height = elemHeight

@@ -3,13 +3,9 @@
 ensurePage = ->
   if @pages.content.length == 0
     @pages.content.push({type: 'page', content: []});
-    
-    toolbar()
 
 this.page = (id, callback) ->
   @pages.content.push({type: 'page', id: id, content: []})
-  
-  toolbar()
   
   callback()
 
@@ -20,9 +16,6 @@ this.currentPage = ->
 this.fullscreen = (bool) ->
   document.isFullscreen = bool == true
   currentPage().push({type: 'fullscreen', value: document.isFullscreen})
-
-this.toolbar = ->
-  currentPage().push({type: 'toolbar'})
 
 this.title = (name) ->
   name = name.text() if typeof name == 'object' && name['text']
