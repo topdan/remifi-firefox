@@ -8,6 +8,7 @@ class Hash
     @formTypes = new FormTypes(@)
   
   perform: (items) =>
+    items = @polishRootItems(items)
     type = items.type;
 
     if type == 'wait'
@@ -18,6 +19,19 @@ class Hash
       @app.remote.views (v) ->
         p.view = v
         p.performArray(items.content, p.pageTypes);
+
+  polishRootItems: (items) =>
+    type = items.type
+    unless type == 'wait' || type == 'pages'
+      items = [items] unless items instanceof Array
+      items = {
+        type: 'pages'
+        content: [
+          type: 'page'
+          content: items
+        ]
+      }
+    items
 
   performArray: (array, types) =>
     for item in array
