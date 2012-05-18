@@ -43,7 +43,7 @@ class Boot
       progressListener.onStateChange = (aWebProgress, aRequest, aFlag, aStatus) =>
         if aFlag & stateStart
           @remote.currentDocument().remifiIsLoaded = null
-        else if aFlag & stateStart
+        else if aFlag & stateStop
           @remote.currentDocument().remifiIsLoaded = true
       
       gBrowser.addProgressListener progressListener
