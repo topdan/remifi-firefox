@@ -8,6 +8,8 @@
 route "/WiHome", "index", ->
   action "doSearch"
 
+route '/WiRecentAdditions', 'movies'
+
 route /\/(Wi)?Search/, "search", ->
   action "doSearch"
 
@@ -35,6 +37,9 @@ this.index = (request) ->
     { title: "New Arrivals", url: "http://movies.netflix.com/WiRecentAdditions" },
     { title: "Suggestions for You", url: "http://movies.netflix.com/RecommendationsHome" },
   ]
+  
+  # throw $('.agMovie').length
+  movies(request)
 
 this.searchForm = () ->
   value = $('#searchField').val()
@@ -118,6 +123,12 @@ this.moreLike = (request) ->
 
   button 'Move to position #1', $('.queueMoveToTop a').attr('href')
   movieSet(request)
+
+this.movies = (request) ->
+  $('.agMovie').list (r) ->
+    r.title = $(this).find('.title a').text()
+    r.url   = $(this).find('.title a').attr('href')
+    r.image = $(this).find('.boxShot img').attr('src')
 
 this.movieSet = (request) ->
   $('.agMovieSet .agMovie').list (r) ->
