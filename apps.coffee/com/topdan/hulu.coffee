@@ -137,7 +137,16 @@ this.results = (selector) ->
     r.title = title.text()
     r.url   = title.attr('href')
     r.image = thumb.attr('data-src') || thumb.attr('src')
-  
+    
+    if r.title == null && e.find('.playlist-bar').length > 0
+      home = e.find('.home-thumb')
+      div = home.children('div').get(1)
+      if div
+        div = $(div)
+        r.title = div.text()
+        r.url = div.find('a')
+        r.subtitle = "Playlist"
+    
   paginate [
     {name: 'prev', url: 'prevPage'},
     {name: 'next', url: 'nextPage'},
