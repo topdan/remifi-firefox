@@ -54,7 +54,14 @@ class Controls
 
   visit: (request, response) =>
     url = @polishURL(request.params["url"]);
-    @remote.currentBrowser().contentDocument.location.href = url if url
+    try
+      @remote.currentBrowser().contentDocument.location.href = url if url
+    catch err
+      return @remote.views (v) ->
+        v.page 'controls', ->
+          v.toolbar()
+          v.error "Invalid URL: #{url}"
+      
     @wait('/', request, response);
 
   search: (request, response) =>
