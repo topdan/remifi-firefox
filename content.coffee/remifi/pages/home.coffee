@@ -23,6 +23,12 @@ class Home
             icon: {url: @remote.static.urlFor('/static/images/gears.png')}
           },
           {
+            title: "subscribe",
+            url: "http://www.remifi.com/subscribe.html",
+            icon: {url: @remote.static.urlFor('/static/images/icon.png')},
+            mobile: true
+          },
+          {
             title: "youtube",
             url: "/controls/visit.html?url=http://www.youtube.com",
             icon: {url: @remote.static.urlFor('/static/images/youtube.png')}
