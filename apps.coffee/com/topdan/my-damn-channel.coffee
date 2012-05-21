@@ -81,7 +81,6 @@ this.player = () ->
   else
     player.setPlay({valign: 'bottom', x: 12, y: 19, delay: 500})
   
-  player.setFullscreenOff({key: 'escape'})
   player.setFullscreenOn({align: 'right', x: 12, y: 19})
 
   player

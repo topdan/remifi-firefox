@@ -8,7 +8,6 @@ class VimeoPlayer extends Player
     
     @setBox({width: 'full', valign: 'bottom', height: 42})
     @setPlay({x: 41, y: 20})
-    @setFullscreenOff({key: 'escape'})
     @setFullscreenOn({align: 'right', x: 35, y: 18})
   
   controls: =>

@@ -16,7 +16,6 @@ class YouTubePlayer extends Player
       @setSeek({x1: 5, x2: @box.width, y: 3, delay: 250})
       @setPlay({x: 29, y: 25})
 
-    @setFullscreenOff({key: 'escape'})
     @setFullscreenOn({align: 'right', x: 17, y: 23})
   
   controls: =>

@@ -8,6 +8,10 @@ class this.Player
     @buttons = {}
     @lines = {}
     
+    @setFullscreenOff key: 'escape'
+    @initBox()
+  
+  initBox: =>
     if @isFullscreen
       @left = 0
       @top = 0
@@ -15,7 +19,7 @@ class this.Player
       @height = screen.height - 1
 
     else
-      @elem = $(selector)
+      @elem = $(@selector)
       
       if @elem.length == 0
         @error = true
