@@ -72,6 +72,10 @@ class Settings
 
         v.list [
           {
+            title: "Home: remifi.com",
+            url: "http://www.remifi.com"
+          },
+          {
             title: "Created By Dan Cunning",
             url: "http://www.topdan.com",
             mobile: true
@@ -82,7 +86,8 @@ class Settings
             mobile: true
           },
           {
-            title: "Version: 0.1"
+            title: "Version: 0.1",
+            url: '/settings/update.html'
           }
         ], striped: true
         

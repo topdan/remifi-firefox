@@ -22,6 +22,7 @@ class Apps
       new Remifi.App.Sandbox(@remote, 'com.topdan.penny-arcade'),
       new Remifi.App.Sandbox(@remote, 'com.topdan.my-damn-channel'),
       new Remifi.App.Sandbox(@remote, 'com.topdan.grooveshark'),
+      new Remifi.App.Sandbox(@remote, 'com.topdan.remifi'),
     ]
   
   render: (request, response) =>

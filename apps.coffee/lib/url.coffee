@@ -1,13 +1,18 @@
 this.externalURL = (url) ->
   return null if @request == null || url == null || typeof url == "undefined"
   
+  if @request.port == '80'
+    host = @request.host
+  else
+    host = "#{@request.host}:#{@request.port}"
+  
   # absolute url using same protocol
   if url.match(/^\/\//)
     @request.protocol + ":" + url
     
   # absolute path with same protocol and host
   else if url.match(/^\//)
-    @request.protocol + "://" + @request.host + url;
+    @request.protocol + "://" + host + url;
     
   # absolute url
   else if url.match(/^http:\/\//) || (url.match(/^https:\/\//))
@@ -15,13 +20,13 @@ this.externalURL = (url) ->
   
   # page anchor
   else if url.match(/^#/)
-    @request.protocol + "://" + @request.host + @request.path + url
+    @request.protocol + "://" + host + @request.path + url
     
   # relative url
   else
     i = @request.path.lastIndexOf('/');
     dir = @request.path.substring(0, i);
-    @request.protocol + "://" + @request.host + dir + '/' + url
+    @request.protocol + "://" + host + dir + '/' + url
 
 class URI
   constructor: (@str) ->
