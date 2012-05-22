@@ -9,14 +9,14 @@
 route '/', 'index'
 
 route "/", "index", ->
-  action 'playPause'
-  action 'startOver'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'startOver', on: 'player'
+  action 'toggleFullscreen', on: 'player'
 
 route /.*/, 'video', ->
-  action 'playPause'
-  action 'startOver'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'startOver', on: 'player'
+  action 'toggleFullscreen', on: 'player'
 
 this.dashize = (string) ->
   string.toLowerCase().
@@ -93,16 +93,4 @@ this.video = (request) ->
 
 this.player = () ->
   new YouTubePlayer('#main-video-link,.youtube-video')
-
-this.playPause = (request) ->
-  player().play()
-  video(request)
-
-this.startOver = (request) ->
-  player().seek(0)
-  video(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  video(request)
 

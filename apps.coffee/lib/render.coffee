@@ -16,7 +16,19 @@ this.isPerformed = ->
 
 this.wait = (options) ->
   options ||= {}
+  @preventDefault()
   @waitOptions = options
+
+this.performRender = (request, handler, name) ->
+  if typeof handler == 'function'
+    handler(request)
+  else if name == 'action'
+    throw "Action not found for #{request.action}"
+  else
+    throw "View not found for #{request.path}"
+
+this.preventDefault = () ->
+  isPreventDefault = true
 
 this.render = (request) ->
   @request = request
@@ -32,17 +44,19 @@ this.render = (request) ->
       $.each route.actions, (index, a) ->
         action = a if request.action == a.name
     
-    handler = null
+    this.isPreventDefault = false
     if action
-      handler = this[action.funcName]
-    else
-      handler = this[route.funcName]
+      if action.source
+        source = this[action.source]
+        throw "Action source not found #{action.source}" unless source
+        source = source()
+      else
+        source = this
       
-    if typeof handler == 'function'
-      handler(request)
-    else
-      throw "View not found for " + request.path
-  
+      performRender request, source[action.funcName], 'action'
+    
+    performRender request, this[route.funcName], 'view' unless this.isPreventDefault
+    
   @request = null;
   
   if @waitOptions

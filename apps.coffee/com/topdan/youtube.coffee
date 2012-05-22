@@ -13,9 +13,9 @@ route "/results", "results", ->
   action "doSearch"
 
 route "/watch", "watch", ->
-  action 'playPause'
-  action 'startOver'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'startOver', on: 'player'
+  action 'toggleFullscreen', on: 'player'
 
 route /\/user\/[^\/]+$/, 'user'
 route /\/user\/[^\/]+\/videos$/, 'userVideos'
@@ -112,15 +112,3 @@ this.watch = (request) ->
 
 this.player = () ->
   new YouTubePlayer('#movie_player-flash,#movie_player,#movie_player-html5')
-
-this.playPause = (request) ->
-  player().play()
-  watch(request)
-
-this.startOver = (request) ->
-  player().seek(0)
-  watch(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  watch(request)

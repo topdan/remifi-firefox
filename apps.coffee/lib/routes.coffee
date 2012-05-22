@@ -30,9 +30,10 @@ this.route = (path, funcName, options, block) ->
   
   @routes.push(route)
 
-this.action = (name, funcName) ->
-  funcName ||= name
-  action = {name: name, funcName: funcName}
+this.action = (name, options) ->
+  options ||= {}
+  funcName = options.function || name
+  action = {name: name, funcName: funcName, source: options.on}
   if @currentRoute
     @currentRoute.actions.push(action)
   else

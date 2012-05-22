@@ -7,8 +7,8 @@
 
 route '/', 'index'
 route //, 'episode', ->
-  action 'playPause'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
   action 'seriesPrev'
   action 'seriesNext'
 
@@ -84,11 +84,3 @@ this.player = () ->
   player.setFullscreenOn({align: 'right', x: 12, y: 19})
 
   player
-
-this.playPause = (request) ->
-  player().play()
-  episode(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  episode(request)

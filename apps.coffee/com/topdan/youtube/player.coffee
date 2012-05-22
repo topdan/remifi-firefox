@@ -26,6 +26,9 @@ class YouTubePlayer extends Player
   playButton: () =>
     button('Play/Pause', @playAction)
   
+  startOver: () =>
+    @seek(0)
+  
   startOverButton: =>
     if @isFullscreen
       button 'Start Over', @startOverAction, disabled: 'Exit fullscreen first'

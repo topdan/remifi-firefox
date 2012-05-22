@@ -26,8 +26,8 @@ route /^\/recent/, 'browse', ->
   action "nextPage"
 
 route /^\/watch/, 'watch', ->
-  action 'playPause'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
   action 'loadMoreEpisodes'
 
 route /^\/[^\/]+$/, 'tvShowOrMovie', ->
@@ -170,14 +170,6 @@ this.watch = (request) ->
   toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
   
   tvShowOrMovie(request)
-
-this.playPause = (request) ->
-  player().play()
-  watch(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  watch(request)
 
 this.player = () ->
   player = new Player('#player')

@@ -8,12 +8,12 @@
 
 route '/', 'index', ->
   action 'selectFeatured'
-  action 'playPause'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
 
 route /.*/, 'videoPage', ->
-  action 'playPause'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
 
 this.index = (request) ->
   video(request)
@@ -45,14 +45,6 @@ this.video = (request) ->
   button('Play/Pause', 'playPause')
   toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
   featuredVideos(request)
-
-this.playPause = (request) ->
-  player().play()
-  video(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  video(request)
 
 this.player = () ->
   new VimeoPlayer('#featured_player,#video')

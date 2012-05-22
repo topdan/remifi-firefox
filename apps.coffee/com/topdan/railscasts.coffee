@@ -13,8 +13,8 @@ route '/episodes', 'search', ->
 
 route /^\/episodes\//, 'episodeOrVideo', ->
   action 'startEpisode'
-  action 'playPause'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
   
 this.index = (request) ->
   page 'index', ->
@@ -117,11 +117,3 @@ this.player = () ->
   player.setFullscreenOn({align: 'right', x: 15, y: 15})
 
   player
-
-this.playPause = (request) ->
-  player().play()
-  video(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  video(request)

@@ -9,8 +9,8 @@ route '/patv', 'patv'
 route /^\/patv\/show\/[^\/]+$/, 'show', ->
   action 'selectSeason'
 route /^\/patv\/episode\/[^\/]+$/, 'episode', ->
-  action 'playPause'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
 
 this.patv = (request) ->
   title $('title')
@@ -98,11 +98,3 @@ this.player = () ->
   player.setFullscreenOn({align: 'right', x: 65, y: 15})
 
   player
-
-this.playPause = (request) ->
-  player().play()
-  episode(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  episode(request)

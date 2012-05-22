@@ -15,8 +15,8 @@ route /^\/[^\/]+$/, 'show'
 route /^\/search\//, 'search'
 
 route /^\/[^\/]+\/[^\/]+$/, 'video', ->
-  action 'playPause'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
   action 'previousVideo'
   action 'nextVideo'
 
@@ -78,14 +78,6 @@ this.video = (request) ->
     {name: 'prev', url: 'previousVideo'},
     {name: 'next', url: 'nextVideo'},
   ]
-
-this.playPause = (request) ->
-  player().play()
-  video(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  video(request)
 
 this.previousVideo = (request) ->
   clickOn $('#prevEpisodeButton')

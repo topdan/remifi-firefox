@@ -12,8 +12,8 @@ route '/', 'index', ->
 
 route '/search', 'search'
 route /^\/talks\//, 'talk', ->
-  action 'playPause'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
 
 route /^\/speakers\//, 'speaker'
 route /^\/themes\//, 'theme'
@@ -89,11 +89,3 @@ this.player = () ->
     player.setPlay({x: 42, y: 58, valign: 'bottom'})
     player.setFullscreenOn({align: 'right', x: 23, y: 17})
     player
-
-this.playPause = (request) ->
-  player().play()
-  talk(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  talk(request)

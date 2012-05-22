@@ -15,8 +15,8 @@ route /^\/full-episodes\/season-[^\/]+$/, 'season'
 route /^\/full-episodes\/special$/, 'season'
 
 route /^\/full-episodes\/.*/, 'episode', ->
-  action 'playPause'
-  action 'toggleFullscreen'
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
 
 this.index = (request) ->
   if hasSearchResults()
@@ -79,14 +79,6 @@ this.episode = (request) ->
   button 'Play/Pause', 'playPause'
   toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
   season request
-
-this.playPause = (request) ->
-  player().play()
-  episode(request)
-
-this.toggleFullscreen = (request) ->
-  player().toggleFullscreen()
-  episode(request)
 
 this.player = () ->
   player = new Player('#mtvnPlayer')

@@ -43,6 +43,9 @@ class this.Player
   play: =>
     @clickButton('play')
   
+  playPause: =>
+    @clickButton('play')
+  
   fullscreenOn: =>
     @clickButton('fullscreen-on')
   
