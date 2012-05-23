@@ -1,7 +1,8 @@
-require 'rubygems'
-require 'aws/s3'
+require 'bundler'
+Bundler.setup
+Bundler.require(:default)
+
 require 'yaml'
-require 'json'
 require 'fileutils'
 
 def version_file
