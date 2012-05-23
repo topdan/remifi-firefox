@@ -37,7 +37,7 @@ class Controls
 
   stop: (request, response) =>
     @remote.currentBrowser().stop();
-    @remote.pages.apps.render(request, response);
+    @remote.pages.sites.render(request, response);
 
   refresh: (request, response) =>
     doc = @remote.currentBrowser().contentDocument;

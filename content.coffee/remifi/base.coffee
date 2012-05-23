@@ -10,7 +10,7 @@ class Base
     @onSetting = "extensions.remifi.onByDefault"
     
     @pages = {}
-    @pages.apps      = new Remifi.Pages.Apps(@)
+    @pages.sites      = new Remifi.Pages.Sites(@)
     @pages.home      = new Remifi.Pages.Home(@)
     @pages.tabs      = new Remifi.Pages.Tabs(@)
     @pages.windows   = new Remifi.Pages.Windows(@)

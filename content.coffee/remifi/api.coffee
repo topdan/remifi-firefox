@@ -3,10 +3,10 @@
 // which I'm not sure how to do via coffeescript
 // so this is a bit of a hack-indirection
 
-Remifi.Api = function(app) {
+Remifi.Api = function(site) {
   
   this.createSandbox = function(url, options) {
-    sandbox = app.remote.createSandbox(url, options)
+    sandbox = site.remote.createSandbox(url, options)
     sandbox.importFunction(crossDomainGet)
     return sandbox;
   }
@@ -19,7 +19,7 @@ Remifi.Api = function(app) {
       return null;
   
     var uri = new Remifi.URI(url);
-    if (app.crossDomains.indexOf(uri.host) == -1)
+    if (site.crossDomains.indexOf(uri.host) == -1)
       return null;
   
     var request = new XMLHttpRequest();

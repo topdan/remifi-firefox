@@ -19,12 +19,12 @@ class Tabs
   open: (request, response) =>
     index = request.params["index"]
     @remote.currentBrowser().selectTabAtIndex(index) if index
-    @remote.pages.apps.render(request, response)
+    @remote.pages.sites.render(request, response)
 
   add: (request, response) =>
     url = @remote.pages.controls.polishURL(request.params["url"]) || ""
     gBrowser.selectedTab = @remote.currentBrowser().addTab(url)
-    @remote.pages.apps.render(request, response)
+    @remote.pages.sites.render(request, response)
 
   close: (request, response) =>
     currentWindow = @remote.currentWindow()

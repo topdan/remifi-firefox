@@ -18,4 +18,4 @@ class Error
           
           v.br();
           v.br();
-          v.button('Use Mouse App', '/mouse/index.html', {type: 'primary'})
+          v.button('Use Mouse instead', '/mouse/index.html', {type: 'primary'})

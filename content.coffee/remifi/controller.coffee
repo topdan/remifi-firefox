@@ -12,7 +12,7 @@ class Controller
     body = null
     
     try
-      # if (page == @remote.pages.apps && doc.remifiError)
+      # if (page == @remote.pages.sites && doc.remifiError)
       #   body = @remote.pages.mouse.index(doc.remifiError, request, response)
       # else
       body = page.render(request, response)
@@ -41,7 +41,7 @@ class Controller
     if request.path == "/home.html"
       @remote.pages.home;
     else if request.path == "/" || Remifi.startsWith(request.path, '/sites/')
-      @remote.pages.apps;
+      @remote.pages.sites;
     else if Remifi.startsWith(request.path, '/tabs/')
       @remote.pages.tabs;
     else if Remifi.startsWith(request.path, '/windows/')

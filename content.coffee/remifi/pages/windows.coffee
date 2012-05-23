@@ -31,7 +31,7 @@ class Windows
         win.focus() if index == count
         count++
 
-    @remote.pages.apps.render(request, response);
+    @remote.pages.sites.render(request, response);
 
   add: (request, response) =>
     # window.open("chrome://to/your/window.xul", windowName, "features");
@@ -43,7 +43,7 @@ class Windows
     else
       window.open();
 
-    @remote.pages.apps.render(request, response);
+    @remote.pages.sites.render(request, response);
 
   close: (request, response) =>
     index = parseInt(request.params["index"]);

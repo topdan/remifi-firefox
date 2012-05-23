@@ -11,16 +11,12 @@
   <script src="remifi/request.js"/>
   <script src="remifi/response.js"/>
   
-  <script src="remifi/app/about.js"/>
-  <script src="remifi/app/localhost.js"/>
-  <script src="remifi/app/sandbox.js"/>
-  
   <script src="remifi/firefox/boot.js"/>
   <script src="remifi/firefox/env.js"/>
   <script src="remifi/firefox/server.js"/>
   <script src="remifi/firefox/view.js"/>
   
-  <script src="remifi/pages/apps.js"/>
+  <script src="remifi/pages/sites.js"/>
   <script src="remifi/pages/bookmarklets.js"/>
   <script src="remifi/pages/controls.js"/>
   <script src="remifi/pages/error.js"/>
@@ -33,6 +29,10 @@
   <script src="remifi/pages/settings.js"/>
   <script src="remifi/pages/tabs.js"/>
   <script src="remifi/pages/windows.js"/>
+  
+  <script src="remifi/site/about.js"/>
+  <script src="remifi/site/localhost.js"/>
+  <script src="remifi/site/sandbox.js"/>
   
   <script src="remifi/views/base.js"/>
   <script src="remifi/views/form.js"/>

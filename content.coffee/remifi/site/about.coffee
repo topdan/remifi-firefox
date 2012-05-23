@@ -1,5 +1,5 @@
 class About
-  Remifi.App.About = About
+  Remifi.Site.About = About
   
   constructor: (@remote) ->
   

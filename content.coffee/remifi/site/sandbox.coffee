@@ -1,5 +1,5 @@
 class Sandbox
-  Remifi.App.Sandbox = Sandbox
+  Remifi.Site.Sandbox = Sandbox
   
   constructor: (@remote, @name) ->
     @remote = remote
@@ -61,7 +61,7 @@ class Sandbox
   
   createSandbox: ->
     sandbox = @api.createSandbox(null, {zepto: true})
-    @evalInSandbox('app', "app = #{JSON.stringify({name: @name})}", sandbox)
+    @evalInSandbox('site', "site = #{JSON.stringify({name: @name})}", sandbox)
     
     @importFiles(sandbox, @imports)
     

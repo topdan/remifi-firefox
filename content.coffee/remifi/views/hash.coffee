@@ -1,7 +1,7 @@
 class Hash
   Remifi.Views.Hash = Hash
   
-  constructor: (@app, @request, @response) ->
+  constructor: (@site, @request, @response) ->
     @pageCount = 0
     @view = null
     @pageTypes = new PageTypes(@)
@@ -12,11 +12,11 @@ class Hash
     type = items.type;
 
     if type == 'wait'
-      @app.remote.pages.controls.wait('/', @request, @response, ms: items.ms)
+      @site.remote.pages.controls.wait('/', @request, @response, ms: items.ms)
 
     else if type == 'pages' && typeof items.content == "object" && items.content.length > 0
       p = @
-      @app.remote.views (v) ->
+      @site.remote.views (v) ->
         p.view = v
         p.performArray(items.content, p.pageTypes);
 
@@ -49,11 +49,11 @@ class Hash
     else if Remifi.startsWith(action, '#')
       '#' + @actionUrlForPage action.substring(1)
     else
-      '/sites/' + @app.name + '/' + action
+      '/sites/' + @site.name + '/' + action
   
   actionUrlForPage: (page) =>
-    @app.pageName ||= @app.name.replace(/[\.\/\_]/g, '-')
-    "#{@app.pageName}-#{page}"
+    @site.pageName ||= @site.name.replace(/[\.\/\_]/g, '-')
+    "#{@site.pageName}-#{page}"
   
   class PageTypes
     
@@ -89,9 +89,9 @@ class Hash
 
       switch action
         when 'click'
-          @p.app.remote.pages.mouse.action('click', delay, x, y);
+          @p.site.remote.pages.mouse.action('click', delay, x, y);
         when 'over'
-          @p.app.remote.pages.mouse.action('over', delay, x, y);
+          @p.site.remote.pages.mouse.action('over', delay, x, y);
 
     keyboard: (hash) =>
       action = hash.action;
@@ -99,10 +99,10 @@ class Hash
 
       switch action
         when 'press'
-          @p.app.remote.pages.keyboard.press(hash.key);
+          @p.site.remote.pages.keyboard.press(hash.key);
 
     fullscreen: (hash) =>
-      @p.app.remote.currentDocument().remifiFullscreen = hash.value == true
+      @p.site.remote.currentDocument().remifiFullscreen = hash.value == true
 
     br: (hash) =>
       @p.view.br()

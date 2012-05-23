@@ -2,7 +2,7 @@
 window.Remifi = {};
 
 class Overlay
-  Remifi.App = {};
+  Remifi.Site = {};
   Remifi.Firefox = {};
   Remifi.Pages = {};
   Remifi.Util = {};

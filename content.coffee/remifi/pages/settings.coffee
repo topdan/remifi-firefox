@@ -57,7 +57,7 @@ class Settings
           v.info("You have the most up-to-date version of the mobile remote")
 
         else
-          v.info("There is an updated version of the mobile remote. Use the mouse app to agree to install the new version when the download is finished.")
+          v.info("There is an updated version of the mobile remote. Use the mouse to agree to install the new version when the download is finished.")
           v.br()
           v.button("Get the Update", remote.xpiPath, {type: "primary"})
 
@@ -118,7 +118,7 @@ class Settings
             mobile: true
           }
           {
-            title: "App rights reserved to website owner"
+            title: "Website image and content rights reserved to website owner"
           },
         ]
         

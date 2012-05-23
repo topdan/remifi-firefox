@@ -8,7 +8,7 @@ sites/lib/url.js
 sites/lib/zepto-ext.js
 content/*.js
 content/remifi/*.js
-content/remifi/app/*.js
+content/remifi/site/*.js
 content/remifi/firefox/*.js
 content/remifi/pages/*.js
 content/remifi/utils/*.js
