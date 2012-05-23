@@ -4,6 +4,10 @@
 // @import com/topdan/hbolib
 // @domain www.maxgo.com
 // @crossdomain catalog.lv3.maxgo.com
+// @home.title maxgo
+// @home.pos  15
+// @home.url  http://www.maxgo.com
+// @home.img  maxgo.jpg
 //
 ###
 

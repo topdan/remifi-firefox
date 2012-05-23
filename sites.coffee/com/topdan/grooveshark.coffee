@@ -2,6 +2,10 @@
 //
 // @import lib/std
 // @domain grooveshark.com
+// @home.title grooveshark
+// @home.pos  16
+// @home.url  http://grooveshark.com
+// @home.img  grooveshark.png
 //
 ###
 

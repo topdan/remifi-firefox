@@ -4,6 +4,10 @@
 // @import com/topdan/hbolib
 // @domain www.hbogo.com
 // @crossdomain catalog.lv3.hbogo.com
+// @home.title hbogo
+// @home.pos  14
+// @home.url  http://www.hbogo.com
+// @home.img  hbogo.png
 //
 ###
 

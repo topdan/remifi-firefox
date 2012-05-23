@@ -2,6 +2,10 @@
 //
 // @import lib/std
 // @domain movies.netflix.com
+// @home.title netflix
+// @home.pos  3
+// @home.url  http://www.netflix.com
+// @home.img  netflix.png
 //
 ###
 

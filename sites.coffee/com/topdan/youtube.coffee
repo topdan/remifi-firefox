@@ -3,6 +3,10 @@
 // @import lib/std
 // @import com.topdan.youtube.player
 // @domain www.youtube.com
+// @home.title youtube
+// @home.pos  2
+// @home.url  http://www.youtube.com
+// @home.img  youtube.png
 //
 ###
 

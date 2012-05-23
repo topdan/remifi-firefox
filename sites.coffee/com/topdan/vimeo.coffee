@@ -3,6 +3,10 @@
 // @import lib/std
 // @domain vimeo.com
 // @import com.topdan.vimeo.player
+// @home.title vimeo
+// @home.pos  9
+// @home.url  http://vimeo.com
+// @home.img  vimeo.png
 //
 ###
 

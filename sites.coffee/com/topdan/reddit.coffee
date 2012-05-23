@@ -2,6 +2,10 @@
 //
 // @import lib/std
 // @domain www.reddit.com
+// @home.title reddit
+// @home.pos  4
+// @home.url  http://www.reddit.com
+// @home.img  reddit.png
 //
 ###
 

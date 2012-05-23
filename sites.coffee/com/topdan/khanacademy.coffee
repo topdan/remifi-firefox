@@ -3,6 +3,10 @@
 // @import lib/std
 // @import com.topdan.youtube.player
 // @domain www.khanacademy.org
+// @home.title khan acad
+// @home.pos  10
+// @home.url  http://www.khanacademy.org
+// @home.img  khan-academy.png
 //
 ###
 

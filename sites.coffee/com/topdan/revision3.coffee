@@ -2,6 +2,10 @@
 //
 // @import lib/std
 // @domain revision3.com
+// @home.title revision3
+// @home.pos  7
+// @home.url  http://www.revision3.com
+// @home.img  revision3.png
 //
 ###
 

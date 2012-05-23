@@ -2,6 +2,10 @@
 //
 // @import lib/std
 // @domain www.mydamnchannel.com
+// @home.title my damn
+// @home.pos  12
+// @home.url  http://www.mydamnchannel.com
+// @home.img  my-damn-channel.png
 //
 ###
 

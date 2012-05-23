@@ -3,6 +3,10 @@
 // @import lib/std
 // @import com.topdan.youtube.player
 // @domain www.ted.com
+// @home.title ted
+// @home.pos  6
+// @home.url  http://www.ted.com
+// @home.img  ted.png
 //
 ###
 

@@ -2,6 +2,10 @@
 //
 // @import lib/std
 // @domain www.hulu.com
+// @home.title hulu
+// @home.pos  13
+// @home.url  http://www.hulu.com
+// @home.img  hulu.png
 //
 ###
 

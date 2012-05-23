@@ -2,6 +2,10 @@
 //
 // @import lib/std
 // @domain railscasts.com
+// @home.title railscasts
+// @home.pos  8
+// @home.url  http://railscasts.com
+// @home.img  railscasts.png
 //
 ###
 
