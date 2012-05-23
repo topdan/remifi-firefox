@@ -25,6 +25,47 @@ class Env
     else
       null
   
+  eachFile: (dir, callback) =>
+    f = @_fileHandle @_fullpath(dir) + "/"
+    dirStack = new Array({entry: f, path: ""});
+
+    return unless f.exists()
+
+    while dirStack.length
+      e = dirStack.pop()
+      dir = e.entry
+      path = e.path
+
+      entries = dir.directoryEntries
+
+      continueRecurse = true
+      childDirectories = []
+
+      while entries.hasMoreElements()
+        entry = entries.getNext()
+        entry.QueryInterface(Components.interfaces.nsIFile)
+
+        if entry.isDirectory()
+          if dir == f
+            p = ''
+          else
+            p = path + '/' + dir.leafName
+          
+          childDirectories.push
+            entry: entry,
+            path: p
+
+        else
+          if dir == f
+            r = callback entry.leafName
+          else
+            r = callback "#{path}/#{dir.leafName}/#{entry.leafName}"
+
+            continueRecurse = false if r == false
+
+      if continueRecurse
+        dirStack = dirStack.concat(childDirectories)
+  
   template: (viewpath, data) =>
     view = @templates[viewpath]
     

@@ -5,25 +5,15 @@ class Sites
     @about = new Remifi.Site.About(@remote)
     @localhost = new Remifi.Site.LocalHost(@remote)
     
-    @list = [
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.google'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.youtube'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.netflix'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.hulu'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.hbo'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.cinemax'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.reddit'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.southparkstudios'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.ted'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.railscasts'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.revision3'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.vimeo'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.khanacademy'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.penny-arcade'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.my-damn-channel'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.grooveshark'),
-      new Remifi.Site.Sandbox(@remote, 'com.topdan.remifi'),
-    ]
+    @sites = @readSites()
+    
+  readSites: =>
+    sites = []
+    @remote.env.eachFile '/sites', (path) =>
+      site = new Remifi.Site.Sandbox(@remote, "/sites#{path}")
+      sites.push site if site.domains && site.domains.length > 0
+    
+    sites
   
   render: (request, response) =>
     doc = @remote.currentBrowser().contentDocument
@@ -45,6 +35,6 @@ class Sites
     body || @remote.pages.mouse.index(request, response)
   
   findSite: (uri, request, response) =>
-    for site in @list
+    for site in @sites
       return site if site.domains && site.domains.indexOf(uri.host) != -1
     null

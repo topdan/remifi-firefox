@@ -1,11 +1,12 @@
 class Sandbox
   Remifi.Site.Sandbox = Sandbox
   
-  constructor: (@remote, @name) ->
+  constructor: (@remote, @filename) ->
     @remote = remote
     @name = name
     @code = null
-    @filename = "/sites/#{name.replace(/\./g, '/')}.js"
+    @name = @filename.substring(1, @filename.length - 3).replace(/\//g, '.')
+    
     @domains = null
     @imports = []
     @std_imports = ['lib/json2', 'lib/render', 'lib/routes', 'lib/url', 'lib/view', 'lib/zepto-ext']
