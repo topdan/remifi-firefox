@@ -5,7 +5,10 @@ class Base
     @view = null
     
     @version = @env.fileContent('/content/VERSION')
-    @xpiPath = "http://files.remifi.com/firefox/edge.xpi"
+    
+    @filePath = Application.prefs.getValue("extensions.remifi.xpiPath", "http://files.remifi.com/firefox/edge")
+    @xpiPath = "#{@filePath}.xpi"
+    @xpiVersionPath = "#{@filePath}.version"
     
     @onSetting = "extensions.remifi.onByDefault"
     

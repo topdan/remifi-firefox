@@ -85,7 +85,7 @@ namespace :plugin do
   task :upload => ['s3:init'] do
     xpi = File.join('remifi.xpi')
     s3_upload "/firefox/edge.xpi", xpi, :access => :public_read, :content_type => "application/x-xpinstall"
-    s3_upload '/firefox/EDGE-VERSION', version_file, :access => :public_read
+    s3_upload '/firefox/edge.version', version_file, :access => :public_read
   end
   
   desc 'package and upload the xpi to amazon s3'

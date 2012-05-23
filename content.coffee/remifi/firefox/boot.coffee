@@ -52,7 +52,7 @@ class Boot
     return if @remote.env.isDevMode
     
     request = new XMLHttpRequest()
-    request.open('GET', 'http://files.remifi.com/firefox/EDGE-VERSION', true)
+    request.open('GET', @remote.xpiVersionPath, true)
     request.onreadystatechange = (e) =>
       if request.readyState != 4
         # keep waiting
