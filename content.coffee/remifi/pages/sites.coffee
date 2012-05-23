@@ -5,13 +5,16 @@ class Sites
     @about = new Remifi.Site.About(@remote)
     @localhost = new Remifi.Site.LocalHost(@remote)
     
-    @sites = @readSites()
-    
   readSites: =>
+    return @cachedSites if @cachedSites
+    
+    Components.utils.reportError 'reading sites'
     sites = []
     @remote.env.eachFile '/sites', (path) =>
       site = new Remifi.Site.Sandbox(@remote, "/sites#{path}")
       sites.push site if site.domains && site.domains.length > 0
+    
+    @cachedSites = sites unless @remote.env.isDevMode
     
     sites
   
@@ -35,6 +38,6 @@ class Sites
     body || @remote.pages.mouse.index(request, response)
   
   findSite: (uri, request, response) =>
-    for site in @sites
+    for site in @readSites()
       return site if site.domains && site.domains.indexOf(uri.host) != -1
     null
