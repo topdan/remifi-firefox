@@ -9,10 +9,10 @@ class About
       
     else if uri.toString() == "about:sessionrestore"
       
-      if request.path == "/apps/about/sessionrestore/start-new-session.html"
+      if request.path == "/sites/about/sessionrestore/start-new-session.html"
         @sessionRestoreStartNewSession(request, response)
         
-      else if request.path == "/apps/about/sessionrestore/restore.html"
+      else if request.path == "/sites/about/sessionrestore/restore.html"
         @sessionRestoreRestore(request, response)
         
       else
@@ -27,9 +27,9 @@ class About
         v.toolbar()
         v.br()
         v.br()
-        v.button("Start New Session", '/apps/about/sessionrestore/start-new-session.html', {type: 'primary'})
+        v.button("Start New Session", '/sites/about/sessionrestore/start-new-session.html', {type: 'primary'})
         v.br()
-        v.button("Restore", '/apps/about/sessionrestore/restore.html')
+        v.button("Restore", '/sites/about/sessionrestore/restore.html')
   
   sessionRestoreStartNewSession: (request, response) =>
     # Security Note: run in sandbox because running a page function

@@ -40,7 +40,7 @@ class Controller
   findPage: (request) =>
     if request.path == "/home.html"
       @remote.pages.home;
-    else if request.path == "/" || Remifi.startsWith(request.path, '/apps/')
+    else if request.path == "/" || Remifi.startsWith(request.path, '/sites/')
       @remote.pages.apps;
     else if Remifi.startsWith(request.path, '/tabs/')
       @remote.pages.tabs;

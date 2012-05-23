@@ -49,7 +49,7 @@ class Hash
     else if Remifi.startsWith(action, '#')
       '#' + @actionUrlForPage action.substring(1)
     else
-      '/apps/' + @app.name + '/' + action
+      '/sites/' + @app.name + '/' + action
   
   actionUrlForPage: (page) =>
     @app.pageName ||= @app.name.replace(/[\.\/\_]/g, '-')

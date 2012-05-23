@@ -5,7 +5,7 @@ class Sandbox
     @remote = remote
     @name = name
     @code = null
-    @filename = "/apps/#{name.replace(/\./g, '/')}.js"
+    @filename = "/sites/#{name.replace(/\./g, '/')}.js"
     @domains = null
     @imports = []
     @std_imports = ['lib/json2', 'lib/render', 'lib/routes', 'lib/url', 'lib/view', 'lib/zepto-ext']
@@ -80,7 +80,7 @@ class Sandbox
     else if name == 'lib/view'
       @importFiles sandbox, @view_imports
     else
-      file = "/apps/#{name}.js"
+      file = "/sites/#{name}.js"
       code = @remote.env.fileContent(file)
       @evalInSandbox(file, code, sandbox)
   

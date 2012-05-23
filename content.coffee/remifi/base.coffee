@@ -51,7 +51,7 @@ class Base
       unless window.fullScreen
         browserY += document.getElementById("navigator-toolbox").clientHeight
       
-      zepto = @env.fileContent('/apps/lib/zepto.js')
+      zepto = @env.fileContent('/sites/lib/zepto.js')
       Components.utils.evalInSandbox('navigator = {userAgent: "Mozilla/5.0 (Macintosh Intel Mac OS X 10.5 rv:11.0) Gecko/20100101 Firefox/11.0"}', sandbox)
       Components.utils.evalInSandbox("screen = {width: #{screen.width}, height: #{screen.height}}", sandbox)
       Components.utils.evalInSandbox("document.isFullscreen = #{@currentDocument().remifiFullscreen == true}", sandbox)
