@@ -1,11 +1,11 @@
 .rvmrc
 .s3.yml
-apps/com
-apps/lib/view
-apps/lib/render.js
-apps/lib/routes.js
-apps/lib/url.js
-apps/lib/zepto-ext.js
+sites/com
+sites/lib/view
+sites/lib/render.js
+sites/lib/routes.js
+sites/lib/url.js
+sites/lib/zepto-ext.js
 content/*.js
 content/remifi/*.js
 content/remifi/app/*.js
