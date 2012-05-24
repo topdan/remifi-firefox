@@ -113,6 +113,7 @@ class Boot
         unless pos == -1
           fullpath = fullpath.substring(0, pos)
           response.headers['Expires'] = "Thu, 31 Dec 2037 23:55:55 GMT" unless @remote.env.isDevMode
-        @remote.env.extensionPath + fullpath
+        path = @remote.env.extensionPath + fullpath
+        @remote.env.polishPath(path)
     
   

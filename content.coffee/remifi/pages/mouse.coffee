@@ -3,7 +3,12 @@ class Mouse
   
   constructor: (@remote) ->
     @delay = 200;
-    @program = "/bin/mouse";
+    
+    if @remote.env.isWindows
+      @program = "/bin/mouse.exe"
+    else
+      @program = "/bin/mouse"
+    
     @x = null;
     @y = null;
 
@@ -123,11 +128,15 @@ class Mouse
     
     switch type
       when 'click'
-        args = ["-a", 1, "-x", x, "-y", y];
-      when 'drag'
-        args = ["-a", 5, "-x1", x, "-y1", y, "-x2", x2, "-y2", y2, "-up", up]
+        if @remote.env.isWindows
+          args = [1, x, y]
+        else
+          args = ["-a", 1, "-x", x, "-y", y];
       when 'over'
-        args = ["-a", 2, "-x", x, "-y", y]
+        if @remote.env.isWindows
+          args = [2, x, y]
+        else
+          args = ["-a", 2, "-x", x, "-y", y]
 
     if type == 'click' && delay && delay != 0
       @actualMouseAction('over', null, x, y);

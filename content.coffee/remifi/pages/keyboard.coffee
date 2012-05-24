@@ -3,7 +3,12 @@ class Keyboard
   
   constructor: (@remote) ->
     @delay = 200;
-    @program = "/bin/keyboard";
+    
+    if @remote.env.isWindows
+      @program = "/bin/keyboard.exe"
+    else
+      @program = "/bin/keyboard"
+    
     @x = null;
     @y = null;
   
@@ -57,9 +62,16 @@ class Keyboard
     @press('return');
 
   press: (key) =>
-    if key == 'escape' || key == 'return'
-      @remote.env.exec("/bin/keyboard", ['-key', key])
-
+    if @remote.env.isWindows
+      if key == 'escape'
+        args = ['1']
+      else if key == 'return'
+        args = ['2']
+    else if key == 'escape' || key == 'return'
+      args = ['-key', key]
+    
+    @remote.env.exec(@program, args) if args
+      
   currentText: () =>
     try
       sandbox = @remote.createSandbox(null, {zepto: true});

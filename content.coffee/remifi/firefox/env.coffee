@@ -10,12 +10,14 @@ class Env
     @extensionPath = extensionsPath + '/remifi@topdan.com'
     
     @isDevMode = Application.prefs.getValue('extensions.remifi.development', false)
+    @isWindows = navigator.oscpu.match(/Windows/) != null
     @templates = {}
     
     f = @_fileHandle(@extensionPath)
     if f.exists() && !f.isDirectory()
       file = @_fileHandle(@extensionPath)
       @extensionPath = Remifi.trim(@_fileContent(file))
+      @extensionPath = @extensionPath.substring(0, @extensionPath.length - 1) if @isWindows
   
   fileContent: (path) =>
     path = @_fullpath(path)
@@ -79,6 +81,12 @@ class Env
     data ||= {}
     view(data)
   
+  polishPath: (path) =>
+    if @isWindows
+      path.replace(/\//g, '\\')
+    else
+      path
+  
   exec: (path, args) =>
     path = @_fullpath(path)
     file = @_fileHandle(path)
@@ -91,6 +99,7 @@ class Env
     @extensionPath + path
   
   _fileHandle: (path) =>
+    path = @polishPath path
     f = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile)
     f.initWithPath(path)
     f
