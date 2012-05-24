@@ -84,6 +84,7 @@ class Base
     else
       Application.prefs.setValue(@onSetting, true)
       @load()
+      @view.openSplashPage()
   
   refresh: =>
     @view.toggle(@isRunning())

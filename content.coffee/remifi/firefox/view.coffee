@@ -1,7 +1,7 @@
 class View
   Remifi.Firefox.View = View
   
-  constructor: () ->
+  constructor: (@remote) ->
   
   toggle: (isOn) =>
     klass = null
@@ -20,6 +20,9 @@ class View
       win = wenum.getNext()
       button = win.document.getElementById('remifi-button')
       button.setAttribute('class', klass) if button
+    
+  openSplashPage: () =>
+    gBrowser.selectedTab = gBrowser.addTab "http://localhost:#{@remote.port}/getting-started/"
   
   installButton: (toolbarId, buttonId, afterId) =>
     return if document.getElementById(buttonId)

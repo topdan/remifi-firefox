@@ -20,7 +20,7 @@ class Boot
     env = new Remifi.Firefox.Env()
     @remote = new Remifi.Base(env)
     @remote.port = @port()
-    @remote.view = new Remifi.Firefox.View()
+    @remote.view = new Remifi.Firefox.View(@remote)
     @remote.static = new Remifi.Static(@remote, '/content/static.json')
     
     @loadServer()
@@ -85,12 +85,12 @@ class Boot
   
   tryFirstSplashPage: () =>
     firstSplash = "extensions.remifi.firstSplash"
-    return if Application.prefs.getValue(firstSplash, false)
+    return if Application.prefs.getValue(firstSplash, false) || !@remote.isRunning()
     
     # won't work on the onLoad thread, not sure what event to hook into so just wait a bit
     setTimeout =>
       Application.prefs.setValue(firstSplash, true)
-      gBrowser.selectedTab = gBrowser.addTab "http://localhost:#{@remote.port}/getting-started/"
+      @remote.view.openSplashPage()
     , 1000
   
   installToolbarButton: () =>
