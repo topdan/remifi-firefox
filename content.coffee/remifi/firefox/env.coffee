@@ -81,6 +81,18 @@ class Env
     data ||= {}
     view(data)
   
+  rawTemplate: (viewpath) =>
+    view = @templates[viewpath]
+    
+    if view == null || typeof view == 'undefined'
+      view = @fileContent(viewpath)
+      throw "viewpath not found: " + viewpath if view == null
+      
+      @templates[viewpath] = view unless @isDevMode
+    
+    view
+    
+  
   polishPath: (path) =>
     if @isWindows
       path.replace(/\//g, '\\')

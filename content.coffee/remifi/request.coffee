@@ -17,7 +17,8 @@ class Request
     uri = new Remifi.URI("http://local.remifi.com#{smoothPath}")
     @params = uri.queryKey;
     @path = uri.path;
-    @isScript = Remifi.endsWith(@path, '.js');
+    @isScript = Remifi.endsWith(@path, '.js')
+    @isJSON = Remifi.endsWith(@path, '.json')
     
     if @params
       for key, value of @params

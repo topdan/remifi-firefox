@@ -24,7 +24,7 @@ class Controller
     body ||= @remote.pages.noBody.render(request, response)
     
     
-    if request.isXhr && request.isScript
+    if request.isXhr && (request.isScript || request.isJSON)
       body
     else if request.isXhr
       # we're ripping data from rendered HTML, it has weird characters when transferring via defaults

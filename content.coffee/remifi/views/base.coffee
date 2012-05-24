@@ -21,6 +21,9 @@ class Base
 
     html
 
+  rawTemplate: (path) =>
+    @out.push @env.rawTemplate(path)
+
   escape: (string) =>
     Remifi.escape(string)
 

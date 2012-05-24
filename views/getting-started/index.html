@@ -3,10 +3,24 @@
   
   <p class="info">Open one of the following addresses on your mobile device</p>
   <br/>
-  <ul>
-    <li>http://<%= hostname.toLowerCase() %>.local:<%= port %></li>
+  <ul id="addresses">
+    <% if (addresses) { %>
+      <% if (addresses.length != 0) { %>
+        <% for(var i=0 ; i < addresses.length ; i++) { %>
+          <li><%= addresses[i] %></li>
+        <% } %>
+      <% } else { %>
+        <li>Sorry, we couldn<%= "'" %>t find your computer<%= "'" %>s address.</li>
+      <% } %>
+    <% } else { %>
+      <li>Finding IP addresses <img src="/static/images/loading.gif"/></li>
+    <% } %>
   </ul>
   <br/>
   <p class="info">If that doesn't work find your IP address (<a href="http://www.remifi.com/help/find-my-ip" target="_blank">instructions</a>), for example http://192.168.1.100:<%= port %></p>
   
 </div>
+
+<% if (addresses) { } else { %>
+<script type="text/javascript" src="/getting-started/index.js"></script>
+<% } %>
