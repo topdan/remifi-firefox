@@ -124,8 +124,12 @@ this.selectSeason = (request) ->
 
 this.episodes = (request) ->
   $('#episodeColumn li').list (r) ->
+    bar = $(this).find('.bar').attr('class')
+    alreadyWatched = bar.indexOf('p-100') != -1 || bar.match(/p-9[0-9]/) if bar
+    
     r.title = $(this).find('.episodeTitle').text()
     r.url   = $(this).find('.btn-play').attr('data-vid') || $(this).find('.btn-play').attr('href')
+    r.badge = '/static/images/famfam/asterisk_yellow.png' unless alreadyWatched
 
 this.moreLike = (request) ->
   title $('h3').text()
