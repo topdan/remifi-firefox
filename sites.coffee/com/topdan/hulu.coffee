@@ -9,6 +9,8 @@
 //
 ###
 
+@badge = 'http://static.huluim.com/images/icon-hulu-plus-badge-light.gif'
+
 route "/", "index", ->
   action "doSearch"
 
@@ -51,6 +53,7 @@ this.tvShow = (request) ->
   else
     baseId = '#episode-container'
   
+  self = this
   $("#{baseId} .vsl li").list (r) ->
     e = $(this)
     title = e.find('.video-info')
@@ -60,6 +63,8 @@ this.tvShow = (request) ->
     r.url   = e.find('a').attr('href')
     r.image = thumb.attr('data-src') || thumb.attr('src')
     r.subtitle = title.text()
+    r.badge = self.badge if e.children('a').length == 2
+    r.active = e.find('.currently-playing').attr('style') != 'display: none'
   
   nextUrl = 'loadMoreEpisodes' if $("#{baseId} .pages li.next").length > 0
   
