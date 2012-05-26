@@ -19,7 +19,7 @@ class Keyboard
     else if request.path == '/keyboard/type.html'
       @typeText(request, response);
       
-    else if request.path == '/keyboard/escape.js'
+    else if request.path == '/keyboard/escape'
       @pressEscape(request, response);
       
     else if request.path == '/keyboard/return.js'
@@ -56,7 +56,8 @@ class Keyboard
     @index(request, response);
 
   pressEscape: (request, response) =>
-    @press('escape');
+    @press('escape')
+    @remote.pages.mouse.index(request, response)
 
   pressReturn: (request, response) =>
     @press('return');
