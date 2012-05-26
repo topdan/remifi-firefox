@@ -27,6 +27,11 @@ route /\/(Wi)?RoleDisplay/, 'roleDisplay'
 
 route '/Quac', 'moreLike'
 
+route '/WiPlayer', 'watch', ->
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
+  action 'toggleHD'
+
 this.roleDisplay = (request) ->
   title($('#page-title').text())
   
@@ -139,3 +144,45 @@ this.movieSet = (request) ->
     r.title = $(this).find('.title a').text()
     r.url   = $(this).find('.title a').attr('href')
     r.image = $(this).find('.boxShot img').attr('src')
+
+this.watch = (request) ->
+  button 'Play/Pause', 'playPause'
+  toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
+  toggle 'Is HD?', 'toggleHD', @isHD()
+
+this.isHD = (requet) ->
+  request.anchor != 'notHD'
+
+this.toggleHD = (request) ->
+  anchorIndex = document.location.href.indexOf('#')
+  if anchorIndex == -1
+    urlWithoutAnchor = document.location.href
+  else
+    urlWithoutAnchor = document.location.href.substring(0, anchorIndex)
+  
+  if request.anchor == 'notHD'
+    request.anchor = 'HD'
+    document.location.href = "#{urlWithoutAnchor}#HD"
+  else
+    request.anchor = 'notHD'
+    document.location.href = "#{urlWithoutAnchor}#notHD"
+
+this.player = () ->
+  player = new Player('#SLPlayerWrapper')
+
+  if @isHD()
+    if player.isFullscreen
+      player.setBox width: 1150, align: 'middle', height: 167
+    else
+      player.setBox width: 1115, align: 'middle', height: 125
+  
+  else if player.isFullscreen
+    player.setBox width: 960, align: 'middle', height: 115
+  else
+    player.setBox width: 845, align: 'middle', height: 115
+
+  player.setPlay x: 25, y: 25, delay: 500
+  player.setFullscreenOn  align: 'right', x: 30, y: 25, delay: 500
+  player.setFullscreenOff align: 'right', x: 30, y: 25, delay: 500
+
+  player
