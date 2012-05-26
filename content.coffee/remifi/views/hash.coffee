@@ -82,6 +82,9 @@ class Hash
       @p.view.button(hash.name, url, {type: hash.buttonType, disabled: hash.disabled})
 
     mouse: (hash) =>
+      return if @p.isMouseUsed
+      @p.isMouseUsed = true
+
       action = hash.action;
       delay = hash.delay;
       x = hash.x;
