@@ -34,6 +34,9 @@ class Mouse
     else if request.path == '/mouse/click.js'
       @click(request, response);
       
+    else if request.path == '/mouse/hide.js'
+      @hide(request, response);
+      
     else if request.path == '/mouse/page-up.js'
       @pageUp(request, response);
       
@@ -52,7 +55,7 @@ class Mouse
 
         v.apps([
           {title: 'keyboard', url: '/keyboard/', icon: {url: '/static/images/keyboard.png'}},
-          null,
+          {title: 'hide', url: '/mouse/hide.js', icon: {url: '/static/images/mouse.png'}},
           {title: 'page up', url: '/mouse/page-up.js', icon: {url: '/static/images/pageup.png'}},
           {title: 'page down', url: '/mouse/page-down.js', icon: {url: '/static/images/pagedown.png'}},
         ]);
@@ -92,6 +95,9 @@ class Mouse
   click: (request, response) =>
     if @x && @y
       @actualMouseAction('click', @x, @y);
+
+  hide: (request, response) =>
+    @actualMouseAction('over', screen.width - 1, screen.height - 100)
 
   pageUp: (request, response) =>
     s = Components.utils.Sandbox(content);
@@ -146,7 +152,7 @@ class Mouse
       exec = =>
         @remote.env.exec(@program, args)
         setTimeout =>
-          @remote.env.exec(@program, @programArgs('over', screen.width - 1, screen.height - 100))
+          @hide()
         , 100
     else
       exec = => @remote.env.exec(@program, args)
