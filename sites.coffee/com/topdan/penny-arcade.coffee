@@ -2,9 +2,10 @@
 //
 // @import lib/std
 // @domain penny-arcade.com
+// @domain www.penny-arcade.com
 // @home.title patv
 // @home.pos  11
-// @home.url  http://penny-arcade.com
+// @home.url  http://penny-arcade.com/patv
 // @home.img  penny-arcade.png
 //
 ###
