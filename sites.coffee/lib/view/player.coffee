@@ -74,9 +74,9 @@ class this.Player
       y = line.y;
     
     if @isFullscreen
-      @mouse.click(x, y, line.delay)
+      @mouse.click(x, y, delay: line.delay, hide: button.hide)
     else
-      @mouse.click(x - window.scrollX, y - window.scrollY, line.delay)
+      @mouse.click(x - window.scrollX, y - window.scrollY, delay: line.delay, hide: button.hide)
   
   clickButton: (name) =>
     button = @buttons[name]
@@ -85,17 +85,17 @@ class this.Player
     if button.key
       @keyboard.press(button.key)
     else if @isFullscreen
-      @mouse.click(button.x, button.y, button.delay)
+      @mouse.click(button.x, button.y, delay: button.delay, hide: button.hide)
     else
       @scrollToPlayer()
-      @mouse.click(button.x - window.scrollX, button.y - window.scrollY, button.delay)
+      @mouse.click(button.x - window.scrollX, button.y - window.scrollY, delay: button.delay, hide: button.hide)
     
     button.callback() if button.callback
   
   overButton: (name) =>
     button = @buttons[name]
     throw "no button named " + name if button == null
-    @mouse.over(button.x, button.y)
+    @mouse.over(button.x, button.y, delay: button.delay, hide: button.hide)
   
   scrollToPlayer: =>
     if @bottom > window.scrollY + window.innerHeight
@@ -143,6 +143,8 @@ class this.Player
   
   addButton: (name, options) =>
     button = {delay: options.delay, callback: options.callback}
+    
+    button.hide = true unless options.hide == false
     
     if options.key
       button.key = options.key;

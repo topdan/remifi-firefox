@@ -1,8 +1,22 @@
-this.mouseClick = (x, y, delay) ->
-  currentPage().push({type: 'mouse', action: 'click', x: x, y: y, delay: delay})
+this.mouseClick = (x, y, options) ->
+  options ||= {}
+  currentPage().push
+    type: 'mouse', 
+    action: 'click', 
+    x: x, 
+    y: y, 
+    delay: options.delay,
+    hide: options.hide
 
-this.mouseOver = (x, y, delay) ->
-  currentPage().push({type: 'mouse', action: 'over', x: x, y: y, delay: delay})
+this.mouseOver = (x, y, options) ->
+  options ||= {}
+  currentPage().push
+    type: 'mouse', 
+    action: 'over', 
+    x: x, 
+    y: y, 
+    delay: options.delay,
+    hide: options.hide
 
 this.clickOn = (elem, options) ->
   options ||= {}
@@ -21,17 +35,17 @@ this.clickOn = (elem, options) ->
 
 class this.Mouse
   
-  click: (x, y, delay) ->
+  click: (x, y, options) ->
     x = Math.floor(x)
     y = Math.floor(y)
     
-    mouseClick(x, y, delay)
+    mouseClick(x, y, options)
   
-  over: (x, y, delay) ->
+  over: (x, y, options) ->
     x = Math.floor(x)
     y = Math.floor(y)
     
-    mouseOver(x, y, delay)
+    mouseOver(x, y, options)
   
   line: (val, x1, x2) =>
     @linearlyInterpolate(0, x1, 21, x2, val)

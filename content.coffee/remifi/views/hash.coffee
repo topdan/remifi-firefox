@@ -92,9 +92,9 @@ class Hash
 
       switch action
         when 'click'
-          @p.site.remote.pages.mouse.action('click', delay, x, y);
+          @p.site.remote.pages.mouse.action('click', x, y, delay: delay, hide: hash.hide)
         when 'over'
-          @p.site.remote.pages.mouse.action('over', delay, x, y);
+          @p.site.remote.pages.mouse.action('over', x, y, delay: delay, hide: hash.hide)
 
     keyboard: (hash) =>
       action = hash.action;

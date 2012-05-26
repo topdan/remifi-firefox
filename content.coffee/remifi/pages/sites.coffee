@@ -8,7 +8,6 @@ class Sites
   all: =>
     return @sites if @sites
     
-    Components.utils.reportError 'reading sites'
     sites = []
     @remote.env.eachFile '/sites', (path) =>
       site = new Remifi.Site.Sandbox(@remote, "/sites#{path}")

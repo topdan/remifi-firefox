@@ -67,31 +67,31 @@ class Mouse
 
       sx = Math.floor(sx * x);
       sy = Math.floor(sy * y);
-      @actualMouseAction('over', null, sx, sy);
+      @actualMouseAction('over', sx, sy);
 
   up: (request, response) =>
     if @x && @y
       @y -= 5;
-      @actualMouseAction('over', null, @x, @y);
+      @actualMouseAction('over', @x, @y);
 
   down: (request, response) =>
     if @x && @y
       @y += 5;
-      @actualMouseAction('over', null, @x, @y);
+      @actualMouseAction('over', @x, @y);
 
   left: (request, response) =>
     if @x && @y
       @x -= 5;
-      @actualMouseAction('over', null, @x, @y);
+      @actualMouseAction('over', @x, @y);
 
   right: (request, response) =>
     if @x && @y
       @x += 5;
-      @actualMouseAction('over', null, @x, @y);
+      @actualMouseAction('over', @x, @y);
 
   click: (request, response) =>
     if @x && @y
-      @actualMouseAction('click', null, @x, @y);
+      @actualMouseAction('click', @x, @y);
 
   pageUp: (request, response) =>
     s = Components.utils.Sandbox(content);
@@ -107,11 +107,26 @@ class Mouse
 
     Components.utils.evalInSandbox("window.scrollTo(0, window.scrollY + window.innerHeight/2);", s);
 
-  action: (type, delay, x, y, x2, y2, up) =>
-    @actualMouseAction(type, delay, x, y, x2, y2, up);
+  action: (type, x, y, options) =>
+    @actualMouseAction(type, x, y, options)
 
-  actualMouseAction: (type, delay, x, y, x2, y2, up) =>
-    args = null;
+  programArgs: (type, x, y) =>
+    switch type
+      when 'click'
+        if @remote.env.isWindows
+          [1, x, y]
+        else
+          ["-a", 1, "-x", x, "-y", y]
+      when 'over'
+        if @remote.env.isWindows
+          [2, x, y]
+        else
+          ["-a", 2, "-x", x, "-y", y]
+
+  actualMouseAction: (type, x, y, options) =>
+    options ||= {}
+    delay = options.delay
+    hide = options.hide
 
     if x >= screen.width
       x = screen.width - 1;
@@ -125,25 +140,22 @@ class Mouse
 
     @x = x
     @y = y
-    
-    switch type
-      when 'click'
-        if @remote.env.isWindows
-          args = [1, x, y]
-        else
-          args = ["-a", 1, "-x", x, "-y", y];
-      when 'over'
-        if @remote.env.isWindows
-          args = [2, x, y]
-        else
-          args = ["-a", 2, "-x", x, "-y", y]
+    args = @programArgs(type, @x, @y)
+
+    if hide
+      exec = =>
+        @remote.env.exec(@program, args)
+        setTimeout =>
+          @remote.env.exec(@program, @programArgs('over', screen.width - 1, screen.height - 100))
+        , 100
+    else
+      exec = => @remote.env.exec(@program, args)
 
     if type == 'click' && delay && delay != 0
-      @actualMouseAction('over', null, x, y);
-      callback = => @remote.env.exec(@program, args)
-      setTimeout(callback, delay);
+      @actualMouseAction('over', x, y)
+      setTimeout(exec, delay)
 
     else if args
-      @remote.env.exec(@program, args)
+      exec()
 
     null
