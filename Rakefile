@@ -45,7 +45,7 @@ end
 
 namespace :s3 do
   
-  task :init => [:connect, :test]
+  task :init => [:connect]
   
   task :connect do
     s3 = s3_settings
@@ -54,10 +54,6 @@ namespace :s3 do
       :access_key_id     => s3["access_key_id"],
       :secret_access_key => s3["secret_access_key"]
     )
-  end
-  
-  task :test do
-    AWS::S3::Service.buckets
   end
   
 end
@@ -84,9 +80,11 @@ namespace :plugin do
   
   desc 'upload the xpi to amazon s3'
   task :upload => ['s3:init'] do
+    name = ENV['NAME'] || 'edge'
+    
     xpi = File.join('remifi.xpi')
-    s3_upload "/firefox/edge.xpi", xpi, :access => :public_read, :content_type => "application/x-xpinstall"
-    s3_upload '/firefox/edge.version', version_file, :access => :public_read
+    s3_upload "/firefox/#{name}.xpi", xpi, :access => :public_read, :content_type => "application/x-xpinstall"
+    s3_upload "/firefox/#{name}.version", version_file, :access => :public_read
   end
   
   desc 'package and upload the xpi to amazon s3'
