@@ -20,18 +20,34 @@ this.mouseOver = (x, y, options) ->
 
 this.clickOn = (elem, options) ->
   options ||= {}
-  options.control ||= false
-  options.alt ||= false
-  options.shift ||= false
-  options.meta ||= false
-  options.button ||= 0
+  if options.actual
+    elemOffset = elem.offset()
+    elemHeight = elem.height()
+    elemWidth  = elem.width()
+    
+    top = window.browserY + elemOffset.top
+    left = window.browserX + elemOffset.left
+    height = elemHeight
+    width = elemWidth
+    
+    x = Math.floor(left + width/2)
+    y = Math.floor(top - height/2)
+    
+    @mouseClick x, y
+    
+  else
+    options.control ||= false
+    options.alt ||= false
+    options.shift ||= false
+    options.meta ||= false
+    options.button ||= 0
 
-  elem = elem.get(0)
+    elem = elem.get(0)
 
-  evt = document.createEvent("MouseEvents")
-  evt.initMouseEvent('click', true, true, null, 0, 0, 0, 0, 0, options.control, options.alt, options.shift, options.meta, options.button, null)
+    evt = document.createEvent("MouseEvents")
+    evt.initMouseEvent('click', true, true, null, 0, 0, 0, 0, 0, options.control, options.alt, options.shift, options.meta, options.button, null)
 
-  elem.dispatchEvent(evt)
+    elem.dispatchEvent(evt)
 
 class this.Mouse
   
