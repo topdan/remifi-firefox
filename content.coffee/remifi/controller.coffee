@@ -5,6 +5,7 @@ class Controller
     @layout = null
   
   process: (request, response) =>
+    @ensureFullscreenMode()
     doc = @remote.currentBrowser().contentDocument
     uri = new Remifi.URI(doc.location.href)
     
@@ -70,4 +71,11 @@ class Controller
     
     views = new Remifi.Views.Base(@remote.env);
     @layout({body: body, views: views, urlFor: @remote.static.urlFor});
+  
+  ensureFullscreenMode: () =>
+    return if @remote.env.isDevMode
     
+    autoFullscreenOff = Application.prefs.getValue('extensions.remifi.autoFullscreenOff', false)
+    return if autoFullscreenOff
+    
+    window.fullScreen = true
