@@ -43,6 +43,10 @@ def compile directory
   end
 end
 
+def current_version
+  @current_version ||= `git rev-parse HEAD`
+end
+
 namespace :s3 do
   
   task :init => [:connect]
@@ -61,8 +65,7 @@ end
 namespace :plugin do
   
   task :version do
-    commit_hash = `git rev-parse HEAD`
-    File.open(version_file, 'w') {|f| f.write commit_hash }
+    File.open(version_file, 'w') {|f| f.write current_version }
   end
   
   desc 'create the xpi'
@@ -84,6 +87,7 @@ namespace :plugin do
     
     xpi = File.join('remifi.xpi')
     s3_upload "/firefox/#{name}.xpi", xpi, :access => :public_read, :content_type => "application/x-xpinstall"
+    s3_upload "/firefox/#{name}/#{current_version}.xpi", xpi, :access => :public_read, :content_type => "application/x-xpinstall"
     s3_upload "/firefox/#{name}.version", version_file, :access => :public_read
   end
   
