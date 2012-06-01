@@ -2,9 +2,6 @@ class GettingStarted
   Remifi.Pages.GettingStarted = GettingStarted
   
   constructor: (@remote) ->
-    setTimeout =>
-      @findAddresses()
-    , 100
   
   render: (request, response) =>
     if request.path == '/getting-started/index.js'
@@ -15,6 +12,11 @@ class GettingStarted
       @index(request, response)
   
   index: (request, response) =>
+    @addresses = null
+    setTimeout =>
+      @findAddresses()
+    , 10
+    
     @remote.views (v) =>
       v.page 'getting-started', =>
         
@@ -52,7 +54,9 @@ class GettingStarted
     try
       record = dns.resolve(hostname, 0)
       while record.hasMore()
-        @addresses.push "http://#{record.getNextAddrAsString()}:#{@remote.port}"
+        address = record.getNextAddrAsString()
+        if address.match(/^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})$/)
+          @addresses.push "http://#{address}:#{@remote.port}"
     catch err
       Components.utils.reportError "Could not detect your IP: #{err}"
     
