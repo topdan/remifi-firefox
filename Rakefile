@@ -44,7 +44,7 @@ def compile directory
 end
 
 def current_version
-  @current_version ||= `git rev-parse HEAD`
+  @current_version ||= `git rev-parse HEAD`.strip
 end
 
 namespace :s3 do
@@ -78,7 +78,7 @@ namespace :plugin do
     puts "Compiling CoffeeScript"
     
     compile 'content'
-    compile 'apps'
+    compile 'sites'
   end
   
   desc 'upload the xpi to amazon s3'
