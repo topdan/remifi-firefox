@@ -57,9 +57,11 @@ class Settings
           v.info("You have the most up-to-date version of the mobile remote")
 
         else
+          xpiPath = "#{remote.filePath}/#{request.responseText}.xpi"
+          
           v.info("There is an updated version of the mobile remote. Use the mouse to agree to install the new version when the download is finished.")
           v.br()
-          v.button("Get the Update", remote.xpiPath, {type: "primary"})
+          v.button("Get the Update", xpiPath, {type: "primary"})
 
         v.br()
         v.button("Back to Settings", '/settings/index.html')
