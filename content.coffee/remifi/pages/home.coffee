@@ -22,14 +22,7 @@ class Home
             url: "/settings/index.html",
             icon: {url: @remote.static.urlFor('/static/images/gears.png')},
             position: 0
-          },
-          {
-            title: "subscribe",
-            url: "http://www.remifi.com/subscribe.html",
-            icon: {url: @remote.static.urlFor('/static/images/icon.png')},
-            position: 1,
-            mobile: true
-          },
+          }
         ]
         
         for site in @remote.pages.sites.all()
