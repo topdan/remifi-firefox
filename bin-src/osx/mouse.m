@@ -43,7 +43,9 @@ int main(int argc, char *argv[]) {
       pt.y = [args integerForKey:@"y"];
       
       PostMouseEvent(kCGMouseButtonLeft, kCGEventMouseMoved, pt);
+      [NSThread sleepForTimeInterval:0.1];
       PostMouseEvent(kCGMouseButtonLeft, kCGEventLeftMouseDown, pt);
+      [NSThread sleepForTimeInterval:0.1];
       PostMouseEvent(kCGMouseButtonLeft, kCGEventLeftMouseUp, pt);
       break;
     
@@ -61,6 +63,7 @@ int main(int argc, char *argv[]) {
       pt.y = [args integerForKey:@"y"];
       
       PostMouseEvent(kCGMouseButtonLeft, kCGEventMouseMoved, pt);
+      [NSThread sleepForTimeInterval:0.1];
       PostMouseEvent(kCGMouseButtonLeft, kCGEventLeftMouseDown, pt);
       break;
       
@@ -70,6 +73,7 @@ int main(int argc, char *argv[]) {
       pt.y = [args integerForKey:@"y"];
       
       PostMouseEvent(kCGMouseButtonLeft, kCGEventMouseMoved, pt);
+      [NSThread sleepForTimeInterval:0.1];
       PostMouseEvent(kCGMouseButtonLeft, kCGEventLeftMouseUp, pt);
       break;
     
