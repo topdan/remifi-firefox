@@ -78,13 +78,13 @@ this.show = (request) ->
 this.player = () ->
   player = new Player('.mejs-video')
   
-  player.setBox({width: 'full', valign: 'bottom', height: 30})
+  player.setBox width: 'full', valign: 'bottom', height: 30
   
   if player.isFullscreen
-    player.setPlay({x: 19, y: 14, delay: 500})
+    player.setPlay x: 19, y: 14, delay: 500
   else
-    player.setPlay({valign: 'bottom', x: 12, y: 19, delay: 500})
+    player.setPlay valign: 'bottom', x: 12, y: 19, delay: 500
   
-  player.setFullscreenOn({align: 'right', x: 12, y: 19})
+  player.setFullscreenOn align: 'right', x: 12, y: 19, delay: 500
 
   player
