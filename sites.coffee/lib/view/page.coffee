@@ -14,7 +14,8 @@ this.currentPage = ->
   @pages.content[@pages.content.length - 1].content
 
 this.variables = (variables) ->
-  currentPage().push({type: 'variables', hash: variables})
+  if @pages.content
+    currentPage().push({type: 'variables', hash: variables})
 
 this.fullscreen = (bool) ->
   document.isFullscreen = bool == true

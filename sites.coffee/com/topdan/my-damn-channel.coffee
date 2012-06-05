@@ -1,6 +1,7 @@
 ###
 //
 // @import lib/std
+// @import com.topdan.youtube.player
 // @domain www.mydamnchannel.com
 // @home.title my damn
 // @home.pos  12
@@ -15,6 +16,8 @@ route //, 'episode', ->
   action 'toggleFullscreen', on: 'player'
   action 'seriesPrev'
   action 'seriesNext'
+  action 'pagingPrev'
+  action 'pagingNext'
 
 this.index = (request) ->
   title $('title')
@@ -63,28 +66,67 @@ this.seriesPrev = (request, index) ->
 this.seriesNext = (request) ->
   seriesPrev request, 1
   
+this.pagingPrev = (request) ->
+  clickOn $('#paging .prev')
+  wait ms: 500
+
+this.pagingNext = (request) ->
+  clickOn $('#paging .next')
+  wait ms: 500
+
 this.show = (request) ->
-  return if $('.mejs-video').length == 0
   title $('h1')
 
   button('Play/Pause', 'playPause')
   toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
   
+  seriesBrowse()
+  previousEpisodes()
+
+this.seriesBrowse = ->
   $('.seriesBrowse').list (r, i) ->
     id = $(this).find('.ui-carousel').attr('id')
     r.title = $(this).find('h1')
     r.url = "#{request.path}##{id}"
   
-this.player = () ->
-  player = new Player('.mejs-video')
+this.previousEpisodes = ->
+  prevElem = $('#paging .prev')
+  nextElem = $('#paging .next')
+  prevUrl = 'pagingPrev' unless prevElem.length == 0 || prevElem.hasClass('hidden')
+  nextUrl = 'pagingNext' unless nextElem.length == 0 || nextElem.hasClass('hidden')
   
-  player.setBox width: 'full', valign: 'bottom', height: 30
+  if $('#paging').length > 0
+    paginate [
+      {name: 'prev', url: prevUrl}
+      {name: 'next', url: nextUrl}
+    ]
+    
+  $('#previous_episodes_mask li').list (r) ->
+    r.title = $(this).find('h2')
+    r.url = $(this).find('a')
+    r.image = $(this).find('img')
+    r.subtitle = $(this).find('p')
   
-  if player.isFullscreen
-    player.setPlay x: 19, y: 14, delay: 500
-  else
-    player.setPlay valign: 'bottom', x: 12, y: 19, delay: 500
-  
-  player.setFullscreenOn align: 'right', x: 12, y: 19, delay: 500
+  if $('#paging').length > 0
+    paginate [
+      {name: 'prev', url: prevUrl}
+      {name: 'next', url: nextUrl}
+    ]
 
-  player
+this.player = () ->
+  if $('.mejs-video').length > 0
+    player = new Player('.mejs-video')
+  
+    player.setBox width: 'full', valign: 'bottom', height: 30
+  
+    if player.isFullscreen
+      player.setPlay x: 19, y: 14, delay: 500
+    else
+      player.setPlay valign: 'bottom', x: 12, y: 19, delay: 500
+  
+    player.setFullscreenOn align: 'right', x: 12, y: 19, delay: 500
+
+    player
+  
+  else
+    new YouTubePlayer('#theContent iframe')

@@ -28,7 +28,7 @@ this.performRender = (request, handler, name) ->
     throw "View not found for #{request.path}"
 
 this.preventDefault = () ->
-  isPreventDefault = true
+  this.isPreventDefault = true
 
 this.render = (request) ->
   @request = request
