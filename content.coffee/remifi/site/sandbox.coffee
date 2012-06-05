@@ -5,7 +5,7 @@ class Sandbox
     @remote = remote
     @name = name
     @code = null
-    @name = @filename.substring(1, @filename.length - 3).replace(/\//g, '.')
+    @name = @filename.substring('/sites/'.length, filename.length - '.js'.length).replace(/\//g, '.')
     
     @domains = null
     @imports = []

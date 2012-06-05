@@ -1,7 +1,7 @@
 this.externalURL = (url) ->
   return null if @request == null || url == null || typeof url == "undefined"
   
-  if @request.port == '80'
+  if @request.port == '' || @request.port == '80'
     host = @request.host
   else
     host = "#{@request.host}:#{@request.port}"
