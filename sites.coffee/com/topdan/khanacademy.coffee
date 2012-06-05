@@ -77,7 +77,11 @@ this.thumbnails = ->
     r.imageHeight = 120
     
 this.category = (request) ->
-  category = $("##{request.anchor}-container")
+  anchor = request.anchor
+  plus = anchor.indexOf('+')
+  anchor = anchor.substring(0, plus) if plus
+  
+  category = $("##{anchor}-container")
 
   linkTo 'Back to Home', externalURL('/#')
   title category.find('h2')
