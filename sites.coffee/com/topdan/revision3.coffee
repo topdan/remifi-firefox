@@ -27,16 +27,17 @@ route /^\/[^\/]+\/[^\/]+$/, 'video', ->
 this.index = (request) ->
   searchForm()
   
-  $('.navigation > ul > li').list (r) ->
-    r.title = $(this).find('a').text()
-    r.url   = $(this).find('a').attr('href')
-    
   $('#homePromos li').list (r) ->
     r.title = $(this).find('img').attr('alt') || ""
     r.title = r.title.substring("Promo image: ".length) if r.title.indexOf("Promo image: ") == 0
     
     r.url   = $(this).find('a').attr('href')
     r.image = $(this).find('.logo img').attr('src')
+  
+  shows = $('.navigation > ul > li').get(0)
+  $(shows).find('li a').list (r) ->
+    r.titleURL = $(this)
+  
 
 this.shows = (request) ->
   $('#shows li').list (r) ->
