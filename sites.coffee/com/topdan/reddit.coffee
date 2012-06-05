@@ -16,8 +16,9 @@ this.index = (request) ->
   page 'index', ->
     list [
       {title: 'My Reddits', url: '#my-reddits'},
+      {title: "r/videos", url: "http://www.reddit.com/r/videos/"},
+      {title: "r/music", url: "http://www.reddit.com/r/music/"},
       {title: "r/NetflixBestOf", url: "http://www.reddit.com/r/NetflixBestOf/"},
-      {title: "r/music", url: "http://www.reddit.com/r/music/"}
     ]
     
     subreddit(request)
