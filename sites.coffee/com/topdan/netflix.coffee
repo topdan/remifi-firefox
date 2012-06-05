@@ -140,7 +140,7 @@ this.moreLike = (request) ->
 this.movies = (request) ->
   $('.agMovie').list (r) ->
     r.title = $(this).find('.title a').text()
-    r.url   = $(this).find('.title a').attr('href')
+    r.url   = $(this).find('a').attr('href')
     r.image = $(this).find('.boxShot img').attr('src')
 
 this.movieSet = (request) ->
@@ -154,26 +154,15 @@ this.watch = (request) ->
   toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
   toggle 'Is HD?', 'toggleHD', @isHD()
 
-this.isHD = (requet) ->
-  request.anchor != 'notHD'
+this.isHD = () ->
+  !request.variables.notHD
 
 this.toggleHD = (request) ->
-  anchorIndex = document.location.href.indexOf('#')
-  if anchorIndex == -1
-    urlWithoutAnchor = document.location.href
-  else
-    urlWithoutAnchor = document.location.href.substring(0, anchorIndex)
-  
-  if request.anchor == 'notHD'
-    request.anchor = 'HD'
-    document.location.href = "#{urlWithoutAnchor}#HD"
-  else
-    request.anchor = 'notHD'
-    document.location.href = "#{urlWithoutAnchor}#notHD"
+  request.variables.notHD = !request.variables.notHD
 
 this.player = () ->
   player = new Player('#SLPlayerWrapper')
-
+  
   if @isHD()
     if player.isFullscreen
       player.setBox width: 1150, align: 'middle', height: 167

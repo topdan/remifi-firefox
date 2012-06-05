@@ -63,4 +63,6 @@ this.render = (request) ->
     @pages = {type: 'wait', ms: @waitOptions.ms}
     @waitOptions = null
   
+  variables(request.variables)
+  
   JSON.stringify(@pages)

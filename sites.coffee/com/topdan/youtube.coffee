@@ -47,10 +47,10 @@ this.results = (request) ->
   searchForm()
   paginate(pages)
   
-  $('#search-results > div.result-item').list (r) ->
+  $('#search-results > li.result-item-video').list (r) ->
     e = $(this)
     link = e.find('h3 a')
-    img = e.find('.thumb-container img')
+    img = e.find('img')
     
     r.title = link.text()
     r.url   = link.attr('href')

@@ -44,7 +44,8 @@ class Sandbox
       anchor: uri.anchor,
       action: action,
       format: format,
-      params: request.params
+      params: request.params,
+      variables: @remote.currentDocument().remifiVariables || {}
     };
     
     json = Components.utils.evalInSandbox("render(#{JSON.stringify(limitedRequest)});", sandbox)

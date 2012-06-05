@@ -107,6 +107,9 @@ class Hash
     fullscreen: (hash) =>
       @p.site.remote.currentDocument().remifiFullscreen = hash.value == true
 
+    variables: (@hash) =>
+      @p.site.remote.currentDocument().remifiVariables = @hash.hash
+
     br: (hash) =>
       @p.view.br()
 
