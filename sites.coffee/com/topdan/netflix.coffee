@@ -164,16 +164,25 @@ this.player = () ->
   player = new Player('#SLPlayerWrapper')
   
   if @isHD()
-    if player.isFullscreen
-      player.setBox width: 1150, align: 'middle', height: 167
-    else
-      player.setBox width: 1115, align: 'middle', height: 125
-  
-  else if player.isFullscreen
-    player.setBox width: 960, align: 'middle', height: 115
+    videoRatio = 16 / 9
   else
-    player.setBox width: 845, align: 'middle', height: 115
-
+    videoRatio = 4/3
+  
+  width = $(document).width()
+  height = $(document).height()
+  
+  windowRatio = width / height
+  
+  if windowRatio > videoRatio
+    width = height * videoRatio
+  else
+    height = width / videoRatio
+  
+  # 10% buffer on either side of the video
+  width = width * 0.8
+  
+  player.setBox align: 'middle', width: width, height: 115
+  
   player.setPlay x: 25, y: 25, delay: 500
   player.setFullscreenOn  align: 'right', x: 30, y: 25, delay: 500
   player.setFullscreenOff align: 'right', x: 30, y: 25, delay: 500
