@@ -30,39 +30,43 @@ this.performRender = (request, handler, name) ->
 this.preventDefault = () ->
   this.isPreventDefault = true
 
+this.renderRoute = (request) ->
+  route = findRoute(request);
+  action = null;
+  
+  return null if route == null
+  
+  if request.action
+    $.each route.actions, (index, a) ->
+      action = a if request.action == a.name
+  
+  this.isPreventDefault = false
+  if action
+    if action.source
+      source = this[action.source]
+      throw "Action source not found #{action.source}" unless source
+      source = source()
+    else
+      source = this
+    
+    performRender request, source[action.funcName], 'action'
+  
+  performRender request, this[route.funcName], 'view' unless this.isPreventDefault
+  
+
 this.render = (request) ->
   @request = request
+    
   runBeforeFilters(request);
   
-  unless isPerformed()
-    route = findRoute(request);
-    action = null;
-    
-    return null if route == null
-    
-    if request.action
-      $.each route.actions, (index, a) ->
-        action = a if request.action == a.name
-    
-    this.isPreventDefault = false
-    if action
-      if action.source
-        source = this[action.source]
-        throw "Action source not found #{action.source}" unless source
-        source = source()
-      else
-        source = this
-      
-      performRender request, source[action.funcName], 'action'
-    
-    performRender request, this[route.funcName], 'view' unless this.isPreventDefault
-    
+  renderRoute(request) unless isPerformed()
+  
   @request = null;
   
   if @waitOptions
     @pages = {type: 'wait', ms: @waitOptions.ms}
     @waitOptions = null
   
-  variables(request.variables)
+  variables(request.variables) if isPerformed()
   
   JSON.stringify(@pages)

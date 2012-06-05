@@ -54,8 +54,8 @@ Zepto.fn.list = (callback, options) ->
     item.subtitle = item.subtitle.text() if item.title != null && typeof item.subtitle == 'object' && item.subtitle['text']
     
     if typeof item.image == 'object' && item.image['attr']
-      item.imageWidth = item.image.attr('width')
-      item.imageHeight = item.image.attr('height')
+      item.imageWidth ||= item.image.attr('width')
+      item.imageHeight ||= item.image.attr('height')
       item.image = item.image.attr('src')
     
     item.title = null    if typeof item.title == 'object'
