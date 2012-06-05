@@ -106,6 +106,19 @@ this.watch = (request) ->
   else
     player().controls()
   
+  if $('#playlist-bar').hasClass('max')
+    playlist()
+  else
+    relatedVideos()
+
+this.playlist = ->
+  $('#playlist-bar-tray-content .video-list li').list (r) ->
+    r.title = $(this).find('a').attr('title')
+    r.url = $(this).find('a')
+    r.image = $(this).find('img').attr('data-thumb') || $(this).find('img').attr('src')
+    r.active = $(this).hasClass('playlist-bar-item-playing')
+    
+this.relatedVideos = ->
   $('#watch-related > .video-list-item').list (r) ->
     e = $(this)
     img = e.find('img')
