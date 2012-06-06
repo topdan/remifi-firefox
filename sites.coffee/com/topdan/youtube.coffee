@@ -10,7 +10,12 @@
 //
 ###
 
+beforeFilter 'avoidHashBang'
+
 route "/", "index", ->
+  action "doSearch"
+
+route "/index", "index", ->
   action "doSearch"
 
 route "/results", "results", ->
@@ -129,3 +134,9 @@ this.relatedVideos = ->
 
 this.player = () ->
   new YouTubePlayer('#movie_player-flash,#movie_player,#movie_player-html5')
+
+this.avoidHashBang = (request) ->
+  if request.path == '/' && request.anchor
+    url = decodeURIComponent(request.anchor)
+    document.location = externalURL url if url.indexOf('/') == 0
+    wait()

@@ -12,7 +12,7 @@ runBeforeFilters = (request) ->
     func.call self, request
 
 this.isPerformed = ->
-  @pages != null && typeof @pages != 'undefined' && @pages.content.length != 0
+  this.isPreventDefault || (@pages != null && typeof @pages != 'undefined' && @pages.content.length != 0)
 
 this.wait = (options) ->
   options ||= {}
@@ -57,7 +57,7 @@ this.renderRoute = (request) ->
 this.render = (request) ->
   @request = request
     
-  runBeforeFilters(request);
+  runBeforeFilters(request)
   
   renderRoute(request) unless isPerformed()
   
