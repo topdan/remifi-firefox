@@ -25,7 +25,8 @@ class GettingStarted
         
         v.template '/views/getting-started/index.html', {
           port: @remote.port,
-          addresses: @addresses
+          addresses: @addresses,
+          installPath: @remote.env.extensionPath
         }
   
   script: (request, response) =>

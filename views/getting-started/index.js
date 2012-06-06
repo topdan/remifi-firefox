@@ -17,5 +17,10 @@ $(function() {
     })
   }
   
-  findAddresses()
+  if ($('#finding-addresses').length > 0)
+    findAddresses();
+  
+  $('#show-details').click(function() {
+    $('#details').toggle();
+  })
 })
