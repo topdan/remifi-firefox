@@ -5,7 +5,6 @@ class Controller
     @layout = null
   
   process: (request, response) =>
-    @ensureFullscreenMode()
     doc = @remote.currentBrowser().contentDocument
     uri = new Remifi.URI(doc.location.href)
     
@@ -24,6 +23,7 @@ class Controller
     
     body ||= @remote.pages.noBody.render(request, response)
     
+    @ensureFullscreenMode() unless response.skipFullscreenCheck
     
     if request.isXhr && (request.isScript || request.isJSON)
       body

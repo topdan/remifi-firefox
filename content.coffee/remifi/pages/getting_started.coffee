@@ -4,6 +4,8 @@ class GettingStarted
   constructor: (@remote) ->
   
   render: (request, response) =>
+    response.skipFullscreenCheck = true
+    
     if request.path == '/getting-started/index.js'
       @script request, response
     else if request.path == '/getting-started/addresses.json'
