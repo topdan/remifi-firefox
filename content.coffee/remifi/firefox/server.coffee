@@ -43,7 +43,7 @@ class Server
     constructor: (@server) ->
     
     onStopListening: (serv, status) =>
-      @stop()
+      @server.stop()
     
     onSocketAccepted: (serv, transport) =>
       transport.setTimeout(1, 30) # 30s timeout FF 1.0.0 does not allow this

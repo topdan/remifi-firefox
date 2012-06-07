@@ -37,6 +37,9 @@ class Settings
 
   fullscreen: (request, response) =>
     window.fullScreen = !window.fullScreen
+    
+    Application.prefs.setValue('extensions.remifi.autoFullscreenOff', !window.fullScreen)
+    
     @index(request, response)
 
   update: (request, response) =>
