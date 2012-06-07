@@ -31,7 +31,7 @@ this.clickOn = (elem, options) ->
     width = elemWidth
     
     x = Math.floor(left + width/2)
-    y = Math.floor(top - height/2)
+    y = Math.floor(top + height/2)
     
     @mouseClick x, y
     
