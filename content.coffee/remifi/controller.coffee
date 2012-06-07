@@ -25,7 +25,6 @@ class Controller
     
     if page && page != @remote.pages.notFound && !response.skipFullscreenCheck
       @ensureFullscreenMode()
-      Components.utils.reportError request.path
     
     if request.isXhr && (request.isScript || request.isJSON)
       body
