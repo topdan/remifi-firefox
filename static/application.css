@@ -5,7 +5,7 @@ table.app-icons tr td { padding-top: 0; margin-top: 0; width: 25%; text-align: c
 table.app-icons tr td a img { border: none; }
 table.app-icons tr.icons td { padding-top: 0.75em; width: 60px; height: 60px;}
 table.app-icons tr.titles { font-family: "Lucida Grande", Verdana, Courier, sans-serif; }
-table.app-icons tr.titles td { padding-top: 0; overflow: hidden;}
+table.app-icons tr.titles td { padding-top: 0; overflow: hidden; line-height: 90%; }
 table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-size: 75%; vertical-align: top;}
 
 .greenButton { border: 2px solid #1F3D7A; }

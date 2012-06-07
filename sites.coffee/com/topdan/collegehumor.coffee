@@ -3,12 +3,37 @@
 // @import lib/std
 // @domain www.collegehumor.com
 // @domain collegehumor.com
+// @home.title col humor
+// @home.pos  16
+// @home.url  http://www.collegehumor.com/videos
+// @home.img  collegehumor.png
 //
 ###
 
-route /^\/video\//, 'video', ->
+route /^\/videos/, 'router', ->
   action 'playPause', on: 'player'
   action 'toggleFullscreen', on: 'player'
+
+this.router = (request) ->
+  if $('#flash_player').length > 0
+    video()
+  else
+    index()
+
+this.index = (request) ->
+  page 'index', ->
+    linkTo 'categories', '#categories'
+    mediaList()
+  
+  page 'categories', ->
+    linkTo 'back', '#index'
+    
+    $('#sidebar_left li').list (r) ->
+      r.titleURL = $(this).find('a')
+      r.active = $(this).hasClass('selected')
+      
+    linkTo 'back', '#index'
+
 
 this.video = (request) ->
   name = $('title').text()

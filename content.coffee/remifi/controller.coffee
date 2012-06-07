@@ -74,7 +74,7 @@ class Controller
     @layout({body: body, views: views, urlFor: @remote.static.urlFor});
   
   ensureFullscreenMode: () =>
-    # return if @remote.env.isDevMode
+    return if @remote.env.isDevMode
     
     autoFullscreenOff = Application.prefs.getValue('extensions.remifi.autoFullscreenOff', false)
     return if autoFullscreenOff
