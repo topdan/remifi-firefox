@@ -1,12 +1,16 @@
 class this.Player
   
-  constructor: (@selector) ->
+  constructor: (@selector, options) ->
+    options ||= {}
+    
     @mouse = new Mouse()
     @keyboard = new Keyboard()
     @isFullscreen = document.isFullscreen == true
     @actions = {}
     @buttons = {}
     @lines = {}
+    @scrollAdjustX = options.scrollX || 0
+    @scrollAdjustY = options.scrollY || 0
     
     @setFullscreenOff key: 'escape'
     @initBox()
@@ -99,7 +103,7 @@ class this.Player
   
   scrollToPlayer: =>
     if @bottom > window.scrollY + window.innerHeight
-      window.scrollTo window.scrollX, @bottom - window.innerHeight - window.browserY
+      window.scrollTo window.scrollX + @scrollAdjustX, @bottom - window.innerHeight - window.browserY + @scrollAdjustY
   
   #
   # Setting up the player
