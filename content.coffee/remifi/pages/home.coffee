@@ -12,7 +12,7 @@ class Home
         v.toolbar({back: true});
 
         if @remote.updateAvailable
-          v.safeOut("<a href=\"#\" data-remote-url=\"#{@remote.xpiPath}\" class=\"info2 update-available\">We've released a new version. Click here to upgrade.</a>")
+          v.safeOut("<a href=\"/settings/getUpdate.html\" class=\"info2 update-available\">We've released a new version. Click here to upgrade.</a>")
         else
           v.safeOut('<div class="info"><p>Add this page to your home screen for easier access.</p></div>')
 

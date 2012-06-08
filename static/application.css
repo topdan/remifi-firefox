@@ -79,6 +79,9 @@ p.wait-message { text-align: center; margin: 10px 20px; padding: 0.5em; color: b
 
 #jqt .toolbar a { height: 30px; }
 #jqt .toolbar.loading .button { display:none; }
+#jqt .toolbar.loading .backButton { display:inline-block; }
+#jqt .toolbar.loading .forwardButton { display:inline-block; }
+
 #jqt .icon { display: inline-block; width: 14px; height: 14px; line-height: 14px; vertical-align: text-top; background-image: url("/static/images/glyphicons-halflings-white.png"); background-position: 14px 14px; background-repeat: no-repeat; *margin-right: .3em; }
 #jqt .backButton { left: 6px; right: auto; background-position: -422px -64px; }
 #jqt .forwardButton { left: 58px; right: auto; background-position: -448px -64px; }

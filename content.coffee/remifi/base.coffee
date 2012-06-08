@@ -77,6 +77,10 @@ class Base
     controller = new Remifi.Controller(@, request, response);
     controller.process(request, response)
   
+  newVersionAvailable: (version) =>
+    @xpiPath = "#{@filePath}/#{version}.xpi"
+    @remote.updateAvailable = true
+  
   toggle: =>
     if @server.isRunning
       Application.prefs.setValue(@onSetting, false)

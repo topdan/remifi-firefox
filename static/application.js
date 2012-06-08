@@ -80,17 +80,22 @@ function setupPages() {
   }
   
   $('a').click(function(e) {
-    var message = $(this).attr('data-disabled-message');
+    var elem = $(this);
+    
+    var message = elem.attr('data-disabled-message');
     if (message) {
       alert(message);
       return false;
     }
     
-    var remoteUrl = $(this).attr('data-remote-url');
+    var remoteUrl = elem.attr('data-remote-url');
     if (remoteUrl) {
       remifi.visit(remoteUrl);
       return false;
     }
+    
+    if (elem.hasClass('backButton') || elem.hasClass('forwardButton'))
+      Remifi.stop();
   });
   
   $('#waiting .stopLoading').click(function(e) {

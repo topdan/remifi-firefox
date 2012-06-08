@@ -13,6 +13,9 @@ class Settings
     else if request.path == '/settings/update.html'
       @update(request, response)
       
+    else if request.path == '/settings/getUpdate.html'
+      @getUpdate(request, response)
+      
     else if request.path == '/settings/fullscreen.html'
       @fullscreen(request, response)
   
@@ -43,6 +46,7 @@ class Settings
     @index(request, response)
 
   update: (request, response) =>
+    self = this
     remote = @remote
     @remote.views (v) ->
       v.page 'update', ->
@@ -60,15 +64,19 @@ class Settings
           v.info("You have the most up-to-date version of the mobile remote")
 
         else
-          xpiPath = "#{remote.filePath}/#{request.responseText}.xpi"
+          remote.newVersionAvailable(request.responseText)
           
-          v.info("There is an updated version of the mobile remote. Use the mouse to agree to install the new version when the download is finished.")
+          v.info("There is an updated version of remifi. Use the mouse to install the new version and restart.")
           v.br()
-          v.button("Get the Update", xpiPath, {type: "primary"})
+          v.button "Upgrade Remifi", "/settings/getUpdate.html", type: "primary"
 
         v.br()
         v.button("Back to Settings", '/settings/index.html')
-
+  
+  getUpdate: (request, response) =>
+    @remote.currentBrowser().contentDocument.location.href = @remote.xpiPath
+    @remote.pages.mouse.index(request, response);
+  
   about: (request, response) =>
     @remote.views (v) ->
       v.page 'about_me', ->
