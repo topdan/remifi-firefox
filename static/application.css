@@ -52,6 +52,19 @@ table.app-icons tr.titles td a { text-decoration: none; color: #0d1db7; font-siz
 #jqt.fullscreen #home .info { display: none;}
 #jqt #home .update-available { display: block; }
 
+#jqt .info2 {
+  background: none repeat scroll 0 0 #DCE1EB;
+  border-top: 1px solid rgba(76, 86, 108, 0.3);
+  color: #4C566C;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  color: #444444;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 16px;
+  padding: 15px;
+  text-align: center;
+}
+
 .important-message  { margin: 0.5em; padding: 0.5em; color: #3A87AD; background-color: #D9EDF7; border: 1px solid #BCE8F1;}
 .error-message { margin: 0.5em; padding: 0.5em; color: #800000; background-color: #EEB4B4;}
 .info-message { margin: 0.5em; padding: 0.5em; background-color: white; color: #444; border: 1px solid black; }
