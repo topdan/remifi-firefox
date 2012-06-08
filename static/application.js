@@ -207,7 +207,7 @@ $(function() {
   });
   
   $(document).on('ajaxError', function(error, request) {
-    remifi.error('We could not connect to your computer. Try restarting the server.')
+    remifi.error("I couldn't connect to your TV. Try restarting Firefox.")
   });
   
   remifi = new Remifi(jQT);
