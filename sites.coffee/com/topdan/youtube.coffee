@@ -111,6 +111,8 @@ this.watch = (request) ->
   else
     player().controls()
   
+  info $('#eow-description').html()
+  
   if $('#playlist-bar').hasClass('max')
     playlist()
   else

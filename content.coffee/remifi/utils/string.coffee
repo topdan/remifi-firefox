@@ -24,7 +24,7 @@ Remifi.escapeHTML = (html) ->
   if (typeof(html) != "string")
     html = html.toString();
   
-  html.replace(/&/g, "&amp;").replace(/\"/g, "&quot;").replace(/>/g, "&gt;").replace(/</g, "&lt;");
+  html.replace(/&/g, "&amp;").replace(/\"/g, "&quot;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/&lt;br&gt;/g, '<br/>')
 
 Remifi.joinAttributes = (attributes) ->
   return null if attributes == null

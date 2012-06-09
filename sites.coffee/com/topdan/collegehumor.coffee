@@ -10,9 +10,13 @@
 //
 ###
 
-route /^\/videos/, 'router', ->
+route /^\/videos?/, 'router', ->
   action 'playPause', on: 'player'
   action 'toggleFullscreen', on: 'player'
+
+route /^\/embed/, 'router', ->
+  action 'playPause', on: 'embeddedPlayer'
+  action 'toggleFullscreen', on: 'embeddedPlayer'
 
 this.router = (request) ->
   if $('#flash_player').length > 0
@@ -58,5 +62,18 @@ this.player = () ->
 
   player.setPlay x: 30, y: 16, delay: 500
   player.setFullscreenOn x: 620, y: 16, delay: 500
+
+  player
+  
+this.embeddedPlayer = () ->
+  player = new Player('#flash_player')
+  
+  if player.isFullscreen
+    player.setBox width: 'full', valign: 'bottom', height: 30
+  else
+    player.setBox width: 'full', valign: 'bottom', height: 60
+
+  player.setPlay x: 20, y: 20, delay: 500
+  player.setFullscreenOn x: 620, y: 20, delay: 500
 
   player

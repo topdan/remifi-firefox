@@ -142,6 +142,7 @@ this.movies = (request) ->
     r.title = $(this).find('.title a').text()
     r.url   = $(this).find('a').attr('href')
     r.image = $(this).find('.boxShot img').attr('src')
+  , perPage: 15
 
 this.movieSet = (request) ->
   $('.agMovieSet .agMovie').list (r) ->

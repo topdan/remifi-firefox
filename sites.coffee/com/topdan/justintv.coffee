@@ -73,10 +73,11 @@ this.search = (request) ->
   searchForm()
   
   $('#broadcasts_list li').list (r) ->
-    r.titleURL = $(this).find('a.title')
+    r.titleURL = $(this).find('a.title,a.broadcast-title')
     r.image = $(this).find('img').attr("src1")
     r.imageWidth = 150
     r.imageHeight = 113
+    r.subtitle = $(this).find('.title_subinfo')
 
 this.ageButton = (request) ->
   over18 = $('#over18')

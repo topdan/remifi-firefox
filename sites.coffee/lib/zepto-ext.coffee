@@ -37,9 +37,10 @@ Zepto.fn.list = (callback, options) ->
     if page == null || (count >= minItem && count < maxItem)
       result = {}
       callback.call(this, result, count)
-      results.push(result) if result.title || result.image || result.titleURL
-    
-    count++
+      
+      if result.title || result.image || result.titleURL
+        results.push(result)
+        count++
   
   results.sort(options.sort) if options.sort
   
