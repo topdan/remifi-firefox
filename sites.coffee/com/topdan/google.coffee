@@ -30,9 +30,17 @@ route '/search', 'search'
 @search = ->
   title($('title').text())
   
-  $('#rso h3 a').list (r) ->
-    r.title = $(this).text()
-    r.url = $(this).attr('href')
+  $('#rso li.g').list (r) ->
+    e = $(this)
+    
+    r.titleURL = e.find('h3 a')
+    r.image = e.find('img').attr('src')
+    # throw r.img if r.img
+    
+    cite = $(this).find('cite').text()
+    cite = cite.match(/[^\/]*/) if cite
+    r.subtitle = cite[0] if cite
+  , imageInternalURL: true
   
   paginate([
     {name: 'prev', url: externalURL($('#pnprev').attr('href'))},

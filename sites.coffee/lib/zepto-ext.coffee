@@ -65,7 +65,7 @@ Zepto.fn.list = (callback, options) ->
     item.subtitle = null if typeof item.subtitle == 'object'
     
     item.url = externalURL(item.url) if item.url && !options.internalURL
-    item.image = externalURL(item.image) if item.image
+    item.image = externalURL(item.image) if item.image && !options.imageInternalURL
   
   paginate paginateItems if paginateItems
   list results, options
