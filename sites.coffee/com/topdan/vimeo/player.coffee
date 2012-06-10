@@ -7,8 +7,8 @@ class VimeoPlayer extends Player
     @fullscreenAction = 'toggleFullscreen'
     
     @setBox({width: 'full', valign: 'bottom', height: 42})
-    @setPlay({x: 41, y: 20})
-    @setFullscreenOn({align: 'right', x: 35, y: 18})
+    @setPlay({x: 41, y: 20, delay: 500})
+    @setFullscreenOn({align: 'right', x: 35, y: 18, delay: 500})
   
   controls: =>
     @playButton()
