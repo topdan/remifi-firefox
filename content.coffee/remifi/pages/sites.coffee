@@ -24,7 +24,10 @@ class Sites
     site = null
     body = null
     
-    if Remifi.startsWith(url, 'about:')
+    if request.params.wait == "1" && @remote.pages.controls.isLoading()
+      body = @remote.pages.controls.wait('/')
+      
+    else if Remifi.startsWith(url, 'about:')
       body = this.about.render(uri, request, response)
       
     else if (uri.host == 'localhost' || uri.host == '127.0.0.1') && uri.port == @remote.port.toString()

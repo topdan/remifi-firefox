@@ -26,7 +26,7 @@ class Controller
     if page && page != @remote.pages.notFound && !response.skipFullscreenCheck
       @ensureFullscreenMode()
     
-    if request.isXhr && (request.isScript || request.isJSON)
+    if request.isXhr && (request.isScript || request.isJSON) || response.isRedirect
       body
     else if request.isXhr
       # we're ripping data from rendered HTML, it has weird characters when transferring via defaults

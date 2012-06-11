@@ -13,4 +13,9 @@ class Response
     
     webpage += "\r\n"
     webpage
-    
+  
+  redirectTo: (url) =>
+    @code = 302
+    @message = "Found"
+    @headers["Location"] = url
+    @isRedirect = true

@@ -91,9 +91,12 @@ class Controls
     else
       url
 
+  isLoading: =>
+    !(@remote.currentBrowser().webProgress.isLoadingDocument == false || @remote.currentDocument().remifiIsLoaded == true)
+
   waitJS: (request, response) =>
     url = request.params["url"]
-    if @remote.currentBrowser().webProgress.isLoadingDocument == false || @remote.currentDocument().remifiIsLoaded == true
-      'remifi.show("' + url + '")'
-    else
+    if @isLoading()
       'setTimeout(function() { remifi.waitUnlessStopped("' + url + '")}, 250);'
+    else
+      'remifi.show("' + url + '")'

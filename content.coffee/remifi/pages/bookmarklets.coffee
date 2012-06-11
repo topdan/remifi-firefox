@@ -32,12 +32,12 @@ class Bookmarklets
   visit: (request, response) =>
     @convertMobileURL(request)
     @remote.pages.controls.visit(request, response);
-    @remote.pages.controls.wait('/', request, response)
+    response.redirectTo('/?wait=1')
 
   newTab: (request, response) =>
     @convertMobileURL(request)
     @remote.pages.tabs.add(request, response);
-    @remote.pages.controls.wait('/', request, response);
+    response.redirectTo('/?wait=1')
 
   convertMobileURL: (request) =>
     url = request.params.url
