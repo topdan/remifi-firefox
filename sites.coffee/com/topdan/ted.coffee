@@ -91,5 +91,5 @@ this.player = () ->
   else
     player = new Player('#streamingPlayerSWF')
     player.setPlay({x: 42, y: 58, valign: 'bottom'})
-    player.setFullscreenOn({align: 'right', x: 23, y: 17})
+    player.setFullscreenOn({align: 'right', x: 23, y: 17, delay: 500})
     player

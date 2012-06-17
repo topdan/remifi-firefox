@@ -38,8 +38,8 @@ route '/search', 'search'
     # throw r.img if r.img
     
     cite = $(this).find('cite').text()
-    cite = cite.match(/[^\/]*/) if cite
-    r.subtitle = cite[0] if cite
+    cite = cite.match(/http:\/\/([^\/]*)/) || cite.match(/([^\/]*)/) if cite
+    r.subtitle = cite[1] if cite
   , imageInternalURL: true
   
   paginate([

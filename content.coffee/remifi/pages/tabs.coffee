@@ -108,7 +108,7 @@ class Tabs
           url: '/windows/close.html?index=' + count
         }]
 
-      if currentWindow == win && win.Remifi.isReference == true
+      if currentWindow == win && win.Remifi && win.Remifi.isReference == true
         currentWindowIndex = count
 
       windows.push({

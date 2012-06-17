@@ -53,7 +53,7 @@ class Windows
       loop 
         break unless wenum.hasMoreElements()
         win = wenum.getNext();
-        if index == count && win.Remifi.isReference == true
+        if index == count && (!win.Remifi || win.Remifi.isReference == true)
           win.close();
         count++
     

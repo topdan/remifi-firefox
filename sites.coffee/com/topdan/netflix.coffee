@@ -98,7 +98,11 @@ this.movie = (request) ->
   title $('h2').text()
   info $('.synopsis').text()
   
-  button "Play", externalURL($('#displaypage-overview-image a').attr('href')), type: 'primary'
+  playUrl = $('#displaypage-overview-image a').attr('href')
+  if playUrl
+    button "Play", externalURL(playUrl), type: 'primary'
+  else
+    error 'Title not available on Netflix Streaming'
   
   $('#displaypage-overview-details .actions a').each ->
     text = $(this).text()
