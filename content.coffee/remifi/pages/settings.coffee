@@ -26,7 +26,7 @@ class Settings
         v.title("Settings")
         v.list [
           {
-            title: "Bookmarklets",
+            title: "Bookmarks",
             url: "/bookmarklets/"
           },
           {

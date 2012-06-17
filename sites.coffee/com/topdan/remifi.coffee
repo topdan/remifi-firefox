@@ -3,8 +3,7 @@
 // @import lib/std
 // @domain www.remifi.com
 // @domain remifi.com
-// @domain remifi.herokuapp.com
-// @domain remifi.com.local
+// @domain remifi.dev
 //
 ###
 
@@ -12,17 +11,24 @@ route '/', 'index', ->
   action 'playPause', on: 'player'
   action 'toggleFullscreen', on: 'player'
 
+route /\/videos\//, 'video', ->
+  action 'playPause', on: 'player'
+  action 'toggleFullscreen', on: 'player'
+
 this.index = -> 
-  button 'Subscribe', externalURL('/subscribe.html'), type: 'primary'
-  
-  if $('#demo-video').length > 0
-    button 'Play/Pause', 'playPause'
-    toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
+  @video()
   
   $('#extra-reading .span4').list (r) ->
     r.titleURL = $(this).find('a')
     r.mobile = true
 
+this.video = ->
+  info $('.video-description')
+  
+  if $('#demo-video').length > 0
+    button 'Play/Pause', 'playPause'
+    toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
+  
 this.player = () ->
   vimeo = new Player('#demo-video')
   

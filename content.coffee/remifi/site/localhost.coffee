@@ -15,6 +15,8 @@ class LocalHost
         v.br()
         v.info "You are connected to your TV through your mobile device!"
         v.br()
-        v.button 'Start Browsing!', '/home.html', type: 'primary'
+        v.button "Set up Bookmarks", "http://www.remifi.com/videos/how-to-setup-iphone-bookmarks.html", type: 'primary'
+        v.br()
+        v.button 'Start Browsing!', '/home.html'
         v.br()
         v.important "Or click the home button in the very upper right"

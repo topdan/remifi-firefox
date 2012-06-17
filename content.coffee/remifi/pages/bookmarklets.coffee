@@ -17,7 +17,6 @@ class Bookmarklets
     @remote.views (v) ->
       v.page 'bookmarklets-page', ->
         v.toolbar();
-        v.title("Bookmarklets");
 
         referer = request.headers["Referer"];
         referer = referer.match('(http://[^\/]+)')[0];
