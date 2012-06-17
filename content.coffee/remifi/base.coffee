@@ -77,8 +77,8 @@ class Base
     controller = new Remifi.Controller(@, request, response);
     controller.process(request, response)
   
-  newVersionAvailable: (version) =>
-    @xpiPath = "#{@filePath}/#{version}.xpi"
+  newVersionAvailable: (version, tracking) =>
+    @xpiPath = "#{@filePath}/#{version}.xpi?#{tracking}"
     @remote.updateAvailable = true
   
   toggle: =>

@@ -64,7 +64,7 @@ class Settings
           v.info("You have the most up-to-date version of the mobile remote")
 
         else
-          remote.newVersionAvailable(request.responseText)
+          remote.newVersionAvailable(request.responseText, 'check')
           
           v.info("There is an updated version of remifi. Use the mouse to install the new version and restart.")
           v.br()

@@ -64,7 +64,7 @@ class Boot
         # great, no updates
         
       else
-        @remote.newVersionAvailable(request.responseText)
+        @remote.newVersionAvailable(request.responseText, 'alert')
     
     request.send(null)
 
