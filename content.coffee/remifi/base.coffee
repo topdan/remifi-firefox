@@ -8,7 +8,7 @@ class Base
     
     @filePath = Application.prefs.getValue("extensions.remifi.xpiPath", "http://files.remifi.com/firefox/edge")
     @xpiPath = "#{@filePath}.xpi"
-    @xpiVersionPath = "#{@filePath}.version"
+    @xpiVersionPath = "#{@filePath}.version?#{@version}"
     
     @onSetting = "extensions.remifi.onByDefault"
     
