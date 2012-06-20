@@ -79,7 +79,7 @@ class Base
   
   newVersionAvailable: (version, tracking) =>
     @xpiPath = "#{@filePath}/#{version}.xpi?#{tracking}"
-    @remote.updateAvailable = true
+    @updateAvailable = true
   
   toggle: =>
     if @server.isRunning
