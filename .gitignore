@@ -1,4 +1,5 @@
 .rvmrc
+.DS_Store
 .s3.yml
 sites/com
 sites/lib/view

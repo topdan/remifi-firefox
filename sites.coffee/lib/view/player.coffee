@@ -6,6 +6,7 @@ class this.Player
     @mouse = new Mouse()
     @keyboard = new Keyboard()
     @isFullscreen = document.isFullscreen == true
+    @isPaused = request.variables.isPaused
     @actions = {}
     @buttons = {}
     @lines = {}
@@ -86,6 +87,9 @@ class this.Player
     button = @buttons[name]
     throw "no button named " + name if button == null
     
+    if name == 'play' && request && request.variables
+      request.variables.isPaused = !request.variables.isPaused
+    
     if button.key
       @keyboard.press(button.key)
     else if @isFullscreen
@@ -157,7 +161,8 @@ class this.Player
       button.y = @alignY(options.valign, options.y)
     
     @buttons[name] = button
-    @actions[name] = -> @clickButton(name)
+    @actions[name] = => @clickButton(name)
+    @[name] = @actions[name]
   
   addLine: (name, options) =>
     line = {delay: options.delay}
