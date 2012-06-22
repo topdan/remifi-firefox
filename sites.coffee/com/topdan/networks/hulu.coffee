@@ -35,6 +35,7 @@ route /^\/watch/, 'watch', ->
   action 'playPause', on: 'player'
   action 'toggleFullscreen', on: 'player'
   action 'loadMoreEpisodes'
+  action 'expandSeason'
 
 route /^\/[^\/]+$/, 'tvShowOrMovie', ->
   action 'loadMoreEpisodes'
@@ -112,7 +113,9 @@ this.tvShowEpisodes = (request) ->
       
       episodes = []
       row = seasonRow.next('tr')
-      while row.length > 0 && !row.hasClass('srh')
+      count = 0
+      while count < 100 && row.length > 0 && !row.hasClass('srh')
+        count++
         a = row.find('.c1 a.info_hover')
         episode = {}
         
@@ -231,10 +234,13 @@ this.doSearch = (request) ->
   wait()
 
 this.watch = (request) ->
-  button 'Play/Pause', 'playPause'
-  toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
+  if request.anchor == 'show-expander'
+    tvShowOrMovie(request)
+  else
+    button 'Play/Pause', 'playPause'
+    toggle 'Fullscreen', 'toggleFullscreen', player().isFullscreen
   
-  tvShowOrMovie(request)
+    tvShowOrMovie(request)
 
 this.player = () ->
   player = new Player('#player')
