@@ -25,6 +25,14 @@ class Home
           }
         ]
         
+        if @remote.isXBMC
+          apps[0].position = 1
+          apps.push
+            title: 'exit'
+            url: '/controls/confirmExit.html'
+            icon: {url: @remote.static.urlFor('/static/images/exit.png')}
+            position: 0
+        
         for site in @remote.pages.sites.all()
           title = site.metadata['home.title']
           pos = site.metadata['home.pos']

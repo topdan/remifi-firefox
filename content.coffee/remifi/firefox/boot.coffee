@@ -10,6 +10,7 @@ class Boot
       @loadPageListener()
       @installToolbarButton()
       @tryFirstSplashPage()
+      @xbmcStartup() if @remote.isXBMC
   
   unload: () ->
     if Remifi.instance && Remifi.isReference != true
@@ -115,5 +116,13 @@ class Boot
           response.headers['Expires'] = "Thu, 31 Dec 2037 23:55:55 GMT" unless @remote.env.isDevMode
         path = @remote.env.extensionPath + fullpath
         @remote.env.polishPath(path)
-    
+  
+  xbmcStartup: () =>
+    setTimeout =>
+      x = Application.prefs.getValue('extensions.remifi.xbmc.x', 25)
+      y = Application.prefs.getValue('extensions.remifi.xbmc.y', 100)
+      
+      window.fullScreen = true
+      @remote.pages.mouse.actualMouseAction('click', x, y, hide: true) if x && y
+    , 1000
   

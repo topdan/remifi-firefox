@@ -12,6 +12,8 @@ class Base
     
     @onSetting = "extensions.remifi.onByDefault"
     
+    @isXBMC = Application.prefs.getValue('extensions.remifi.xbmc', false)
+    
     @pages = {}
     @pages.sites      = new Remifi.Pages.Sites(@)
     @pages.home      = new Remifi.Pages.Home(@)

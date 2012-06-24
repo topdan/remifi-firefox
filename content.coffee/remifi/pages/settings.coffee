@@ -18,10 +18,13 @@ class Settings
       
     else if request.path == '/settings/fullscreen.html'
       @fullscreen(request, response)
-  
+      
+    else if request.path == '/settings/xbmc.html'
+      @xbmc(request, response)
+      
   index: (request, response) =>
-    @remote.views (v) ->
-      v.page 'settings', ->
+    @remote.views (v) =>
+      v.page 'settings', =>
         v.toolbar()
         v.title("Settings")
         v.list [
@@ -36,6 +39,7 @@ class Settings
         ], striped: true
 
         v.toggle 'Fullscreen Mode', '/settings/fullscreen.html', window.fullScreen
+        v.toggle 'Using XBMC', '/settings/xbmc.html', @remote.isXBMC
         v.button('Check for Updates', '/settings/update.html', {type: 'primary'})
 
   fullscreen: (request, response) =>
@@ -43,6 +47,11 @@ class Settings
     
     Application.prefs.setValue('extensions.remifi.autoFullscreenOff', !window.fullScreen)
     
+    @index(request, response)
+
+  xbmc: (request, response) =>
+    @remote.isXBMC = !@remote.isXBMC
+    Application.prefs.setValue('extensions.remifi.xbmc', @remote.isXBMC)
     @index(request, response)
 
   update: (request, response) =>

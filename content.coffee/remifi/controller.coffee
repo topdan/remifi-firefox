@@ -15,7 +15,9 @@ class Controller
     
     try
       if !@firstSplash
+        @firstSplash = true
         Application.prefs.setValue(@firstSplashPref, true)
+        
         body = @remote.pages.sites.localhost.gettingStarted(uri, request, response)
       else
         body = page.render(request, response)

@@ -30,6 +30,12 @@ class Controls
 
     else if request.path == '/controls/wait.js'
       @waitJS(request, response);
+    
+    else if request.path == '/controls/confirmExit.html'
+      @confirmExit(request, response)
+      
+    else if request.path == '/controls/exit.html'
+      @exit(request, response)
 
   home: (request, response) =>
     @remote.currentBrowser().goHome();
@@ -100,3 +106,27 @@ class Controls
       'setTimeout(function() { remifi.waitUnlessStopped("' + url + '")}, 250);'
     else
       'remifi.show("' + url + '")'
+  
+  confirmExit: (request, response) =>
+    @remote.views (v) ->
+      v.page 'confirmExit', ->
+        v.toolbar()
+        
+        v.info 'Are you are your want to close your browser?'
+        
+        v.button 'Yes', '/controls/exit.html', type: 'primary'
+        v.button 'No', '/home.html'
+  
+  exit: (request, response) =>
+    app = Components.classes['@mozilla.org/toolkit/app-startup;1'].getService(Components.interfaces.nsIAppStartup)
+    app.quit(Components.interfaces.nsIAppStartup.eForceQuit)
+    
+    @remote.views (v) ->
+      v.page 'controls', ->
+        v.toolbar()
+        
+        v.important 'Closing your browser'
+        
+        v.info 'Thanks for using Remifi!'
+        
+
