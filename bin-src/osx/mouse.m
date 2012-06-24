@@ -5,11 +5,7 @@
 // gcc -o mouse mouse.m -framework ApplicationServices -framework Foundation
 //
 // Usage:
-// ./mouse -a click -x 10 -y 10
-// ./mouse -a over -x 10 -y 10
-// ./mouse -a down -x 10 -y 10
-// ./mouse -a up -x 10 -y 10
-// ./mouse -a drag -x1 10 -y1 10 -x2 20 -y2 20 -up 0
+// ./mouse -a 2 -x 10 -y 10
 
 
 #import <Foundation/Foundation.h>

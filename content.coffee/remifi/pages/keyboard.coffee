@@ -65,15 +65,7 @@ class Keyboard
     @press('return');
 
   press: (key) =>
-    if @remote.env.isWindows
-      if key == 'escape'
-        args = ['1']
-      else if key == 'return'
-        args = ['2']
-    else if key == 'escape' || key == 'return'
-      args = ['-key', key]
-    
-    @remote.env.exec(@program, args) if args
+    @remote.input.keyboardPress(key)
       
   currentText: () =>
     try

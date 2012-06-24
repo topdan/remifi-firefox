@@ -15,8 +15,7 @@
   <script src="remifi/firefox/env.js"/>
   <script src="remifi/firefox/server.js"/>
   <script src="remifi/firefox/view.js"/>
-  <script src="remifi/firefox/input/osx_bin.js"/>
-  <script src="remifi/firefox/input/osx_lib.js"/>
+  <script src="remifi/firefox/input/osx.js"/>
   
   <script src="remifi/pages/sites.js"/>
   <script src="remifi/pages/bookmarklets.js"/>
