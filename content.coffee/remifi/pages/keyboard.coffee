@@ -13,6 +13,8 @@ class Keyboard
     @y = null;
   
   render: (request, response) =>
+    response.skipFullscreenCheck = true
+    
     if request.path == '/keyboard/index.html' || request.path == '/keyboard/'
       @index(request, response);
       

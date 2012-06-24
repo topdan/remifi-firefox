@@ -13,6 +13,8 @@ class Mouse
     @y = null;
 
   render: (request, response) =>
+    response.skipFullscreenCheck = true
+    
     if request.path == '/mouse/index.html' || request.path == '/mouse/'
       @index(request, response);
       

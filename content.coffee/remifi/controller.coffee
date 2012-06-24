@@ -3,6 +3,8 @@ class Controller
   
   constructor: (@remote) ->
     @layout = null
+    @firstSplashPref = 'extensions.remifi.firstRemoteSplash'
+    @firstSplash = Application.prefs.getValue(@firstSplashPref, false)
   
   process: (request, response) =>
     doc = @remote.currentBrowser().contentDocument
@@ -12,10 +14,11 @@ class Controller
     body = null
     
     try
-      # if (page == @remote.pages.sites && doc.remifiError)
-      #   body = @remote.pages.mouse.index(doc.remifiError, request, response)
-      # else
-      body = page.render(request, response)
+      if !@firstSplash
+        Application.prefs.setValue(@firstSplashPref, true)
+        body = @remote.pages.sites.localhost.gettingStarted(uri, request, response)
+      else
+        body = page.render(request, response)
     catch err
       doc.remifiError = err
       Components.utils.reportError(err)
