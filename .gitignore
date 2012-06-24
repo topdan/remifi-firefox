@@ -11,6 +11,7 @@ content/*.js
 content/remifi/*.js
 content/remifi/site/*.js
 content/remifi/firefox/*.js
+content/remifi/firefox/input/*.js
 content/remifi/pages/*.js
 content/remifi/utils/*.js
 content/remifi/views/*.js

@@ -18,7 +18,6 @@
 void PostMouseEvent(CGMouseButton button, CGEventType type, const CGPoint point) 
 {
  CGEventRef theEvent = CGEventCreateMouseEvent(NULL, type, point, button);
- CGEventSetType(theEvent, type);
  CGEventPost(kCGHIDEventTap, theEvent);
  CFRelease(theEvent);
 }

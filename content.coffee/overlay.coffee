@@ -4,6 +4,7 @@ window.Remifi = {};
 class Overlay
   Remifi.Site = {};
   Remifi.Firefox = {};
+  Remifi.Firefox.Input = {};
   Remifi.Pages = {};
   Remifi.Util = {};
   Remifi.Views = {};

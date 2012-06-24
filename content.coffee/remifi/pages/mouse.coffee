@@ -118,19 +118,6 @@ class Mouse
   action: (type, x, y, options) =>
     @actualMouseAction(type, x, y, options)
 
-  programArgs: (type, x, y) =>
-    switch type
-      when 'click'
-        if @remote.env.isWindows
-          [1, x, y]
-        else
-          ["-a", 1, "-x", x, "-y", y]
-      when 'over'
-        if @remote.env.isWindows
-          [2, x, y]
-        else
-          ["-a", 2, "-x", x, "-y", y]
-
   actualMouseAction: (type, x, y, options) =>
     options ||= {}
     delay = options.delay
@@ -148,22 +135,26 @@ class Mouse
 
     @x = x
     @y = y
-    args = @programArgs(type, @x, @y)
+
+    if type == 'click'
+      inputFunc = @remote.input.mouseClick
+    else
+      inputFunc = @remote.input.mouseOver
 
     if hide
       exec = =>
-        @remote.env.exec(@program, args)
+        inputFunc(@x, @y)
         setTimeout =>
           @hide()
         , 100
     else
-      exec = => @remote.env.exec(@program, args)
+      exec = => inputFunc(@x, @y)
 
     if type == 'click' && delay && delay != 0
       @actualMouseAction('over', x, y)
       setTimeout(exec, delay)
 
-    else if args
+    else
       exec()
 
     null
