@@ -15,7 +15,9 @@ route "/", "index"
 route '/', "index", anchor: 'home/'
 route '/', "section", anchor: /^[^\/]+\/$/
 route '/', "category", anchor: /browseMode=browseGrid\?browseID=/
-# route '/', 'video', anchor: /\/video&/
+# route '/', 'video', anchor: /\/video&/, ->
+#   action 'playPause', on: 'player'
+#   action 'toggleFullscreen', on: 'player'
 route '/', "notFound", anchor: /.*/
 
 this.catalogURL = (path) ->
@@ -105,10 +107,12 @@ this.seriesEpisodes = (request, xml) ->
     
     seasonNum = parseInt e.find('season').text().substring('Season '.length)
     episode = parseInt e.find('episodeInSeries').text()
+    tkey = e.find('TKey').text()
     
     seasons[seasonNum] ||= []
     seasons[seasonNum].push {
       title: e.find('title').text(),
+      url: externalURL("/#series/video&assetID=#{tkey}?videoMode=embeddedVideo?showSpecialFeatures=false/")
       episode: parseInt(e.find('episodeInSeries').text()),
       image: findThumb(e),
       subtitle: e.find('season').text() + " Episode " + e.find('episodeInSeason').text()
