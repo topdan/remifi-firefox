@@ -14,17 +14,17 @@ class Controller
     body = null
     
     try
-      if !@firstSplash
-        @firstSplash = true
-        Application.prefs.setValue(@firstSplashPref, true)
-        
-        body = @remote.pages.sites.localhost.gettingStarted(uri, request, response)
-      else
-        body = page.render(request, response)
+      body = page.render(request, response)
     catch err
       doc.remifiError = err
       Components.utils.reportError(err)
       body = @remote.pages.error.render(err, request, response)
+    
+    if !@firstSplash && !response.skipFullscreenCheck
+      @firstSplash = true
+      Application.prefs.setValue(@firstSplashPref, true)
+      
+      body = @remote.pages.sites.localhost.gettingStarted(uri, request, response)
     
     body ||= @remote.pages.noBody.render(request, response)
     
