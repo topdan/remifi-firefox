@@ -23,7 +23,10 @@ class Boot
     @remote.port = @port()
     @remote.view = new Remifi.Firefox.View(@remote)
     @remote.static = new Remifi.Static(@remote, '/content/static.json')
-    @remote.input = new Remifi.Firefox.Input.OSX()
+    if @remote.env.isWindows
+      @remote.input = new Remifi.Firefox.Input.Win32()
+    else
+      @remote.input = new Remifi.Firefox.Input.OSX()
     
     @loadServer()
 

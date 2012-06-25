@@ -4,11 +4,6 @@ class Mouse
   constructor: (@remote) ->
     @delay = 200;
     
-    if @remote.env.isWindows
-      @program = "/bin/mouse.exe"
-    else
-      @program = "/bin/mouse"
-    
     @x = null;
     @y = null;
 

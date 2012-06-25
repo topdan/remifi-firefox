@@ -4,11 +4,6 @@ class Keyboard
   constructor: (@remote) ->
     @delay = 200;
     
-    if @remote.env.isWindows
-      @program = "/bin/keyboard.exe"
-    else
-      @program = "/bin/keyboard"
-    
     @x = null;
     @y = null;
   
