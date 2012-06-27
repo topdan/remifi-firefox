@@ -120,8 +120,9 @@ class Boot
   
   xbmcStartup: () =>
     setTimeout =>
-      x = Application.prefs.getValue('extensions.remifi.xbmc.x', 25)
-      y = Application.prefs.getValue('extensions.remifi.xbmc.y', 100)
+      unless Application.prefs.getValue('extensions.remifi.xbmc.skipFocus', false)
+        x = Application.prefs.getValue('extensions.remifi.xbmc.x', 25)
+        y = Application.prefs.getValue('extensions.remifi.xbmc.y', 100)
       
       window.fullScreen = true
       @remote.pages.mouse.actualMouseAction('click', x, y, hide: true) if x && y
