@@ -25,6 +25,8 @@ class Boot
     @remote.static = new Remifi.Static(@remote, '/content/static.json')
     if @remote.env.isWindows
       @remote.input = new Remifi.Firefox.Input.Win32()
+    else if @remote.env.isLinux
+      @remote.input = new Remifi.Firefox.Input.X11(@remote)
     else
       @remote.input = new Remifi.Firefox.Input.OSX()
     
@@ -129,4 +131,3 @@ class Boot
       window.fullScreen = true
       @remote.pages.mouse.actualMouseAction('click', x, y, hide: true) if x && y
     , 1000
-  

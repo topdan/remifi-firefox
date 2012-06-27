@@ -17,6 +17,7 @@
   <script src="remifi/firefox/view.js"/>
   <script src="remifi/firefox/input/osx.js"/>
   <script src="remifi/firefox/input/win32.js"/>
+  <script src="remifi/firefox/input/x11.js"/>
   
   <script src="remifi/pages/sites.js"/>
   <script src="remifi/pages/bookmarklets.js"/>
