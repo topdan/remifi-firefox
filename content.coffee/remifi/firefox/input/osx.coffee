@@ -1,4 +1,4 @@
-class OSX
+class OSX extends Remifi.Firefox.Input.Base
   # https://developer.apple.com/library/mac/#documentation/Carbon/Reference/QuartzEventServicesRef/Reference/reference.html
   
   Remifi.Firefox.Input.OSX = OSX

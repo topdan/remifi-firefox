@@ -11,6 +11,8 @@ class Env
     
     @isDevMode = Application.prefs.getValue('extensions.remifi.development', false)
     @isWindows = navigator.oscpu.match(/Windows/) != null
+    @isLinux = navigator.oscpu.match(/Linux/) != null
+    @isOSX = navigator.oscpu.match(/OS X/) != null
     @templates = {}
     
     f = @_fileHandle(@extensionPath)

@@ -1,4 +1,4 @@
-class X11
+class X11 extends Remifi.Firefox.Input.Base
   Remifi.Firefox.Input.X11 = X11
   
   constructor: (@remote) ->
@@ -27,15 +27,7 @@ class X11
       'escape': 0xFF1B,
       'return': 0xFF0D
     }
-    
-  exec: (path, args) =>
-    path = @remote.env._fullpath(path)
-    file = @remote.env._fileHandle(path)
-    
-    runner = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess)
-    runner.init(file)
-    runner.run(true, args, args.length)
-    
+  
   mouseClick: (x, y) =>
     @mouseOver(x, y)
     @exec '/bin/x11/mouseClick', [x, y]

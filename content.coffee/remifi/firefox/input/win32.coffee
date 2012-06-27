@@ -1,4 +1,4 @@
-class Win32
+class Win32 extends Remifi.Firefox.Input.Base
   Remifi.Firefox.Input.Win32 = Win32
   
   constructor: ->
