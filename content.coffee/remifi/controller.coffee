@@ -76,7 +76,7 @@ class Controller
       @layout = Remifi.microtemplate(code)
     
     views = new Remifi.Views.Base(@remote.env);
-    @layout({body: body, views: views, urlFor: @remote.static.urlFor});
+    @layout({body: body, views: views, urlFor: @remote.static.urlFor, websocketPort: @remote.websocketPort});
   
   ensureFullscreenMode: () =>
     return if @remote.env.isDevMode

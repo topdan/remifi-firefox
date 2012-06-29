@@ -58,15 +58,19 @@ class Mouse
         ]);
 
   over: (request, response) =>
-    x = parseFloat(request.params["x"]);
-    y = parseFloat(request.params["y"]);
+    x = parseFloat(request.params["x"])
+    y = parseFloat(request.params["y"])
+    
+    @performOver(x, y)
 
+  performOver: (x, y) =>
     unless isNaN(x) || isNaN(y)
       sx = screen.width;
       sy = screen.height;
 
       sx = Math.floor(sx * x);
       sy = Math.floor(sy * y);
+      
       @actualMouseAction('over', sx, sy);
 
   up: (request, response) =>

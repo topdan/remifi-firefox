@@ -79,29 +79,13 @@ class Server
       rawHeaders = bis.readBytes(count)
       bis.close()
       
-      @setupRequest(rawHeaders)
+      @request.processHeaders(rawHeaders)
       
       staticPath = @server.getStaticFilePath(@request, @response)
       if staticPath
         @respondWithFile(staticPath)
       else
         @respondWithPage()
-    
-    setupRequest: (rawHeaders) =>
-      requestLines = rawHeaders.match(/([^\r]+)\r\n/g)
-      
-      if requestLines[0]
-        firstLine = requestLines[0].match(/^([^\ ]+) ([^\ ]+)/)
-        if firstLine
-          @request.method = firstLine[1]
-          @request.setPath(firstLine[2])
-      
-      for line in requestLines
-        piece = line.split(': ')
-        @request.headers[piece[0]] = piece[1] if piece
-      
-      xhr = @request.headers['X-Requested-With'];
-      @request.isXhr = xhr && xhr.match(/XMLHttpRequest/i) != null;
     
     respondWithFile: (filepath) =>
       extension = filepath.match(/([^\.]+)$/)

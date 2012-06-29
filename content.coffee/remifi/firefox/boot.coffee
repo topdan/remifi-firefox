@@ -21,11 +21,13 @@ class Boot
     env = new Remifi.Firefox.Env()
     @remote = new Remifi.Base(env)
     @remote.port = @port()
+    @remote.websocketPort = @websocketPort()
     @remote.view = new Remifi.Firefox.View(@remote)
     @remote.static = new Remifi.Static(@remote, '/content/static.json')
     @remote.input = Remifi.Firefox.Input.build(@remote)
     
     @loadServer()
+    @loadWebsocket()
 
     Remifi.instance = @remote
     @remote.load() if Application.prefs.getValue(@remote.onSetting, true)
@@ -105,6 +107,9 @@ class Boot
   port: () =>
     Application.prefs.getValue('extensions.remifi.port', 6670)
   
+  websocketPort: () =>
+    Application.prefs.getValue('extensions.remifi.websocketPort', 6671)
+  
   loadServer: () =>
     @remote.server = new Remifi.Firefox.Server(@remote.port)
     @remote.server.dynamicRequest = @remote.handleRequest
@@ -117,6 +122,21 @@ class Boot
           response.headers['Expires'] = "Thu, 31 Dec 2037 23:55:55 GMT" unless @remote.env.isDevMode
         path = @remote.env.extensionPath + fullpath
         @remote.env.polishPath(path)
+  
+  loadWebsocket: () =>
+    @remote.websocket = new Remifi.Firefox.Websocket(@remote.websocketPort)
+    @remote.websocket.handler = (data) =>
+      try
+        json = JSON.parse(data)
+      catch e
+        Components.utils.reportError("Invalid Websocket JSON #{e}: #{data}")
+        return
+      
+      switch json.type
+        when 'mouseMove'
+          @remote.pages.mouse.performOver(json.x, json.y)
+        else
+          Components.utils.reportError("Unrecognized Websocket Type: #{json.type.toString()}")
   
   xbmcStartup: () =>
     setTimeout =>

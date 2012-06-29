@@ -97,9 +97,11 @@ class Base
   
   load: =>
     @server.start()
+    @websocket.start() if @websocket
     @view.toggle(true)
   
   unload: =>
     @server.stop()
+    @websocket.stop() if @websocket
     @view.toggle(false)
   

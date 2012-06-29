@@ -31,6 +31,14 @@ function setupPages() {
   }
   
   var moveMouse = function(x, y) {
+    if (!remifi.skipWebsocket && remifi.hasWebsocket()) {
+      moveMouseWebsocket(x, y);
+    } else {
+      moveMouseAjax(x, y);
+    }
+  }
+  
+  var moveMouseAjax = function(x, y) {
     if (isMoving) {
       waitingX = x;
       waitingY = y;
@@ -50,6 +58,24 @@ function setupPages() {
         }
       })
     }
+  }
+  
+  var ratelimit = function(fn, ms) {
+    var last = (new Date()).getTime();
+    return (function() {
+      var now = (new Date()).getTime();
+      if (now - last > ms) {
+        last = now;
+        fn.apply(null, arguments);
+      }
+    });
+  }
+  
+  var moveMouseWebsocket = function(x, y) {
+    console.log("moving mouse " + x + " " + y);
+    ratelimit(function() {
+      remifi.websocket().send(JSON.stringify({type: 'mouseMove', x: x, y: y}))
+    }, 40);
   }
   
   if ($.support.touch) {
@@ -195,6 +221,26 @@ Remifi = function(jQT) {
     })
   }
   
+  this.hasWebsocket = function() {
+    if (Remifi.skipWebsocket) return false;
+    return this.websocket().readyState == this._websocket.OPEN;
+  }
+  
+  this.websocketClose = function() {
+    if (this.hasWebsocket())
+      this.websocket().close()
+  }
+  
+  this.websocket = function() {
+    if (this._websocket) return this._websocket;
+    this._websocket = new WebSocket("ws://" + document.location.hostname + ":" + this.websocketPort())
+    return this._websocket;
+  }
+  
+  this.websocketPort = function() {
+    return $('meta[name=websocket-port]').attr('content');
+  }
+  
 }
 
 $(function() {
@@ -209,6 +255,10 @@ $(function() {
   $(document).on('ajaxError', function(error, request) {
     remifi.error("I couldn't connect to your TV. Try restarting Firefox.")
   });
+  
+  $(window).bind('beforeunload', function() {
+    remifi.websocketClose();
+  })
   
   remifi = new Remifi(jQT);
   
