@@ -95,7 +95,7 @@ this.instantQueue = (request) ->
   , perPage: 100
 
 this.movie = (request) ->
-  title $('h2').text()
+  title $('h2').text() || $('h1').text()
   info $('.synopsis').text()
   
   playUrl = $('#displaypage-overview-image a').attr('href')
